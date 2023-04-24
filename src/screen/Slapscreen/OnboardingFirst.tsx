@@ -4,7 +4,6 @@ import {
   Text,
   View,
   SafeAreaView,
-  StatusBar,
   FlatList,
   Image,
   TouchableOpacity,
@@ -12,7 +11,8 @@ import {
 import sizes from '../../res/sizes';
 import {slides} from '../../datafeck/DataFirst';
 import fonts from '../../res/fonts';
-
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
+import {Check} from '../../redux/state/Check.reducer';
 const COLORS = {
   primary: '#FFFFFF',
   black: '#000000',
@@ -22,7 +22,7 @@ const COLORS = {
 };
 const Slide = ({item}: any) => {
   return (
-    <View style={{alignContent: 'center', width: sizes._screen_width}}>
+    <View style={styles.view2}>
       <Image source={item.image} style={styles.image} />
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.subtitle}>{item.subtitle}</Text>
@@ -36,11 +36,8 @@ const OnboardingFirst = ({navigation}: any) => {
     const currentIdex = Math.round(e / sizes._screen_width);
     setCurrentSlideIndex(currentIdex);
   };
-
   const goNextSlide = () => {
     const nextSlideIndex = currentSlideIndex + 1;
-    console.log(nextSlideIndex);
-
     if (nextSlideIndex != slides.length) {
       const offset = nextSlideIndex * sizes._screen_width;
       ref?.current?.scrollToOffset({offset});
@@ -48,34 +45,26 @@ const OnboardingFirst = ({navigation}: any) => {
     }
   };
   const skip = () => {
-    const lastSlideIndex = slides.length - sizes._1sdp;
+    const lastSlideIndex = slides.length - 1;
     const offset = lastSlideIndex * sizes._screen_width;
     ref?.current?.scrollToOffset({offset});
     setCurrentSlideIndex(lastSlideIndex);
   };
+  const dispatch = useDispatch();
 
+  const Continew = () => {
+    dispatch(Check(true));
+  };
   const Food = () => {
     return (
       <>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-            width: sizes._screen_width * 0.16,
-            alignSelf: 'center',
-          }}>
+        <View style={styles.view1}>
           {slides.map((_, index) => (
             <View
               key={index}
               style={[
                 styles.indicator,
-                currentSlideIndex == index && {
-                  backgroundColor: '#99FF66',
-                  height: sizes._screen_width * 0.035,
-                  width: sizes._screen_width * 0.035,
-                  borderRadius: 60,
-                },
+                currentSlideIndex == index && styles.view3,
               ]}
             />
           ))}
@@ -84,7 +73,7 @@ const OnboardingFirst = ({navigation}: any) => {
     );
   };
   return (
-    <View style={{backgroundColor: 'white', flex: 1}}>
+    <View style={styles.container}>
       <SafeAreaView>
         <FlatList
           ref={ref}
@@ -93,11 +82,7 @@ const OnboardingFirst = ({navigation}: any) => {
           }}
           pagingEnabled
           data={slides}
-          contentContainerStyle={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: sizes._screen_height * 0.7,
-          }}
+          contentContainerStyle={styles.fl}
           horizontal
           scrollEnabled={true}
           showsHorizontalScrollIndicator={false}
@@ -106,18 +91,26 @@ const OnboardingFirst = ({navigation}: any) => {
         />
         <Food />
       </SafeAreaView>
-      <View
-        style={{
-          bottom: sizes._screen_width * 0.1,
-          position: 'absolute',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          width: sizes._screen_width * 0.8,
-          alignSelf: 'center',
-        }}>
-        <Text onPress={skip}>Bỏ qua</Text>
-        <Text onPress={goNextSlide}>Tiếp theo</Text>
+      <View style={styles.view4}>
+        {currentSlideIndex == 2 ? (
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              Continew();
+              navigation.navigate('Login');
+            }}>
+            <Text style={styles.txt1}>Bắt đầu</Text>
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.view}>
+            <Text onPress={skip} style={styles.txt}>
+              Bỏ qua
+            </Text>
+            <Text onPress={goNextSlide} style={styles.txt}>
+              Tiếp theo
+            </Text>
+          </View>
+        )}
       </View>
     </View>
   );
@@ -126,27 +119,28 @@ const OnboardingFirst = ({navigation}: any) => {
 export default OnboardingFirst;
 
 const styles = StyleSheet.create({
+  container: {backgroundColor: 'white', flex: 1},
   title: {
     color: COLORS.black,
     fontSize: sizes._screen_width * 0.065,
     textAlign: 'center',
-    marginTop: sizes._60sdp,
+    marginTop: 55,
     fontFamily: fonts.textBold,
   },
   image: {
     height: sizes._screen_width * 0.6,
     width: sizes._screen_width * 0.6,
     resizeMode: 'contain',
-    marginTop: sizes._50sdp,
+    marginTop: 45,
     alignSelf: 'center',
   },
   subtitle: {
     color: COLORS.black,
     fontSize: sizes._screen_width * 0.04,
-    lineHeight: sizes._24sdp,
+    lineHeight: 20,
     maxWidth: '80%',
     textAlign: 'center',
-    marginTop: sizes._13sdp,
+    marginTop: 13,
     alignSelf: 'center',
     fontFamily: fonts.textRegular,
     opacity: 0.8,
@@ -155,9 +149,58 @@ const styles = StyleSheet.create({
     height: sizes._screen_width * 0.035,
     width: sizes._screen_width * 0.035,
     backgroundColor: 'white',
-
     borderRadius: 60,
     borderWidth: 1.5,
     borderColor: COLORS.gray,
+  },
+  txt: {
+    color: 'black',
+    fontFamily: fonts.textRegular,
+    fontSize: sizes._screen_width * 0.04,
+  },
+  view: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  txt1: {
+    color: 'white',
+    fontFamily: fonts.textBold,
+    fontSize: sizes._screen_width * 0.04,
+  },
+  fl: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: sizes._screen_height * 0.7,
+  },
+  view1: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: sizes._screen_width * 0.16,
+    alignSelf: 'center',
+  },
+  view2: {alignContent: 'center', width: sizes._screen_width},
+  view3: {
+    backgroundColor: '#99FF66',
+    height: sizes._screen_width * 0.035,
+    width: sizes._screen_width * 0.035,
+    borderRadius: 60,
+  },
+  view4: {
+    bottom: sizes._screen_width * 0.1,
+    position: 'absolute',
+
+    width: sizes._screen_width * 0.8,
+    alignSelf: 'center',
+  },
+  btn: {
+    height: 50,
+    width: sizes._screen_width * 0.3,
+    backgroundColor: 'green',
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 15,
   },
 });

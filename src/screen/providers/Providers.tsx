@@ -1,14 +1,12 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const Spapscreen1 = () => {
+export default function Providers() {
   return (
     <View>
-      <Text>Spapscreen1</Text>
+      <Text>Providers</Text>
     </View>
   );
-};
-
-export default Spapscreen1;
+}
 
 const styles = StyleSheet.create({});
