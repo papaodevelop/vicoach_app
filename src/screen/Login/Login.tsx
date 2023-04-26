@@ -34,7 +34,7 @@ const Login = ({navigation}: any) => {
       <View style={styles.btn}>
         <BTNLogin
           txt="ĐĂNG NHẬP"
-          onPress={() => navigation.navigate('Bottomtabbars')}
+          onPress={() => navigation.navigate('DrawerCustoms')}
         />
       </View>
       <Text style={styles.txt3}>

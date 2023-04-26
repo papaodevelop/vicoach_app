@@ -1,44 +1,82 @@
-import {StyleSheet, Text, Platform, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, Platform, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import images from '../res/images';
-import fonts from '../res/fonts';
-import sizes from '../res/sizes';
+
 import Providers from '../screen/providers/Providers';
 import Home from '../screen/home/Home';
 import Mycourses from '../screen/mycourses/Mycourses';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconHome from 'react-native-vector-icons/Entypo';
-import colors from '../res/colors';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Entypo from 'react-native-vector-icons/Entypo';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import Blog from '../screen/blog/Blog';
+import Categories from '../screen/categories/Categories';
+import fonts from '../res/fonts';
+import sizes from '../res/sizes';
 const Tab = createBottomTabNavigator();
 interface Props {
   navigation: any;
 }
+const isAndroid = Platform.OS === 'android';
+
+const CustomtabBarBuuton = ({children, onPress}: any) => (
+  <TouchableOpacity
+    activeOpacity={1}
+    style={{
+      top: isAndroid ? -32 : -sizes._csreen_height * 0.02,
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}
+    onPress={onPress}>
+    <View
+      style={{
+        width: 70,
+        height: 70,
+        borderRadius: 35,
+        backgroundColor: '#6be799',
+      }}>
+      {children}
+    </View>
+  </TouchableOpacity>
+);
 const Bottomtabbars = (props: Props) => {
-  const isAndroid = Platform.OS === 'android';
   return (
     <Tab.Navigator
       initialRouteName="Trang chủ"
       screenOptions={{
+        tabBarShowLabel: false,
         tabBarActiveTintColor: '#12449c',
         tabBarInactiveTintColor: 'white',
-        tabBarStyle: {
-          height: sizes._screen_height * 0.07,
-          backgroundColor: '#6be799',
-        },
+        tabBarStyle: styles.item1,
       }}>
       <Tab.Screen
-        name="Tiện ích"
+        name="Phân loại"
+        component={Categories}
+        options={{
+          tabBarIcon: ({focused, size, color}) => {
+            return (
+              <View style={styles.item}>
+                <Ionicons name="grid" size={30} color={'white'} />
+                {focused ? <Text style={styles.txt}>Phân loại</Text> : null}
+              </View>
+            );
+          },
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Giảng viên"
         component={Providers}
         options={{
           tabBarIcon: ({focused, size, color}) => {
             return (
-              <>
-                {/* <Image
-                  source={images.tienich}
-                  style={{height: 26, width: 26, resizeMode: 'cover'}}
-                /> */}
-              </>
+              <View style={styles.item}>
+                <FontAwesome5 name="users" size={30} color={'white'} />
+                {focused ? <Text style={styles.txt}>Giảng viên</Text> : null}
+              </View>
             );
           },
           headerShown: false,
@@ -50,29 +88,31 @@ const Bottomtabbars = (props: Props) => {
         options={{
           tabBarIcon: ({focused, size, color}) => {
             return (
-              <TouchableOpacity
-                onPress={() => props.navigation.navigate('Trang chủ')}
-                style={{
-                  height: sizes._screen_width * 0.14,
-                  width: sizes._screen_width * 0.14,
-                  backgroundColor: '#6be799',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: 60,
-                  bottom: isAndroid
-                    ? sizes._screen_height * 0.025
-                    : sizes._screen_height * 0.01,
-                  elevation: 2,
-                  shadowColor: '#000',
-                  shadowOffset: {
-                    width: 0,
-                    height: 1,
-                  },
-                  shadowOpacity: 0.25,
-                  shadowRadius: 1.84,
-                }}>
-                <IconHome name="home" color={'white'} size={30} />
-              </TouchableOpacity>
+              <>
+                <IconHome name="home" color={'white'} size={35} />
+                {focused ? (
+                  <Text
+                    style={{top: sizes._screen_height * 0.03, ...styles.txt}}>
+                    Trang chủ
+                  </Text>
+                ) : null}
+              </>
+            );
+          },
+          tabBarButton: props => <CustomtabBarBuuton {...props} />,
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Blog"
+        component={Blog}
+        options={{
+          tabBarIcon: ({focused, size, color}) => {
+            return (
+              <View style={styles.item}>
+                <Fontisto name="blogger" size={30} color={'white'} />
+                {focused ? <Text style={styles.txt}>Blog</Text> : null}
+              </View>
             );
           },
           headerShown: false,
@@ -84,9 +124,10 @@ const Bottomtabbars = (props: Props) => {
         options={{
           tabBarIcon: ({focused, size, color}) => {
             return (
-              <>
+              <View style={styles.item}>
                 <Icon name="video-camera" size={30} color={'white'} />
-              </>
+                {focused ? <Text style={styles.txt}>Khoá học</Text> : null}
+              </View>
             );
           },
 
@@ -99,4 +140,45 @@ const Bottomtabbars = (props: Props) => {
 
 export default Bottomtabbars;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  shadow: {
+    shadowColor: '#7F5DF0',
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5,
+  },
+  item: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    top: isAndroid ? 0 : sizes._screen_height * 0.01,
+  },
+  item1: {
+    height: 70,
+    backgroundColor: '#6be799',
+    position: 'absolute',
+
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#7F5DF0',
+    bottom: 25,
+    right: 10,
+    borderRadius: 15,
+    left: 10,
+    shadowOffset: {
+      width: 1,
+      height: 10,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5,
+  },
+  txt: {
+    color: 'white',
+    fontFamily: fonts.textRegular,
+    fontSize: isAndroid ? 13 : 15,
+  },
+});

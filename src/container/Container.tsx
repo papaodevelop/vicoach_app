@@ -6,6 +6,12 @@ import Login from '../screen/Login/Login';
 import Register from '../screen/Login/Register';
 import Spapscreen1 from '../screen/slapscreen/Slapscreen1';
 import Bottomtabbars from './Bottomtabbars';
+import ViewAll from '../screen/home/NewestCourses/ViewAll';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {View} from 'react-native';
+import {Text} from 'react-native-svg';
+import DrawerContent from './DrawerContent';
+import DrawerCustom from './DrawerCustom';
 
 export default function Container() {
   const Stack = createNativeStackNavigator();
@@ -13,14 +19,16 @@ export default function Container() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        screenOptions={{headerShown: false}}
-        initialRouteName="Spapscreen1">
+        initialRouteName="Spapscreen1"
+        screenOptions={{
+          headerShown: false,
+        }}>
         <Stack.Screen name="Spapscreen1" component={Spapscreen1} />
-
         <Stack.Screen name="OnboardingFirst" component={OnboardingFirst} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="Bottomtabbars" component={Bottomtabbars} />
+        <Stack.Screen name="DrawerCustoms" component={DrawerCustom} />
+        <Stack.Screen name="ViewAll" component={ViewAll} />
       </Stack.Navigator>
     </NavigationContainer>
   );
