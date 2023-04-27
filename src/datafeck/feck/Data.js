@@ -43,7 +43,8 @@ export const khoahocmoi=[{
     price:50000,
     status:null,
     pricenew:'Free',
-    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQavptRqKumWD_6LEwh1eiscVM3Vhi-9sRuAw&usqp=CAU'
+    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQavptRqKumWD_6LEwh1eiscVM3Vhi-9sRuAw&usqp=CAU',
+    startdate:'20/12/2023'
 },
 {
     id:2,
@@ -54,8 +55,9 @@ export const khoahocmoi=[{
     price:50000,
     status:20,
     pricenew:40000,
-    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQAybgey_X6vlTW9augF5el5xSq8WmLbxGpQ&usqp=CAU'
-  
+    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQAybgey_X6vlTW9augF5el5xSq8WmLbxGpQ&usqp=CAU',
+    startdate:'20/12/2023'
+
 },
 {
     id:3,
@@ -66,7 +68,8 @@ export const khoahocmoi=[{
     price:90000,
     status:20,
     pricenew:45000,
-    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjYRIcDpIXnXXDnGKe1rFX5mNc-uwSPkmZpQ&usqp=CAU'
+    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjYRIcDpIXnXXDnGKe1rFX5mNc-uwSPkmZpQ&usqp=CAU',
+    startdate:'20/12/2023'
 
 },
 {
@@ -78,7 +81,63 @@ export const khoahocmoi=[{
     price:90000,
     status:20,
     pricenew:45000,
-    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHVn6-Jt_xb2_8paNT0LqVu3nrD4LpTZ4Dtg&usqp=CAU'
+    img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHVn6-Jt_xb2_8paNT0LqVu3nrD4LpTZ4Dtg&usqp=CAU',
+    startdate:'20/12/2023'
 
 },
+];
+export const instrucutors=[
+    {
+        id:1,
+        name:'Nguyễn Văn Kiên',
+        img:images.kien,
+        star:5,
+        status:true
+    },
+    {
+        id:2,
+        name:'Nguyễn Văn Kiên',
+        img:images.kien,
+        star:5,
+        status: false
+    },
+    {
+        id:3,
+        name:'Nguyễn Văn Kiên',
+        img:images.kien,
+        star:5,
+        status: true
+    }
+    ,
+    {
+        id:4,
+        name:'Nguyễn Văn Kiên4',
+        img:images.kien,
+        star:4.5,
+        status:  true
+    }
+    ,
+    {
+        id:5,
+        name:'Nguyễn Văn Kiên',
+        img:images.kien,
+        star:5,
+        status: true
+    }
+    ,
+    {
+        id:6,
+        name:'Nguyễn Văn Kiên',
+        img:images.kien,
+        star:5,
+        status: true
+    }
+    ,
+    {
+        id:7,
+        name:'Nguyễn Văn Kiên',
+        img:images.kien,
+        star:5,
+        status: true
+    }
 ]

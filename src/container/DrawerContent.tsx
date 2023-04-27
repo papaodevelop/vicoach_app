@@ -1,35 +1,107 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {
-  DrawerContentScrollView,
-  DrawerItemList,
-} from '@react-navigation/drawer';
-
-export default function DrawerContent(props: any) {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
+import images from '../res/images';
+import sizes from '../res/sizes';
+import colors from '../res/colors';
+import fonts from '../res/fonts';
+import RenderItemDrawer from '../component/renderItem/RenderItemDrawer';
+import itemNavigationDrawer from '../datafeck/itemNavigationDrawer';
+import stylescustom from '../res/stylescustom';
+interface Props {
+  navigation: any;
+}
+export default function DrawerContent(props: Props) {
   return (
-    <DrawerContentScrollView {...props}>
-      <View style={styles.drawerHeader}>
-        <Text style={styles.drawerTitle}>Drawer Title</Text>
-      </View>
-    </DrawerContentScrollView>
+    <ScrollView style={styles.drawerHeader}>
+      <SafeAreaView style={{marginLeft: 15}}>
+        <View
+          style={{...stylescustom.view1, width: sizes._screen_width * 0.14}}>
+          <Image resizeMode="contain" source={images.kien} style={styles.img} />
+          <View style={styles.img2}>
+            <Image source={images.setting} style={styles.img1} />
+          </View>
+        </View>
+        <Text style={styles.name}>Nguyễn Văn Kiên</Text>
+        <View style={styles.line} />
+        <FlatList
+          data={itemNavigationDrawer}
+          renderItem={({item}) => (
+            <RenderItemDrawer item={item} navigation={props.navigation} />
+          )}
+          scrollEnabled={false}
+        />
+        <View
+          style={{...styles.line, marginTop: sizes._screen_height * 0.06}}
+        />
+        <TouchableOpacity
+          style={{
+            ...stylescustom.view1,
+            marginTop: sizes._screen_height * 0.02,
+          }}>
+          <Image source={images.logout} style={styles.icon} />
+          <Text style={styles.txt}>Logout</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   drawerHeader: {
-    flexDirection: 'row',
+    flex: 1,
+    backgroundColor: colors.GREEN,
+  },
+  img: {
+    height: sizes._screen_width * 0.14,
+    width: sizes._screen_width * 0.14,
+    borderRadius: (sizes._screen_width * 0.14) / 2,
+  },
+  name: {
+    color: colors.WHITE,
+    fontSize: sizes._csreen_width * 0.05,
+    fontFamily: fonts.textBold,
+    marginTop: 10,
+  },
+  line: {
+    backgroundColor: colors.WHITE,
+    width: sizes._csreen_width * 0.35,
+    height: 2.5,
+    marginTop: sizes._screen_height * 0.02,
+  },
+  icon: {
+    tintColor: colors.WHITE,
+    height: sizes._screen_width * 0.065,
+    width: sizes._screen_width * 0.065,
+  },
+  txt: {
+    color: colors.WHITE,
+    fontFamily: fonts.textRegular,
+    fontSize: sizes._csreen_width * 0.04,
+    marginLeft: 15,
+  },
+  img1: {
+    height: sizes._screen_width * 0.05,
+    width: sizes._screen_width * 0.05,
+    tintColor: colors.GRAY,
+  },
+  img2: {
+    height: sizes._screen_width * 0.06,
+    width: sizes._screen_width * 0.06,
+    borderRadius: (sizes._screen_width * 0.1) / 2,
+    backgroundColor: colors.WHITE,
+    position: 'absolute',
+    bottom: 0,
+    right: -10,
     alignItems: 'center',
-    padding: 10,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#ddd',
-  },
-  drawerCloseButton: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginRight: 10,
-  },
-  drawerTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    justifyContent: 'center',
   },
 });

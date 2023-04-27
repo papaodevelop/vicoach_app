@@ -51,6 +51,7 @@ const Bottomtabbars = (props: Props) => {
         tabBarActiveTintColor: '#12449c',
         tabBarInactiveTintColor: 'white',
         tabBarStyle: styles.item1,
+        tabBarItemStyle: {height: 70},
       }}>
       <Tab.Screen
         name="Phân loại"
@@ -59,7 +60,11 @@ const Bottomtabbars = (props: Props) => {
           tabBarIcon: ({focused, size, color}) => {
             return (
               <View style={styles.item}>
-                <Ionicons name="grid" size={30} color={'white'} />
+                <Ionicons
+                  name="grid"
+                  size={sizes._screen_width * 0.065}
+                  color={'white'}
+                />
                 {focused ? <Text style={styles.txt}>Phân loại</Text> : null}
               </View>
             );
@@ -74,7 +79,11 @@ const Bottomtabbars = (props: Props) => {
           tabBarIcon: ({focused, size, color}) => {
             return (
               <View style={styles.item}>
-                <FontAwesome5 name="users" size={30} color={'white'} />
+                <FontAwesome5
+                  name="users"
+                  size={sizes._screen_width * 0.065}
+                  color={'white'}
+                />
                 {focused ? <Text style={styles.txt}>Giảng viên</Text> : null}
               </View>
             );
@@ -89,7 +98,11 @@ const Bottomtabbars = (props: Props) => {
           tabBarIcon: ({focused, size, color}) => {
             return (
               <>
-                <IconHome name="home" color={'white'} size={35} />
+                <IconHome
+                  name="home"
+                  color={'white'}
+                  size={sizes._screen_width * 0.09}
+                />
                 {focused ? (
                   <Text
                     style={{top: sizes._screen_height * 0.03, ...styles.txt}}>
@@ -110,7 +123,11 @@ const Bottomtabbars = (props: Props) => {
           tabBarIcon: ({focused, size, color}) => {
             return (
               <View style={styles.item}>
-                <Fontisto name="blogger" size={30} color={'white'} />
+                <Fontisto
+                  name="blogger"
+                  size={sizes._screen_width * 0.065}
+                  color={'white'}
+                />
                 {focused ? <Text style={styles.txt}>Blog</Text> : null}
               </View>
             );
@@ -125,7 +142,11 @@ const Bottomtabbars = (props: Props) => {
           tabBarIcon: ({focused, size, color}) => {
             return (
               <View style={styles.item}>
-                <Icon name="video-camera" size={30} color={'white'} />
+                <Icon
+                  name="video-camera"
+                  size={sizes._screen_width * 0.065}
+                  color={'white'}
+                />
                 {focused ? <Text style={styles.txt}>Khoá học</Text> : null}
               </View>
             );
@@ -154,14 +175,11 @@ const styles = StyleSheet.create({
   item: {
     justifyContent: 'flex-start',
     alignItems: 'center',
-    top: isAndroid ? 0 : sizes._screen_height * 0.01,
   },
   item1: {
     height: 70,
     backgroundColor: '#6be799',
     position: 'absolute',
-
-    alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#7F5DF0',
     bottom: 25,
@@ -179,6 +197,6 @@ const styles = StyleSheet.create({
   txt: {
     color: 'white',
     fontFamily: fonts.textRegular,
-    fontSize: isAndroid ? 13 : 15,
+    fontSize: sizes._screen_width * 0.03,
   },
 });

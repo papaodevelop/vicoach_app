@@ -2,10 +2,14 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import sizes from '../res/sizes';
 import Icon from 'react-native-vector-icons/FontAwesome';
-export default function Star({star}: any) {
+export default function Star({star, width}: any) {
   const [maxRating, setMaxRating] = useState([1, 2, 3, 4, 5]);
   return (
-    <View style={styles.customRatingBarStyle}>
+    <View
+      style={{
+        ...styles.customRatingBarStyle,
+        width: width ? width : sizes._screen_width * 0.3,
+      }}>
       {maxRating.map((item, key) => {
         return (
           <Icon
@@ -31,6 +35,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    width: sizes._screen_width * 0.3,
   },
 });

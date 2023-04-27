@@ -11,12 +11,14 @@ import colors from '../../res/colors';
 import fonts from '../../res/fonts';
 import sizes from '../../res/sizes';
 import Icon from 'react-native-vector-icons/Entypo';
+import Icons from 'react-native-vector-icons/AntDesign';
+
 const isAndroid = Platform.OS === 'android';
 interface Props {
   title: string;
   navigation: any;
 }
-export default function HeaderScreen(props: Props) {
+export default function HeaderScreen1(props: Props) {
   return (
     <View style={styles.container}>
       <StatusBar
@@ -33,12 +35,12 @@ export default function HeaderScreen(props: Props) {
             justifyContent: 'center',
           }}>
           <Text style={styles.title}>{props.title}</Text>
-          <Icon
-            name="chevron-left"
+          <Icons
+            name="menu-fold"
             size={sizes._screen_width * 0.09}
             color={'white'}
             style={styles.icon}
-            onPress={() => props.navigation.goBack()}
+            onPress={() => props.navigation.toggleDrawer()}
           />
         </View>
       </SafeAreaView>
@@ -60,5 +62,5 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     textTransform: 'uppercase',
   },
-  icon: {left: 5, position: 'absolute'},
+  icon: {left: 10, position: 'absolute'},
 });

@@ -18,5 +18,13 @@ const stylescustom = StyleSheet.create({
     fontFamily: fonts.textRegular,
     fontSize: sizes._screen_width * 0.04,
   },
+  numbercolum2: {
+    justifyContent: 'space-between',
+    width: sizes._screen_width * 0.9,
+    alignSelf: 'center',
+  },
+  paddingBottom: {
+    paddingBottom: sizes._screen_height * 0.15,
+  },
 });
 export default stylescustom;

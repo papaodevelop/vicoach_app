@@ -6,6 +6,9 @@ import {
   TouchableOpacity,
   TextInput,
   LayoutAnimation,
+  Animated,
+  SafeAreaView,
+  StatusBar,
 } from 'react-native';
 import React, {useEffect} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -36,58 +39,75 @@ export default function HeaderHome(props: Props) {
 
   return (
     <View style={headerStyle}>
-      <View style={styles.view1}>
-        <View style={styles.view}>
-          <Icon
-            name="menu-fold"
-            size={30}
-            color={'white'}
-            onPress={() => props.navigation.toggleDrawer()}
-          />
-          <View style={{marginLeft: 15}}>
-            <Text style={styles.txt}>Vi Master</Text>
-            <Text style={styles.txt1}>Hãy bắt đầu học!</Text>
-          </View>
-        </View>
-        <View
-          style={{...styles.view, justifyContent: 'space-between', width: 105}}>
-          <TouchableOpacity style={styles.view3} activeOpacity={0.8}>
-            <Ionicons name="cart" color={'white'} size={30} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.view3} activeOpacity={0.8}>
-            <Ionicons name="md-notifications" color={'white'} size={30} />
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      {props.show && (
-        <View style={styles.view4}>
+      <StatusBar
+        backgroundColor="#6be799"
+        barStyle={'light-content'}
+        showHideTransition={'fade'}
+        translucent={false}
+      />
+      <SafeAreaView>
+        <View style={styles.view1}>
           <View style={styles.view}>
-            <Ionicons
-              name="md-search"
-              color={colors.BLACK}
+            <Icon
+              name="menu-fold"
               size={30}
-              style={{paddingRight: 5}}
+              color={'white'}
+              onPress={() => props.navigation.toggleDrawer()}
             />
-            <TextInput
-              placeholder={'Tìm kiếm khoá học?'}
-              value={props.value}
-              onChangeText={props.setValue}
-              style={styles.txtip}
-            />
-          </View>
+            <View
+              style={{
+                marginLeft: 15,
 
-          {props.value ? (
-            <MaterialIcons
-              onPress={() => props.setValue('')}
-              name="cancel"
-              color={colors.BLACK}
-              size={20}
-              style={{marginRight: 15}}
-            />
-          ) : null}
+                width: sizes._screen_width * 0.5,
+              }}>
+              <Text style={styles.txt}>Hi Kiên</Text>
+              <Text style={styles.txt1}>Hãy bắt đầu học!</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              ...styles.view,
+              justifyContent: 'space-between',
+              width: sizes._screen_width * 0.28,
+            }}>
+            <TouchableOpacity style={styles.view3} activeOpacity={0.8}>
+              <Ionicons name="cart" color={'white'} size={30} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.view3} activeOpacity={0.8}>
+              <Ionicons name="md-notifications" color={'white'} size={30} />
+            </TouchableOpacity>
+          </View>
         </View>
-      )}
+
+        {props.show && (
+          <View style={styles.view4}>
+            <View style={styles.view}>
+              <Ionicons
+                name="md-search"
+                color={colors.BLACK}
+                size={30}
+                style={{paddingRight: 5}}
+              />
+              <TextInput
+                placeholder={'Tìm kiếm khoá học?'}
+                value={props.value}
+                onChangeText={props.setValue}
+                style={styles.txtip}
+              />
+            </View>
+
+            {props.value ? (
+              <MaterialIcons
+                onPress={() => props.setValue('')}
+                name="cancel"
+                color={colors.BLACK}
+                size={20}
+                style={{marginRight: 15}}
+              />
+            ) : null}
+          </View>
+        )}
+      </SafeAreaView>
     </View>
   );
 }
@@ -98,7 +118,6 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     paddingBottom: 30,
-    paddingTop: isAndroid ? 30 : 50,
   },
   view: {
     flexDirection: 'row',
@@ -123,8 +142,8 @@ const styles = StyleSheet.create({
   },
   view3: {
     backgroundColor: 'rgba(0, 0, 0, 0.40)',
-    height: 45,
-    width: 45,
+    height: sizes._screen_width * 0.12,
+    width: sizes._screen_width * 0.12,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,

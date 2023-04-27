@@ -1,4 +1,4 @@
-import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import {StatusBar, StyleSheet, Text, View, LogBox} from 'react-native';
 import React from 'react';
 import Container from './src/container/Container';
 import {Provider} from 'react-redux';
@@ -7,7 +7,7 @@ import {persistStore} from 'redux-persist';
 import {PersistGate} from 'redux-persist/integration/react';
 
 const persistor = persistStore(store);
-
+LogBox.ignoreLogs(['Sending']);
 const App = () => {
   return (
     <Provider store={store}>
