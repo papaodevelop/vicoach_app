@@ -18,6 +18,11 @@ const stylescustom = StyleSheet.create({
     fontFamily: fonts.textRegular,
     fontSize: sizes._screen_width * 0.04,
   },
+  txt1: {
+    color: colors.GRAY,
+    fontFamily: fonts.textRegular,
+    fontSize: sizes._screen_width * 0.035,
+  },
   numbercolum2: {
     justifyContent: 'space-between',
     width: sizes._screen_width * 0.9,

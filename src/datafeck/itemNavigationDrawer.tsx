@@ -16,7 +16,7 @@ const itemNavigationDrawer = [
   {
     id: 3,
     name: 'Courses',
-    navigation: '',
+    navigation: 'Khoá học',
     icon: images.courses,
   },
   {

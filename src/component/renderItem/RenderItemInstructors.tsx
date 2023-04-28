@@ -14,8 +14,6 @@ import stylescustom from '../../res/stylescustom';
 import fonts from '../../res/fonts';
 
 export default function RenderItemInstructors({item, index}: any) {
-  console.log(item);
-
   return (
     <Pressable style={styles.view}>
       <View
@@ -27,7 +25,7 @@ export default function RenderItemInstructors({item, index}: any) {
       <View style={{alignItems: 'center'}}>
         <Image source={item.img} style={styles.img} />
         <Text style={styles.txt}>{item?.name}</Text>
-        <Text style={{...styles.txt, color: colors.GRAY}}>{'Rất tốt'}</Text>
+        <Text style={{...styles.txt, color: colors.GRAY}}>{'Giảng viên'}</Text>
 
         <Star star={item.star} width={sizes._screen_width * 0.2} />
       </View>

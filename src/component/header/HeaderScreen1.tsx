@@ -22,7 +22,7 @@ export default function HeaderScreen1(props: Props) {
   return (
     <View style={styles.container}>
       <StatusBar
-        backgroundColor="#6be799"
+        backgroundColor="#ee782c"
         barStyle={'light-content'}
         showHideTransition={'fade'}
         translucent={false}
@@ -50,7 +50,7 @@ export default function HeaderScreen1(props: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#6be799',
+    backgroundColor: '#ee782c',
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     paddingBottom: 30,

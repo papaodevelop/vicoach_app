@@ -15,6 +15,7 @@ export default function Organization() {
         keyExtractor={item => `${item?.id}`}
         scrollEventThrottle={16}
         contentContainerStyle={stylescustom.paddingBottom}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

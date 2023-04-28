@@ -7,9 +7,8 @@ import sizes from '../res/sizes';
 import colors from '../res/colors';
 import fonts from '../res/fonts';
 import Purchased from '../screen/mycourses/Purchased';
-import MyCouses1 from '../screen/mycourses/MyCouses1';
+
 import Organization from '../screen/mycourses/Organization';
-import Invited from '../screen/mycourses/Invited';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -37,20 +36,11 @@ function MyTabs() {
         component={Purchased}
         options={{tabBarLabel: 'Đã Mua'}}
       />
-      <Tab.Screen
-        name="khoahoccuatoi"
-        component={MyCouses1}
-        options={{tabBarLabel: 'của tôi'}}
-      />
+
       <Tab.Screen
         name="tochuc"
         component={Organization}
         options={{tabBarLabel: 'Chuyên Gia'}}
-      />
-      <Tab.Screen
-        name="duocmoi"
-        component={Invited}
-        options={{tabBarLabel: 'Được mời'}}
       />
     </Tab.Navigator>
   );

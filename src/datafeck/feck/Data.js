@@ -44,7 +44,9 @@ export const khoahocmoi=[{
     status:null,
     pricenew:'Free',
     img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQavptRqKumWD_6LEwh1eiscVM3Vhi-9sRuAw&usqp=CAU',
-    startdate:'20/12/2023'
+    startdate:'20/12/2023',
+    category:'Bán sản phẩm'
+
 },
 {
     id:2,
@@ -56,7 +58,8 @@ export const khoahocmoi=[{
     status:20,
     pricenew:40000,
     img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQAybgey_X6vlTW9augF5el5xSq8WmLbxGpQ&usqp=CAU',
-    startdate:'20/12/2023'
+    startdate:'20/12/2023',
+    category:'Bán sản phẩm'
 
 },
 {
@@ -69,7 +72,9 @@ export const khoahocmoi=[{
     status:20,
     pricenew:45000,
     img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjYRIcDpIXnXXDnGKe1rFX5mNc-uwSPkmZpQ&usqp=CAU',
-    startdate:'20/12/2023'
+    startdate:'20/12/2023',
+    category:'Học làm giàu'
+
 
 },
 {
@@ -82,7 +87,9 @@ export const khoahocmoi=[{
     status:20,
     pricenew:45000,
     img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHVn6-Jt_xb2_8paNT0LqVu3nrD4LpTZ4Dtg&usqp=CAU',
-    startdate:'20/12/2023'
+    startdate:'20/12/2023',
+    category:'Học làm giàu'
+
 
 },
 ];
@@ -139,5 +146,142 @@ export const instrucutors=[
         img:images.kien,
         star:5,
         status: true
+    }
+];
+export const CategoriesData=[
+    {
+        id:1,
+        name:'Management',
+        courses:[
+            {
+                id:1,
+                name:'Khoá 1'
+            },
+            {
+                id:2,
+                name:'Khoá 2'
+            },
+            {
+                id:3,
+                name:'Khoá 3'
+            }
+        ],
+        color:'#a7bdff',
+        img:images.management
+    },
+    {
+        id:2,
+        name:'Design',
+        courses:[
+            {
+                id:1,
+                name:'Khoá 1',
+                courses:[
+                    {
+                        id:1,
+                    },
+                    {
+                        id:2,
+                    },
+                    {
+                        id:3,
+                    }
+                ]
+            },
+            {
+                id:2,
+                name:'Khoá 2',
+                courses:[
+                    {
+                        id:1,
+                    },
+                    {
+                        id:2,
+                    },
+                    
+                ]
+            },
+            
+        ],
+        color:'#d583e3',
+        img:images.design
+    },
+    {
+        id:3,
+        name:'Marketing',
+        courses:[
+            {
+                id:1,
+                name:'Khoá 1',
+                courses:[
+                    {
+                        id:1,
+                    },
+                  
+                ]
+            },   
+        ],
+        color:'#f17fb6',
+        img:images.marketing
+
+    },
+    {
+        id:4,
+        name:'Developer',
+        courses:[
+        ],
+        color:'#f7916b',
+        img:images.developer
+
+    },
+    {
+        id:5,
+        name:'Lifestyle',
+        courses:[
+            {
+                id:1,
+                name:'Khoá 1',
+                courses:[
+                    {
+                        id:1,
+                    },
+                    {
+                        id:2,
+                    },
+                    {
+                        id:3,
+                    }
+                ]
+            },
+            {
+                id:2,
+                name:'Khoá 2',
+                courses:[
+                    {
+                        id:1,
+                    },
+                    {
+                        id:2,
+                    },
+                    
+                ]
+            },
+            {
+                id:3,
+                name:'Khoá 3',
+                courses:[
+                    {
+                        id:1,
+                    },
+                    {
+                        id:2,
+                    },
+                    
+                ]
+            },
+            
+        ],
+        color:'#f76b6b',
+        img:images.lifestyle
     }
 ]

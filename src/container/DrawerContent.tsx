@@ -58,7 +58,7 @@ export default function DrawerContent(props: Props) {
 const styles = StyleSheet.create({
   drawerHeader: {
     flex: 1,
-    backgroundColor: colors.GREEN,
+    backgroundColor: colors.ORANGE,
   },
   img: {
     height: sizes._screen_width * 0.14,

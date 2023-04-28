@@ -15,6 +15,7 @@ export default function Purchased() {
         keyExtractor={item => `${item?.id}`}
         scrollEventThrottle={16}
         contentContainerStyle={stylescustom.paddingBottom}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

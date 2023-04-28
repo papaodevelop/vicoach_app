@@ -19,3 +19,10 @@ export function txt1(val: string) {
     return val.substring(0, 30) + '...';
   }
 }
+export function txt1Blog(val: string) {
+  if (val.length < 100) {
+    return val;
+  } else {
+    return val.substring(0, 99) + '...';
+  }
+}

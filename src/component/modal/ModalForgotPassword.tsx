@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.textBold,
   },
   head: {
-    backgroundColor: colors.RED,
+    backgroundColor: colors.ORANGE,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     height: 40,

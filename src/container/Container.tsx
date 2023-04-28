@@ -12,6 +12,7 @@ import {View} from 'react-native';
 import {Text} from 'react-native-svg';
 import DrawerContent from './DrawerContent';
 import DrawerCustom from './DrawerCustom';
+import BlogPost from '../screen/blog/BlogPost';
 
 export default function Container() {
   const Stack = createNativeStackNavigator();
@@ -29,6 +30,7 @@ export default function Container() {
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="DrawerCustoms" component={DrawerCustom} />
         <Stack.Screen name="ViewAll" component={ViewAll} />
+        <Stack.Screen name="BlogPost" component={BlogPost} />
       </Stack.Navigator>
     </NavigationContainer>
   );

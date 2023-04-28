@@ -45,11 +45,10 @@ const RenderItemCourses = (props: Props) => {
           {money(item.pricenew)}
         </Text>
       </View>
-
       <View style={stylescustom.view1}>
         <View>
-          <Text style={styles.txt2}>Nguồn</Text>
-          <Text style={styles.txt3}>{item.lecturers}</Text>
+          <Text style={styles.txt2}>Loại</Text>
+          <Text style={styles.txt3}>{item.category}</Text>
         </View>
         <View
           style={{
