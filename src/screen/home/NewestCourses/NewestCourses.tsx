@@ -8,9 +8,10 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {money, txt, txt1} from '../../../res/convert';
 import LinearGradient from 'react-native-linear-gradient';
+import {NavigationProp} from '@react-navigation/native';
 interface Props {
   data: any;
-  navigation: any;
+  navigation: NavigationProp<Record<string, any>>;
 }
 export default function NewestCourses(props: Props) {
   const RederItem = ({item}: any) => {

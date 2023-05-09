@@ -8,8 +8,9 @@ import fonts from '../../res/fonts';
 import NewestCourses from './NewestCourses/NewestCourses';
 import stylescustom from '../../res/stylescustom';
 import {khoahocmoi} from '../../datafeck/feck/Data';
+import {NavigationProp} from '@react-navigation/native';
 interface Props {
-  navigation: any;
+  navigation: NavigationProp<Record<string, any>>;
 }
 export default function Home(props: Props) {
   const [search, setSearch] = useState('');

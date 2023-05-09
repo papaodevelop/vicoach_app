@@ -11,10 +11,11 @@ import colors from '../../res/colors';
 import fonts from '../../res/fonts';
 import sizes from '../../res/sizes';
 import Icon from 'react-native-vector-icons/Entypo';
+import {NavigationProp} from '@react-navigation/native';
 const isAndroid = Platform.OS === 'android';
 interface Props {
   title: string;
-  navigation: any;
+  navigation: NavigationProp<Record<string, null>>;
 }
 export default function HeaderScreen(props: Props) {
   return (

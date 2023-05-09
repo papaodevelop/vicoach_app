@@ -23,6 +23,16 @@ const stylescustom = StyleSheet.create({
     fontFamily: fonts.textRegular,
     fontSize: sizes._screen_width * 0.035,
   },
+  txt2: {
+    color: colors.BLACK,
+    fontFamily: fonts.textBold,
+    fontSize: sizes._screen_width * 0.04,
+  },
+  txt3: {
+    color: colors.BLACK,
+    fontFamily: fonts.textBold,
+    fontSize: sizes._screen_width * 0.035,
+  },
   numbercolum2: {
     justifyContent: 'space-between',
     width: sizes._screen_width * 0.9,
@@ -30,6 +40,9 @@ const stylescustom = StyleSheet.create({
   },
   paddingBottom: {
     paddingBottom: sizes._screen_height * 0.15,
+  },
+  container: {
+    flex: 1,
   },
 });
 export default stylescustom;

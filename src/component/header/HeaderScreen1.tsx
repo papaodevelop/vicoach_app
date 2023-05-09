@@ -16,7 +16,7 @@ import Icons from 'react-native-vector-icons/AntDesign';
 const isAndroid = Platform.OS === 'android';
 interface Props {
   title: string;
-  navigation: any;
+  navigation?: any;
 }
 export default function HeaderScreen1(props: Props) {
   return (

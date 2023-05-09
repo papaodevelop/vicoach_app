@@ -14,8 +14,8 @@ import sizes from '../res/sizes';
 import colors from '../res/colors';
 import fonts from '../res/fonts';
 import RenderItemDrawer from '../component/renderItem/RenderItemDrawer';
-import itemNavigationDrawer from '../datafeck/itemNavigationDrawer';
 import stylescustom from '../res/stylescustom';
+import {itemNavigationDrawer} from '../datafeck/itemNavigationDrawer';
 interface Props {
   navigation: any;
 }
@@ -48,7 +48,11 @@ export default function DrawerContent(props: Props) {
             marginTop: sizes._screen_height * 0.02,
           }}>
           <Image source={images.logout} style={styles.icon} />
-          <Text style={styles.txt}>Logout</Text>
+          <Text
+            style={styles.txt}
+            onPress={() => props.navigation.navigate('Login')}>
+            Logout
+          </Text>
         </TouchableOpacity>
       </SafeAreaView>
     </ScrollView>

@@ -33,12 +33,12 @@ export default function BlogPost({navigation, route}: any) {
             </View>
           </View>
           <Text style={styles.txt2}>{item.conten}</Text>
-          {item.comment && (
+          {item.comment.length > 0 && (
             <>
               <Text style={{...styles.txt, marginTop: 15}}>Comments</Text>
               <FlatList
                 data={item.comment}
-                renderItem={({data}: any) => <RenderComment item={data} />}
+                renderItem={({item}: any) => <RenderComment item={item} />}
                 scrollEnabled={false}
                 style={{marginTop: 20}}
               />

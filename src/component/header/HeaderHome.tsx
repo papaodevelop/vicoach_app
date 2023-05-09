@@ -36,7 +36,6 @@ export default function HeaderHome(props: Props) {
     //@ts-ignore
     headerStyle.height;
   }
-
   return (
     <View style={headerStyle}>
       <StatusBar
@@ -73,7 +72,10 @@ export default function HeaderHome(props: Props) {
             <TouchableOpacity style={styles.view3} activeOpacity={0.8}>
               <Ionicons name="cart" color={'white'} size={30} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.view3} activeOpacity={0.8}>
+            <TouchableOpacity
+              style={styles.view3}
+              activeOpacity={0.8}
+              onPress={() => props.navigation.navigate('Notification')}>
               <Ionicons name="md-notifications" color={'white'} size={30} />
             </TouchableOpacity>
           </View>

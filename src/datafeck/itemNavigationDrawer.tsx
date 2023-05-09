@@ -1,6 +1,6 @@
 import images from '../res/images';
 
-const itemNavigationDrawer = [
+export const itemNavigationDrawer = [
   {
     id: 1,
     name: 'Home',
@@ -22,13 +22,13 @@ const itemNavigationDrawer = [
   {
     id: 4,
     name: 'Meetings',
-    navigation: '',
+    navigation: 'Meetings',
     icon: images.mess,
   },
   {
     id: 5,
     name: 'Quizzes',
-    navigation: '',
+    navigation: 'Quizzes',
     icon: images.quizzs,
   },
   {
@@ -62,4 +62,3 @@ const itemNavigationDrawer = [
     icon: images.support,
   },
 ];
-export default itemNavigationDrawer;

@@ -13,6 +13,10 @@ import {Text} from 'react-native-svg';
 import DrawerContent from './DrawerContent';
 import DrawerCustom from './DrawerCustom';
 import BlogPost from '../screen/blog/BlogPost';
+import MeetingsDetails from '../screen/meetings/MeetingsDetails';
+import Notification from '../screen/notification/Notification';
+import QuizzResuls from '../screen/quizzes/resul/QuizzResuls';
+import DetailResul from '../screen/quizzes/resul/DetailResul';
 
 export default function Container() {
   const Stack = createNativeStackNavigator();
@@ -31,6 +35,10 @@ export default function Container() {
         <Stack.Screen name="DrawerCustoms" component={DrawerCustom} />
         <Stack.Screen name="ViewAll" component={ViewAll} />
         <Stack.Screen name="BlogPost" component={BlogPost} />
+        <Stack.Screen name="MeetingsDetails" component={MeetingsDetails} />
+        <Stack.Screen name="Notification" component={Notification} />
+        <Stack.Screen name="QuizzResuls" component={QuizzResuls} />
+        <Stack.Screen name="DetailResul" component={DetailResul} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -8,8 +8,9 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Star from '../../../component/Star';
 import fonts from '../../../res/fonts';
 import {money} from '../../../res/convert';
+import {NavigationProp} from '@react-navigation/native';
 interface Props {
-  navigation: any;
+  navigation: NavigationProp<Record<string, any>>;
   item: any;
 }
 export default function RenderItemCouses(props: Props) {

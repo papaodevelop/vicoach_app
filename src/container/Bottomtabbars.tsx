@@ -16,9 +16,10 @@ import Blog from '../screen/blog/Blog';
 import Categories from '../screen/categories/Categories';
 import fonts from '../res/fonts';
 import sizes from '../res/sizes';
+import {NavigationProp} from '@react-navigation/native';
 const Tab = createBottomTabNavigator();
 interface Props {
-  navigation: any;
+  navigation: NavigationProp<Record<string, any>>;
 }
 const isAndroid = Platform.OS === 'android';
 
