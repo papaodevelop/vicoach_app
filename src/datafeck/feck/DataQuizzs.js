@@ -36,8 +36,8 @@ export const NotParticpated=[
         title:'Bài này chỉ để test',
         time:5,
         numberofsentences:10,
-        img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQavptRqKumWD_6LEwh1eiscVM3Vhi-9sRuAw&usqp=CAU'
-
+        img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQavptRqKumWD_6LEwh1eiscVM3Vhi-9sRuAw&usqp=CAU',
+        quiz:DataQuiz
     },
     {
         id:2,
@@ -46,6 +46,6 @@ export const NotParticpated=[
         numberofsentences:20,
         title:'Bài này chỉ để test',
         img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQAybgey_X6vlTW9augF5el5xSq8WmLbxGpQ&usqp=CAU',
-
+        quiz:DataQuiz
     },
 ]

@@ -9,6 +9,9 @@ interface Props {
   next: () => void;
   return: () => void;
   index: number;
+  complete?: boolean;
+  submit?: () => void;
+  maxIndex: number;
 }
 export default function BTNQuizz(props: Props) {
   return (
@@ -17,12 +20,29 @@ export default function BTNQuizz(props: Props) {
         <Pressable onPress={props.next} style={styles.btn}>
           <Text style={styles.txt}>Tiếp theo</Text>
         </Pressable>
-      ) : props.index == 4 ? (
-        <Pressable
-          onPress={props.return}
-          style={{...styles.btn, backgroundColor: colors.GRAY}}>
-          <Text style={styles.txt}>Trở lại</Text>
-        </Pressable>
+      ) : props.index == props.maxIndex ? (
+        <>
+          {props.complete ? (
+            <>
+              <Pressable
+                style={{...styles.view1, backgroundColor: colors.GRAY}}
+                onPress={props.return}>
+                <Text style={styles.txt}>Trở lại</Text>
+              </Pressable>
+              <Pressable
+                style={{...styles.view1, backgroundColor: colors.GREEN}}
+                onPress={props.submit}>
+                <Text style={styles.txt}>Hoàn thành</Text>
+              </Pressable>
+            </>
+          ) : (
+            <Pressable
+              onPress={props.return}
+              style={{...styles.btn, backgroundColor: colors.GRAY}}>
+              <Text style={styles.txt}>Trở lại</Text>
+            </Pressable>
+          )}
+        </>
       ) : (
         <>
           <Pressable

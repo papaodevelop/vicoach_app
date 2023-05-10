@@ -26,3 +26,9 @@ export function txt1Blog(val: string) {
     return val.substring(0, 99) + '...';
   }
 }
+export const Time = (remainingTime: number) => {
+  const minutes = Math.floor(remainingTime / 60);
+  const seconds = remainingTime % 60;
+
+  return `${minutes}:${seconds}`;
+};

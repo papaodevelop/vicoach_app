@@ -9,7 +9,11 @@ const NotParticipated = ({navigation}: any) => {
       <FlatList
         data={NotParticpated}
         renderItem={({item, index}) => (
-          <RenderNotParticipated index={index} item={item} />
+          <RenderNotParticipated
+            index={index}
+            item={item}
+            navigation={navigation}
+          />
         )}
         keyExtractor={item => `${item?.id}`}
         scrollEventThrottle={16}

@@ -15,7 +15,7 @@ import {NavigationProp} from '@react-navigation/native';
 const isAndroid = Platform.OS === 'android';
 interface Props {
   title: string;
-  navigation: NavigationProp<Record<string, null>>;
+  navigation: NavigationProp<Record<string, any>>;
 }
 export default function HeaderScreen(props: Props) {
   return (

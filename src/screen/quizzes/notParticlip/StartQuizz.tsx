@@ -1,25 +1,33 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {NavigationProp} from '@react-navigation/native';
 import stylescustom from '../../../res/stylescustom';
 import HeaderScreen from '../../../component/header/HeaderScreen';
-import colors from '../../../res/colors';
 import sizes from '../../../res/sizes';
-import fonts from '../../../res/fonts';
 import {ProgressBar} from 'react-native-paper';
-import RenderDetailQuiz from './RenderDetailQuiz';
+import colors from '../../../res/colors';
 import BTNQuizz from '../../../component/btn/BTNQuizz';
+import fonts from '../../../res/fonts';
+import {CountdownCircleTimer} from 'react-native-countdown-circle-timer';
+import {Time} from '../../../res/convert';
+import RenderQuiz from './RenderQuiz';
 import ModalConfirm from '../../../component/modal/ModalConfirm';
-interface Props {
-  navigation: NavigationProp<Record<string, any>>;
-  route: any;
-}
-export default function DetailResul(props: Props) {
-  const items = props.route.params.item;
+import {DeleteForm} from '../../../redux/state/Quizz.reducer';
+import {useDispatch} from 'react-redux';
+import {DataQuizzs} from '../../../datafeck/feck/DataQuizzs';
+export default function StartQuizz({navigation, route}: any) {
+  const items = route.params.item;
   const percent = 1 / items?.quiz?.length;
-  const [answer, setAnswer] = useState();
-  const [choose, setChoose] = useState();
+  const [selectId, setSelectID] = useState<number>();
+  const [progress, setProgress] = useState<number>();
   const [index, setIndex] = useState(0);
+  const [idItem, setIdItem] = useState();
+  const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    let item = index + 1;
+    setProgress(percent * item);
+    setIdItem(items.quiz[index].id);
+  }, [index]);
   const Next = () =>
     setIndex(prevCount =>
       prevCount >= items?.quiz?.length - 1
@@ -28,17 +36,35 @@ export default function DetailResul(props: Props) {
     );
   const Return = () =>
     setIndex(prevCount => (prevCount <= 0 ? 0 : prevCount - 1));
-  const [progress, setProgress] = useState<number>();
-  useEffect(() => {
-    let item = index + 1;
-    setProgress(percent * item);
-    setAnswer(items.quiz[index].answer);
-    setChoose(items.quiz[index].choose);
-  }, [index]);
+  const summit = () => {
+    setShow(true);
+    dispatch(DeleteForm([]));
+  };
   return (
     <View style={stylescustom.container}>
-      <HeaderScreen navigation={props.navigation} title="Bài kiểm tra" />
+      <HeaderScreen title="Làm bài" navigation={navigation} />
       <View style={styles.view}>
+        <View style={{alignSelf: 'center'}}>
+          <CountdownCircleTimer
+            isPlaying
+            duration={items.time * 60}
+            size={sizes._screen_width * 0.4}
+            colors={['#F7B801', '#A30000']}
+            colorsTime={[10, 0]}>
+            {({remainingTime}) => {
+              if (remainingTime === 0) {
+                setShow(true);
+              }
+              return (
+                <>
+                  <Text style={stylescustom.txt}>
+                    {remainingTime == 0 ? 'Hết giờ' : Time(remainingTime)}
+                  </Text>
+                </>
+              );
+            }}
+          </CountdownCircleTimer>
+        </View>
         <View style={styles.proges}>
           <Text style={styles.txt1}>Số điểm: {100 / items?.quiz?.length}</Text>
           <Text style={styles.txt}>
@@ -59,24 +85,38 @@ export default function DetailResul(props: Props) {
         <FlatList
           data={items.quiz[index].question}
           renderItem={({item, index}) => (
-            <RenderDetailQuiz
+            <RenderQuiz
+              idItem={idItem}
               item={item}
               index={index}
-              answer={answer}
-              choose={choose}
+              quiz
+              select={(val: number) => setSelectID(val)}
+              selectedId={selectId}
             />
           )}
-          scrollEnabled={false}
           numColumns={2}
           contentContainerStyle={styles.flatlist}
         />
       </View>
       <BTNQuizz
-        next={Next}
-        return={Return}
         view={styles.btn}
         index={index}
+        next={Next}
+        return={Return}
+        complete
+        submit={summit}
         maxIndex={items?.quiz?.length - 1}
+      />
+      <ModalConfirm
+        confirm={() => {
+          setShow(false);
+          navigation.navigate('TestResul', {
+            item: DataQuizzs[0],
+          });
+        }}
+        isShow={show}
+        toggleDate={() => setShow(false)}
+        txt="Bạn đã hoàn thành bài kiểm tra? Ấn đồng ý để kết thúc"
       />
     </View>
   );
@@ -107,12 +147,13 @@ const styles = StyleSheet.create({
     ...stylescustom.txt,
   },
   flatlist: {
-    marginTop: 20,
+    marginTop: 10,
     alignSelf: 'center',
   },
   btn: {
-    marginTop: sizes._screen_height * 0.1,
     width: sizes._screen_width * 0.9,
     alignSelf: 'center',
+    position: 'absolute',
+    bottom: sizes._screen_height * 0.04,
   },
 });

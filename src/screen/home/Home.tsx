@@ -1,11 +1,11 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import HeaderHome from '../../component/header/HeaderHome';
 import sizes from '../../res/sizes';
 import colors from '../../res/colors';
-import FeaturedCourses from './FeaturedCourses/FeaturedCourses';
+import FeaturedCourses from './featuredCourses/FeaturedCourses';
 import fonts from '../../res/fonts';
-import NewestCourses from './NewestCourses/NewestCourses';
+import NewestCourses from './newestCourses/NewestCourses';
 import stylescustom from '../../res/stylescustom';
 import {khoahocmoi} from '../../datafeck/feck/Data';
 import {NavigationProp} from '@react-navigation/native';

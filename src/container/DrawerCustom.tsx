@@ -5,6 +5,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import Bottomtabbars from './Bottomtabbars';
 import Meetings from '../screen/meetings/Meetings';
 import Quizzes from '../screen/quizzes/Quizzes';
+import Favorite from '../screen/favorite/Favorite';
 const Drawer = createDrawerNavigator();
 
 const DrawerCustoms = () => {
@@ -15,6 +16,7 @@ const DrawerCustoms = () => {
       <Drawer.Screen name="Bottomtabbars" component={Bottomtabbars} />
       <Drawer.Screen name="Meetings" component={Meetings} />
       <Drawer.Screen name="Quizzes" component={Quizzes} />
+      <Drawer.Screen name="Favorite" component={Favorite} />
     </Drawer.Navigator>
   );
 };

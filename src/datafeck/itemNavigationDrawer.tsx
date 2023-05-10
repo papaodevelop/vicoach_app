@@ -40,7 +40,7 @@ export const itemNavigationDrawer = [
   {
     id: 7,
     name: 'Favorites',
-    navigation: '',
+    navigation: 'Favorite',
     icon: images.favorite,
   },
   {

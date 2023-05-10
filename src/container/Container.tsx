@@ -2,21 +2,19 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import OnboardingFirst from '../screen/slapscreen/OnboardingFirst';
-import Login from '../screen/Login/Login';
-import Register from '../screen/Login/Register';
+import Login from '../screen/login/Login';
+import Register from '../screen/login/Register';
 import Spapscreen1 from '../screen/slapscreen/Slapscreen1';
-import Bottomtabbars from './Bottomtabbars';
-import ViewAll from '../screen/home/NewestCourses/ViewAll';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {View} from 'react-native';
-import {Text} from 'react-native-svg';
-import DrawerContent from './DrawerContent';
+import ViewAll from '../screen/home/newestCourses/ViewAll';
 import DrawerCustom from './DrawerCustom';
 import BlogPost from '../screen/blog/BlogPost';
 import MeetingsDetails from '../screen/meetings/MeetingsDetails';
 import Notification from '../screen/notification/Notification';
 import QuizzResuls from '../screen/quizzes/resul/QuizzResuls';
 import DetailResul from '../screen/quizzes/resul/DetailResul';
+import QuizInfomation from '../screen/quizzes/notParticlip/QuizInfomation';
+import StartQuizz from '../screen/quizzes/notParticlip/StartQuizz';
+import TestResul from '../screen/quizzes/notParticlip/TestResul';
 
 export default function Container() {
   const Stack = createNativeStackNavigator();
@@ -39,6 +37,9 @@ export default function Container() {
         <Stack.Screen name="Notification" component={Notification} />
         <Stack.Screen name="QuizzResuls" component={QuizzResuls} />
         <Stack.Screen name="DetailResul" component={DetailResul} />
+        <Stack.Screen name="QuizInfomation" component={QuizInfomation} />
+        <Stack.Screen name="StartQuizz" component={StartQuizz} />
+        <Stack.Screen name="TestResul" component={TestResul} />
       </Stack.Navigator>
     </NavigationContainer>
   );

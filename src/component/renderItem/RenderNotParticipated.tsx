@@ -4,17 +4,24 @@ import sizes from '../../res/sizes';
 import colors from '../../res/colors';
 import stylescustom from '../../res/stylescustom';
 import fonts from '../../res/fonts';
-import Icon from 'react-native-vector-icons/AntDesign';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import {NavigationProp} from '@react-navigation/native';
 interface Props {
   item: any;
   index: number;
+  navigation: NavigationProp<Record<string, any>>;
 }
 const RenderNotParticipated = (props: Props) => {
   let item = props.item;
   return (
-    <Pressable style={styles.view} key={props.index}>
+    <Pressable
+      style={styles.view}
+      key={props.index}
+      onPress={() =>
+        props.navigation.navigate('QuizInfomation', {
+          item: item,
+        })
+      }>
       <View style={stylescustom.view}>
         <View style={stylescustom.view1}>
           <Image source={{uri: item?.img}} style={styles.img} />

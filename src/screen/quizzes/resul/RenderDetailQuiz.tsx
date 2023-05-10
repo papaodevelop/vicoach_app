@@ -15,7 +15,7 @@ export default function RenderDetailQuiz(props: Props) {
       ? colors.GREEN
       : props.item.name === props.answer && props.answer !== props.choose
       ? colors.RED
-      : undefined;
+      : 'transparent';
   const text = props.item.name === props.answer ? 'Bạn chọn' : null;
 
   return (

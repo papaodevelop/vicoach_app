@@ -1,15 +1,10 @@
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import Instructors from '../screen/providers/Instructors';
-import Organizations from '../screen/providers/Organizations';
-import Consultants from '../screen/providers/Consultants';
 import sizes from '../res/sizes';
 import colors from '../res/colors';
 import fonts from '../res/fonts';
 import Purchased from '../screen/mycourses/Purchased';
-
 import Organization from '../screen/mycourses/Organization';
-
 const Tab = createMaterialTopTabNavigator();
 
 function MyTabs() {
