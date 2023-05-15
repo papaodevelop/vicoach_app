@@ -42,6 +42,7 @@ export default function Categories({navigation}: any) {
         )}
         showsVerticalScrollIndicator={false}
         style={styles.view1}
+        contentContainerStyle={stylescustom.paddingBottom}
       />
     </View>
   );

@@ -19,7 +19,7 @@ export default function Home(props: Props) {
     return (
       <>
         <Text style={styles.title}>Khoá học nổi bật</Text>
-        <FeaturedCourses />
+        <FeaturedCourses navigation={props.navigation} />
         <View style={styles.view}>
           <Text style={styles.title1}>Khoá học học mới nhất</Text>
           <Text

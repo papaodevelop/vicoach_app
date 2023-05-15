@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import stylescustom from '../../../res/stylescustom';
 import HeaderScreen from '../../../component/header/HeaderScreen';
@@ -22,9 +22,8 @@ const QuizInfomation = (props: Props) => {
     });
     setShow(false);
   };
-  return (
-    <View style={stylescustom.container}>
-      <HeaderScreen title="Thông tin" navigation={props.navigation} />
+  const RenderItem = () => (
+    <>
       <View style={styles.view}>
         <Text style={stylescustom.txt2}>{item.name}</Text>
         <Text style={stylescustom.txt1}>{item.title}</Text>
@@ -88,6 +87,19 @@ const QuizInfomation = (props: Props) => {
           <BTNLogin onPress={() => setShow(true)} txt="Bắt đầu" />
         </View>
       </View>
+    </>
+  );
+  return (
+    <View style={stylescustom.container}>
+      <HeaderScreen title="Thông tin" navigation={props.navigation} />
+      <FlatList
+        data={[]}
+        renderItem={null}
+        ListFooterComponent={() => <RenderItem />}
+        contentContainerStyle={{paddingBottom: 50}}
+        showsVerticalScrollIndicator={false}
+      />
+
       <ModalConfirm
         txt="Bạn muốn bắt đầu làm bài tập ?"
         isShow={show}

@@ -1,4 +1,11 @@
-import {Animated, FlatList, StyleSheet, Text, View} from 'react-native';
+import {
+  Animated,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React from 'react';
 import {ExpandingDot} from 'react-native-animated-pagination-dots';
 import sizes from '../../../res/sizes';
@@ -10,11 +17,21 @@ import fonts from '../../../res/fonts';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {money} from '../../../res/convert';
 import Star from '../../../component/Star';
-export default function FeaturedCourses() {
+import {NavigationProp} from '@react-navigation/native';
+interface Props {
+  navigation: NavigationProp<Record<string, any>>;
+}
+export default function FeaturedCourses(props: Props) {
   const scrollX = React.useRef(new Animated.Value(0)).current;
   const RenderItem = ({item}: any) => {
     return (
-      <View style={styles.view}>
+      <Pressable
+        style={styles.view}
+        onPress={() =>
+          props.navigation.navigate('CourseDetail', {
+            item: item,
+          })
+        }>
         <Image style={styles.img} source={item.image}></Image>
         <LinearGradient
           start={{x: 2, y: 0}}
@@ -56,7 +73,7 @@ export default function FeaturedCourses() {
             </View>
           </View>
         </View>
-      </View>
+      </Pressable>
     );
   };
   return (

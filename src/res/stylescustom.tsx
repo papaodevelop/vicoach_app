@@ -27,6 +27,7 @@ const stylescustom = StyleSheet.create({
     color: colors.BLACK,
     fontFamily: fonts.textBold,
     fontSize: sizes._screen_width * 0.04,
+    width: sizes._screen_width * 0.5,
   },
   txt3: {
     color: colors.BLACK,

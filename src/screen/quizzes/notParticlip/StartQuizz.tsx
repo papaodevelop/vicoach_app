@@ -40,9 +40,8 @@ export default function StartQuizz({navigation, route}: any) {
     setShow(true);
     dispatch(DeleteForm([]));
   };
-  return (
-    <View style={stylescustom.container}>
-      <HeaderScreen title="Làm bài" navigation={navigation} />
+  const RenderItem = () => (
+    <>
       <View style={styles.view}>
         <View style={{alignSelf: 'center'}}>
           <CountdownCircleTimer
@@ -96,6 +95,7 @@ export default function StartQuizz({navigation, route}: any) {
           )}
           numColumns={2}
           contentContainerStyle={styles.flatlist}
+          scrollEnabled={false}
         />
       </View>
       <BTNQuizz
@@ -106,6 +106,18 @@ export default function StartQuizz({navigation, route}: any) {
         complete
         submit={summit}
         maxIndex={items?.quiz?.length - 1}
+      />
+    </>
+  );
+  return (
+    <View style={stylescustom.container}>
+      <HeaderScreen title="Làm bài" navigation={navigation} />
+      <FlatList
+        data={[]}
+        renderItem={null}
+        ListFooterComponent={() => <RenderItem />}
+        contentContainerStyle={{paddingBottom: 50, alignItems: 'center'}}
+        showsVerticalScrollIndicator={false}
       />
       <ModalConfirm
         confirm={() => {
@@ -153,7 +165,7 @@ const styles = StyleSheet.create({
   btn: {
     width: sizes._screen_width * 0.9,
     alignSelf: 'center',
-    position: 'absolute',
-    bottom: sizes._screen_height * 0.04,
+
+    marginTop: sizes._screen_height * 0.02,
   },
 });

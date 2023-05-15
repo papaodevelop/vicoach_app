@@ -66,7 +66,7 @@ const Bottomtabbars = (props: Props) => {
                   size={sizes._screen_width * 0.065}
                   color={'white'}
                 />
-                {focused ? <Text style={styles.txt}>Phân loại</Text> : null}
+                {focused ? <Text style={styles.txt}></Text> : null}
               </View>
             );
           },

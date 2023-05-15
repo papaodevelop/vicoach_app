@@ -23,7 +23,6 @@ interface Props {
   setValue: (val: string) => void;
   show: boolean;
 }
-const isAndroid = Platform.OS === 'android';
 export default function HeaderHome(props: Props) {
   useEffect(() => {
     const toggle = () => {
@@ -69,7 +68,10 @@ export default function HeaderHome(props: Props) {
               justifyContent: 'space-between',
               width: sizes._screen_width * 0.28,
             }}>
-            <TouchableOpacity style={styles.view3} activeOpacity={0.8}>
+            <TouchableOpacity
+              style={styles.view3}
+              activeOpacity={0.8}
+              onPress={() => props.navigation.navigate('Cart')}>
               <Ionicons name="cart" color={'white'} size={30} />
             </TouchableOpacity>
             <TouchableOpacity
