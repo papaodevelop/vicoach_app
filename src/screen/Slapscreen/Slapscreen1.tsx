@@ -114,7 +114,7 @@ export default Slapscreen1;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#00ba63',
+    backgroundColor: colors.ORANGE,
     alignItems: 'center',
     tintColor: 'white',
   },

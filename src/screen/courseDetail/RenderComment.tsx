@@ -4,6 +4,7 @@ import stylescustom from '../../res/stylescustom';
 import colors from '../../res/colors';
 import sizes from '../../res/sizes';
 import {Image} from 'react-native';
+import Star from '../../component/Star';
 interface Props {
   item: any;
   index: number;
@@ -11,12 +12,15 @@ interface Props {
 export default function RenderComment(props: Props) {
   return (
     <View style={styles.view}>
-      <View style={stylescustom.view1}>
-        <Image source={props.item.avt} style={styles.img} />
-        <View style={styles.view1}>
-          <Text style={stylescustom.txt}>{props.item.name}</Text>
-          <Text style={stylescustom.txt1}>{'student'}</Text>
+      <View style={stylescustom.view}>
+        <View style={stylescustom.view1}>
+          <Image source={props.item.avt} style={styles.img} />
+          <View style={styles.view1}>
+            <Text style={stylescustom.txt}>{props.item.name}</Text>
+            <Text style={stylescustom.txt1}>{'student'}</Text>
+          </View>
         </View>
+        <Star star={4.5} width={sizes._screen_width * 0.2} />
       </View>
       <Text style={styles.txt}>{props.item.title}</Text>
     </View>

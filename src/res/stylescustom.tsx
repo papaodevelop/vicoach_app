@@ -18,10 +18,20 @@ const stylescustom = StyleSheet.create({
     fontFamily: fonts.textRegular,
     fontSize: sizes._screen_width * 0.04,
   },
+  txtBold: {
+    color: colors.BLACK,
+    fontFamily: fonts.textBold,
+    fontSize: sizes._screen_width * 0.04,
+  },
   txt1: {
     color: colors.GRAY,
     fontFamily: fonts.textRegular,
     fontSize: sizes._screen_width * 0.035,
+  },
+  txtGray: {
+    color: colors.GRAY,
+    fontFamily: fonts.textRegular,
+    fontSize: sizes._screen_width * 0.04,
   },
   txt2: {
     color: colors.BLACK,
