@@ -33,5 +33,6 @@
     setting: require('../assets/images/setting.png'),
     subscription: require('../assets/images/subscription.png'),
     support: require('../assets/images/support.png'),
+    video: require('../assets/images/video.mp4'),
   }
   export default images
