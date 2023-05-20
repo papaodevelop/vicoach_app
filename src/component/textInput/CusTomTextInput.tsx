@@ -5,11 +5,13 @@ import sizes from '../../res/sizes';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
 import Icon from 'react-native-vector-icons/Ionicons';
+import stylescustom from '../../res/stylescustom';
 interface Props {
   placeholder?: string;
   pass?: boolean;
   value?: string;
   setValue: (val: string) => void;
+  require?: boolean;
 }
 const CusTomTextInput = (props: Props) => {
   const [show, setShow] = useState(true);
@@ -18,31 +20,34 @@ const CusTomTextInput = (props: Props) => {
   };
   return (
     <View style={styles.view}>
-      <TextInput
-        style={styles.textInput}
-        cursorColor={'black'}
-        placeholder={props.placeholder}
-        selectionColor={'black'}
-        secureTextEntry={props.pass ? show : undefined}
-        value={props.value}
-        onChangeText={props.setValue}
-      />
-      {props.value ? (
-        <Icon
-          onPress={() => props.setValue('')}
-          name="close-circle"
-          color={colors.GRAY}
-          size={sizes._screen_width * 0.05}
+      {props.require && <Text style={styles.txt}>*</Text>}
+      <View style={stylescustom.view1}>
+        <TextInput
+          style={styles.textInput}
+          cursorColor={'black'}
+          placeholder={props.placeholder}
+          selectionColor={'black'}
+          secureTextEntry={props.pass ? show : undefined}
+          value={props.value}
+          onChangeText={props.setValue}
         />
-      ) : null}
-      {props.pass === true && (
-        <Icon
-          onPress={onPress}
-          name={show ? 'md-eye-off' : 'md-eye'}
-          color={colors.GRAY}
-          size={sizes._screen_width * 0.05}
-        />
-      )}
+        {props.value ? (
+          <Icon
+            onPress={() => props.setValue('')}
+            name="close-circle"
+            color={colors.GRAY}
+            size={sizes._screen_width * 0.05}
+          />
+        ) : null}
+        {props.pass === true && (
+          <Icon
+            onPress={onPress}
+            name={show ? 'md-eye-off' : 'md-eye'}
+            color={colors.GRAY}
+            size={sizes._screen_width * 0.05}
+          />
+        )}
+      </View>
     </View>
   );
 };
@@ -54,8 +59,8 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     borderWidth: 1,
     borderColor: colors.GRAY,
-    flexDirection: 'row',
-    alignItems: 'center',
+
+    marginTop: 15,
   },
   textInput: {
     color: colors.BLACK,
@@ -64,5 +69,15 @@ const styles = StyleSheet.create({
     width: sizes._screen_width * 0.7,
     height: sizes._screen_height * 0.047,
     marginLeft: sizes._screen_width * 0.04,
+  },
+  txt: {
+    color: colors.RED,
+    fontFamily: fonts.textRegular,
+    fontSize: sizes._csreen_width * 0.03,
+    width: sizes._screen_width * 0.8,
+    textAlign: 'right',
+    position: 'absolute',
+
+    right: -10,
   },
 });

@@ -19,6 +19,20 @@ export function txt1(val: string) {
     return val.substring(0, 30) + '...';
   }
 }
+export function txt3(val: string) {
+  if (val.length < 20) {
+    return val;
+  } else {
+    return val.substring(0, 19) + '...';
+  }
+}
+export function txt2(val: string) {
+  if (val.length < 50) {
+    return val;
+  } else {
+    return val.substring(0, 48) + '...';
+  }
+}
 export function txt1Blog(val: string) {
   if (val.length < 100) {
     return val;

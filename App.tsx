@@ -5,8 +5,6 @@ import {Provider} from 'react-redux';
 import store from './src/redux/store/store';
 import {persistStore} from 'redux-persist';
 import {PersistGate} from 'redux-persist/integration/react';
-import PlayVideo from './src/screen/video/PlayVideo';
-
 const persistor = persistStore(store);
 LogBox.ignoreLogs(['Sending']);
 const App = () => {
@@ -20,7 +18,7 @@ const App = () => {
             showHideTransition={'fade'}
             translucent={true}
           />
-          <PlayVideo />
+          <Container />
         </View>
       </PersistGate>
     </Provider>

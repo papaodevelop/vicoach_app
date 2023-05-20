@@ -22,7 +22,7 @@ const ModalConfirmRegister = (props: Props) => {
       </View>
       <View style={styles.view}>
         <Text style={styles.title}>
-          Đăng ký thành công. Kiểm tra email để xác thực tài khoản ?
+          Đăng ký thành công. Trở lại màn hình đăng nhập để bắt đầu ?
         </Text>
 
         <TouchableOpacity style={styles.btn} onPress={props.toggleDate}>

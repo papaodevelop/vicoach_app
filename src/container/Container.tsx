@@ -17,6 +17,7 @@ import StartQuizz from '../screen/quizzes/notParticlip/StartQuizz';
 import TestResul from '../screen/quizzes/notParticlip/TestResul';
 import Cart from '../screen/cart/Cart';
 import CourseDetail from '../screen/courseDetail/CourseDetail';
+import PlayVideo from '../screen/video/PlayVideo';
 
 export default function Container() {
   const Stack = createNativeStackNavigator();
@@ -44,6 +45,7 @@ export default function Container() {
         <Stack.Screen name="StartQuizz" component={StartQuizz} />
         <Stack.Screen name="TestResul" component={TestResul} />
         <Stack.Screen name="CourseDetail" component={CourseDetail} />
+        <Stack.Screen name="PlayVideo" component={PlayVideo} />
       </Stack.Navigator>
     </NavigationContainer>
   );

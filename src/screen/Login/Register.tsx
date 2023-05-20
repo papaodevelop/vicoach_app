@@ -1,5 +1,5 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import colors from '../../res/colors';
 import sizes from '../../res/sizes';
 import fonts from '../../res/fonts';
@@ -8,51 +8,117 @@ import BTNLogin from '../../component/btn/BTNLogin';
 import images from '../../res/images';
 import Icon from 'react-native-vector-icons/Entypo';
 import ModalConfirmRegister from '../../component/modal/ModalConfirmRegister';
+import {useRegisterMutation} from '../../redux/api/login.api';
+import {Payloadregiter} from '../../../types/Auth';
+import Loading from '../../component/loading/Loading';
+import ErrorText from '../../component/error/ErrorText';
+import {
+  isRequired,
+  validateEmail,
+  validatePassword,
+  validateUsername,
+} from '../../res/require';
+import ErrorText1 from '../../component/error/ErrorText1';
+import {errEmail, errPassWord, errUserName, errexport} from '../../res/err';
+import {Errors} from '../../../types/Err';
+interface ErrorRegister {
+  data: {
+    error: string;
+    message: [];
+  };
+  statusCode: number;
+  status: number;
+}
 const Register = ({navigation}: any) => {
-  const [name, setNname] = useState('');
+  const [name, setName] = useState('');
   const [userName, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
-  const [passconfirm, setPassConfirm] = useState('');
+  const [errEmails, setErrEmails] = useState('');
+  const [erruserNames, setErrUsernames] = useState('');
   const [show, setShow] = useState(false);
+  const [register, {error, isLoading, isSuccess}] = useRegisterMutation();
   const submit = async () => {
-    setShow(false);
-    await navigation.goBack();
+    await register({
+      username: userName,
+      email: email,
+      name: name,
+      password: pass,
+      password_confirmation: pass,
+    } as Payloadregiter);
   };
+  useEffect(() => {
+    if (isSuccess) {
+      setShow(true);
+    }
+    let errr = error as Errors;
+    let err = errr?.data?.message;
+    if (err) {
+      setErrEmails(errexport(err));
+      setErrUsernames(errexport(err));
+    }
+  }, [error, isSuccess]);
   return (
-    <View style={styles.container}>
-      <Icon
-        name="chevron-left"
-        size={40}
-        color={'black'}
-        style={styles.icon}
-        onPress={() => navigation.goBack()}
-      />
-      <Image source={images.logo} resizeMode="contain" style={styles.img} />
-      <Text style={styles.login}>ĐĂNG KÝ</Text>
-      <View style={styles.view}>
-        <CusTombtn
-          placeholder="Tên người dùng"
-          value={name}
-          setValue={setNname}
+    <View style={{flex: 1}}>
+      <ScrollView style={styles.container}>
+        <Icon
+          name="chevron-left"
+          size={40}
+          color={'black'}
+          style={styles.icon}
+          onPress={() => navigation.goBack()}
         />
-        <CusTombtn
-          placeholder="Tên đăng nhập"
-          value={userName}
-          setValue={setUsername}
-        />
-        <CusTombtn placeholder="Email" value={email} setValue={setEmail} />
-        <CusTombtn placeholder="Mật khẩu" value={pass} setValue={setPass} />
-        <CusTombtn
-          placeholder="Xác nhận mật khẩu"
-          value={passconfirm}
-          setValue={setPassConfirm}
-        />
-      </View>
-      <View style={styles.btn}>
-        <BTNLogin txt="ĐĂNG KÝ" onPress={() => setShow(true)} />
-      </View>
-      <ModalConfirmRegister isShow={show} toggleDate={submit} />
+        <Image source={images.logo} resizeMode="contain" style={styles.img} />
+        <Text style={styles.login}>ĐĂNG KÝ</Text>
+        <View style={styles.view}>
+          <CusTombtn
+            placeholder="Tên người dùng"
+            value={name}
+            setValue={setName}
+            require
+          />
+          <CusTombtn
+            placeholder="Tên đăng nhập"
+            value={userName}
+            setValue={setUsername}
+            require
+          />
+          {userName && !validateUsername(userName) ? (
+            <ErrorText1 err={errUserName} />
+          ) : null}
+          <ErrorText1 err={erruserNames} />
+
+          <CusTombtn
+            placeholder="Email"
+            value={email}
+            setValue={setEmail}
+            require
+          />
+          {email && !validateEmail(email) ? (
+            <ErrorText1 err={errEmail} />
+          ) : null}
+          <ErrorText1 err={errEmails} />
+
+          <CusTombtn
+            placeholder="Mật khẩu"
+            value={pass}
+            setValue={setPass}
+            require
+          />
+          {pass && !validatePassword(pass) ? (
+            <ErrorText1 err={errPassWord} />
+          ) : null}
+        </View>
+        <View style={styles.btn}>
+          <BTNLogin
+            txt="ĐĂNG KÝ"
+            onPress={submit}
+            active={name && email && userName && pass ? false : true}
+          />
+        </View>
+        <ModalConfirmRegister isShow={show} toggleDate={() => setShow(false)} />
+      </ScrollView>
+      {isLoading && <Loading />}
     </View>
   );
 };
@@ -74,8 +140,7 @@ const styles = StyleSheet.create({
   },
   view: {
     alignItems: 'center',
-    marginTop: sizes._screen_height * 0.03,
-    height: sizes._csreen_height * 0.36,
+
     justifyContent: 'space-between',
   },
 

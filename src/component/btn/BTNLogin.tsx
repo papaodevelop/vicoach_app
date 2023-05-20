@@ -6,10 +6,17 @@ import fonts from '../../res/fonts';
 interface Props {
   txt: string;
   onPress: () => void;
+  active?: boolean;
 }
 const BTNLogin = (props: Props) => {
   return (
-    <TouchableOpacity onPress={props.onPress} style={styles.btn}>
+    <TouchableOpacity
+      onPress={props.active ? undefined : props.onPress}
+      activeOpacity={0.5}
+      style={{
+        ...styles.btn,
+        backgroundColor: props.active ? '#DDDDDD' : colors.ORANGE,
+      }}>
       <Text style={styles.txt}>{props.txt}</Text>
     </TouchableOpacity>
   );
@@ -19,7 +26,6 @@ const styles = StyleSheet.create({
   btn: {
     height: sizes._screen_height * 0.05,
     width: sizes._screen_width * 0.7,
-    backgroundColor: colors.ORANGE,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 60,

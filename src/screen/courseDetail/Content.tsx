@@ -4,8 +4,9 @@ import stylescustom from '../../res/stylescustom';
 import sizes from '../../res/sizes';
 import {Contentdata} from '../../datafeck/feck/Contentdata';
 import RenderContent from './RenderContent';
+import BTNLogin from '../../component/btn/BTNLogin';
 
-export default function Content() {
+export default function Content({navigation}: any) {
   return (
     <View style={stylescustom.container}>
       {Contentdata.map(items => {
@@ -24,6 +25,12 @@ export default function Content() {
           </View>
         );
       })}
+      <View style={{alignItems: 'center', marginTop: 30}}>
+        <BTNLogin
+          onPress={() => navigation.navigate('PlayVideo')}
+          txt="Bắt đầu"
+        />
+      </View>
     </View>
   );
 }

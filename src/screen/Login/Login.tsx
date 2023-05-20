@@ -1,5 +1,5 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import colors from '../../res/colors';
 import sizes from '../../res/sizes';
 import fonts from '../../res/fonts';
@@ -7,10 +7,36 @@ import CusTombtn from '../../component/textInput/CusTomTextInput';
 import BTNLogin from '../../component/btn/BTNLogin';
 import images from '../../res/images';
 import ModalForgotPassword from '../../component/modal/ModalForgotPassword';
+import axios from 'axios';
+import {useLoginMutation} from '../../redux/api/login.api';
+import Loading from '../../component/loading/Loading';
+import ErrorText from '../../component/error/ErrorText';
+import {TypedUseSelectorHook, useSelector} from 'react-redux';
 const Login = ({navigation}: any) => {
   const [userName, setusername] = useState('');
   const [pass, setPass] = useState('');
   const [show, setShow] = useState(false);
+  const axiosObj = axios.create({
+    baseURL: 'https://khoahoc.vicoaching.vn/api/v1/',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    responseType: 'json',
+    withCredentials: true,
+  });
+  const [login, {data, isLoading, error, isSuccess}] = useLoginMutation();
+
+  const LoginUser = async () => {
+    login({
+      username: userName,
+      password: pass,
+    });
+  };
+  useEffect(() => {
+    if (isSuccess) {
+      navigation.navigate('DrawerCustoms');
+    }
+  }, [isSuccess]);
   return (
     <View style={styles.container}>
       <Image source={images.logo} resizeMode="contain" style={styles.img} />
@@ -28,14 +54,12 @@ const Login = ({navigation}: any) => {
           setValue={setPass}
         />
       </View>
+      {error && <ErrorText err={'Tài khoản không chính xác'} />}
       <Text style={styles.txt2} onPress={() => setShow(true)}>
         Quên mật khẩu ?
       </Text>
       <View style={styles.btn}>
-        <BTNLogin
-          txt="ĐĂNG NHẬP"
-          onPress={() => navigation.navigate('DrawerCustoms')}
-        />
+        <BTNLogin txt="ĐĂNG NHẬP" onPress={LoginUser} />
       </View>
       <Text style={styles.txt3}>
         Bạn chưa có tài khoản?{' '}
@@ -44,9 +68,10 @@ const Login = ({navigation}: any) => {
           onPress={() => navigation.navigate('Register')}>
           {' '}
           Đăng ký
-        </Text>{' '}
+        </Text>
       </Text>
       <ModalForgotPassword isShow={show} toggleDate={() => setShow(false)} />
+      {isLoading && <Loading />}
     </View>
   );
 };

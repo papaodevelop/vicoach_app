@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,13 +11,31 @@ import sizes from '../../res/sizes';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
 import CusTombtn from '../../component/textInput/CusTomTextInput';
+import {useForgotpwMutation} from '../../redux/api/login.api';
+import {ActivityIndicator} from 'react-native-paper';
+import {validateEmail} from '../../res/require';
+import ErrorText1 from '../error/ErrorText1';
+import {ErrValiEmail, errEmail} from '../../res/err';
 
 interface Props {
   isShow: boolean;
   toggleDate: () => void;
 }
 const ModalForgotPassword = (props: Props) => {
+  const [forgot, {data, error, isSuccess, isLoading, isError}] =
+    useForgotpwMutation();
   const [email, setEmail] = useState('');
+  const [Erremail, setErrEmail] = useState('');
+  const SentForgot = () => {
+    forgot({
+      email: email,
+    });
+  };
+  useEffect(() => {
+    if (error) {
+      setErrEmail(ErrValiEmail);
+    }
+  }, [isSuccess, error]);
   const renderContent = () => (
     <View style={styles.content}>
       <View style={styles.head}>
@@ -30,10 +48,30 @@ const ModalForgotPassword = (props: Props) => {
             placeholder="Nhập email tài khoản"
             value={email}
             setValue={setEmail}
+            require
           />
+          {email && !validateEmail(email) ? (
+            <ErrorText1 err={errEmail} />
+          ) : null}
+          {isSuccess && (
+            <ErrorText1 err={'Kiểm tra email để khôi phục tài khoản'} />
+          )}
+          {isError && <ErrorText1 err={Erremail} />}
         </View>
-        <TouchableOpacity style={styles.btn} onPress={props.toggleDate}>
-          <Text style={styles.btntxt}>Gửi</Text>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => (isSuccess ? props.toggleDate() : SentForgot())}>
+          {isLoading ? (
+            <ActivityIndicator color="white" />
+          ) : (
+            <>
+              {isSuccess ? (
+                <Text style={styles.btntxt}>Đóng</Text>
+              ) : (
+                <Text style={styles.btntxt}>Gửi</Text>
+              )}
+            </>
+          )}
         </TouchableOpacity>
       </View>
     </View>

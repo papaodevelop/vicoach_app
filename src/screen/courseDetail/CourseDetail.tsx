@@ -71,7 +71,7 @@ const CourseDetail = (props: Props) => {
         </Tabs.Tab>
         <Tabs.Tab name="Nội dung">
           <Tabs.ScrollView showsVerticalScrollIndicator={false}>
-            <Content />
+            <Content navigation={props.navigation} />
           </Tabs.ScrollView>
         </Tabs.Tab>
         <Tabs.Tab name="Đánh giá">
