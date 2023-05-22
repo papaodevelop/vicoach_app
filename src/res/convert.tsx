@@ -2,7 +2,7 @@ export function money(val: string | number) {
   if (typeof val === 'string') {
     return val;
   } else {
-    return Number(val).toLocaleString('vi-VN') + 'đ';
+    return Number(val).toLocaleString('vi-VN') + '$';
   }
 }
 export function txt(val: string) {

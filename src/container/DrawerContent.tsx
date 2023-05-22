@@ -8,6 +8,7 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
+  Pressable,
 } from 'react-native';
 import images from '../res/images';
 import sizes from '../res/sizes';
@@ -26,9 +27,11 @@ export default function DrawerContent(props: Props) {
         <View
           style={{...stylescustom.view1, width: sizes._screen_width * 0.14}}>
           <Image resizeMode="contain" source={images.kien} style={styles.img} />
-          <View style={styles.img2}>
+          <Pressable
+            style={styles.img2}
+            onPress={() => props.navigation.navigate('Profile')}>
             <Image source={images.setting} style={styles.img1} />
-          </View>
+          </Pressable>
         </View>
         <Text style={styles.name}>Nguyễn Văn Kiên</Text>
         <View style={styles.line} />

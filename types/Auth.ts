@@ -1,8 +1,5 @@
 export interface Auth {
-  apiToken: string;
-  tokenType: string;
-  expiresIn: number;
-  userId: number;
+  Cookie: string[] | undefined;
 }
 export interface AuthState {
   auth: Auth | null;
@@ -10,7 +7,6 @@ export interface AuthState {
 export interface PayloadLogin {
   username: string;
   password: string;
-  remember?: boolean;
 }
 export interface Payloadregiter {
   username: string;

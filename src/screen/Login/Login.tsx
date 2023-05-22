@@ -11,32 +11,53 @@ import axios from 'axios';
 import {useLoginMutation} from '../../redux/api/login.api';
 import Loading from '../../component/loading/Loading';
 import ErrorText from '../../component/error/ErrorText';
-import {TypedUseSelectorHook, useSelector} from 'react-redux';
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
+import {setDataUser} from '../../redux/state/login.slice';
+import {RootState, useAppDispatch} from '../../redux/store/store';
+import {BASE_URL} from '../../Api/BaseURL';
+import {setAuth} from '../../redux/state/auth.slice';
 const Login = ({navigation}: any) => {
-  const [userName, setusername] = useState('');
-  const [pass, setPass] = useState('');
+  const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
+  const remember = useAppSelect(data => data.getdataUser.getdataUser);
+  const [userName, setusername] = useState(remember.username);
+  const [pass, setPass] = useState(remember.password);
   const [show, setShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [err, setErr] = useState<string>();
+  const dispatch = useDispatch();
   const axiosObj = axios.create({
-    baseURL: 'https://khoahoc.vicoaching.vn/api/v1/',
+    baseURL: BASE_URL,
     headers: {
       'Content-Type': 'application/json',
     },
     responseType: 'json',
     withCredentials: true,
   });
-  const [login, {data, isLoading, error, isSuccess}] = useLoginMutation();
-
   const LoginUser = async () => {
-    login({
-      username: userName,
-      password: pass,
-    });
-  };
-  useEffect(() => {
-    if (isSuccess) {
-      navigation.navigate('DrawerCustoms');
+    setIsLoading(true);
+    try {
+      const response = await axiosObj.post('auth/login', {
+        username: userName,
+        password: pass,
+      });
+
+      if (response.status == 200) {
+        dispatch(setAuth(response.headers['set-cookie']));
+        setErr('');
+        dispatch(
+          setDataUser({
+            username: userName,
+            password: pass,
+          }),
+        );
+        navigation.navigate('DrawerCustoms');
+      }
+    } catch (error: any) {
+      setErr(error?.response?.data.message);
     }
-  }, [isSuccess]);
+    setIsLoading(false);
+  };
+
   return (
     <View style={styles.container}>
       <Image source={images.logo} resizeMode="contain" style={styles.img} />
@@ -54,7 +75,7 @@ const Login = ({navigation}: any) => {
           setValue={setPass}
         />
       </View>
-      {error && <ErrorText err={'Tài khoản không chính xác'} />}
+      {err && <ErrorText err={'Tài khoản không chính xác'} />}
       <Text style={styles.txt2} onPress={() => setShow(true)}>
         Quên mật khẩu ?
       </Text>

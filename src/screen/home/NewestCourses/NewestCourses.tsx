@@ -9,17 +9,19 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {money, txt, txt1} from '../../../res/convert';
 import LinearGradient from 'react-native-linear-gradient';
 import {NavigationProp} from '@react-navigation/native';
+import {CourseCategoryType} from '../../../../types/CourseCategoryType';
 interface Props {
   data: any;
   navigation: NavigationProp<Record<string, any>>;
 }
+
 export default function NewestCourses(props: Props) {
-  const RederItem = ({item}: any) => {
+  const RederItem = ({item}: {item: CourseCategoryType}) => {
     return (
       <View style={styles.view}>
         <View>
           <Image
-            source={{uri: item.img}}
+            source={{uri: item.thumbnail?.url}}
             style={styles.img}
             resizeMode="cover"
           />
@@ -39,11 +41,11 @@ export default function NewestCourses(props: Props) {
                 color={'#FFD700'}
                 size={sizes._screen_width * 0.04}
               />
-              <Text style={styles.txt5}>{item.star}</Text>
+              <Text style={styles.txt5}>{item?.reviews}</Text>
             </View>
           </View>
         </View>
-        <Text style={styles.txt}>{txt1(item.name)}</Text>
+        <Text style={styles.txt}>{item?.title?.en}</Text>
         <View style={styles.view1}>
           <View style={stylescustom.view1}>
             <FontAwesome
@@ -51,7 +53,7 @@ export default function NewestCourses(props: Props) {
               color={colors.GRAY}
               size={sizes._screen_width * 0.04}
             />
-            <Text style={styles.txt1}>{txt(item.lecturers)}</Text>
+            <Text style={styles.txt1}>{item?.assign_instructor?.name}</Text>
           </View>
           <View style={stylescustom.view1}>
             <Icon
@@ -59,20 +61,20 @@ export default function NewestCourses(props: Props) {
               color={colors.GRAY}
               size={sizes._screen_width * 0.04}
             />
-            <Text style={styles.txt1}>{item.time} giờ</Text>
+            <Text style={styles.txt1}>{item?.duration} giờ</Text>
           </View>
         </View>
         <View style={styles.view2}>
           <Text style={styles.txt3}>
-            {money(item.price) ? money(item.price) : item.price}
+            {money(item?.price) ? money(item?.price) : item?.price}
           </Text>
           <Text style={styles.txt2}>
-            {money(item.pricenew) ? money(item.pricenew) : item.pricenew}
+            {money(item?.price) ? money(item?.price) : item?.price}
           </Text>
         </View>
-        {item.status && (
+        {item?.status && (
           <View style={styles.view5}>
-            <Text style={styles.txt4}>{item.status}% Off</Text>
+            <Text style={styles.txt4}>{item?.status}% Off</Text>
           </View>
         )}
       </View>

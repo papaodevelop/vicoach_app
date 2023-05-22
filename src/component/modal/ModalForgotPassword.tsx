@@ -16,7 +16,6 @@ import {ActivityIndicator} from 'react-native-paper';
 import {validateEmail} from '../../res/require';
 import ErrorText1 from '../error/ErrorText1';
 import {ErrValiEmail, errEmail} from '../../res/err';
-
 interface Props {
   isShow: boolean;
   toggleDate: () => void;
@@ -35,7 +34,7 @@ const ModalForgotPassword = (props: Props) => {
     if (error) {
       setErrEmail(ErrValiEmail);
     }
-  }, [isSuccess, error]);
+  }, [error]);
   const renderContent = () => (
     <View style={styles.content}>
       <View style={styles.head}>

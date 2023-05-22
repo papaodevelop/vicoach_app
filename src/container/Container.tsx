@@ -18,6 +18,7 @@ import TestResul from '../screen/quizzes/notParticlip/TestResul';
 import Cart from '../screen/cart/Cart';
 import CourseDetail from '../screen/courseDetail/CourseDetail';
 import PlayVideo from '../screen/video/PlayVideo';
+import Profile from '../screen/profile/Profile';
 
 export default function Container() {
   const Stack = createNativeStackNavigator();
@@ -46,6 +47,7 @@ export default function Container() {
         <Stack.Screen name="TestResul" component={TestResul} />
         <Stack.Screen name="CourseDetail" component={CourseDetail} />
         <Stack.Screen name="PlayVideo" component={PlayVideo} />
+        <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
   );

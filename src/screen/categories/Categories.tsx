@@ -7,14 +7,17 @@ import {CategoriesData} from '../../datafeck/feck/Data';
 import RenderItemCategoriesData from '../../component/renderItem/RenderItemCategoriesData';
 import RenderItemShowCategori from '../../component/renderItem/RenderItemShowCategori';
 import fonts from '../../res/fonts';
+import {useGetCategoryQuery} from '../../redux/api/courseCategory.api';
+import Loading from '../../component/loading/Loading';
 
 export default function Categories({navigation}: any) {
+  const {data, isLoading} = useGetCategoryQuery('');
   const ListFoodter = () => {
     return (
       <View style={styles.view}>
         <Text style={styles.txt}>Xu hướng</Text>
         <FlatList
-          data={CategoriesData}
+          data={data?.trending_categories}
           renderItem={({item, index}) => (
             <RenderItemCategoriesData item={item} index={index} />
           )}
@@ -36,7 +39,7 @@ export default function Categories({navigation}: any) {
       </Text>
 
       <FlatList
-        data={CategoriesData}
+        data={data?.categories}
         renderItem={({item, index}) => (
           <RenderItemShowCategori item={item} index={index} />
         )}
@@ -44,6 +47,7 @@ export default function Categories({navigation}: any) {
         style={styles.view1}
         contentContainerStyle={stylescustom.paddingBottom}
       />
+      {isLoading && <Loading />}
     </View>
   );
 }

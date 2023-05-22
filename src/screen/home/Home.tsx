@@ -9,12 +9,16 @@ import NewestCourses from './newestCourses/NewestCourses';
 import stylescustom from '../../res/stylescustom';
 import {khoahocmoi} from '../../datafeck/feck/Data';
 import {NavigationProp} from '@react-navigation/native';
+import {useGetCategoryQuery} from '../../redux/api/courseCategory.api';
+import Loading from '../../component/loading/Loading';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
 }
 export default function Home(props: Props) {
   const [search, setSearch] = useState('');
   const [showSearch, setShowSearch] = useState(true);
+  const {data, isLoading} = useGetCategoryQuery('');
+
   const ListFooter = () => {
     return (
       <>
@@ -26,14 +30,17 @@ export default function Home(props: Props) {
             style={styles.txt}
             onPress={() =>
               props.navigation.navigate('ViewAll', {
-                title: 'Khoá học học mới nhất',
-                item: khoahocmoi,
+                title: 'Khoá học mới nhất',
+                item: data?.newest_courses,
               })
             }>
             Xem thêm
           </Text>
         </View>
-        <NewestCourses data={khoahocmoi} navigation={props.navigation} />
+        <NewestCourses
+          data={data?.newest_courses}
+          navigation={props.navigation}
+        />
         <View style={styles.view}>
           <Text style={styles.title1}>Các gói mới</Text>
           <Text
@@ -132,6 +139,7 @@ export default function Home(props: Props) {
         scrollEventThrottle={16}
         ListFooterComponentStyle={{paddingBottom: sizes._screen_height * 0.15}}
       />
+      {isLoading && <Loading />}
     </View>
   );
 }

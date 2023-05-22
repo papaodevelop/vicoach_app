@@ -12,7 +12,14 @@ import stylescustom from '../../res/stylescustom';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
 import Icon from 'react-native-vector-icons/AntDesign';
-export default function RenderItemShowCategori({item, index}: any) {
+import {CourseCategoryType} from '../../../types/CourseCategoryType';
+interface Props {
+  item: CourseCategoryType;
+  index: number;
+}
+export default function RenderItemShowCategori(props: Props) {
+  const textTitle = props.item.name.vi || props.item.name.en;
+
   const [show, setShow] = useState(false);
   const showItem = () => {
     setShow(!show);
@@ -29,18 +36,15 @@ export default function RenderItemShowCategori({item, index}: any) {
   }
   return (
     <>
-      {item?.courses?.length > 1 ? (
+      {props.item?.children?.length > 1 ? (
         <>
           <Pressable style={styles.view1} onPress={showItem}>
             <View style={stylescustom.view}>
               <View style={stylescustom.view1}>
-                <View style={styles.view}>
-                  <Image source={item.img} style={styles.img} />
-                </View>
                 <View style={styles.view2}>
-                  <Text style={styles.title}>{item.name}</Text>
+                  <Text style={styles.title}>{textTitle}</Text>
                   <Text style={styles.txt}>
-                    {item?.courses?.length} Courses
+                    {props.item?.children?.length} Courses
                   </Text>
                 </View>
               </View>
@@ -52,7 +56,7 @@ export default function RenderItemShowCategori({item, index}: any) {
             </View>
             {show ? (
               <>
-                {item?.courses?.map((i: any, index: number) => (
+                {props.item?.children?.map((i: any, index: number) => (
                   <View
                     style={{
                       flexDirection: 'row',
@@ -70,9 +74,9 @@ export default function RenderItemShowCategori({item, index}: any) {
                       <View style={[styles.route]} />
                     </View>
                     <View style={{marginLeft: 16}}>
-                      <Text style={styles.title}>{i.name}</Text>
+                      <Text style={styles.title}>{textTitle}</Text>
                       <Text style={styles.txt}>
-                        {i?.courses?.length} Courses
+                        {i?.children?.length} Courses
                       </Text>
                     </View>
                   </View>
@@ -84,12 +88,11 @@ export default function RenderItemShowCategori({item, index}: any) {
       ) : (
         <View style={styles.view1}>
           <View style={stylescustom.view1}>
-            <View style={styles.view}>
-              <Image source={item.img} style={styles.img} />
-            </View>
             <View style={styles.view2}>
-              <Text style={styles.title}>{item.name}</Text>
-              <Text style={styles.txt}>{item?.courses?.length} Courses</Text>
+              <Text style={styles.title}>{textTitle}</Text>
+              <Text style={styles.txt}>
+                {props.item?.children?.length} Courses
+              </Text>
             </View>
           </View>
         </View>

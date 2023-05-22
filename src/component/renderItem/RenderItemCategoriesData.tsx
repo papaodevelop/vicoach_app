@@ -4,16 +4,24 @@ import colors from '../../res/colors';
 import sizes from '../../res/sizes';
 import stylescustom from '../../res/stylescustom';
 import fonts from '../../res/fonts';
-
-export default function RenderItemCategoriesData({item, index}: any) {
+import {CourseCategoryType} from '../../../types/CourseCategoryType';
+interface Props {
+  item: CourseCategoryType;
+  index: number;
+}
+export default function RenderItemCategoriesData(props: Props) {
+  const textTitle = props.item?.name?.vi || props.item?.name?.en;
   return (
     <View style={styles.view}>
-      <View style={{backgroundColor: item.color, ...styles.view1}}>
-        <Image source={item.img} style={styles.img} />
+      <View style={{...styles.view1}}>
+        <Image
+          source={{uri: props.item?.thumbnail_image?.url}}
+          style={styles.img}
+        />
       </View>
       <View style={styles.view2}>
-        <Text style={styles.title}>{item.name}</Text>
-        <Text style={styles.txt}>{item.courses?.length} Courses</Text>
+        <Text style={styles.title}>{textTitle}</Text>
+        <Text style={styles.txt}>{props.item.number_of_course} Courses</Text>
       </View>
     </View>
   );
@@ -37,7 +45,7 @@ const styles = StyleSheet.create({
   img: {
     height: sizes._screen_width * 0.1,
     width: sizes._screen_width * 0.1,
-    tintColor: colors.WHITE,
+    // tintColor: colors.WHITE,
   },
   view2: {
     marginLeft: sizes._screen_width * 0.03,

@@ -13,16 +13,30 @@ import {setupListeners} from '@reduxjs/toolkit/dist/query';
 import getCheck from '../state/Check.reducer';
 import getQuizz from '../state/Quizz.reducer';
 import {loginApi} from '../api/login.api';
+import {profileApi} from '../api/profile.api';
+import {categoryAPI} from '../api/courseCategory.api';
 import {useDispatch} from 'react-redux';
+import getdataUser from '../state/login.slice';
+import getAuth from '../state/auth.slice';
 const reducers = combineReducers({
   [loginApi.reducerPath]: loginApi.reducer,
+  [profileApi.reducerPath]: profileApi.reducer,
   getcheck: getCheck,
   getQuizz: getQuizz,
+  getdataUser: getdataUser,
+  getAuth: getAuth,
+  [categoryAPI.reducerPath]: categoryAPI.reducer,
 });
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['getQuizz'],
+  blacklist: [
+    'getQuizz',
+    loginApi.reducerPath,
+    'getAuth',
+    profileApi.reducerPath,
+    categoryAPI.reducerPath,
+  ],
 };
 const persistedReducer = persistReducer(persistConfig, reducers);
 
@@ -33,7 +47,11 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(loginApi.middleware);
+    }).concat([
+      loginApi.middleware,
+      profileApi.middleware,
+      categoryAPI.middleware,
+    ]);
   },
 });
 setupListeners(store.dispatch);
