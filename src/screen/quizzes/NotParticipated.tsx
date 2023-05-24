@@ -2,8 +2,13 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {NotParticpated} from '../../datafeck/feck/DataQuizzs';
 import RenderNotParticipated from '../../component/renderItem/RenderNotParticipated';
+import {NavigationProp} from '@react-navigation/native';
 
-const NotParticipated = ({navigation}: any) => {
+const NotParticipated = ({
+  navigation,
+}: {
+  navigation: NavigationProp<Record<string, any>>;
+}) => {
   return (
     <View style={styles.container}>
       <FlatList

@@ -8,8 +8,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import colors from '../../res/colors';
 import {money} from '../../res/convert';
 import BTNLogin from '../../component/btn/BTNLogin';
+import {NavigationProp} from '@react-navigation/native';
 interface Props {
-  navigation: any;
+  navigation: NavigationProp<Record<string, any>>;
   route: any;
 }
 export default function MeetingsDetails(props: Props) {

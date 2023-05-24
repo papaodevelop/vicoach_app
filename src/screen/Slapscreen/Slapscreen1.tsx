@@ -12,6 +12,7 @@ import sizes from '../../res/sizes';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
+import {NavigationProp} from '@react-navigation/native';
 const SIZE = 10;
 const MARGIN = 5;
 const BG = 'rgb(172, 172, 172)';
@@ -21,7 +22,11 @@ const INTERVAL = 300;
 const ANIMATION_DURATION = 400;
 const ANIMATION_SCALE = 1.4;
 
-const Slapscreen1 = ({navigation}: any) => {
+const Slapscreen1 = ({
+  navigation,
+}: {
+  navigation: NavigationProp<Record<string, any>>;
+}) => {
   const [active, setActive] = useState(1);
   const timerRef: any = useRef(null);
   const useAppSelect: TypedUseSelectorHook<any> = useSelector;

@@ -8,8 +8,10 @@ import colors from '../../../res/colors';
 import fonts from '../../../res/fonts';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BTNLogin from '../../../component/btn/BTNLogin';
+import {NavigationProp} from '@react-navigation/native';
 interface Props {
-  navigation: any;
+  navigation: NavigationProp<Record<string, any>>;
+
   route: any;
 }
 export default function TestResul(props: Props) {

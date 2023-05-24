@@ -13,6 +13,7 @@ import {slides} from '../../datafeck/DataFirst';
 import fonts from '../../res/fonts';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {Check} from '../../redux/state/Check.reducer';
+import {NavigationProp} from '@react-navigation/native';
 const COLORS = {
   primary: '#FFFFFF',
   black: '#000000',
@@ -29,7 +30,11 @@ const Slide = ({item}: any) => {
     </View>
   );
 };
-const OnboardingFirst = ({navigation}: any) => {
+const OnboardingFirst = ({
+  navigation,
+}: {
+  navigation: NavigationProp<Record<string, any>>;
+}) => {
   const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);
   const ref = React.useRef<any>(null);
   const updateCurrentSlideIndex = (e: any) => {

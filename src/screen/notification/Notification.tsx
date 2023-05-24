@@ -4,8 +4,13 @@ import HeaderScreen from '../../component/header/HeaderScreen';
 import RenderNotifi from '../../component/renderItem/RenderNotifi';
 import {dataNotification} from '../../datafeck/feck/Notification';
 import sizes from '../../res/sizes';
+import {NavigationProp} from '@react-navigation/native';
 
-export default function Notification({navigation}: any) {
+export default function Notification({
+  navigation,
+}: {
+  navigation: NavigationProp<Record<string, any>>;
+}) {
   return (
     <View style={styles.container}>
       <HeaderScreen navigation={navigation} title="THÔNG BÁO" />

@@ -11,6 +11,7 @@ import {khoahocmoi} from '../../datafeck/feck/Data';
 import {NavigationProp} from '@react-navigation/native';
 import {useGetCategoryQuery} from '../../redux/api/courseCategory.api';
 import Loading from '../../component/loading/Loading';
+import SearchAll from '../search/SearchAll';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
 }
@@ -105,15 +106,24 @@ export default function Home(props: Props) {
         setValue={setSearch}
         show={showSearch}
       />
-      <FlatList
-        data={[]}
-        onScroll={(val: any) => onScroll(val)}
-        renderItem={null}
-        ListFooterComponent={() => <ListFooter />}
-        showsVerticalScrollIndicator={false}
-        scrollEventThrottle={16}
-        ListFooterComponentStyle={{paddingBottom: sizes._screen_height * 0.15}}
-      />
+      {search ? (
+        <View>
+          <SearchAll navigation={props.navigation} search={search} />
+        </View>
+      ) : (
+        <FlatList
+          data={[]}
+          onScroll={(val: any) => onScroll(val)}
+          renderItem={null}
+          ListFooterComponent={() => <ListFooter />}
+          showsVerticalScrollIndicator={false}
+          scrollEventThrottle={16}
+          ListFooterComponentStyle={{
+            paddingBottom: sizes._screen_height * 0.15,
+          }}
+        />
+      )}
+
       {isLoading && <Loading />}
     </View>
   );
@@ -122,7 +132,6 @@ export default function Home(props: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
   },
   title: {
     color: colors.BLACK,

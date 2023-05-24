@@ -14,6 +14,9 @@ import Content from './Content';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import Comment from './Comment';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';
+import {useDispatch} from 'react-redux';
+import {addCart} from '../../redux/state/cart.reducer';
+import images from '../../res/images';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   route: any;
@@ -31,12 +34,14 @@ const Header = ({
         source={{uri: item?.thumbnail?.url}}
         style={styles.img}
         resizeMode="cover"
+        defaultSource={images.i2}
       />
       <View style={styles.viewHeader}>
         <View style={stylescustom.view1}>
           <Image
             source={{uri: item?.assign_instructor?.image?.url}}
             style={styles.avt}
+            defaultSource={images.noimage}
           />
           <View style={{marginLeft: 8}}>
             <Text style={stylescustom.txt}>
@@ -60,9 +65,23 @@ const Header = ({
 const CourseDetail = (props: Props) => {
   const item = props.route.params.item as CourseCategoryType;
   const refRBSheet = useRef<any>();
+  const dispatch = useDispatch();
+
   const textTitle = item?.title?.vi || item?.title?.en;
   const category = item?.category?.name?.vi || item?.category?.name?.en;
-
+  const addCarts = () => {
+    dispatch(
+      addCart({
+        id: item?.id,
+        name: textTitle,
+        reviews: item?.reviews,
+        thumbnail: item?.thumbnail?.url,
+        startDate: item.created_at,
+        price: item.price,
+      }),
+    );
+    refRBSheet.current.close();
+  };
   return (
     <View style={stylescustom.container}>
       <View style={{zIndex: 10, backgroundColor: 'white', paddingBottom: 5}}>
@@ -99,7 +118,6 @@ const CourseDetail = (props: Props) => {
           </Tabs.ScrollView>
         </Tabs.Tab>
       </Tabs.Container>
-
       {/* @ts-ignore */}
       <RBSheet
         ref={refRBSheet}
@@ -130,7 +148,9 @@ const CourseDetail = (props: Props) => {
               color={colors.BLACK}
               size={sizes._screen_width * 0.06}
             />
-            <Text style={styles.txt2}>Thêm vào giỏ hàng</Text>
+            <Text style={styles.txt2} onPress={addCarts}>
+              Thêm vào giỏ hàng
+            </Text>
           </View>
         </View>
       </RBSheet>

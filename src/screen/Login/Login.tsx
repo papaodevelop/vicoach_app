@@ -8,7 +8,6 @@ import BTNLogin from '../../component/btn/BTNLogin';
 import images from '../../res/images';
 import ModalForgotPassword from '../../component/modal/ModalForgotPassword';
 import axios from 'axios';
-import {useLoginMutation} from '../../redux/api/login.api';
 import Loading from '../../component/loading/Loading';
 import ErrorText from '../../component/error/ErrorText';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
@@ -52,6 +51,8 @@ const Login = ({navigation}: any) => {
         navigation.navigate('DrawerCustoms');
       }
     } catch (error: any) {
+      console.log(error?.response?.status);
+
       setErr(error?.response?.data.message);
     }
     setIsLoading(false);

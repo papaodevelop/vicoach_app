@@ -54,6 +54,32 @@ export const categoryAPI = createApi({
         return [{type: tagTypes, id: 'LIST'}];
       },
     }),
+    getCourseSearch: build.query<ListApiResponse<CourseCategoryType>, string>({
+      query: queryString => ({
+        url: `course-list?search=${queryString}`,
+        method: 'GET',
+      }),
+      providesTags(result) {
+        if (result?.data) {
+          const courseSearch = result.data;
+          return [
+            ...courseSearch.map(({id}) => ({
+              type: tagTypes,
+              id,
+            })),
+            {
+              type: tagTypes,
+              id: 'LIST',
+            },
+          ];
+        }
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
   }),
 });
-export const {useGetCategoryQuery, useGetClassCourseQuery} = categoryAPI;
+export const {
+  useGetCategoryQuery,
+  useGetClassCourseQuery,
+  useGetCourseSearchQuery,
+} = categoryAPI;

@@ -58,7 +58,7 @@ export const itemNavigationDrawer = [
   {
     id: 10,
     name: 'Support',
-    navigation: '',
+    navigation: 'Support',
     icon: images.support,
   },
 ];

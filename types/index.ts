@@ -1,1 +1,1 @@
-export * from './CheckTypes'
+export * from './CheckTypes';

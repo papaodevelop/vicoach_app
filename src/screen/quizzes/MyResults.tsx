@@ -3,8 +3,13 @@ import React from 'react';
 import {khoahocmoi} from '../../datafeck/feck/Data';
 import RenderQuizzes from '../../component/renderItem/RenderQuizzes';
 import {DataQuizzs} from '../../datafeck/feck/DataQuizzs';
+import {NavigationProp} from '@react-navigation/native';
 
-export default function MyResults({navigation}: any) {
+export default function MyResults({
+  navigation,
+}: {
+  navigation: NavigationProp<Record<string, any>>;
+}) {
   return (
     <View style={styles.container}>
       <FlatList

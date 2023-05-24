@@ -22,3 +22,11 @@ interface ClassCourse {
   live_class: 1;
   delivery_mode: string;
 }
+interface Carts {
+  id: number;
+  name: string;
+  reviews: string;
+  thumbnail: string;
+  startDate: string;
+  price: number;
+}

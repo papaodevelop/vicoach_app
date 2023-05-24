@@ -1,5 +1,5 @@
 import {NavigationProp} from '@react-navigation/native';
 
-export interface NavigationType {
+interface NavigationType {
   navigation: NavigationProp<Record<string, any>>;
 }

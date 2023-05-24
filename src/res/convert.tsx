@@ -1,8 +1,8 @@
 export function money(val: string | number) {
-  if (typeof val === 'string') {
-    return val;
+  if (val === 0) {
+    return 'Free';
   } else {
-    return Number(val).toLocaleString('vi-VN') + '$';
+    return '$' + Number(val).toLocaleString('en-US');
   }
 }
 export function txt(val: string) {

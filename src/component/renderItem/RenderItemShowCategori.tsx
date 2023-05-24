@@ -18,7 +18,7 @@ interface Props {
   index: number;
 }
 export default function RenderItemShowCategori(props: Props) {
-  const textTitle = props.item.name.vi || props.item.name.en;
+  const textTitle = props.item?.name?.vi || props.item?.name?.en;
 
   const [show, setShow] = useState(false);
   const showItem = () => {
@@ -57,24 +57,15 @@ export default function RenderItemShowCategori(props: Props) {
             {show ? (
               <>
                 {props.item?.children?.map((i: any, index: number) => (
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                    }}
-                    key={index}>
-                    <View
-                      style={{
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        width: sizes._screen_width * 0.1,
-                        marginLeft: 5,
-                      }}>
+                  <View style={stylescustom.view1} key={index}>
+                    <View style={styles.view3}>
                       <View style={styles.hr} />
                       <View style={[styles.route]} />
                     </View>
                     <View style={{marginLeft: 16}}>
-                      <Text style={styles.title}>{textTitle}</Text>
+                      <Text style={styles.title}>
+                        {i?.name?.vi || i?.name?.en}
+                      </Text>
                       <Text style={styles.txt}>
                         {i?.children?.length} Courses
                       </Text>
@@ -144,5 +135,11 @@ const styles = StyleSheet.create({
     borderStyle: 'dashed',
     borderColor: colors.GRAY,
     borderDashOffset: 4,
+  },
+  view3: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: sizes._screen_width * 0.1,
+    marginLeft: 5,
   },
 });

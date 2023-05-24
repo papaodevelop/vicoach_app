@@ -17,10 +17,23 @@ import fonts from '../res/fonts';
 import RenderItemDrawer from '../component/renderItem/RenderItemDrawer';
 import stylescustom from '../res/stylescustom';
 import {itemNavigationDrawer} from '../datafeck/itemNavigationDrawer';
+import {useLogoutMutation} from '../redux/api/login.api';
 interface Props {
   navigation: any;
 }
 export default function DrawerContent(props: Props) {
+  const [logoutMutation] = useLogoutMutation();
+  const handleLogout = async () => {
+    try {
+      const result = await logoutMutation('');
+      console.log(result);
+      props.navigation.navigate('Login');
+    } catch (error) {
+      // Xử lý lỗi nếu có
+
+      console.error('Lỗi khi logout:', error);
+    }
+  };
   return (
     <ScrollView style={styles.drawerHeader}>
       <SafeAreaView style={{marginLeft: 15}}>
@@ -51,9 +64,7 @@ export default function DrawerContent(props: Props) {
             marginTop: sizes._screen_height * 0.02,
           }}>
           <Image source={images.logout} style={styles.icon} />
-          <Text
-            style={styles.txt}
-            onPress={() => props.navigation.navigate('Login')}>
+          <Text style={styles.txt} onPress={handleLogout}>
             Logout
           </Text>
         </TouchableOpacity>

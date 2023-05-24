@@ -4,8 +4,9 @@ import colors from '../../res/colors';
 import fonts from '../../res/fonts';
 import sizes from '../../res/sizes';
 import stylescustom from '../../res/stylescustom';
+import {NavigationProp} from '@react-navigation/native';
 interface Props {
-  navigation: any;
+  navigation: NavigationProp<Record<string, any>>;
   item: any;
 }
 export default function RenderItemDrawer(props: Props) {

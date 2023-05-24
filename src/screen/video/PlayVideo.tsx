@@ -18,9 +18,14 @@ import stylescustom from '../../res/stylescustom';
 import {FeaturedCoursess} from '../../datafeck/feck/Data';
 import RenderListVideo from './RenderListVideo';
 import BTNLogin from '../../component/btn/BTNLogin';
+import {NavigationProp} from '@react-navigation/native';
 const windowHeight = sizes._screen_width * (9 / 12);
 const windowWith = sizes._screen_width;
-export default function PlayVideo({navigation}: any) {
+export default function PlayVideo({
+  navigation,
+}: {
+  navigation: NavigationProp<Record<string, any>>;
+}) {
   const onLoad = () => {
     console.log('endload');
   };

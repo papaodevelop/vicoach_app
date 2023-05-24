@@ -6,6 +6,7 @@ import Bottomtabbars from './Bottomtabbars';
 import Meetings from '../screen/meetings/Meetings';
 import Quizzes from '../screen/quizzes/Quizzes';
 import Favorite from '../screen/favorite/Favorite';
+import Support from '../screen/support/Support';
 const Drawer = createDrawerNavigator();
 
 const DrawerCustoms = () => {
@@ -17,6 +18,7 @@ const DrawerCustoms = () => {
       <Drawer.Screen name="Meetings" component={Meetings} />
       <Drawer.Screen name="Quizzes" component={Quizzes} />
       <Drawer.Screen name="Favorite" component={Favorite} />
+      <Drawer.Screen name="Support" component={Support} />
     </Drawer.Navigator>
   );
 };

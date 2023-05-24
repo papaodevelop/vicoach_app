@@ -1,4 +1,3 @@
 export interface CheckTypes {
-check:boolean
+  check: boolean;
 }
-

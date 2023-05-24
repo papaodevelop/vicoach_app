@@ -4,20 +4,26 @@ import colors from '../../res/colors';
 import stylescustom from '../../res/stylescustom';
 import sizes from '../../res/sizes';
 import Star from '../../component/Star';
-import {money} from '../../res/convert';
+import {DateTime, money} from '../../res/convert';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import images from '../../res/images';
 interface Props {
-  item: any;
+  item: Carts;
   index: number;
 }
 export default function RenderItemCart(props: Props) {
   return (
     <View style={styles.view}>
       <View style={stylescustom.view1}>
-        <Image source={{uri: props.item.img}} style={styles.img} />
+        <Image
+          source={
+            props.item?.thumbnail ? {uri: props.item?.thumbnail} : images.i1
+          }
+          style={styles.img}
+        />
         <View style={styles.view1}>
-          <Text style={stylescustom.txt2}>{props.item.name}</Text>
-          <Star star={props.item.star} width={sizes._screen_width * 0.2} />
+          <Text style={stylescustom.txt2}>{props.item?.name}</Text>
+          <Star star={props.item.reviews} width={sizes._screen_width * 0.2} />
           <View style={stylescustom.view}>
             <View style={stylescustom.view1}>
               <Icon
@@ -25,9 +31,9 @@ export default function RenderItemCart(props: Props) {
                 color={colors.GRAY}
                 size={sizes._csreen_width * 0.04}
               />
-              <Text style={styles.txt}>{props.item.day}</Text>
+              <Text style={styles.txt}>{DateTime(props.item?.startDate)}</Text>
             </View>
-            <Text style={styles.price}>{money(props.item.pirce)}</Text>
+            <Text style={styles.price}>{money(props.item?.price)}</Text>
           </View>
         </View>
       </View>

@@ -18,6 +18,7 @@ import {categoryAPI} from '../api/courseCategory.api';
 import {useDispatch} from 'react-redux';
 import getdataUser from '../state/login.slice';
 import getAuth from '../state/auth.slice';
+import getCart from '../state/cart.reducer';
 const reducers = combineReducers({
   [loginApi.reducerPath]: loginApi.reducer,
   [profileApi.reducerPath]: profileApi.reducer,
@@ -26,6 +27,7 @@ const reducers = combineReducers({
   getdataUser: getdataUser,
   getAuth: getAuth,
   [categoryAPI.reducerPath]: categoryAPI.reducer,
+  getCart: getCart,
 });
 const persistConfig = {
   key: 'root',

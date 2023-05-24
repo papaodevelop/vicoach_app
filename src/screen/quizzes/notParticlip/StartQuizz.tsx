@@ -14,7 +14,14 @@ import ModalConfirm from '../../../component/modal/ModalConfirm';
 import {DeleteForm} from '../../../redux/state/Quizz.reducer';
 import {useDispatch} from 'react-redux';
 import {DataQuizzs} from '../../../datafeck/feck/DataQuizzs';
-export default function StartQuizz({navigation, route}: any) {
+import {NavigationProp} from '@react-navigation/native';
+export default function StartQuizz({
+  navigation,
+  route,
+}: {
+  navigation: NavigationProp<Record<string, any>>;
+  route: any;
+}) {
   const items = route.params.item;
   const percent = 1 / items?.quiz?.length;
   const [selectId, setSelectID] = useState<number>();

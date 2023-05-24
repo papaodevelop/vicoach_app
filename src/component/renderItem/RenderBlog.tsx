@@ -6,7 +6,16 @@ import fonts from '../../res/fonts';
 import {txt1Blog} from '../../res/convert';
 import stylescustom from '../../res/stylescustom';
 import Icon from 'react-native-vector-icons/FontAwesome';
-export default function RenderBlog({item, index, navigation}: any) {
+import {NavigationProp} from '@react-navigation/native';
+export default function RenderBlog({
+  item,
+  index,
+  navigation,
+}: {
+  navigation: NavigationProp<Record<string, any>>;
+  item: any;
+  index: number;
+}) {
   return (
     <Pressable
       style={styles.view}
