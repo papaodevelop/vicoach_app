@@ -6,10 +6,11 @@ import fonts from '../../../res/fonts';
 import stylescustom from '../../../res/stylescustom';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {money, txt, txt1} from '../../../res/convert';
+import {Time, money, txt, txt1, txt3} from '../../../res/convert';
 import LinearGradient from 'react-native-linear-gradient';
 import {NavigationProp} from '@react-navigation/native';
 import {CourseCategoryType} from '../../../../types/CourseCategoryType';
+import images from '../../../res/images';
 interface Props {
   data: any;
   navigation: NavigationProp<Record<string, any>>;
@@ -17,6 +18,8 @@ interface Props {
 
 export default function NewestCourses(props: Props) {
   const RederItem = ({item}: {item: CourseCategoryType}) => {
+    const textTitle = item?.title?.vi || item?.title?.en;
+
     return (
       <View style={styles.view}>
         <View>
@@ -24,6 +27,7 @@ export default function NewestCourses(props: Props) {
             source={{uri: item.thumbnail?.url}}
             style={styles.img}
             resizeMode="cover"
+            defaultSource={images.i2}
           />
           <LinearGradient
             start={{x: 2, y: 0}}
@@ -45,7 +49,7 @@ export default function NewestCourses(props: Props) {
             </View>
           </View>
         </View>
-        <Text style={styles.txt}>{item?.title?.en}</Text>
+        <Text style={styles.txt}>{txt1(textTitle)}</Text>
         <View style={styles.view1}>
           <View style={stylescustom.view1}>
             <FontAwesome
@@ -53,7 +57,9 @@ export default function NewestCourses(props: Props) {
               color={colors.GRAY}
               size={sizes._screen_width * 0.04}
             />
-            <Text style={styles.txt1}>{item?.assign_instructor?.name}</Text>
+            <Text style={styles.txt1}>
+              {txt(item?.assign_instructor?.name)}
+            </Text>
           </View>
           <View style={stylescustom.view1}>
             <Icon
@@ -61,7 +67,7 @@ export default function NewestCourses(props: Props) {
               color={colors.GRAY}
               size={sizes._screen_width * 0.04}
             />
-            <Text style={styles.txt1}>{item?.duration} giờ</Text>
+            <Text style={styles.txt1}>{Time(item?.duration)} giờ</Text>
           </View>
         </View>
         <View style={styles.view2}>

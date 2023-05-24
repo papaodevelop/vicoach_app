@@ -1,33 +1,34 @@
-import {
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import sizes from '../../res/sizes';
 import colors from '../../res/colors';
-import Star from '../Star';
 import stylescustom from '../../res/stylescustom';
-import fonts from '../../res/fonts';
-
-export default function RenderItemInstructors({item, index}: any) {
+import {CourseCategoryType} from '../../../types/CourseCategoryType';
+import images from '../../res/images';
+import {NavigationProp} from '@react-navigation/native';
+export default function RenderItemInstructors({
+  item,
+  index,
+  navigation,
+}: {
+  item: CourseCategoryType;
+  index: number;
+  navigation: NavigationProp<Record<string, any>>;
+}) {
   return (
-    <Pressable style={styles.view}>
-      <View
-        style={{
-          backgroundColor: item?.status ? colors.GREEN : colors.RED,
-          ...styles.view1,
-        }}
-      />
-      <View style={{alignItems: 'center'}}>
-        <Image source={item.img} style={styles.img} />
-        <Text style={styles.txt}>{item?.name}</Text>
-        <Text style={{...styles.txt, color: colors.GRAY}}>{'Giảng viên'}</Text>
+    <Pressable
+      style={styles.view}
+      key={index}
+      onPress={() => navigation.navigate('ProfileIntructors', {item: item})}>
+      <View style={styles.view1}>
+        {item?.image?.url ? (
+          <Image source={{uri: item?.image?.url}} style={styles.img} />
+        ) : (
+          <Image style={styles.img} source={images.noimage} />
+        )}
 
-        <Star star={item.star} width={sizes._screen_width * 0.2} />
+        {/* @ts-ignore */}
+        <Text style={styles.txt}>{item?.name}</Text>
       </View>
     </Pressable>
   );
@@ -36,7 +37,7 @@ export default function RenderItemInstructors({item, index}: any) {
 const styles = StyleSheet.create({
   view: {
     width: sizes._screen_width * 0.42,
-    height: sizes._screen_width * 0.5,
+    paddingVertical: 10,
     backgroundColor: colors.WHITE,
     marginTop: 15,
     borderRadius: 15,
@@ -45,15 +46,11 @@ const styles = StyleSheet.create({
     height: sizes._csreen_width * 0.18,
     width: sizes._csreen_width * 0.18,
     borderRadius: (sizes._csreen_width * 0.18) / 2,
-    marginTop: sizes._csreen_width * 0.02,
+    marginTop: sizes._csreen_width * 0.04,
   },
-  txt: {...stylescustom.txt, marginTop: sizes._screen_width * 0.02},
-  view1: {
-    height: 12,
-    width: 12,
-    borderRadius: 30,
-    alignSelf: 'flex-end',
-    marginRight: sizes._screen_width * 0.02,
-    marginTop: sizes._screen_width * 0.02,
+  view1: {alignItems: 'center', paddingBottom: 20},
+  txt: {
+    ...stylescustom.txt1,
+    marginTop: 8,
   },
 });

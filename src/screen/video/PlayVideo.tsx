@@ -17,6 +17,7 @@ import Control from './Control';
 import stylescustom from '../../res/stylescustom';
 import {FeaturedCoursess} from '../../datafeck/feck/Data';
 import RenderListVideo from './RenderListVideo';
+import BTNLogin from '../../component/btn/BTNLogin';
 const windowHeight = sizes._screen_width * (9 / 12);
 const windowWith = sizes._screen_width;
 export default function PlayVideo({navigation}: any) {
@@ -70,7 +71,7 @@ export default function PlayVideo({navigation}: any) {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, alignItems: 'center'}}>
       <Pressable onPress={() => setShow(!show)}>
         <Video
           ref={videoRef}
@@ -80,6 +81,7 @@ export default function PlayVideo({navigation}: any) {
           paused={play}
           rate={1}
           muted={false}
+          onError={val => console.log(val)}
           fullscreenOrientation="all"
           source={images.video}
           resizeMode="contain"
@@ -140,6 +142,7 @@ export default function PlayVideo({navigation}: any) {
           contentContainerStyle={styles.view}
         />
       </View>
+      <BTNLogin onPress={() => navigation.goBack()} txt="Trở lại" />
     </View>
   );
 }

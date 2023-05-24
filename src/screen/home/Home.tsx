@@ -23,7 +23,10 @@ export default function Home(props: Props) {
     return (
       <>
         <Text style={styles.title}>Khoá học nổi bật</Text>
-        <FeaturedCourses navigation={props.navigation} />
+        <FeaturedCourses
+          navigation={props.navigation}
+          data={data?.featured_courses}
+        />
         <View style={styles.view}>
           <Text style={styles.title1}>Khoá học học mới nhất</Text>
           <Text
@@ -41,34 +44,6 @@ export default function Home(props: Props) {
           data={data?.newest_courses}
           navigation={props.navigation}
         />
-        <View style={styles.view}>
-          <Text style={styles.title1}>Các gói mới</Text>
-          <Text
-            style={styles.txt}
-            onPress={() =>
-              props.navigation.navigate('ViewAll', {
-                title: 'Các gói mới',
-                item: khoahocmoi,
-              })
-            }>
-            Xem thêm
-          </Text>
-        </View>
-        <NewestCourses data={khoahocmoi} navigation={props.navigation} />
-        <View style={styles.view}>
-          <Text style={styles.title1}>Xếp hạng cao nhất</Text>
-          <Text
-            style={styles.txt}
-            onPress={() =>
-              props.navigation.navigate('ViewAll', {
-                title: 'Xếp hạng cao nhất',
-                item: khoahocmoi,
-              })
-            }>
-            Xem thêm
-          </Text>
-        </View>
-        <NewestCourses data={khoahocmoi} navigation={props.navigation} />
         <View style={styles.view}>
           <Text style={styles.title1}>Bán chạy nhất</Text>
           <Text

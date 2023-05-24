@@ -2,14 +2,16 @@ import {createApi} from '@reduxjs/toolkit/query/react';
 import {ListApiResponse} from '../../../types/Common';
 import {axiosBaseQuery} from './axiosClient';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';
+
 const tagTypes = 'category' as const;
+
 export const categoryAPI = createApi({
   reducerPath: 'categoryAPI',
   tagTypes: [tagTypes],
   baseQuery: axiosBaseQuery(),
   endpoints: build => ({
     getCategory: build.query<ListApiResponse<CourseCategoryType>, string>({
-      query: (queryString: string = '') => ({
+      query: (queryString = '') => ({
         url: `home?${queryString}`,
         method: 'GET',
       }),
@@ -30,7 +32,28 @@ export const categoryAPI = createApi({
         return [{type: tagTypes, id: 'LIST'}];
       },
     }),
+    getClassCourse: build.query<ListApiResponse<CourseCategoryType>, string>({
+      query: (queryString = '') => ({
+        url: `student/class-course?${queryString}`,
+        method: 'GET',
+      }),
+      providesTags(result) {
+        if (result?.data) {
+          const classCourse = result.data;
+          return [
+            ...classCourse.map(({id}) => ({
+              type: tagTypes,
+              id,
+            })),
+            {
+              type: tagTypes,
+              id: 'LIST',
+            },
+          ];
+        }
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
   }),
 });
-
-export const {useGetCategoryQuery} = categoryAPI;
+export const {useGetCategoryQuery, useGetClassCourseQuery} = categoryAPI;

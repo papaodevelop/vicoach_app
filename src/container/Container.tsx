@@ -19,6 +19,7 @@ import Cart from '../screen/cart/Cart';
 import CourseDetail from '../screen/courseDetail/CourseDetail';
 import PlayVideo from '../screen/video/PlayVideo';
 import Profile from '../screen/profile/Profile';
+import ProfileIntructors from '../screen/profile/ProfileIntructors';
 
 export default function Container() {
   const Stack = createNativeStackNavigator();
@@ -48,6 +49,7 @@ export default function Container() {
         <Stack.Screen name="CourseDetail" component={CourseDetail} />
         <Stack.Screen name="PlayVideo" component={PlayVideo} />
         <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="ProfileIntructors" component={ProfileIntructors} />
       </Stack.Navigator>
     </NavigationContainer>
   );

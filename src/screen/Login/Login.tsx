@@ -40,7 +40,6 @@ const Login = ({navigation}: any) => {
         username: userName,
         password: pass,
       });
-
       if (response.status == 200) {
         dispatch(setAuth(response.headers['set-cookie']));
         setErr('');

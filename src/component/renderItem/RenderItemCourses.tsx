@@ -6,19 +6,25 @@ import stylescustom from '../../res/stylescustom';
 import Star from '../Star';
 import fonts from '../../res/fonts';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {money} from '../../res/convert';
-
+import {DateTime, Time, money} from '../../res/convert';
+import images from '../../res/images';
 interface Props {
-  item: any;
+  item: ClassCourse;
   index: number;
 }
 const RenderItemCourses = (props: Props) => {
   let item = props.item;
+  const text = item?.category?.vi || item?.category?.en;
+  const texts = item?.title?.vi || item?.title?.en;
+
   return (
     <Pressable style={styles.view} key={props.index}>
       <View style={stylescustom.view}>
         <View style={stylescustom.view1}>
-          <Image source={{uri: item?.img}} style={styles.img} />
+          <Image
+            source={item?.thumbnail ? {uri: item?.thumbnail} : images.i1}
+            style={styles.img}
+          />
           <View
             style={{
               ...styles.height,
@@ -26,9 +32,9 @@ const RenderItemCourses = (props: Props) => {
               justifyContent: 'space-between',
             }}>
             <View>
-              <Text style={styles.txt}>{item.name}</Text>
+              <Text style={styles.txt}>{texts}</Text>
               <View style={styles.view1}>
-                <Star star={item.star} width={sizes._screen_width * 0.2} />
+                <Star star={item.reviews} width={sizes._screen_width * 0.2} />
               </View>
             </View>
             <View style={stylescustom.view1}>
@@ -37,27 +43,19 @@ const RenderItemCourses = (props: Props) => {
                 color={colors.GRAY}
                 size={sizes._screen_width * 0.03}
               />
-              <Text style={styles.txt1}>{item.time}</Text>
+              <Text style={styles.txt1}>{Time(item.duration)}</Text>
             </View>
           </View>
         </View>
-        <Text style={{alignSelf: 'flex-end', color: colors.GREEN}}>
-          {money(item.pricenew)}
-        </Text>
       </View>
       <View style={stylescustom.view1}>
         <View>
           <Text style={styles.txt2}>Loại</Text>
-          <Text style={styles.txt3}>{item.category}</Text>
+          <Text style={styles.txt3}>{text}</Text>
         </View>
-        <View
-          style={{
-            position: 'absolute',
-            width: sizes._screen_width * 0.9,
-            alignItems: 'center',
-          }}>
+        <View>
           <Text style={styles.txt2}>Ngày mua</Text>
-          <Text style={styles.txt3}>{item.startdate}</Text>
+          <Text style={styles.txt3}>{DateTime(item.start_date)}</Text>
         </View>
       </View>
     </Pressable>
@@ -86,6 +84,7 @@ const styles = StyleSheet.create({
     color: colors.BLACK,
     fontFamily: fonts.textBold,
     fontSize: sizes._csreen_width * 0.038,
+    width: sizes._screen_width * 0.55,
   },
   txt1: {
     color: colors.GRAY,
@@ -99,5 +98,9 @@ const styles = StyleSheet.create({
     fontSize: sizes._csreen_width * 0.03,
     marginTop: 10,
   },
-  txt3: {...stylescustom.txt, fontSize: sizes._screen_width * 0.035},
+  txt3: {
+    ...stylescustom.txt,
+    fontSize: sizes._screen_width * 0.035,
+    width: sizes._screen_width * 0.4,
+  },
 });

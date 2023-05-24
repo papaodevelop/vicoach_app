@@ -1,12 +1,17 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import HeaderScreen1 from '../../component/header/HeaderScreen1';
-import TopTabProviders from '../../container/TopTabProviders';
-export default function Providers({navigation}: any) {
+import Instructors from './Instructors';
+import {NavigationProp} from '@react-navigation/native';
+export default function Providers({
+  navigation,
+}: {
+  navigation: NavigationProp<Record<string, any>>;
+}) {
   return (
     <View style={styles.container}>
-      <HeaderScreen1 title="Giảng viên" navigation={navigation} />
-      <TopTabProviders />
+      <HeaderScreen1 title="Giáo viên" navigation={navigation} />
+      <Instructors navigation={navigation} />
     </View>
   );
 }
@@ -14,6 +19,5 @@ export default function Providers({navigation}: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
   },
 });

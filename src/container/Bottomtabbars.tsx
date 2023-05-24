@@ -66,7 +66,7 @@ const Bottomtabbars = (props: Props) => {
                   size={sizes._screen_width * 0.065}
                   color={'white'}
                 />
-                {focused ? <Text style={styles.txt}></Text> : null}
+                {focused ? <Text style={styles.txt}>Phân loại</Text> : null}
               </View>
             );
           },
@@ -74,7 +74,7 @@ const Bottomtabbars = (props: Props) => {
         }}
       />
       <Tab.Screen
-        name="Giảng viên"
+        name="Giáo viên"
         component={Providers}
         options={{
           tabBarIcon: ({focused, size, color}) => {
@@ -85,7 +85,7 @@ const Bottomtabbars = (props: Props) => {
                   size={sizes._screen_width * 0.065}
                   color={'white'}
                 />
-                {focused ? <Text style={styles.txt}>Giảng viên</Text> : null}
+                {focused ? <Text style={styles.txt}>Giáo viên</Text> : null}
               </View>
             );
           },

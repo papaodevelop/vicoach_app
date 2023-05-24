@@ -7,6 +7,9 @@ export interface ListApiResponse<T> {
   categories: [];
   trending_categories: [];
   newest_courses: [];
+  featured_courses: [];
+  count: number;
+  instructors: [];
 }
 
 export interface PaginationResponse {

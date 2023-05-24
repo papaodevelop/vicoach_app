@@ -35,25 +35,18 @@ const Control = (props: Props) => {
   const handleOnSlide = (time: number) => {
     props.onSlideCapture(time);
   };
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     props.setShow(false);
-  //   }, 4000);
-  //   return () => {
-  //     clearInterval(intervalId);
-  //   };
-  // }, [props.show]);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      props.setShow(false);
+    }, 4000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [props.show]);
 
   return (
     <>
-      <View style={styles.dot}>
-        <Icons
-          onPress={props.back}
-          name="chevron-left"
-          size={sizes._screen_width * 0.09}
-          color={colors.WHITE}
-        />
-      </View>
+      <View style={styles.dot}></View>
       <View style={styles.wrapper}>
         <Icon
           onPress={props.previous}

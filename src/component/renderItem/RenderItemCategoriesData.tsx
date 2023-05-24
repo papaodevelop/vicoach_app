@@ -5,6 +5,7 @@ import sizes from '../../res/sizes';
 import stylescustom from '../../res/stylescustom';
 import fonts from '../../res/fonts';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';
+import images from '../../res/images';
 interface Props {
   item: CourseCategoryType;
   index: number;
@@ -17,6 +18,7 @@ export default function RenderItemCategoriesData(props: Props) {
         <Image
           source={{uri: props.item?.thumbnail_image?.url}}
           style={styles.img}
+          defaultSource={images.i2}
         />
       </View>
       <View style={styles.view2}>

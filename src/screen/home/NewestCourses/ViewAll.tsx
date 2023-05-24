@@ -3,7 +3,15 @@ import React, {useState} from 'react';
 import HeaderScreen from '../../../component/header/HeaderScreen';
 import SearchInput from '../../../component/textInput/SearchInput';
 import RenderItemCouses from './RenderItemCouses';
-export default function ViewAll({route, navigation}: any) {
+import {NavigationProp} from '@react-navigation/native';
+import {CourseCategoryType} from '../../../../types/CourseCategoryType';
+export default function ViewAll({
+  route,
+  navigation,
+}: {
+  route: any;
+  navigation: NavigationProp<Record<string, any>>;
+}) {
   const {title, item} = route.params;
   const [search, setSearch] = useState('');
   return (

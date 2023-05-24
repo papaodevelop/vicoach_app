@@ -1,5 +1,5 @@
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import stylescustom from '../../res/stylescustom';
 import HeaderScreen from '../../component/header/HeaderScreen';
 import {NavigationProp} from '@react-navigation/native';
@@ -13,20 +13,36 @@ import Infomation from './Infomation';
 import Content from './Content';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import Comment from './Comment';
+import {CourseCategoryType} from '../../../types/CourseCategoryType';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   route: any;
 }
-const Header = ({item, onShow}: any) => {
+const Header = ({
+  item,
+  onShow,
+}: {
+  item: CourseCategoryType;
+  onShow: () => void;
+}) => {
   return (
     <>
-      <Image source={item.image} style={styles.img} resizeMode="cover" />
-      <View style={{...stylescustom.view, marginTop: 15}}>
+      <Image
+        source={{uri: item?.thumbnail?.url}}
+        style={styles.img}
+        resizeMode="cover"
+      />
+      <View style={styles.viewHeader}>
         <View style={stylescustom.view1}>
-          <Image source={item.avt} style={styles.avt} />
+          <Image
+            source={{uri: item?.assign_instructor?.image?.url}}
+            style={styles.avt}
+          />
           <View style={{marginLeft: 8}}>
-            <Text style={stylescustom.txt1}>{item.lecturers}</Text>
-            <Star star={item.start} width={sizes._screen_width * 0.2} />
+            <Text style={stylescustom.txt}>
+              {item?.assign_instructor?.name}
+            </Text>
+            <Text style={stylescustom.txt1}>Giáo viên</Text>
           </View>
         </View>
         <Pressable style={styles.view2} onPress={onShow}>
@@ -42,17 +58,20 @@ const Header = ({item, onShow}: any) => {
 };
 
 const CourseDetail = (props: Props) => {
-  const item = props.route.params.item;
+  const item = props.route.params.item as CourseCategoryType;
   const refRBSheet = useRef<any>();
+  const textTitle = item?.title?.vi || item?.title?.en;
+  const category = item?.category?.name?.vi || item?.category?.name?.en;
+
   return (
     <View style={stylescustom.container}>
       <View style={{zIndex: 10, backgroundColor: 'white', paddingBottom: 5}}>
         <HeaderScreen navigation={props.navigation} title="Chi tiết khoá học" />
         <View style={styles.view}>
-          <Text style={styles.txt}>{item.name}</Text>
+          <Text style={styles.txt}>{textTitle}</Text>
           <View style={styles.view1}>
-            <Text style={stylescustom.txt1}>kiêndasdasd</Text>
-            <Star star={item.start} width={sizes._screen_width * 0.2} />
+            <Text style={stylescustom.txt1}>{category}</Text>
+            <Star star={item.reviews} width={sizes._screen_width * 0.2} />
           </View>
         </View>
       </View>
@@ -120,20 +139,6 @@ const CourseDetail = (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-  box: {
-    height: 250,
-    width: '100%',
-  },
-  boxA: {
-    backgroundColor: 'white',
-  },
-  boxB: {
-    backgroundColor: '#D8D8D8',
-  },
-  header: {
-    width: '100%',
-    backgroundColor: '#2196f3',
-  },
   txt: {
     ...stylescustom.txt3,
     fontSize: sizes._screen_width * 0.05,
@@ -177,6 +182,7 @@ const styles = StyleSheet.create({
     ...stylescustom.view1,
     marginTop: 15,
   },
+  viewHeader: {...stylescustom.view, marginTop: 15, marginLeft: 10},
 });
 
 export default CourseDetail;

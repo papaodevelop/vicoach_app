@@ -81,7 +81,29 @@ export interface CourseCategoryType {
   };
   assign_instructor: {
     name: string;
-    image: string;
+    image: {
+      id: number;
+      url: string;
+      path: string;
+      fileName: string;
+      key: number;
+      type: string;
+    };
   };
   reviews: string;
+  address: {
+    id: number;
+    street: string;
+    state: string;
+    city: string;
+    country: string;
+    zip_code: number;
+  };
+  image: {
+    id: number;
+    url: string;
+    path: string;
+    fileName: string;
+  };
+  subscription: null;
 }

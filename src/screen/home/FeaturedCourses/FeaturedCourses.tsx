@@ -15,15 +15,20 @@ import {Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import fonts from '../../../res/fonts';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {money} from '../../../res/convert';
+import {Time, money} from '../../../res/convert';
 import Star from '../../../component/Star';
 import {NavigationProp} from '@react-navigation/native';
+import {CourseCategoryType} from '../../../../types/CourseCategoryType';
+import images from '../../../res/images';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
+  data: any;
 }
 export default function FeaturedCourses(props: Props) {
   const scrollX = React.useRef(new Animated.Value(0)).current;
-  const RenderItem = ({item}: any) => {
+  const RenderItem = ({item}: {item: CourseCategoryType}) => {
+    const textTitle = item?.title?.vi || item?.title?.en;
+
     return (
       <Pressable
         style={styles.view}
@@ -32,25 +37,23 @@ export default function FeaturedCourses(props: Props) {
             item: item,
           })
         }>
-        <Image style={styles.img} source={item.image}></Image>
+        <Image
+          style={styles.img}
+          defaultSource={images.i2}
+          source={{uri: item?.thumbnail?.url}}></Image>
         <LinearGradient
           start={{x: 2, y: 0}}
           end={{x: 2, y: 0.7}}
           colors={['white', colors.BLACK]}
           style={styles.liner}></LinearGradient>
-        <View
-          style={{
-            alignSelf: 'center',
-            alignItems: 'flex-end',
-            width: sizes._screen_width * 0.8,
-          }}>
+        <View style={styles.view6}>
           <View style={styles.view5}>
             <Text style={styles.txt1}>{money(item.price)}</Text>
           </View>
         </View>
         <View style={styles.view3}>
-          <Text style={styles.txt3}>{item.name}</Text>
-          <Star star={item.start} />
+          <Text style={styles.txt3}>{textTitle}</Text>
+          <Star star={item.reviews} />
           <View
             style={{
               ...styles.view4,
@@ -58,18 +61,33 @@ export default function FeaturedCourses(props: Props) {
               width: sizes._screen_width * 0.7,
             }}>
             <View style={styles.view4}>
-              <Image source={item.avt} style={styles.img1} />
-              <Text style={{...styles.txt, width: sizes._screen_width * 0.4}}>
-                {item.lecturers}
+              <Image
+                source={
+                  item?.assign_instructor?.image?.url
+                    ? {uri: item?.assign_instructor?.image?.url}
+                    : images.noimage
+                }
+                style={styles.img1}
+              />
+              <Text
+                style={{
+                  ...styles.txt,
+                  width: sizes._screen_width * 0.4,
+                  marginLeft: 8,
+                }}>
+                {item?.assign_instructor?.name}
               </Text>
             </View>
+
             <View style={styles.view4}>
               <Icon
                 name="clockcircle"
                 color={colors.WHITE}
                 size={sizes._screen_width * 0.05}
               />
-              <Text style={styles.txt}>{item.time} giờ</Text>
+              <Text style={{...styles.txt, marginLeft: 8}}>
+                {Time(item.duration)} giờ
+              </Text>
             </View>
           </View>
         </View>
@@ -79,7 +97,7 @@ export default function FeaturedCourses(props: Props) {
   return (
     <View style={styles.view1}>
       <FlatList
-        data={FeaturedCoursess}
+        data={props?.data}
         showsHorizontalScrollIndicator={false}
         keyExtractor={item => `${item.id}`}
         onScroll={Animated.event(
@@ -94,7 +112,7 @@ export default function FeaturedCourses(props: Props) {
         renderItem={({item}) => <RenderItem item={item} />}
       />
       <ExpandingDot
-        data={FeaturedCoursess}
+        data={props?.data}
         scrollX={scrollX}
         dotStyle={styles.dot}
         inActiveDotOpacity={0.2}
@@ -157,12 +175,16 @@ const styles = StyleSheet.create({
     color: colors.WHITE,
     fontFamily: fonts.textRegular,
     fontSize: sizes._csreen_width * 0.035,
-    marginLeft: 8,
   },
   view5: {backgroundColor: 'white', padding: 8, borderRadius: 10},
   txt1: {
     color: colors.GREEN,
     fontSize: sizes._csreen_width * 0.04,
     fontFamily: fonts.textRegular,
+  },
+  view6: {
+    alignSelf: 'center',
+    alignItems: 'flex-end',
+    width: sizes._screen_width * 0.8,
   },
 });
