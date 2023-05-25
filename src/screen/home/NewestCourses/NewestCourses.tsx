@@ -1,4 +1,4 @@
-import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import sizes from '../../../res/sizes';
 import colors from '../../../res/colors';
@@ -21,7 +21,14 @@ export default function NewestCourses(props: Props) {
     const textTitle = item?.title?.vi || item?.title?.en;
 
     return (
-      <View style={styles.view}>
+      <Pressable
+        style={styles.view}
+        onPress={() =>
+          props.navigation.navigate('CourseDetail', {
+            id: item.id,
+            reviews: item.reviews,
+          })
+        }>
         <View>
           <Image
             source={{uri: item.thumbnail?.url}}
@@ -83,7 +90,7 @@ export default function NewestCourses(props: Props) {
             <Text style={styles.txt4}>{item?.status}% Off</Text>
           </View>
         )}
-      </View>
+      </Pressable>
     );
   };
   return (

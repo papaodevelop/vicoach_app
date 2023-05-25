@@ -7,6 +7,9 @@ import Meetings from '../screen/meetings/Meetings';
 import Quizzes from '../screen/quizzes/Quizzes';
 import Favorite from '../screen/favorite/Favorite';
 import Support from '../screen/support/Support';
+import Certificate from '../screen/certificate/Certificate';
+import DashBoard from '../screen/dashboard/DashBoard';
+import Comment from '../screen/comment/Comment';
 const Drawer = createDrawerNavigator();
 
 const DrawerCustoms = () => {
@@ -19,6 +22,9 @@ const DrawerCustoms = () => {
       <Drawer.Screen name="Quizzes" component={Quizzes} />
       <Drawer.Screen name="Favorite" component={Favorite} />
       <Drawer.Screen name="Support" component={Support} />
+      <Drawer.Screen name="Certificate" component={Certificate} />
+      <Drawer.Screen name="DashBoard" component={DashBoard} />
+      <Drawer.Screen name="Comment" component={Comment} />
     </Drawer.Navigator>
   );
 };

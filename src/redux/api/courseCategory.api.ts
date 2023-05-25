@@ -2,9 +2,8 @@ import {createApi} from '@reduxjs/toolkit/query/react';
 import {ListApiResponse} from '../../../types/Common';
 import {axiosBaseQuery} from './axiosClient';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';
-
+import {CourseDetail} from '../../../types/CourseDetail';
 const tagTypes = 'category' as const;
-
 export const categoryAPI = createApi({
   reducerPath: 'categoryAPI',
   tagTypes: [tagTypes],
@@ -76,10 +75,56 @@ export const categoryAPI = createApi({
         return [{type: tagTypes, id: 'LIST'}];
       },
     }),
+    getdetailCourse: build.query<CourseDetail, string>({
+      query: queryString => ({
+        url: `course-list/${queryString}`,
+        method: 'GET',
+      }),
+      providesTags(result) {
+        if (result?.data) {
+          const detailCourse = result.data;
+          return [
+            ...detailCourse.map(({id}) => ({
+              type: tagTypes,
+              id,
+            })),
+            {
+              type: tagTypes,
+              id: 'LIST',
+            },
+          ];
+        }
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
+    getReviewCoures: build.query<ListApiResponse<CoursesReview>, string>({
+      query: queryString => ({
+        url: `class-course/${queryString}/reviews`,
+        method: 'GET',
+      }),
+      providesTags(result) {
+        if (result?.data) {
+          const courseReview = result.data;
+          return [
+            ...courseReview.map(({id}) => ({
+              type: tagTypes,
+              id,
+            })),
+            {
+              type: tagTypes,
+              id: 'LIST',
+            },
+          ];
+        }
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
   }),
 });
 export const {
   useGetCategoryQuery,
   useGetClassCourseQuery,
   useGetCourseSearchQuery,
+  useGetdetailCourseQuery,
+  useGetReviewCouresQuery,
 } = categoryAPI;

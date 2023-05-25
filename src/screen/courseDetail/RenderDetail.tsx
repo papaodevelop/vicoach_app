@@ -4,6 +4,7 @@ import stylescustom from '../../res/stylescustom';
 import colors from '../../res/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import sizes from '../../res/sizes';
+import {DateTime, Time} from '../../res/convert';
 
 const RenderDetail = ({item, index}: any) => {
   return (
@@ -17,7 +18,13 @@ const RenderDetail = ({item, index}: any) => {
       </View>
       <View style={styles.view5}>
         <Text style={stylescustom.txt1}>{item.name}</Text>
-        <Text style={stylescustom.txt3}>{item.title}</Text>
+        <Text style={stylescustom.txt3}>
+          {item.name == 'Ngày bắt đầu'
+            ? DateTime(item.title)
+            : item.name == 'Thời lượng'
+            ? Time(item.title)
+            : item.title}
+        </Text>
       </View>
     </View>
   );

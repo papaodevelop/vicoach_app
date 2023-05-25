@@ -5,24 +5,27 @@ import colors from '../../res/colors';
 import sizes from '../../res/sizes';
 import {Image} from 'react-native';
 import Star from '../../component/Star';
-interface Props {
-  item: any;
-  index: number;
-}
-export default function RenderComment(props: Props) {
+import images from '../../res/images';
+import {DateTime, DateTimes} from '../../res/convert';
+
+export default function RenderComment({item}: {item: CoursesReview}) {
   return (
     <View style={styles.view}>
       <View style={stylescustom.view}>
         <View style={stylescustom.view1}>
-          <Image source={props.item.avt} style={styles.img} />
+          <Image
+            source={{uri: item?.user?.image?.url}}
+            defaultSource={images.noimage}
+            style={styles.img}
+          />
           <View style={styles.view1}>
-            <Text style={stylescustom.txt}>{props.item.name}</Text>
-            <Text style={stylescustom.txt1}>{'student'}</Text>
+            <Text style={stylescustom.txt}>{item?.user?.name}</Text>
+            <Text style={stylescustom.txt1}>{DateTimes(item?.created_at)}</Text>
           </View>
         </View>
-        <Star star={4.5} width={sizes._screen_width * 0.2} />
+        <Star star={item?.rating} width={sizes._screen_width * 0.2} />
       </View>
-      <Text style={styles.txt}>{props.item.title}</Text>
+      <Text style={styles.txt}>{item?.content}</Text>
     </View>
   );
 }

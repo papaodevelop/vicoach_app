@@ -56,12 +56,12 @@ export default function DrawerContent(props: Props) {
           scrollEnabled={false}
         />
         <View
-          style={{...styles.line, marginTop: sizes._screen_height * 0.06}}
+          style={{...styles.line, marginTop: sizes._screen_height * 0.03}}
         />
         <TouchableOpacity
           style={{
             ...stylescustom.view1,
-            marginTop: sizes._screen_height * 0.02,
+            marginTop: sizes._screen_height * 0.08,
           }}>
           <Image source={images.logout} style={styles.icon} />
           <Text style={styles.txt} onPress={handleLogout}>

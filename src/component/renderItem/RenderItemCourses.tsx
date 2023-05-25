@@ -48,13 +48,17 @@ const RenderItemCourses = (props: Props) => {
           </View>
         </View>
       </View>
-      <View style={stylescustom.view1}>
+      <View style={stylescustom.view}>
         <View>
           <Text style={styles.txt2}>Loại</Text>
           <Text style={styles.txt3}>{text}</Text>
         </View>
-        <View>
-          <Text style={styles.txt2}>Ngày mua</Text>
+        <View
+          style={{
+            alignItems: 'center',
+            marginRight: sizes._screen_width * 0.05,
+          }}>
+          <Text style={styles.txt2}>Ngày bắt đầu</Text>
           <Text style={styles.txt3}>{DateTime(item.start_date)}</Text>
         </View>
       </View>
@@ -101,6 +105,5 @@ const styles = StyleSheet.create({
   txt3: {
     ...stylescustom.txt,
     fontSize: sizes._screen_width * 0.035,
-    width: sizes._screen_width * 0.4,
   },
 });

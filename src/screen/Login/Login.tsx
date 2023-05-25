@@ -51,8 +51,6 @@ const Login = ({navigation}: any) => {
         navigation.navigate('DrawerCustoms');
       }
     } catch (error: any) {
-      console.log(error?.response?.status);
-
       setErr(error?.response?.data.message);
     }
     setIsLoading(false);

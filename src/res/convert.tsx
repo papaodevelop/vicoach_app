@@ -51,3 +51,9 @@ export const DateTime = (val: string) => {
   var formattedDate = date.toLocaleDateString('vi-VN');
   return formattedDate;
 };
+export const DateTimes = (val: string) => {
+  var date = new Date(val);
+  var formattedDate = date.toLocaleDateString('vi-VN');
+  var formatTime = date.toLocaleTimeString('vi-VN');
+  return formattedDate + ' ' + formatTime;
+};

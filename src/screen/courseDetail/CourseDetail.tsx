@@ -17,6 +17,12 @@ import {CourseCategoryType} from '../../../types/CourseCategoryType';
 import {useDispatch} from 'react-redux';
 import {addCart} from '../../redux/state/cart.reducer';
 import images from '../../res/images';
+import {useGetdetailCourseQuery} from '../../redux/api/courseCategory.api';
+import {CourseDetail} from '../../../types/CourseDetail';
+import Loading from '../../component/loading/Loading';
+import Video from 'react-native-video';
+import {ProgressBar} from 'react-native-paper';
+
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   route: any;
@@ -24,30 +30,58 @@ interface Props {
 const Header = ({
   item,
   onShow,
+  data,
 }: {
   item: CourseCategoryType;
   onShow: () => void;
+  data: CourseDetail | undefined;
 }) => {
+  console.log(data?.assign_instructor?.image);
+
   return (
     <>
-      <Image
-        source={{uri: item?.thumbnail?.url}}
-        style={styles.img}
-        resizeMode="cover"
-        defaultSource={images.i2}
-      />
+      {data?.video_overview?.url ? (
+        <>
+          <Video
+            style={styles.img}
+            rate={1}
+            muted={false}
+            onError={val => console.log(val)}
+            fullscreenOrientation="all"
+            source={{uri: data?.video_overview?.url}}
+            resizeMode="contain"
+            volume={8}
+            ignoreSilentSwitch="ignore"
+            fullscreenAutorotate={true}
+            onLoadStart={() => console.log('loadStart')}
+            repeat={false}
+            controls={true}
+            onLoad={() => console.log('loadEnd')}
+          />
+        </>
+      ) : (
+        <Image
+          source={{uri: item?.thumbnail?.url}}
+          style={styles.img}
+          resizeMode="cover"
+          defaultSource={images.i2}
+        />
+      )}
+
       <View style={styles.viewHeader}>
         <View style={stylescustom.view1}>
           <Image
-            source={{uri: item?.assign_instructor?.image?.url}}
+            source={{uri: data?.assign_instructor?.image?.url}}
             style={styles.avt}
             defaultSource={images.noimage}
           />
           <View style={{marginLeft: 8}}>
             <Text style={stylescustom.txt}>
-              {item?.assign_instructor?.name}
+              {data?.assign_instructor?.name}
             </Text>
-            <Text style={stylescustom.txt1}>Giáo viên</Text>
+            <Text style={stylescustom.txt1}>
+              {data?.assign_instructor?.short_description}
+            </Text>
           </View>
         </View>
         <Pressable style={styles.view2} onPress={onShow}>
@@ -62,35 +96,37 @@ const Header = ({
   );
 };
 
-const CourseDetail = (props: Props) => {
-  const item = props.route.params.item as CourseCategoryType;
+const CourseDetails = (props: Props) => {
+  const item =
+    (props.route.params.item as CourseCategoryType) ||
+    (props.route.params as CourseDetail);
   const refRBSheet = useRef<any>();
   const dispatch = useDispatch();
-
-  const textTitle = item?.title?.vi || item?.title?.en;
-  const category = item?.category?.name?.vi || item?.category?.name?.en;
+  const {data, isLoading} = useGetdetailCourseQuery(`${item.id}`);
+  const textTitle = data?.title?.vi || data?.title?.en;
+  const category = data?.category?.name?.vi || data?.category?.name?.en;
   const addCarts = () => {
     dispatch(
       addCart({
         id: item?.id,
         name: textTitle,
         reviews: item?.reviews,
-        thumbnail: item?.thumbnail?.url,
-        startDate: item.created_at,
-        price: item.price,
+        thumbnail: data?.thumbnail?.url,
+        startDate: data?.created_at,
+        price: data?.price,
       }),
     );
     refRBSheet.current.close();
   };
   return (
     <View style={stylescustom.container}>
-      <View style={{zIndex: 10, backgroundColor: 'white', paddingBottom: 5}}>
+      <View style={styles.view4}>
         <HeaderScreen navigation={props.navigation} title="Chi tiết khoá học" />
         <View style={styles.view}>
           <Text style={styles.txt}>{textTitle}</Text>
           <View style={styles.view1}>
             <Text style={stylescustom.txt1}>{category}</Text>
-            <Star star={item.reviews} width={sizes._screen_width * 0.2} />
+            <Star star={item?.reviews} width={sizes._screen_width * 0.2} />
           </View>
         </View>
       </View>
@@ -100,21 +136,25 @@ const CourseDetail = (props: Props) => {
           zIndex: 1,
         }}
         renderHeader={() => (
-          <Header item={item} onShow={() => refRBSheet.current.open()} />
+          <Header
+            item={item}
+            onShow={() => refRBSheet.current.open()}
+            data={data}
+          />
         )}>
         <Tabs.Tab name="Thông tin">
           <Tabs.ScrollView showsVerticalScrollIndicator={false}>
-            <Infomation />
+            <Infomation datas={data} />
           </Tabs.ScrollView>
         </Tabs.Tab>
         <Tabs.Tab name="Nội dung">
           <Tabs.ScrollView showsVerticalScrollIndicator={false}>
-            <Content navigation={props.navigation} />
+            <Content navigation={props.navigation} data={data} />
           </Tabs.ScrollView>
         </Tabs.Tab>
         <Tabs.Tab name="Đánh giá">
-          <Tabs.ScrollView>
-            <Comment />
+          <Tabs.ScrollView showsVerticalScrollIndicator={false}>
+            <Comment item={data} navigation={props.navigation} />
           </Tabs.ScrollView>
         </Tabs.Tab>
       </Tabs.Container>
@@ -154,6 +194,7 @@ const CourseDetail = (props: Props) => {
           </View>
         </View>
       </RBSheet>
+      {isLoading && <Loading />}
     </View>
   );
 };
@@ -169,11 +210,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   img: {
-    width: sizes._screen_width * 0.8,
-    height: sizes._screen_width * 0.8,
+    width: sizes._screen_width,
+    height: sizes._screen_width * (9 / 12),
     alignSelf: 'center',
     marginTop: 10,
-    borderRadius: 15,
+    backgroundColor: 'black',
   },
   avt: {
     width: sizes._screen_width * 0.12,
@@ -203,6 +244,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   viewHeader: {...stylescustom.view, marginTop: 15, marginLeft: 10},
+  view4: {zIndex: 10, backgroundColor: 'white', paddingBottom: 5},
 });
 
-export default CourseDetail;
+export default CourseDetails;

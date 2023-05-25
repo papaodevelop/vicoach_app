@@ -9,7 +9,6 @@ import {
 import React from 'react';
 import {ExpandingDot} from 'react-native-animated-pagination-dots';
 import sizes from '../../../res/sizes';
-import {FeaturedCoursess} from '../../../datafeck/feck/Data';
 import colors from '../../../res/colors';
 import {Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -28,7 +27,6 @@ export default function FeaturedCourses(props: Props) {
   const scrollX = React.useRef(new Animated.Value(0)).current;
   const RenderItem = ({item}: {item: CourseCategoryType}) => {
     const textTitle = item?.title?.vi || item?.title?.en;
-
     return (
       <Pressable
         style={styles.view}

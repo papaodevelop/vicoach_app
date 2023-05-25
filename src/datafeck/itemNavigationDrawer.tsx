@@ -10,7 +10,7 @@ export const itemNavigationDrawer = [
   {
     id: 2,
     name: 'Dashboard',
-    navigation: '',
+    navigation: 'DashBoard',
     icon: images.dashboard,
   },
   {
@@ -18,12 +18,6 @@ export const itemNavigationDrawer = [
     name: 'Courses',
     navigation: 'Khoá học',
     icon: images.courses,
-  },
-  {
-    id: 4,
-    name: 'Meetings',
-    navigation: 'Meetings',
-    icon: images.mess,
   },
   {
     id: 5,
@@ -34,7 +28,7 @@ export const itemNavigationDrawer = [
   {
     id: 6,
     name: 'Certificate',
-    navigation: '',
+    navigation: 'Certificate',
     icon: images.certificate,
   },
   {
@@ -46,14 +40,8 @@ export const itemNavigationDrawer = [
   {
     id: 8,
     name: 'Comments',
-    navigation: '',
+    navigation: 'Comment',
     icon: images.comment,
-  },
-  {
-    id: 9,
-    name: 'Financial',
-    navigation: '',
-    icon: images.financial,
   },
   {
     id: 10,

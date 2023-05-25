@@ -1,5 +1,5 @@
-import {FlatList, StyleSheet, Text, TextInput, View} from 'react-native';
-import React, {useState} from 'react';
+import {FlatList, StyleSheet, View} from 'react-native';
+import React from 'react';
 import HeaderScreen from '../../../component/header/HeaderScreen';
 import RenderItemCouses from './RenderItemCouses';
 import {NavigationProp} from '@react-navigation/native';

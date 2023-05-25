@@ -19,7 +19,7 @@ interface ClassCourse {
   lesson: number;
   quiz: number;
   type: string;
-  live_class: 1;
+  live_class: number;
   delivery_mode: string;
 }
 interface Carts {

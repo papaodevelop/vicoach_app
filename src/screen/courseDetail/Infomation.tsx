@@ -5,6 +5,7 @@ import {
   Text,
   View,
   LayoutAnimation,
+  Image,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import colors from '../../res/colors';
@@ -15,48 +16,49 @@ import Icons from 'react-native-vector-icons/AntDesign';
 import stylescustom from '../../res/stylescustom';
 import RenderDetail from './RenderDetail';
 import DataQuestion from '../../datafeck/feck/DataQuestion';
+import {CourseDetail} from '../../../types/CourseDetail';
+import images from '../../res/images';
 
-export default function Infomation() {
+export default function Infomation({datas}: {datas: CourseDetail | undefined}) {
   const data = [
     {
       id: 1,
-      name: 'Sinh viên',
-      title: 4,
-      icon: 'user',
+      name: 'Mức độ',
+      title: datas?.level?.title,
+      icon: 'level-up',
     },
     {
       id: 2,
-      name: 'Chương',
-      title: 0,
+      name: 'Số chương',
+      title: datas?.chapter_list.length,
       icon: 'group',
     },
     {
       id: 3,
       name: 'Ngày bắt đầu',
-      title: '2023-11-05',
+      title: datas?.created_at,
       icon: 'calendar',
     },
     {
       id: 4,
       name: 'Thời lượng',
-      title: '2:30',
+      title: datas?.duration,
       icon: 'clock-o',
     },
     {
       id: 5,
       name: 'Loại',
-      title: 'Live class',
+      title: datas?.type,
       icon: 'video-camera',
     },
     {
       id: 6,
       name: 'Trạng thái',
-      title: 'In Progress',
+      title: datas?.status,
       icon: 'bullseye',
     },
   ];
-
-  const RenderItem = ({item, index}: any) => {
+  const RenderItem = ({item}: any) => {
     const [show, setShow] = useState(false);
     const showItem = () => {
       setShow(!show);
@@ -115,16 +117,35 @@ export default function Infomation() {
           <Text style={stylescustom.txt1}>Included</Text>
         </View>
       </View>
-      <View style={{marginTop: 20}}>
-        <Text style={stylescustom.txt}>
-          <Text style={{color: colors.RED}}>Note: </Text>
-          1.The company is now leading the fresh beverage market in England,
-          holding nearly 50% market share.{'\n'} 2.To promote the brand image,
-          employees in the company are required to attach the company logo to
-          all letters and emails sent to customers.{'\n'} 3.The company provides
-          a 5-year warranty service for their products.
-        </Text>
-      </View>
+      {datas?.assistant_instructor[0] && (
+        <>
+          <Text style={styles.txt2}>Trợ giảng</Text>
+          {datas?.assistant_instructor.map((i, index) => (
+            <View style={stylescustom.view1} key={i.id}>
+              <Image
+                source={{uri: i.image}}
+                defaultSource={images.noimage}
+                style={styles.img}
+              />
+              <View style={{marginLeft: 15}}>
+                <Text style={styles.txt2}>{i.name}</Text>
+                <Text>{i.description}</Text>
+              </View>
+            </View>
+          ))}
+        </>
+      )}
+
+      {datas?.meta_description && (
+        <View style={{marginTop: 20}}>
+          <Text style={stylescustom.txt}>
+            <Text style={{color: colors.RED}}>
+              Mô tả: {datas?.meta_description}
+            </Text>
+          </Text>
+        </View>
+      )}
+
       <View>
         <FlatList
           scrollEnabled={false}
@@ -133,10 +154,12 @@ export default function Infomation() {
             <RenderDetail item={item} index={index} />
           )}
           numColumns={2}
-          contentContainerStyle={{
+          columnWrapperStyle={{
             width: sizes._csreen_width * 0.9,
             alignSelf: 'center',
+            justifyContent: 'space-around',
           }}
+          keyExtractor={item => `8${item.id}`}
         />
       </View>
       <View style={styles.view5}>
@@ -145,6 +168,7 @@ export default function Infomation() {
           renderItem={({item, index}) => (
             <RenderItem item={item} index={index} />
           )}
+          keyExtractor={item => `7${item.id}`}
           scrollEnabled={false}
         />
       </View>
@@ -206,4 +230,9 @@ const styles = StyleSheet.create({
   txt1: {
     marginTop: 10,
   },
+  txt2: {
+    ...stylescustom.txtBold,
+    marginTop: 10,
+  },
+  img: {height: 40, width: 40, borderRadius: 40 / 2},
 });

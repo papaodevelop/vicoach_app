@@ -1,34 +1,30 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import sizes from '../../res/sizes';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import colors from '../../res/colors';
+import sizes from '../../res/sizes';
 import stylescustom from '../../res/stylescustom';
-import Icon from 'react-native-vector-icons/AntDesign';
-import {Time} from '../../res/convert';
-interface Props {
-  item: any;
-  index: number;
-}
-export default function RenderContent(props: Props) {
+
+const QuizDetail = ({item}: {item: any}) => {
   return (
-    <View style={styles.view} key={`3${props.index}`}>
+    <View style={styles.view}>
       <View
         style={{
           ...styles.view1,
         }}>
         <Icon
-          name="play"
+          name="grav"
           color={colors.WHITE}
           size={sizes._csreen_width * 0.08}
         />
       </View>
       <View style={styles.view2}>
-        <Text style={stylescustom.txt2}>{props.item.name} </Text>
-        <Text style={stylescustom.txt1}>{Time(props.item?.duration)}</Text>
+        <Text style={stylescustom.txt2}>{item?.quiz?.title?.vi} </Text>
       </View>
     </View>
   );
-}
+};
+export default QuizDetail;
 
 const styles = StyleSheet.create({
   view: {
@@ -43,7 +39,7 @@ const styles = StyleSheet.create({
   view1: {
     width: sizes._screen_width * 0.15,
     height: sizes._screen_width * 0.15,
-    backgroundColor: colors.GREEN,
+    backgroundColor: colors.ORANGE,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
