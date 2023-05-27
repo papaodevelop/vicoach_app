@@ -33,7 +33,7 @@ export const categoryAPI = createApi({
     }),
     getClassCourse: build.query<ListApiResponse<CourseCategoryType>, string>({
       query: (queryString = '') => ({
-        url: `student/class-course?${queryString}`,
+        url: `student/class-course`,
         method: 'GET',
       }),
       providesTags(result) {
@@ -101,6 +101,7 @@ export const categoryAPI = createApi({
       query: queryString => ({
         url: `class-course/${queryString}/reviews`,
         method: 'GET',
+        timeout: 5000,
       }),
       providesTags(result) {
         if (result?.data) {

@@ -121,15 +121,15 @@ export default function Infomation({datas}: {datas: CourseDetail | undefined}) {
         <>
           <Text style={styles.txt2}>Trợ giảng</Text>
           {datas?.assistant_instructor.map((i, index) => (
-            <View style={stylescustom.view1} key={i.id}>
+            <View style={stylescustom.view1} key={i?.id}>
               <Image
-                source={{uri: i.image}}
+                source={{uri: i?.image?.url}}
                 defaultSource={images.noimage}
                 style={styles.img}
               />
               <View style={{marginLeft: 15}}>
-                <Text style={styles.txt2}>{i.name}</Text>
-                <Text>{i.description}</Text>
+                <Text style={styles.txt2}>{i?.name}</Text>
+                <Text>{i?.description}</Text>
               </View>
             </View>
           ))}

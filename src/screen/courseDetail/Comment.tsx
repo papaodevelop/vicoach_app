@@ -24,7 +24,7 @@ export default function Comment({
 }) {
   const {data} = useGetReviewCouresQuery(`${item?.id}`);
   return (
-    <View style={{flex: 1}}>
+    <View>
       <View>
         <FlatList
           data={data?.items}

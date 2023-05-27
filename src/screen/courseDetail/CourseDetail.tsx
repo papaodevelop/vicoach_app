@@ -1,11 +1,10 @@
-import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React, {useRef} from 'react';
 import stylescustom from '../../res/stylescustom';
 import HeaderScreen from '../../component/header/HeaderScreen';
 import {NavigationProp} from '@react-navigation/native';
 import sizes from '../../res/sizes';
 import Star from '../../component/Star';
-import Icon from 'react-native-vector-icons/Entypo';
 import Icons from 'react-native-vector-icons/AntDesign';
 import colors from '../../res/colors';
 import {Tabs} from 'react-native-collapsible-tab-view';
@@ -16,102 +15,35 @@ import Comment from './Comment';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';
 import {useDispatch} from 'react-redux';
 import {addCart} from '../../redux/state/cart.reducer';
-import images from '../../res/images';
 import {useGetdetailCourseQuery} from '../../redux/api/courseCategory.api';
 import {CourseDetail} from '../../../types/CourseDetail';
 import Loading from '../../component/loading/Loading';
-import Video from 'react-native-video';
-import {ProgressBar} from 'react-native-paper';
-
+import Header from './Header';
+import TopTabCourse from '../mycourses/TopTabCourse';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   route: any;
 }
-const Header = ({
-  item,
-  onShow,
-  data,
-}: {
-  item: CourseCategoryType;
-  onShow: () => void;
-  data: CourseDetail | undefined;
-}) => {
-  console.log(data?.assign_instructor?.image);
 
-  return (
-    <>
-      {data?.video_overview?.url ? (
-        <>
-          <Video
-            style={styles.img}
-            rate={1}
-            muted={false}
-            onError={val => console.log(val)}
-            fullscreenOrientation="all"
-            source={{uri: data?.video_overview?.url}}
-            resizeMode="contain"
-            volume={8}
-            ignoreSilentSwitch="ignore"
-            fullscreenAutorotate={true}
-            onLoadStart={() => console.log('loadStart')}
-            repeat={false}
-            controls={true}
-            onLoad={() => console.log('loadEnd')}
-          />
-        </>
-      ) : (
-        <Image
-          source={{uri: item?.thumbnail?.url}}
-          style={styles.img}
-          resizeMode="cover"
-          defaultSource={images.i2}
-        />
-      )}
-
-      <View style={styles.viewHeader}>
-        <View style={stylescustom.view1}>
-          <Image
-            source={{uri: data?.assign_instructor?.image?.url}}
-            style={styles.avt}
-            defaultSource={images.noimage}
-          />
-          <View style={{marginLeft: 8}}>
-            <Text style={stylescustom.txt}>
-              {data?.assign_instructor?.name}
-            </Text>
-            <Text style={stylescustom.txt1}>
-              {data?.assign_instructor?.short_description}
-            </Text>
-          </View>
-        </View>
-        <Pressable style={styles.view2} onPress={onShow}>
-          <Icon
-            name="dots-three-horizontal"
-            size={sizes._screen_width * 0.07}
-            color={colors.GRAY}
-          />
-        </Pressable>
-      </View>
-    </>
-  );
-};
-
-const CourseDetails = (props: Props) => {
+const CourseDetails: React.FC<Props> = props => {
   const item =
     (props.route.params.item as CourseCategoryType) ||
     (props.route.params as CourseDetail);
   const refRBSheet = useRef<any>();
+
   const dispatch = useDispatch();
   const {data, isLoading} = useGetdetailCourseQuery(`${item.id}`);
   const textTitle = data?.title?.vi || data?.title?.en;
   const category = data?.category?.name?.vi || data?.category?.name?.en;
+  console.log(data?.id);
+
   const addCarts = () => {
     dispatch(
       addCart({
         id: item?.id,
         name: textTitle,
         reviews: item?.reviews,
-        thumbnail: data?.thumbnail?.url,
+        thumbnail: data?.thumbnail?.url || null,
         startDate: data?.created_at,
         price: data?.price,
       }),
@@ -132,9 +64,11 @@ const CourseDetails = (props: Props) => {
       </View>
 
       <Tabs.Container
-        headerContainerStyle={{
-          zIndex: 1,
-        }}
+        initialTabName="Thông tin"
+        snapThreshold={null}
+        tabBarHeight={400}
+        lazy={true}
+        cancelLazyFadeIn={true}
         renderHeader={() => (
           <Header
             item={item}
@@ -143,17 +77,23 @@ const CourseDetails = (props: Props) => {
           />
         )}>
         <Tabs.Tab name="Thông tin">
-          <Tabs.ScrollView showsVerticalScrollIndicator={false}>
+          <Tabs.ScrollView
+            alwaysBounceVertical
+            showsVerticalScrollIndicator={false}>
             <Infomation datas={data} />
           </Tabs.ScrollView>
         </Tabs.Tab>
         <Tabs.Tab name="Nội dung">
-          <Tabs.ScrollView showsVerticalScrollIndicator={false}>
-            <Content navigation={props.navigation} data={data} />
+          <Tabs.ScrollView
+            showsVerticalScrollIndicator={false}
+            alwaysBounceVertical>
+            <Content navigation={props.navigation} datas={data} />
           </Tabs.ScrollView>
         </Tabs.Tab>
         <Tabs.Tab name="Đánh giá">
-          <Tabs.ScrollView showsVerticalScrollIndicator={false}>
+          <Tabs.ScrollView
+            showsVerticalScrollIndicator={false}
+            alwaysBounceVertical>
             <Comment item={data} navigation={props.navigation} />
           </Tabs.ScrollView>
         </Tabs.Tab>
@@ -198,6 +138,7 @@ const CourseDetails = (props: Props) => {
     </View>
   );
 };
+export default CourseDetails;
 
 const styles = StyleSheet.create({
   txt: {
@@ -209,28 +150,13 @@ const styles = StyleSheet.create({
     width: sizes._screen_width * 0.95,
     alignSelf: 'center',
   },
-  img: {
-    width: sizes._screen_width,
-    height: sizes._screen_width * (9 / 12),
-    alignSelf: 'center',
-    marginTop: 10,
-    backgroundColor: 'black',
-  },
-  avt: {
-    width: sizes._screen_width * 0.12,
-    height: sizes._screen_width * 0.12,
-    borderRadius: (sizes._screen_width * 0.12) / 2,
-  },
+
   view1: {
     marginRight: sizes._screen_width * 0.05,
     ...stylescustom.view,
     marginTop: 10,
   },
-  view2: {
-    padding: sizes._screen_width * 0.03,
-    backgroundColor: colors.WHITE,
-    borderRadius: 15,
-  },
+
   txt1: {
     ...stylescustom.txt3,
     fontSize: sizes._screen_width * 0.05,
@@ -243,8 +169,15 @@ const styles = StyleSheet.create({
     ...stylescustom.view1,
     marginTop: 15,
   },
-  viewHeader: {...stylescustom.view, marginTop: 15, marginLeft: 10},
   view4: {zIndex: 10, backgroundColor: 'white', paddingBottom: 5},
+  box: {
+    height: 250,
+    width: '100%',
+  },
+  boxA: {
+    backgroundColor: 'white',
+  },
+  boxB: {
+    backgroundColor: '#D8D8D8',
+  },
 });
-
-export default CourseDetails;

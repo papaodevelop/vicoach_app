@@ -11,7 +11,6 @@ export const axiosAuth = () => {
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
 
   const auths = useAppSelect(data => data.getAuth.auth);
-
   axios.interceptors.request.use(
     function (config: InternalAxiosRequestConfig) {
       // Do something before request is sent

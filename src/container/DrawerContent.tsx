@@ -26,13 +26,8 @@ export default function DrawerContent(props: Props) {
   const handleLogout = async () => {
     try {
       const result = await logoutMutation('');
-      console.log(result);
       props.navigation.navigate('Login');
-    } catch (error) {
-      // Xử lý lỗi nếu có
-
-      console.error('Lỗi khi logout:', error);
-    }
+    } catch (error) {}
   };
   return (
     <ScrollView style={styles.drawerHeader}>

@@ -6,11 +6,13 @@ import stylescustom from '../../res/stylescustom';
 import Star from '../Star';
 import fonts from '../../res/fonts';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {DateTime, Time, money} from '../../res/convert';
+import {DateTime, Time} from '../../res/convert';
 import images from '../../res/images';
+import {NavigationProp} from '@react-navigation/native';
 interface Props {
   item: ClassCourse;
   index: number;
+  navigation: NavigationProp<Record<string, any>>;
 }
 const RenderItemCourses = (props: Props) => {
   let item = props.item;
@@ -18,12 +20,20 @@ const RenderItemCourses = (props: Props) => {
   const texts = item?.title?.vi || item?.title?.en;
 
   return (
-    <Pressable style={styles.view} key={props.index}>
+    <Pressable
+      style={styles.view}
+      key={props.index}
+      onPress={() =>
+        props.navigation.navigate('CourseDetail', {
+          item: item,
+        })
+      }>
       <View style={stylescustom.view}>
         <View style={stylescustom.view1}>
           <Image
-            source={item?.thumbnail ? {uri: item?.thumbnail} : images.i1}
+            source={{uri: item?.thumbnail}}
             style={styles.img}
+            defaultSource={images.i1}
           />
           <View
             style={{

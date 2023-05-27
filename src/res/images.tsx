@@ -29,6 +29,7 @@
     mess: require('../assets/images/mess.png'),
     nen: require('../assets/images/nen.png'),
     noCart: require('../assets/images/noCart.png'),
+    nodata: require('../assets/images/nodata.png'),
     noimage: require('../assets/images/noimage.jpeg'),
     quizz: require('../assets/images/quizz.png'),
     quizzs: require('../assets/images/quizzs.png'),

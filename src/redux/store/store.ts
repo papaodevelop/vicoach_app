@@ -17,6 +17,7 @@ import {profileApi} from '../api/profile.api';
 import {categoryAPI} from '../api/courseCategory.api';
 import {useDispatch} from 'react-redux';
 import getdataUser from '../state/login.slice';
+import {courseListApi} from '../api/courseList.api';
 import getAuth from '../state/auth.slice';
 import getCart from '../state/cart.reducer';
 const reducers = combineReducers({
@@ -28,6 +29,7 @@ const reducers = combineReducers({
   getAuth: getAuth,
   [categoryAPI.reducerPath]: categoryAPI.reducer,
   getCart: getCart,
+  [courseListApi.reducerPath]: courseListApi.reducer,
 });
 const persistConfig = {
   key: 'root',
@@ -38,6 +40,7 @@ const persistConfig = {
     'getAuth',
     profileApi.reducerPath,
     categoryAPI.reducerPath,
+    courseListApi.reducerPath,
   ],
 };
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -53,6 +56,7 @@ const store = configureStore({
       loginApi.middleware,
       profileApi.middleware,
       categoryAPI.middleware,
+      courseListApi.middleware,
     ]);
   },
 });

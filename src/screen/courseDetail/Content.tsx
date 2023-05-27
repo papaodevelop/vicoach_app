@@ -1,5 +1,5 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import React, {memo} from 'react';
 import stylescustom from '../../res/stylescustom';
 import sizes from '../../res/sizes';
 import RenderContent from './RenderContent';
@@ -7,19 +7,30 @@ import BTNLogin from '../../component/btn/BTNLogin';
 import {NavigationProp} from '@react-navigation/native';
 import {CourseDetail} from '../../../types/CourseDetail';
 import QuizDetail from './QuizDetail';
+import images from '../../res/images';
+import {useGetCouseListQuery} from '../../redux/api/courseList.api';
 export default function Content({
   navigation,
-  data,
+  datas,
 }: {
   navigation: NavigationProp<Record<string, any>>;
-  data: CourseDetail | undefined;
+  datas: CourseDetail | undefined;
 }) {
-  return (
-    <View style={stylescustom.container}>
-      {data?.chapter_list.map(i => {
+  const {data} = useGetCouseListQuery(`${datas?.id}`);
+  const videoLessons = data?.chapter_list.reduce(function (acc, chapter) {
+    const videoLessonsInChapter = chapter?.lesson_list.filter(function (
+      lesson,
+    ) {
+      return lesson?.material?.type === 'VIDEO';
+    });
+    //@ts-ignore
+    return acc.concat(videoLessonsInChapter);
+  }, []);
+  const RendeFoodter = memo(() => (
+    <>
+      {datas?.chapter_list.map(i => {
         const data1 = i?.lesson_list?.filter(obj => obj.duration !== undefined);
         const data2 = i?.lesson_list?.filter(obj => obj.quiz !== undefined);
-
         return (
           <View key={`5${i.id}`}>
             <Text style={styles.txt}>{i?.name}</Text>
@@ -37,7 +48,6 @@ export default function Content({
                 />
               </View>
             )}
-
             <View>
               <FlatList
                 data={data2}
@@ -51,15 +61,36 @@ export default function Content({
           </View>
         );
       })}
-      {data?.chapter_list[0] && (
+      {!datas?.chapter_list[0] && (
+        <View style={styles.view2}>
+          <Image source={images.nodata} style={styles.img} />
+          <Text style={stylescustom.txtBold}>
+            Không tìm thấy nội dung khoá học
+          </Text>
+        </View>
+      )}
+
+      {datas?.chapter_list[0] && datas?.has_enroll && (
         <View style={styles.view}>
           <BTNLogin
-            onPress={() => navigation.navigate('PlayVideo')}
+            onPress={() =>
+              navigation.navigate('PlayVideo', {
+                item: videoLessons,
+              })
+            }
             txt="Bắt đầu"
           />
         </View>
       )}
-    </View>
+    </>
+  ));
+  return (
+    <FlatList
+      data={[]}
+      renderItem={null}
+      scrollEnabled={false}
+      ListFooterComponent={() => <RendeFoodter />}
+    />
   );
 }
 
@@ -71,4 +102,9 @@ const styles = StyleSheet.create({
   },
   view: {alignItems: 'center', marginTop: 30},
   view1: {marginTop: sizes._screen_height * 0.02},
+  view2: {flex: 1, alignItems: 'center', justifyContent: 'center'},
+  img: {
+    height: sizes._screen_width * 0.7,
+    width: sizes._screen_width * 0.7,
+  },
 });

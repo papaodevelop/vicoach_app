@@ -1,25 +1,24 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {khoahocmoi} from '../../datafeck/feck/Data';
-import RenderItemCourses from '../../component/renderItem/RenderItemCourses';
 import stylescustom from '../../res/stylescustom';
-import {useGetClassCourseQuery} from '../../redux/api/courseCategory.api';
 import sizes from '../../res/sizes';
 import Loading from '../../component/loading/Loading';
+import RenderItemCourses from '../../component/renderItem/RenderItemCourses';
 import {NavigationProp} from '@react-navigation/native';
+import {useGetClassCourseQuery} from '../../redux/api/courseCategory.api';
 
-export default function Purchased({
+export default function ClassCouse({
   navigation,
 }: {
   navigation: NavigationProp<Record<string, any>>;
 }) {
   const {data, isFetching, refetch, isLoading} = useGetClassCourseQuery('');
   var courseTypeArray = data?.items.filter(function (phanTu: ClassCourse) {
-    return phanTu.type === 'CourseType';
+    return phanTu.type === 'VirtualSingleClass';
   });
   return (
     <View style={styles.container}>
-      <Text style={styles.txt}>Bạn có {courseTypeArray?.length} khoá học</Text>
+      <Text style={styles.txt}>Bạn có {courseTypeArray?.length} lớp học</Text>
       <FlatList
         data={courseTypeArray}
         renderItem={({item, index}: {item: ClassCourse; index: number}) => (

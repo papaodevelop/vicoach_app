@@ -77,7 +77,12 @@ export interface CourseDetail {
       twitter: string;
       linkedin: string;
       instagram: string;
-      image: string;
+      image: {
+        id: number;
+        url: string;
+        path: string;
+        fileName: string;
+      };
     },
   ];
   thumbnail: {
@@ -85,7 +90,7 @@ export interface CourseDetail {
     url: string;
     path: string;
     fileName: string;
-    key: string;
+    key: number;
     type: string;
   };
   chapter_list: [
