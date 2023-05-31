@@ -57,3 +57,8 @@ export const DateTimes = (val: string) => {
   var formatTime = date.toLocaleTimeString('vi-VN');
   return formattedDate + ' ' + formatTime;
 };
+export function convertByteToMB(byte: number) {
+  const megabyte = byte / (1024 * 1024);
+  const roundedMB = megabyte.toFixed(2);
+  return roundedMB + ' MB';
+}

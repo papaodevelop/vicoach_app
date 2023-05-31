@@ -1,5 +1,5 @@
 import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import stylescustom from '../../../res/stylescustom';
 import HeaderScreen from '../../../component/header/HeaderScreen';
 import sizes from '../../../res/sizes';
@@ -9,24 +9,28 @@ import colors from '../../../res/colors';
 import BTNLogin from '../../../component/btn/BTNLogin';
 import ModalConfirm from '../../../component/modal/ModalConfirm';
 import {NavigationProp} from '@react-navigation/native';
+import {useGetQuizzMutation} from '../../../redux/api/quiz.api';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   route: any;
 }
+
 const QuizInfomation = (props: Props) => {
-  const item = props.route.params.item;
+  const item = props.route.params as Id;
+
   const [show, setShow] = useState(false);
   const Confirm = () => {
-    props.navigation.navigate('StartQuizz', {
-      item: item,
-    });
+    // props.navigation.navigate('StartQuizz', {
+    //   item: item,
+    // });
     setShow(false);
   };
+
   const RenderItem = () => (
     <>
       <View style={styles.view}>
-        <Text style={stylescustom.txt2}>{item.name}</Text>
-        <Text style={stylescustom.txt1}>{item.title}</Text>
+        {/* <Text style={stylescustom.txt2}>{item.name}</Text>
+        <Text style={stylescustom.txt1}>{item.title}</Text> */}
         <Image source={images.quizz} style={styles.img} />
         <View style={styles.view1}>
           <View style={styles.view2}>
@@ -52,7 +56,7 @@ const QuizInfomation = (props: Props) => {
             </View>
             <View style={styles.view5}>
               <Text style={stylescustom.txt1}>Pass</Text>
-              <Text style={stylescustom.txt3}>{item.quantity} 50</Text>
+              {/* <Text style={stylescustom.txt3}>{item.quantity} 50</Text> */}
             </View>
           </View>
           <View style={styles.view2}>
@@ -65,7 +69,7 @@ const QuizInfomation = (props: Props) => {
             </View>
             <View style={styles.view5}>
               <Text style={stylescustom.txt1}>Quizz</Text>
-              <Text style={stylescustom.txt3}>{item.numberofsentences}</Text>
+              {/* <Text style={stylescustom.txt3}>{item.numberofsentences}</Text> */}
             </View>
           </View>
           <View style={styles.view2}>
@@ -79,7 +83,7 @@ const QuizInfomation = (props: Props) => {
             <View style={styles.view5}>
               <Text style={stylescustom.txt1}>Thời gian</Text>
 
-              <Text style={stylescustom.txt3}>{item.time}</Text>
+              {/* <Text style={stylescustom.txt3}>{item.time}</Text> */}
             </View>
           </View>
         </View>

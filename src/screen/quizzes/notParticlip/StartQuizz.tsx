@@ -1,4 +1,11 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import stylescustom from '../../../res/stylescustom';
 import HeaderScreen from '../../../component/header/HeaderScreen';
@@ -7,14 +14,19 @@ import {ProgressBar} from 'react-native-paper';
 import colors from '../../../res/colors';
 import BTNQuizz from '../../../component/btn/BTNQuizz';
 import fonts from '../../../res/fonts';
-import {CountdownCircleTimer} from 'react-native-countdown-circle-timer';
-import {Time} from '../../../res/convert';
 import RenderQuiz from './RenderQuiz';
 import ModalConfirm from '../../../component/modal/ModalConfirm';
-import {DeleteForm} from '../../../redux/state/Quizz.reducer';
-import {useDispatch} from 'react-redux';
+import {DeleteForm, Quizz, Reselect} from '../../../redux/state/Quizz.reducer';
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {DataQuizzs} from '../../../datafeck/feck/DataQuizzs';
 import {NavigationProp} from '@react-navigation/native';
+import CountTime from './CountTime';
+import {RootState} from '../../../redux/store/store';
+import {useSubMitQuizMutation} from '../../../redux/api/quiz.api';
+type ad = {
+  id: number;
+  chose: string | number;
+};
 export default function StartQuizz({
   navigation,
   route,
@@ -22,121 +34,193 @@ export default function StartQuizz({
   navigation: NavigationProp<Record<string, any>>;
   route: any;
 }) {
-  const items = route.params.item;
-  const percent = 1 / items?.quiz?.length;
-  const [selectId, setSelectID] = useState<number>();
+  const items = route?.params.data as getQuizType;
+  const percent = 1 / items?.quiz?.question_list?.length;
   const [progress, setProgress] = useState<number>();
   const [index, setIndex] = useState(0);
-  const [idItem, setIdItem] = useState();
+  const [txt, setTxt] = useState<string | undefined>();
+  const [idItem, setIdItem] = useState<number>();
   const [show, setShow] = useState(false);
+  const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
+  const check = useAppSelect(data => data?.getQuizz.answer);
+  const [selectedItems, setSelectedItems] = useState([]);
   const dispatch = useDispatch();
+  const [submitQuiz, {data, error}] = useSubMitQuizMutation();
   useEffect(() => {
     let item = index + 1;
     setProgress(percent * item);
-    setIdItem(items.quiz[index].id);
+    setIdItem(items?.quiz?.question_list[index]?.id);
+    const ab: any = check.find(
+      (item: ad) => item.id === items?.quiz?.question_list[index]?.id,
+    );
+    setTxt(ab?.chose == undefined ? '' : String(ab?.chose));
+    const currentCheck: any = check.find(
+      (item: any) => item?.id === items?.quiz?.question_list[index]?.id,
+    );
+    setSelectedItems(
+      currentCheck?.chose?.length >= 1 ? currentCheck?.chose : [],
+    );
   }, [index]);
-  const Next = () =>
+
+  const Next = async () => {
+    if (
+      !check.find(
+        (item: any) => item.id === items?.quiz?.question_list[index]?.id,
+      )
+    ) {
+      dispatch(
+        Quizz({
+          id: items?.quiz?.question_list[index]?.id,
+          chose:
+            items?.quiz?.question_list[index]?.question_type ==
+            'MULTIPLE_CHOICE'
+              ? selectedItems
+              : txt,
+        }),
+      );
+    } else {
+      dispatch(
+        Reselect({
+          id: items?.quiz?.question_list[index]?.id,
+          chose:
+            items?.quiz?.question_list[index]?.question_type ==
+            'MULTIPLE_CHOICE'
+              ? selectedItems
+              : txt,
+        }),
+      );
+    }
     setIndex(prevCount =>
-      prevCount >= items?.quiz?.length - 1
-        ? items?.quiz?.length - 1
+      prevCount >= items?.quiz?.question_list?.length - 1
+        ? items?.quiz?.question_list?.length - 1
         : prevCount + 1,
     );
-  const Return = () =>
+    submitQuiz({
+      take_quiz_id: items?.id,
+      question_id: items?.quiz?.question_list[index]?.id,
+      question_type: items?.quiz?.question_list[index]?.question_type,
+      answer: txt,
+      choice_list: selectedItems,
+    });
+  };
+  const Return = () => {
+    if (
+      !check.find(
+        (item: any) => item.id === items?.quiz?.question_list[index]?.id,
+      )
+    ) {
+      dispatch(
+        Quizz({
+          id: items?.quiz?.question_list[index]?.id,
+          chose:
+            items?.quiz?.question_list[index]?.question_type ==
+            'MULTIPLE_CHOICE'
+              ? selectedItems
+              : txt,
+        }),
+      );
+    } else {
+      dispatch(
+        Reselect({
+          id: items?.quiz?.question_list[index]?.id,
+          chose:
+            items?.quiz?.question_list[index]?.question_type ==
+            'MULTIPLE_CHOICE'
+              ? selectedItems
+              : txt,
+        }),
+      );
+    }
     setIndex(prevCount => (prevCount <= 0 ? 0 : prevCount - 1));
+  };
   const summit = () => {
+    submitQuiz({
+      take_quiz_id: items?.id,
+      question_id: items?.quiz?.question_list[index]?.id,
+      question_type: items?.quiz?.question_list[index]?.question_type,
+      answer: txt,
+      choice_list: selectedItems,
+    });
     setShow(true);
     dispatch(DeleteForm([]));
   };
-  const RenderItem = () => (
-    <>
-      <View style={styles.view}>
-        <View style={{alignSelf: 'center'}}>
-          <CountdownCircleTimer
-            isPlaying
-            duration={items.time * 60}
-            size={sizes._screen_width * 0.4}
-            colors={['#F7B801', '#A30000']}
-            colorsTime={[10, 0]}>
-            {({remainingTime}) => {
-              if (remainingTime === 0) {
-                setShow(true);
-              }
-              return (
-                <>
-                  <Text style={stylescustom.txt}>
-                    {remainingTime == 0 ? 'Hết giờ' : Time(remainingTime)}
-                  </Text>
-                </>
-              );
-            }}
-          </CountdownCircleTimer>
+  return (
+    <View style={[stylescustom.container]}>
+      <HeaderScreen title="Làm bài" navigation={navigation} />
+      <ScrollView style={stylescustom.paddingBottom}>
+        <View style={{alignSelf: 'center', marginTop: 10}}>
+          <CountTime time={items?.quiz?.time} />
         </View>
-        <View style={styles.proges}>
-          <Text style={styles.txt1}>Số điểm: {100 / items?.quiz?.length}</Text>
-          <Text style={styles.txt}>
-            {index + 1}/{items?.quiz?.length}
-          </Text>
-          <ProgressBar progress={progress} color={colors.RED} />
+        <View style={styles.view}>
+          <View style={styles.proges}>
+            <Text style={styles.txt1}>
+              Số điểm: {items?.quiz?.question_list[index]?.mark}
+            </Text>
+            <Text style={styles.txt}>
+              {index + 1}/{items?.quiz?.question_list?.length}
+            </Text>
+            <ProgressBar progress={progress} color={colors.RED} />
+          </View>
         </View>
-      </View>
-      <Text
-        style={{
-          ...styles.title,
-          marginTop: 20,
-          marginLeft: sizes._screen_width * 0.05,
-        }}>
-        {items.quiz[index].name}
-      </Text>
-      <View>
-        <FlatList
-          data={items.quiz[index].question}
-          renderItem={({item, index}) => (
-            <RenderQuiz
-              idItem={idItem}
-              item={item}
-              index={index}
-              quiz
-              select={(val: number) => setSelectID(val)}
-              selectedId={selectId}
+        <Text
+          style={{
+            ...styles.title,
+            marginTop: 20,
+            marginLeft: sizes._screen_width * 0.05,
+          }}>
+          {items?.quiz?.question_list[index]?.question}
+        </Text>
+        <View style={{alignItems: 'center'}}>
+          {items?.quiz?.question_list[index]?.question_type ==
+          'MULTIPLE_CHOICE' ? (
+            <FlatList
+              data={items?.quiz?.question_list[index]?.choice_list}
+              renderItem={({item, index}) => (
+                <RenderQuiz
+                  idItem={idItem}
+                  item={item}
+                  index={index}
+                  setSelectedItems={setSelectedItems}
+                  SelectedItems={selectedItems}
+                />
+              )}
+              numColumns={2}
+              contentContainerStyle={styles.flatlist}
+              scrollEnabled={false}
+            />
+          ) : (
+            <TextInput
+              value={txt}
+              onChangeText={val => setTxt(val)}
+              multiline={true}
+              cursorColor={colors.BLACK}
+              selectionColor={colors.BLACK}
+              style={styles.txtInput}
             />
           )}
-          numColumns={2}
-          contentContainerStyle={styles.flatlist}
-          scrollEnabled={false}
+        </View>
+        <BTNQuizz
+          view={styles.btn}
+          index={index}
+          next={Next}
+          return={Return}
+          complete
+          submit={summit}
+          maxIndex={items?.quiz?.question_list?.length - 1}
         />
-      </View>
-      <BTNQuizz
-        view={styles.btn}
-        index={index}
-        next={Next}
-        return={Return}
-        complete
-        submit={summit}
-        maxIndex={items?.quiz?.length - 1}
-      />
-    </>
-  );
-  return (
-    <View style={stylescustom.container}>
-      <HeaderScreen title="Làm bài" navigation={navigation} />
-      <FlatList
-        data={[]}
-        renderItem={null}
-        ListFooterComponent={() => <RenderItem />}
-        contentContainerStyle={{paddingBottom: 50, alignItems: 'center'}}
-        showsVerticalScrollIndicator={false}
-      />
-      <ModalConfirm
-        confirm={() => {
-          setShow(false);
-          navigation.navigate('TestResul', {
-            item: DataQuizzs[0],
-          });
-        }}
-        isShow={show}
-        toggleDate={() => setShow(false)}
-        txt="Bạn đã hoàn thành bài kiểm tra? Ấn đồng ý để kết thúc"
-      />
+
+        <ModalConfirm
+          confirm={() => {
+            setShow(false);
+            navigation.navigate('TestResul', {
+              item: DataQuizzs[0],
+            });
+          }}
+          isShow={show}
+          toggleDate={() => setShow(false)}
+          txt="Bạn đã hoàn thành bài kiểm tra? Ấn đồng ý để kết thúc"
+        />
+      </ScrollView>
     </View>
   );
 }
@@ -174,5 +258,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
 
     marginTop: sizes._screen_height * 0.02,
+  },
+  txtInput: {
+    height: sizes._screen_height * 0.2,
+    width: sizes._screen_width * 0.9,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: colors.GRAY,
+    marginTop: 10,
+    padding: 10,
+    verticalAlign: 'top',
+    ...stylescustom.txt,
   },
 });

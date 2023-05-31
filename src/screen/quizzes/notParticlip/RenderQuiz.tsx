@@ -1,62 +1,50 @@
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import colors from '../../../res/colors';
 import sizes from '../../../res/sizes';
 import stylescustom from '../../../res/stylescustom';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import {Quizz, Reselect} from '../../../redux/state/Quizz.reducer';
 import {RootState} from '../../../redux/store/store';
+
 interface Props {
   item: any;
   index: number;
   choose?: any;
   answer?: any;
-  quiz?: boolean;
-  selectedId: number | undefined;
-  select: any;
   idItem: number | undefined;
+  setSelectedItems: any;
+  SelectedItems: string[];
 }
 export default function RenderQuiz(props: Props) {
-  const dispatch = useDispatch();
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
   const check = useAppSelect(data => data?.getQuizz.answer);
-  const aaa = () => {
-    const currentCheck: any = check.find(
-      (item: any) => item?.id === props?.idItem,
-    );
-    if (currentCheck && currentCheck.chose === props?.item?.id) {
-      return colors.GREEN;
-    } else {
-      return 'transparent';
-    }
+  const Selects = (val: any) => {
+    props.setSelectedItems((prevSelectID: any) => {
+      if (prevSelectID?.includes(val)) {
+        return prevSelectID?.filter((id: any) => id !== val);
+      } else {
+        return [...prevSelectID, val];
+      }
+    });
   };
+  const itemchose = () => {
+    return props.SelectedItems?.includes(props?.item?.id)
+      ? colors.GREEN
+      : 'transparent';
+  };
+
   return (
     <>
       <Pressable
         style={{
           ...styles.view,
           borderWidth: 1,
-          borderColor: aaa(),
+          borderColor: itemchose(),
         }}
-        onPress={() => {
-          props.select(props.item.id);
-          if (!check.find((item: any) => item.id === props.idItem)) {
-            dispatch(
-              Quizz({
-                id: props.idItem,
-                chose: props.item.id,
-              }),
-            );
-          } else {
-            dispatch(
-              Reselect({
-                id: props.idItem,
-                chose: props.item.id,
-              }),
-            );
-          }
+        onPress={async () => {
+          await Selects(props.item.id);
         }}>
-        <Text style={stylescustom.txt}>{props.item.name}</Text>
+        <Text style={stylescustom.txt}>{props.item.answer}</Text>
       </Pressable>
     </>
   );

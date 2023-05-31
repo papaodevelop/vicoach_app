@@ -4,8 +4,8 @@ import Video from 'react-native-video';
 import Orientation from 'react-native-orientation-locker';
 import Control from './Control';
 import sizes from '../../res/sizes';
-import images from '../../res/images';
 import {NavigationProp} from '@react-navigation/native';
+import WebView from 'react-native-webview';
 const windowHeight = sizes._screen_width * (9 / 12);
 const windowWith = sizes._screen_width;
 export default function RenderViedeo({
@@ -61,6 +61,7 @@ export default function RenderViedeo({
       prevCount >= duration - 10 ? duration : prevCount + 10,
     );
   };
+
   return (
     <Pressable onPress={() => setShow(!show)}>
       <Video
@@ -73,7 +74,12 @@ export default function RenderViedeo({
         muted={false}
         onError={val => console.log(val)}
         fullscreenOrientation="all"
-        source={images.video}
+        source={{
+          uri: url,
+          headers: {
+            Referer: 'https://api.vicoaching.vn/api/v1/',
+          },
+        }}
         resizeMode="contain"
         volume={8}
         ignoreSilentSwitch="ignore"
@@ -87,6 +93,15 @@ export default function RenderViedeo({
           setDuration(data.playableDuration);
         }}
       />
+      {/* <WebView
+        style={styles.backgroundVideo}
+        source={{
+          uri: url,
+          headers: {
+            Referer: 'https://api.vicoaching.vn/api/v1/',
+          },
+        }}
+      /> */}
       {show && (
         <View style={styles.control}>
           <Control

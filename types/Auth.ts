@@ -1,8 +1,8 @@
 export interface Auth {
-  Cookie: string[] | undefined;
+  Cookie: string[];
 }
 export interface AuthState {
-  auth: Auth | null;
+  auth: string;
 }
 export interface PayloadLogin {
   username: string;

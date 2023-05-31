@@ -25,6 +25,8 @@ target 'Vi_Mater' do
   config = use_native_modules!
   pod 'react-native-video', 
   :path => '../node_modules/react-native-video'
+  pod 'rn-fetch-blob',
+  :path => '../node_modules/rn-fetch-blob'
   # Flags change depending on the env values.
   flags = get_default_flags()
 

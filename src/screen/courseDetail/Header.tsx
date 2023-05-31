@@ -45,7 +45,7 @@ const Header = memo(
             <Image
               source={{uri: data?.thumbnail?.url}}
               style={styles.img}
-              resizeMode="cover"
+              resizeMode="stretch"
               defaultSource={images.i2}
             />
           </>

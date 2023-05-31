@@ -46,7 +46,17 @@ const Control = (props: Props) => {
 
   return (
     <>
-      <View style={styles.dot}></View>
+      <View style={styles.dot}>
+        {!props.fullscren && (
+          <Icons
+            name="chevron-left"
+            size={sizes._screen_width * 0.09}
+            color={'white'}
+            style={styles.icon}
+            onPress={props.back}
+          />
+        )}
+      </View>
       <View style={styles.wrapper}>
         <Icon
           onPress={props.previous}
@@ -164,4 +174,5 @@ const styles = StyleSheet.create({
     top: sizes._screen_height * 0.05,
     opacity: 0.8,
   },
+  icon: {left: 5, position: 'absolute'},
 });

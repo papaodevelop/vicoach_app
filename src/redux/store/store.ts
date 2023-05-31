@@ -20,6 +20,7 @@ import getdataUser from '../state/login.slice';
 import {courseListApi} from '../api/courseList.api';
 import getAuth from '../state/auth.slice';
 import getCart from '../state/cart.reducer';
+import {getQuizzDetail} from '../api/quiz.api';
 const reducers = combineReducers({
   [loginApi.reducerPath]: loginApi.reducer,
   [profileApi.reducerPath]: profileApi.reducer,
@@ -30,6 +31,7 @@ const reducers = combineReducers({
   [categoryAPI.reducerPath]: categoryAPI.reducer,
   getCart: getCart,
   [courseListApi.reducerPath]: courseListApi.reducer,
+  [getQuizzDetail.reducerPath]: getQuizzDetail.reducer,
 });
 const persistConfig = {
   key: 'root',
@@ -41,6 +43,7 @@ const persistConfig = {
     profileApi.reducerPath,
     categoryAPI.reducerPath,
     courseListApi.reducerPath,
+    getQuizzDetail.reducerPath,
   ],
 };
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -57,6 +60,7 @@ const store = configureStore({
       profileApi.middleware,
       categoryAPI.middleware,
       courseListApi.middleware,
+      getQuizzDetail.middleware,
     ]);
   },
 });

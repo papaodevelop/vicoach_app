@@ -44,7 +44,11 @@ export default function RenderItemShowCategori(props: Props) {
                 <View style={styles.view2}>
                   <Text style={styles.title}>{textTitle}</Text>
                   <Text style={styles.txt}>
-                    {props.item?.children?.length} Courses
+                    {props.item?.children?.length
+                      ? props.item?.children?.length
+                      : 0}
+                    {'  '}
+                    Children
                   </Text>
                 </View>
               </View>
@@ -67,7 +71,7 @@ export default function RenderItemShowCategori(props: Props) {
                         {i?.name?.vi || i?.name?.en}
                       </Text>
                       <Text style={styles.txt}>
-                        {i?.children?.length} Courses
+                        {i?.children?.length ? i?.children?.length : 0} Children
                       </Text>
                     </View>
                   </View>
@@ -82,7 +86,10 @@ export default function RenderItemShowCategori(props: Props) {
             <View style={styles.view2}>
               <Text style={styles.title}>{textTitle}</Text>
               <Text style={styles.txt}>
-                {props.item?.children?.length} Courses
+                {props.item?.children?.length
+                  ? props.item?.children?.length
+                  : 0}{' '}
+                Children
               </Text>
             </View>
           </View>

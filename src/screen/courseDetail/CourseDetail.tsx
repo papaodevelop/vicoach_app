@@ -35,7 +35,6 @@ const CourseDetails: React.FC<Props> = props => {
   const {data, isLoading} = useGetdetailCourseQuery(`${item.id}`);
   const textTitle = data?.title?.vi || data?.title?.en;
   const category = data?.category?.name?.vi || data?.category?.name?.en;
-  console.log(data?.id);
 
   const addCarts = () => {
     dispatch(

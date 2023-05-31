@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import sizes from '../../res/sizes';
 import colors from '../../res/colors';
@@ -16,6 +17,7 @@ interface Props {
   toggleDate: () => void;
   confirm: () => void;
   txt: string;
+  loading?: boolean;
 }
 const ModalConfirm = (props: Props) => {
   const renderContent = () => (
@@ -32,7 +34,11 @@ const ModalConfirm = (props: Props) => {
             alignSelf: 'center',
           }}>
           <TouchableOpacity style={styles.btn} onPress={props.confirm}>
-            <Text style={styles.btntxt}>Đồng ý</Text>
+            {props.loading ? (
+              <ActivityIndicator />
+            ) : (
+              <Text style={styles.btntxt}>Đồng ý</Text>
+            )}
           </TouchableOpacity>
           <TouchableOpacity
             style={{...styles.btn, backgroundColor: colors.GRAY}}

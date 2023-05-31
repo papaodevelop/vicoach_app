@@ -27,7 +27,8 @@ export default function PlayVideo({
   route: any;
 }) {
   const [select, setSelect] = useState<number>(0);
-  let item = route?.params?.item[select];
+  const item = route?.params?.item[select];
+
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
       <RenderViedeo

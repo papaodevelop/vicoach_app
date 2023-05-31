@@ -1,4 +1,4 @@
-import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React, {memo} from 'react';
 import stylescustom from '../../res/stylescustom';
 import sizes from '../../res/sizes';
@@ -26,36 +26,50 @@ export default function Content({
     //@ts-ignore
     return acc.concat(videoLessonsInChapter);
   }, []);
-  const RendeFoodter = memo(() => (
+  const RendeFoodter = () => (
     <>
-      {datas?.chapter_list.map(i => {
-        const data1 = i?.lesson_list?.filter(obj => obj.duration !== undefined);
-        const data2 = i?.lesson_list?.filter(obj => obj.quiz !== undefined);
+      {data?.chapter_list.map(i => {
+        const data1 = i?.lesson_list?.filter(
+          obj => obj?.duration !== undefined,
+        );
+        const data2 = i?.lesson_list?.filter(obj => obj?.quiz !== undefined);
+
         return (
           <View key={`5${i.id}`}>
             <Text style={styles.txt}>{i?.name}</Text>
-            {data1.length > 0 && (
-              <View>
-                <FlatList
-                  data={data1}
-                  horizontal
-                  renderItem={({item, index}) => (
-                    <RenderContent item={item} index={index} />
-                  )}
-                  style={{marginTop: sizes._screen_height * 0.02}}
-                  showsHorizontalScrollIndicator={false}
-                  keyExtractor={item => `${item.id}2`}
-                />
-              </View>
-            )}
+
+            <View>
+              <FlatList
+                data={data1}
+                horizontal
+                renderItem={({item, index}) => (
+                  <RenderContent
+                    item={item}
+                    index={index}
+                    idCourse={data?.id}
+                    check={i?.id}
+                  />
+                )}
+                style={{marginTop: sizes._screen_height * 0.02}}
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={item => `${item?.id}2`}
+              />
+            </View>
+
             <View>
               <FlatList
                 data={data2}
                 horizontal
-                renderItem={({item}) => <QuizDetail item={item} />}
+                renderItem={({item}: {item: DocumentType}) => (
+                  <QuizDetail
+                    item={item}
+                    idCourse={data?.id}
+                    navigation={navigation}
+                  />
+                )}
                 style={styles.view1}
                 showsHorizontalScrollIndicator={false}
-                keyExtractor={item => `1${item.id}`}
+                keyExtractor={item => `1${item?.id}`}
               />
             </View>
           </View>
@@ -78,12 +92,12 @@ export default function Content({
                 item: videoLessons,
               })
             }
-            txt="Bắt đầu"
+            txt="Xem video"
           />
         </View>
       )}
     </>
-  ));
+  );
   return (
     <FlatList
       data={[]}
