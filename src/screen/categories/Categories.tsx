@@ -6,9 +6,9 @@ import sizes from '../../res/sizes';
 import RenderItemCategoriesData from '../../component/renderItem/RenderItemCategoriesData';
 import RenderItemShowCategori from '../../component/renderItem/RenderItemShowCategori';
 import fonts from '../../res/fonts';
-import {useGetCategoryQuery} from '../../redux/api/courseCategory.api';
 import Loading from '../../component/loading/Loading';
 import {NavigationProp} from '@react-navigation/native';
+import {useGetCategoryQuery} from '../../redux/state';
 
 export default function Categories({
   navigation,

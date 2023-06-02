@@ -15,10 +15,10 @@ import Comment from './Comment';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';
 import {useDispatch} from 'react-redux';
 import {addCart} from '../../redux/state/cart.reducer';
-import {useGetdetailCourseQuery} from '../../redux/api/courseCategory.api';
 import {CourseDetail} from '../../../types/CourseDetail';
 import Loading from '../../component/loading/Loading';
 import Header from './Header';
+import {useGetdetailCourseQuery} from '../../redux/state';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   route: any;

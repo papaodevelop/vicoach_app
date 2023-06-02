@@ -8,10 +8,8 @@ import BTNLogin from '../../component/btn/BTNLogin';
 import images from '../../res/images';
 import Icon from 'react-native-vector-icons/Entypo';
 import ModalConfirmRegister from '../../component/modal/ModalConfirmRegister';
-import {useRegisterMutation} from '../../redux/api/login.api';
 import {Payloadregiter} from '../../../types/Auth';
 import Loading from '../../component/loading/Loading';
-import ErrorText from '../../component/error/ErrorText';
 import {
   isRequired,
   validateEmail,
@@ -21,6 +19,7 @@ import {
 import ErrorText1 from '../../component/error/ErrorText1';
 import {errEmail, errPassWord, errUserName, errexport} from '../../res/err';
 import {Errors} from '../../../types/Err';
+import {useRegisterMutation} from '../../redux/state';
 interface ErrorRegister {
   data: {
     error: string;

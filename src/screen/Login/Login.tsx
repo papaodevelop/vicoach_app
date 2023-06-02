@@ -17,7 +17,7 @@ import {BASE_URL} from '../../Api/BaseURL';
 import {setAuth} from '../../redux/state/auth.slice';
 const Login = ({navigation}: any) => {
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
-  const remember = useAppSelect(data => data.getdataUser.getdataUser);
+  const remember = useAppSelect(data => data?.getdataUser?.getdataUser);
   const [userName, setusername] = useState(remember.username);
   const [pass, setPass] = useState(remember.password);
   const [show, setShow] = useState(false);

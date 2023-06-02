@@ -8,7 +8,7 @@ import {NavigationProp} from '@react-navigation/native';
 import {CourseDetail} from '../../../types/CourseDetail';
 import QuizDetail from './QuizDetail';
 import images from '../../res/images';
-import {useGetCouseListQuery} from '../../redux/api/courseList.api';
+import {useGetCouseListQuery} from '../../redux/state';
 export default function Content({
   navigation,
   datas,

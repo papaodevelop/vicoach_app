@@ -1,11 +1,10 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {instrucutors} from '../../datafeck/feck/Data';
 import RenderItemInstructors from '../../component/renderItem/RenderItemInstructors';
 import stylescustom from '../../res/stylescustom';
-import {useGetCategoryQuery} from '../../redux/api/courseCategory.api';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';
 import {NavigationProp} from '@react-navigation/native';
+import {useGetCategoryQuery} from '../../redux/state';
 
 export default function Instructors({
   navigation,

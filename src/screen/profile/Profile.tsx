@@ -6,14 +6,15 @@ import {NavigationProp} from '@react-navigation/native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import stylescustom from '../../res/stylescustom';
 import TotabScoll from './customTabScoll/ToptabScoll';
+import Loading from '../../component/loading/Loading';
 const Profile = ({
   navigation,
+  route,
 }: {
   navigation: NavigationProp<Record<string, any>>;
+  route: any;
 }) => {
-  const {data, isLoading, isError, error} = useGetProfileQuery('');
-  console.log(data);
-
+  const data = route.params.data;
   return (
     <View style={stylescustom.container}>
       <HeaderScreen navigation={navigation} title="Profile" />

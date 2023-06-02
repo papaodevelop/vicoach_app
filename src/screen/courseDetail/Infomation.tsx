@@ -73,6 +73,7 @@ export default function Infomation({datas}: {datas: CourseDetail | undefined}) {
     if (!show) {
       headerStyle;
     }
+
     return (
       <>
         <Pressable style={styles.view3} onPress={showItem}>

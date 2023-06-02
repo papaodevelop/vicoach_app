@@ -3,11 +3,11 @@ import React from 'react';
 import HeaderScreen from '../../component/header/HeaderScreen';
 import RenderItemCouses from '../home/newestCourses/RenderItemCouses';
 import {NavigationProp} from '@react-navigation/native';
-import {useGetDetailClassifyQuery} from '../../redux/api/courseCategory.api';
 import Loading from '../../component/loading/Loading';
 import images from '../../res/images';
 import sizes from '../../res/sizes';
 import stylescustom from '../../res/stylescustom';
+import {useGetDetailClassifyQuery} from '../../redux/state';
 export default function DetailCategories({
   route,
   navigation,

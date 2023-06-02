@@ -6,8 +6,8 @@ import sizes from '../../res/sizes';
 import stylescustom from '../../res/stylescustom';
 import {NavigationProp} from '@react-navigation/native';
 import ModalConfirm from '../../component/modal/ModalConfirm';
-import {useGetQuizzMutation} from '../../redux/api/quiz.api';
 import {Time} from '../../res/convert';
+import {useGetQuizzMutation} from '../../redux/state';
 
 const QuizDetail = ({
   item,

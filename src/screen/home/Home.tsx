@@ -8,9 +8,9 @@ import fonts from '../../res/fonts';
 import NewestCourses from './newestCourses/NewestCourses';
 import stylescustom from '../../res/stylescustom';
 import {NavigationProp} from '@react-navigation/native';
-import {useGetCategoryQuery} from '../../redux/api/courseCategory.api';
 import Loading from '../../component/loading/Loading';
 import SearchAll from '../search/SearchAll';
+import {useGetCategoryQuery} from '../../redux/state';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
 }

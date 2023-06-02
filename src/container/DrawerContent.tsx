@@ -17,16 +17,25 @@ import fonts from '../res/fonts';
 import RenderItemDrawer from '../component/renderItem/RenderItemDrawer';
 import stylescustom from '../res/stylescustom';
 import {itemNavigationDrawer} from '../datafeck/itemNavigationDrawer';
-import {useLogoutMutation} from '../redux/api/login.api';
+
+import {useDispatch} from 'react-redux';
+import {authApi, useGetProfileQuery, useLogoutMutation} from '../redux/state';
 interface Props {
   navigation: any;
 }
 export default function DrawerContent(props: Props) {
+  const dispatch = useDispatch();
+
   const [logoutMutation] = useLogoutMutation();
+  const {data} = useGetProfileQuery('');
+
   const handleLogout = async () => {
     try {
       const result = await logoutMutation('');
-      props.navigation.navigate('Login');
+      if (result) {
+        dispatch(authApi.util.resetApiState());
+        props.navigation.navigate('Login');
+      }
     } catch (error) {}
   };
   return (
@@ -37,7 +46,11 @@ export default function DrawerContent(props: Props) {
           <Image resizeMode="contain" source={images.kien} style={styles.img} />
           <Pressable
             style={styles.img2}
-            onPress={() => props.navigation.navigate('Profile')}>
+            onPress={() =>
+              props.navigation.navigate('Profile', {
+                data,
+              })
+            }>
             <Image source={images.setting} style={styles.img1} />
           </Pressable>
         </View>

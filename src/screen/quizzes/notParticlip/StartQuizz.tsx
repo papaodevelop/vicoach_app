@@ -22,7 +22,7 @@ import {DataQuizzs} from '../../../datafeck/feck/DataQuizzs';
 import {NavigationProp} from '@react-navigation/native';
 import CountTime from './CountTime';
 import {RootState} from '../../../redux/store/store';
-import {useSubMitQuizMutation} from '../../../redux/api/quiz.api';
+import {useSubMitQuizMutation} from '../../../redux/state';
 type ad = {
   id: number;
   chose: string | number;

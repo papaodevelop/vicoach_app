@@ -5,7 +5,7 @@ import sizes from '../../res/sizes';
 import Loading from '../../component/loading/Loading';
 import RenderItemCourses from '../../component/renderItem/RenderItemCourses';
 import {NavigationProp} from '@react-navigation/native';
-import {useGetClassCourseQuery} from '../../redux/api/courseCategory.api';
+import {useGetClassCourseQuery} from '../../redux/state';
 
 export default function ClassCouse({
   navigation,

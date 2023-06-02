@@ -11,11 +11,11 @@ import sizes from '../../res/sizes';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
 import CusTombtn from '../../component/textInput/CusTomTextInput';
-import {useForgotpwMutation} from '../../redux/api/login.api';
 import {ActivityIndicator} from 'react-native-paper';
 import {validateEmail} from '../../res/require';
 import ErrorText1 from '../error/ErrorText1';
 import {ErrValiEmail, errEmail} from '../../res/err';
+import {useForgotpwMutation} from '../../redux/state';
 interface Props {
   isShow: boolean;
   toggleDate: () => void;

@@ -11,9 +11,9 @@ import React from 'react';
 import RenderComment from './RenderComment';
 import BTNLogin from '../../component/btn/BTNLogin';
 import stylescustom from '../../res/stylescustom';
-import {useGetReviewCouresQuery} from '../../redux/api/courseCategory.api';
 import {NavigationProp} from '@react-navigation/native';
 import {CourseDetail} from '../../../types/CourseDetail';
+import {useGetReviewCouresQuery} from '../../redux/state';
 
 export default function Comment({
   navigation,

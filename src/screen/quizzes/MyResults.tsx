@@ -1,6 +1,5 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {khoahocmoi} from '../../datafeck/feck/Data';
 import RenderQuizzes from '../../component/renderItem/RenderQuizzes';
 import {DataQuizzs} from '../../datafeck/feck/DataQuizzs';
 import {NavigationProp} from '@react-navigation/native';

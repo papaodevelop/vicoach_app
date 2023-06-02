@@ -2,10 +2,10 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import RenderItemCourses from '../../component/renderItem/RenderItemCourses';
 import stylescustom from '../../res/stylescustom';
-import {useGetClassCourseQuery} from '../../redux/api/courseCategory.api';
 import sizes from '../../res/sizes';
 import Loading from '../../component/loading/Loading';
 import {NavigationProp} from '@react-navigation/native';
+import {useGetClassCourseQuery} from '../../redux/state';
 
 export default function Purchased({
   navigation,

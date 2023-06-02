@@ -1,6 +1,5 @@
-import React, {useState, useMemo} from 'react';
+import React, {useState} from 'react';
 import {View, Dimensions, Text, StyleSheet} from 'react-native';
-import {RefreshControlProps} from 'react-native-head-tab-view';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -9,10 +8,8 @@ import Animated, {
   Extrapolate,
 } from 'react-native-reanimated';
 
-import {ScrollableTabViewContainer, TabViewContainer} from './TabViewBase';
+import {TabViewContainer} from './TabViewBase';
 import {useHomeConfig} from './hook';
-
-import {TabViewType} from './types';
 import images from '../../../res/images';
 import {TabBar} from 'react-native-tab-view';
 import colors from '../../../res/colors';
@@ -40,7 +37,7 @@ interface Props {
   navigation: NavigationProp<Record<string, any>>;
 }
 const TotabScoll: React.FC<Props> = props => {
-  const {tabviewType, enableSnap} = useHomeConfig(props);
+  const {enableSnap} = useHomeConfig(props);
   const [scrollTrans, setScrollTrans] = useState(useSharedValue(0));
   const transXValue = useDerivedValue(() => {
     const left = (G_WIN_WIDTH - IMG_WH) / 2;
@@ -133,29 +130,12 @@ const TotabScoll: React.FC<Props> = props => {
         {...props}
         inactiveColor={'#333'}
         activeColor={'#FFD321'}
-        style={[
-          {
-            height: 60,
-            elevation: 10,
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            backgroundColor: 'white',
-          },
-        ]}
-        indicatorStyle={{
-          backgroundColor: colors.ORANGE,
-          height: 2,
-          borderRadius: 10,
-        }}
+        style={styles.header}
+        indicatorStyle={styles.indicator}
         tabStyle={{width: sizes._csreen_width / 3}}
         renderLabel={({route, focused, color}: any) => {
           return (
-            <View style={{marginBottom: 10}}>
+            <View style={{height: '100%', justifyContent: 'center'}}>
               <Text
                 style={[
                   styles.txtheader,
@@ -171,13 +151,7 @@ const TotabScoll: React.FC<Props> = props => {
   };
   const renderScrollHeader = () => {
     return (
-      <View
-        style={{
-          backgroundColor: '#fff',
-          width: '100%',
-          height: HEAD_HEIGHT,
-          alignItems: 'center',
-        }}>
+      <View style={styles.view}>
         <Animated.Image
           source={images.kien}
           style={[
@@ -216,7 +190,7 @@ const TotabScoll: React.FC<Props> = props => {
             detailStyle,
           ]}>
           <Text style={styles.txt}>{props.data?.name}</Text>
-          <Text style={styles.txt}>{props.data?.email}</Text>
+          <Text style={styles.txt1}>{props.data?.roles[0]}</Text>
         </Animated.View>
       </View>
     );
@@ -233,16 +207,16 @@ const TotabScoll: React.FC<Props> = props => {
     enableSnap,
   };
   return (
-    <View style={{flex: 1}}>
-      {tabviewType === TabViewType.default ? (
-        <ScrollableTabViewContainer {...Props} />
-      ) : (
-        <TabViewContainer {...Props} renderTabBar={_renderTabBar} />
-      )}
+    <View style={stylescustom.container}>
+      <TabViewContainer
+        {...Props}
+        renderTabBar={_renderTabBar}
+        navigation={props.navigation}
+        data={props.data}
+      />
     </View>
   );
 };
-
 export default TotabScoll;
 const styles = StyleSheet.create({
   txtheader: {
@@ -250,7 +224,35 @@ const styles = StyleSheet.create({
   },
   txt: {
     textAlign: 'center',
-    ...stylescustom.txt,
+    ...stylescustom.txtBold,
     lineHeight: LINE_HEIGHT,
+    fontSize: sizes._screen_width * 0.05,
+  },
+  txt1: {
+    ...stylescustom.txt1,
+    fontSize: sizes._screen_width * 0.03,
+  },
+  header: {
+    height: 50,
+    elevation: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    backgroundColor: 'white',
+  },
+  indicator: {
+    backgroundColor: colors.ORANGE,
+    height: 2,
+    borderRadius: 10,
+  },
+  view: {
+    backgroundColor: '#fff',
+    width: '100%',
+    height: HEAD_HEIGHT,
+    alignItems: 'center',
   },
 });
