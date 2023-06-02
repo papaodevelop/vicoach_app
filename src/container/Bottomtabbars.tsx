@@ -1,7 +1,6 @@
 import {StyleSheet, Text, Platform, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
 import Providers from '../screen/providers/Providers';
 import Home from '../screen/home/Home';
 import Mycourses from '../screen/mycourses/Mycourses';
@@ -9,9 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import IconHome from 'react-native-vector-icons/Entypo';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
 import Blog from '../screen/blog/Blog';
 import Categories from '../screen/categories/Categories';
 import fonts from '../res/fonts';

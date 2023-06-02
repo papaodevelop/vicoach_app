@@ -123,7 +123,7 @@ export default function Infomation({datas}: {datas: CourseDetail | undefined}) {
           {datas?.assistant_instructor.map((i, index) => (
             <View style={stylescustom.view1} key={i?.id}>
               <Image
-                source={{uri: i?.image?.url}}
+                source={i?.image?.url ? {uri: i?.image?.url} : images.noimage}
                 defaultSource={images.noimage}
                 style={styles.img}
               />

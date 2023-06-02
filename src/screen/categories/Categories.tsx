@@ -1,16 +1,20 @@
 import {FlatList, LayoutAnimation, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import HeaderScreen1 from '../../component/header/HeaderScreen1';
 import stylescustom from '../../res/stylescustom';
 import sizes from '../../res/sizes';
-import {CategoriesData} from '../../datafeck/feck/Data';
 import RenderItemCategoriesData from '../../component/renderItem/RenderItemCategoriesData';
 import RenderItemShowCategori from '../../component/renderItem/RenderItemShowCategori';
 import fonts from '../../res/fonts';
 import {useGetCategoryQuery} from '../../redux/api/courseCategory.api';
 import Loading from '../../component/loading/Loading';
+import {NavigationProp} from '@react-navigation/native';
 
-export default function Categories({navigation}: any) {
+export default function Categories({
+  navigation,
+}: {
+  navigation: NavigationProp<Record<string, any>>;
+}) {
   const {data, isLoading} = useGetCategoryQuery('');
   const ListFoodter = () => {
     return (
@@ -19,7 +23,11 @@ export default function Categories({navigation}: any) {
         <FlatList
           data={data?.trending_categories}
           renderItem={({item, index}) => (
-            <RenderItemCategoriesData item={item} index={index} />
+            <RenderItemCategoriesData
+              item={item}
+              index={index}
+              navigation={navigation}
+            />
           )}
           showsHorizontalScrollIndicator={false}
           horizontal
@@ -41,7 +49,11 @@ export default function Categories({navigation}: any) {
       <FlatList
         data={data?.categories}
         renderItem={({item, index}) => (
-          <RenderItemShowCategori item={item} index={index} />
+          <RenderItemShowCategori
+            item={item}
+            index={index}
+            navigation={navigation}
+          />
         )}
         showsVerticalScrollIndicator={false}
         style={styles.view1}

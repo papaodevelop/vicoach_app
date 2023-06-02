@@ -1,19 +1,7 @@
-import {
-  Alert,
-  Dimensions,
-  FlatList,
-  Pressable,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import React, {createRef, useEffect, useState} from 'react';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
 import sizes from '../../res/sizes';
-import images from '../../res/images';
-import Control from './Control';
 import stylescustom from '../../res/stylescustom';
-import {FeaturedCoursess} from '../../datafeck/feck/Data';
 import RenderListVideo from './RenderListVideo';
 import BTNLogin from '../../component/btn/BTNLogin';
 import {NavigationProp} from '@react-navigation/native';

@@ -1,4 +1,5 @@
 interface ProfileType {
+  data: [];
   id: number;
   name: string;
   username: string;

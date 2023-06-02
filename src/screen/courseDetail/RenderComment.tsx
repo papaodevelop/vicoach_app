@@ -14,7 +14,11 @@ export default function RenderComment({item}: {item: CoursesReview}) {
       <View style={stylescustom.view}>
         <View style={stylescustom.view1}>
           <Image
-            source={{uri: item?.user?.image?.url}}
+            source={
+              item?.user?.image?.url
+                ? {uri: item?.user?.image?.url}
+                : images.noimage
+            }
             defaultSource={images.noimage}
             style={styles.img}
           />

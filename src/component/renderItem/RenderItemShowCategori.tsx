@@ -1,5 +1,5 @@
 import {
-  Image,
+  FlatList,
   LayoutAnimation,
   Pressable,
   StyleSheet,
@@ -13,87 +13,102 @@ import colors from '../../res/colors';
 import fonts from '../../res/fonts';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';
+import RenderChidlren from './RenderChidlren';
+import {NavigationProp} from '@react-navigation/native';
 interface Props {
   item: CourseCategoryType;
   index: number;
+  navigation: NavigationProp<Record<string, any>>;
 }
 export default function RenderItemShowCategori(props: Props) {
   const textTitle = props.item?.name?.vi || props.item?.name?.en;
 
   const [show, setShow] = useState(false);
+  const [show1, setShow1] = useState(false);
+
   const showItem = () => {
     setShow(!show);
   };
+
   useEffect(() => {
     const toggle = () => {
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     };
     toggle();
-  }, [show]);
+  }, [show, show1]);
   let headerStyle = Object.assign({}, styles.view1);
-  if (!show) {
+  if (!show && !show1) {
     headerStyle;
   }
   return (
     <>
-      {props.item?.children?.length > 1 ? (
+      {props.item?.children?.length >= 1 ? (
         <>
-          <Pressable style={styles.view1} onPress={showItem}>
+          <Pressable
+            style={styles.view1}
+            onPress={() => {
+              props.navigation.navigate('DetailCategories', {
+                title: textTitle,
+                item: props.item?.id,
+              });
+            }}>
             <View style={stylescustom.view}>
               <View style={stylescustom.view1}>
                 <View style={styles.view2}>
                   <Text style={styles.title}>{textTitle}</Text>
-                  <Text style={styles.txt}>
-                    {props.item?.children?.length
-                      ? props.item?.children?.length
-                      : 0}
-                    {'  '}
+                  <Text style={stylescustom.txt1}>
+                    {props?.item?.children?.length
+                      ? props?.item?.children?.length
+                      : 0}{' '}
                     Children
                   </Text>
                 </View>
               </View>
               <Icon
+                onPress={showItem}
                 name={show ? 'down' : 'right'}
                 size={sizes._screen_width * 0.06}
                 color={colors.GRAY}
               />
             </View>
             {show ? (
-              <>
-                {props.item?.children?.map((i: any, index: number) => (
-                  <View style={stylescustom.view1} key={index}>
-                    <View style={styles.view3}>
-                      <View style={styles.hr} />
-                      <View style={[styles.route]} />
-                    </View>
-                    <View style={{marginLeft: 16}}>
-                      <Text style={styles.title}>
-                        {i?.name?.vi || i?.name?.en}
-                      </Text>
-                      <Text style={styles.txt}>
-                        {i?.children?.length ? i?.children?.length : 0} Children
-                      </Text>
-                    </View>
-                  </View>
-                ))}
-              </>
+              <FlatList
+                data={props.item.children}
+                scrollEnabled={false}
+                renderItem={({item, index}) => (
+                  <RenderChidlren
+                    i={item}
+                    index={index}
+                    show={show1}
+                    setShow={setShow1}
+                    navigation={props.navigation}
+                  />
+                )}
+              />
             ) : null}
           </Pressable>
         </>
       ) : (
-        <View style={styles.view1}>
+        <Pressable
+          style={styles.view1}
+          onPress={() => {
+            props.navigation.navigate('DetailCategories', {
+              title: textTitle,
+              item: props.item?.id,
+            });
+          }}>
           <View style={stylescustom.view1}>
             <View style={styles.view2}>
               <Text style={styles.title}>{textTitle}</Text>
-              <Text style={styles.txt}>
-                {props.item?.children?.length
-                  ? props.item?.children?.length
+              <Text style={stylescustom.txt1}>
+                {props?.item?.children?.length
+                  ? props?.item?.children?.length
                   : 0}{' '}
                 Children
               </Text>
             </View>
           </View>
-        </View>
+        </Pressable>
       )}
     </>
   );
@@ -128,25 +143,11 @@ const styles = StyleSheet.create({
     tintColor: colors.BLACK,
   },
   view2: {marginLeft: 15},
-  route: {
-    backgroundColor: colors.BLACK,
-    height: sizes._screen_width * 0.022,
-    width: sizes._screen_width * 0.022,
-    borderRadius: 60,
-  },
-  hr: {
-    width: 2,
-    flex: 1,
-    paddingBottom: sizes._screen_height * 0.06,
-    borderWidth: 1.5,
-    borderStyle: 'dashed',
-    borderColor: colors.GRAY,
-    borderDashOffset: 4,
-  },
-  view3: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: sizes._screen_width * 0.1,
-    marginLeft: 5,
+
+  txt1: {
+    height: sizes._screen_height * 0.04,
+    width: sizes._screen_width * 0.5,
+    justifyContent: 'center',
+    marginLeft: 20,
   },
 });

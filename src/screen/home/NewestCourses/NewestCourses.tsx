@@ -31,7 +31,9 @@ export default function NewestCourses(props: Props) {
         }>
         <View>
           <Image
-            source={{uri: item.thumbnail?.url}}
+            source={
+              item.thumbnail?.url ? {uri: item.thumbnail?.url} : images.i2
+            }
             style={styles.img}
             resizeMode="cover"
             defaultSource={images.i2}

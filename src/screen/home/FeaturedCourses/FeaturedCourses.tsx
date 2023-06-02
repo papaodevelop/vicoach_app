@@ -38,7 +38,9 @@ export default function FeaturedCourses(props: Props) {
         <Image
           style={styles.img}
           defaultSource={images.i2}
-          source={{uri: item?.thumbnail?.url}}></Image>
+          source={
+            item?.thumbnail?.url ? {uri: item?.thumbnail?.url} : images.i2
+          }></Image>
         <LinearGradient
           start={{x: 2, y: 0}}
           end={{x: 2, y: 0.7}}

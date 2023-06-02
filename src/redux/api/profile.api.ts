@@ -7,7 +7,7 @@ export const profileApi = createApi({
   tagTypes: [tagTypes],
   baseQuery: axiosBaseQuery(),
   endpoints: build => ({
-    getProfile: build.query<ListApiResponse<ProfileType>, string>({
+    getProfile: build.query<ProfileType, string>({
       query: (queryString: string = '') => ({
         url: `users/profile-settings?${queryString}`,
         method: 'GET',

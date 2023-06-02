@@ -7,7 +7,6 @@ import FeaturedCourses from './featuredCourses/FeaturedCourses';
 import fonts from '../../res/fonts';
 import NewestCourses from './newestCourses/NewestCourses';
 import stylescustom from '../../res/stylescustom';
-import {khoahocmoi} from '../../datafeck/feck/Data';
 import {NavigationProp} from '@react-navigation/native';
 import {useGetCategoryQuery} from '../../redux/api/courseCategory.api';
 import Loading from '../../component/loading/Loading';
@@ -52,13 +51,16 @@ export default function Home(props: Props) {
             onPress={() =>
               props.navigation.navigate('ViewAll', {
                 title: 'Bán chạy nhất',
-                item: khoahocmoi,
+                item: data?.newest_courses,
               })
             }>
             Xem thêm
           </Text>
         </View>
-        <NewestCourses data={khoahocmoi} navigation={props.navigation} />
+        <NewestCourses
+          data={data?.newest_courses}
+          navigation={props.navigation}
+        />
         <View style={styles.view}>
           <Text style={styles.title1}>Khoá học giảm giá</Text>
           <Text
@@ -66,13 +68,16 @@ export default function Home(props: Props) {
             onPress={() =>
               props.navigation.navigate('ViewAll', {
                 title: 'Khoá học giảm giá',
-                item: khoahocmoi,
+                item: data?.newest_courses,
               })
             }>
             Xem thêm
           </Text>
         </View>
-        <NewestCourses data={khoahocmoi} navigation={props.navigation} />
+        <NewestCourses
+          data={data?.newest_courses}
+          navigation={props.navigation}
+        />
         <View style={styles.view}>
           <Text style={styles.title1}>Khoá học miễn phí</Text>
           <Text
@@ -80,13 +85,16 @@ export default function Home(props: Props) {
             onPress={() =>
               props.navigation.navigate('ViewAll', {
                 title: 'Khoá học miễn phí',
-                item: khoahocmoi,
+                item: data?.newest_courses,
               })
             }>
             Xem thêm
           </Text>
         </View>
-        <NewestCourses data={khoahocmoi} navigation={props.navigation} />
+        <NewestCourses
+          data={data?.newest_courses}
+          navigation={props.navigation}
+        />
       </>
     );
   };

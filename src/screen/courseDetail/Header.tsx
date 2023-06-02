@@ -43,7 +43,9 @@ const Header = memo(
         ) : (
           <>
             <Image
-              source={{uri: data?.thumbnail?.url}}
+              source={
+                data?.thumbnail?.url ? {uri: data?.thumbnail?.url} : images.i2
+              }
               style={styles.img}
               resizeMode="stretch"
               defaultSource={images.i2}
@@ -54,7 +56,11 @@ const Header = memo(
         <View style={styles.viewHeader}>
           <View style={stylescustom.view1}>
             <Image
-              source={{uri: data?.assign_instructor?.image?.url}}
+              source={
+                data?.assign_instructor?.image?.url
+                  ? {uri: data?.assign_instructor?.image?.url}
+                  : images.noimage
+              }
               style={styles.avt}
               defaultSource={images.noimage}
             />

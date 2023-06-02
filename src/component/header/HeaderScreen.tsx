@@ -27,12 +27,7 @@ export default function HeaderScreen(props: Props) {
         translucent={false}
       />
       <SafeAreaView>
-        <View
-          style={{
-            width: sizes._screen_width,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
+        <View style={styles.view}>
           <Text style={styles.title}>{props.title}</Text>
           <Icon
             name="chevron-left"
@@ -60,6 +55,13 @@ const styles = StyleSheet.create({
     fontSize: sizes._screen_width * 0.06,
     alignSelf: 'center',
     textTransform: 'uppercase',
+    width: sizes._screen_width * 0.8,
+    textAlign: 'center',
   },
   icon: {left: 5, position: 'absolute'},
+  view: {
+    width: sizes._screen_width,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

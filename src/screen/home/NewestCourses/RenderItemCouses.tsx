@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import sizes from '../../../res/sizes';
 import colors from '../../../res/colors';
@@ -13,14 +13,20 @@ import {CourseCategoryType} from '../../../../types/CourseCategoryType';
 import images from '../../../res/images';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
-  item: CourseCategoryType;
+  item: CourseCategoryType | DetailClassify;
 }
 export default function RenderItemCouses(props: Props) {
   let item = props.item;
   const textTitle = item?.title?.vi || item?.title?.en;
 
   return (
-    <View style={styles.view}>
+    <Pressable
+      style={styles.view}
+      onPress={() =>
+        props.navigation.navigate('CourseDetail', {
+          item: item,
+        })
+      }>
       <Image
         source={item?.thumbnail?.url ? {uri: item?.thumbnail?.url} : images.i1}
         style={{
@@ -54,7 +60,7 @@ export default function RenderItemCouses(props: Props) {
           </Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 

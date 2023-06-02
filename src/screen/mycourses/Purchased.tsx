@@ -1,6 +1,5 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {khoahocmoi} from '../../datafeck/feck/Data';
 import RenderItemCourses from '../../component/renderItem/RenderItemCourses';
 import stylescustom from '../../res/stylescustom';
 import {useGetClassCourseQuery} from '../../redux/api/courseCategory.api';

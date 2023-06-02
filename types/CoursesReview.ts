@@ -120,3 +120,33 @@ interface question_list {
     },
   ];
 }
+interface DetailClassify {
+  id: number;
+  title: {
+    en: string;
+    vi: string;
+  };
+  duration: number;
+  price: number;
+  created_at: string;
+  updated_at: string;
+  category: {
+    name: {
+      en: string;
+      vi: string;
+    };
+  };
+  thumbnail: {
+    id: number;
+    url: string;
+    path: string;
+    fileName: string;
+    key: null;
+    type: string;
+  };
+  assign_instructor: {
+    name: string;
+    image: null;
+  };
+  reviews: string;
+}

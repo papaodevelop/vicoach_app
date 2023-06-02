@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import colors from '../../res/colors';
 import sizes from '../../res/sizes';
@@ -6,17 +6,32 @@ import stylescustom from '../../res/stylescustom';
 import fonts from '../../res/fonts';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';
 import images from '../../res/images';
+import {NavigationProp} from '@react-navigation/native';
 interface Props {
   item: CourseCategoryType;
   index: number;
+  navigation: NavigationProp<Record<string, any>>;
 }
 export default function RenderItemCategoriesData(props: Props) {
   const textTitle = props.item?.name?.vi || props.item?.name?.en;
   return (
-    <View style={styles.view}>
+    <Pressable
+      style={styles.view}
+      onPress={() =>
+        props.item.number_of_course
+          ? props.navigation.navigate('DetailCategories', {
+              title: textTitle,
+              item: props.item?.id,
+            })
+          : undefined
+      }>
       <View style={{...styles.view1}}>
         <Image
-          source={{uri: props.item?.thumbnail_image?.url}}
+          source={
+            props.item?.thumbnail_image?.url
+              ? {uri: props.item?.thumbnail_image?.url}
+              : images.i2
+          }
           style={styles.img}
           defaultSource={images.i2}
         />
@@ -25,7 +40,7 @@ export default function RenderItemCategoriesData(props: Props) {
         <Text style={styles.title}>{textTitle}</Text>
         <Text style={styles.txt}>{props.item.number_of_course} Courses</Text>
       </View>
-    </View>
+    </Pressable>
   );
 }
 const styles = StyleSheet.create({

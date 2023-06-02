@@ -31,7 +31,7 @@ const RenderItemCourses = (props: Props) => {
       <View style={stylescustom.view}>
         <View style={stylescustom.view1}>
           <Image
-            source={{uri: item?.thumbnail}}
+            source={item?.thumbnail ? {uri: item?.thumbnail} : images.i1}
             style={styles.img}
             defaultSource={images.i1}
           />

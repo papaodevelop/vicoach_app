@@ -19,13 +19,12 @@ import {useGetdetailCourseQuery} from '../../redux/api/courseCategory.api';
 import {CourseDetail} from '../../../types/CourseDetail';
 import Loading from '../../component/loading/Loading';
 import Header from './Header';
-import TopTabCourse from '../mycourses/TopTabCourse';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   route: any;
 }
 
-const CourseDetails: React.FC<Props> = props => {
+const CourseDetails = (props: Props) => {
   const item =
     (props.route.params.item as CourseCategoryType) ||
     (props.route.params as CourseDetail);

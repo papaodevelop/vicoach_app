@@ -120,6 +120,28 @@ export const categoryAPI = createApi({
         return [{type: tagTypes, id: 'LIST'}];
       },
     }),
+    getDetailClassify: build.query<ListApiResponse<DetailClassify>, string>({
+      query: queryString => ({
+        url: `course-list/?category_id[]=${queryString}`,
+        method: 'GET',
+      }),
+      providesTags(result) {
+        if (result?.data) {
+          const detailClassify = result.data;
+          return [
+            ...detailClassify.map(({id}) => ({
+              type: tagTypes,
+              id,
+            })),
+            {
+              type: tagTypes,
+              id: 'LIST',
+            },
+          ];
+        }
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
   }),
 });
 export const {
@@ -128,4 +150,5 @@ export const {
   useGetCourseSearchQuery,
   useGetdetailCourseQuery,
   useGetReviewCouresQuery,
+  useGetDetailClassifyQuery,
 } = categoryAPI;

@@ -84,16 +84,6 @@ export default function ProfileIntructors({
             <About navigation={navigation} item={item} />
           </Tabs.ScrollView>
         </Tabs.Tab>
-        <Tabs.Tab name="Khoá học">
-          <Tabs.ScrollView showsVerticalScrollIndicator={false}>
-            <Content navigation={navigation} />
-          </Tabs.ScrollView>
-        </Tabs.Tab>
-        <Tabs.Tab name="Danh hiệu">
-          <Tabs.ScrollView>
-            <Comment />
-          </Tabs.ScrollView>
-        </Tabs.Tab>
       </Tabs.Container>
     </View>
   );
