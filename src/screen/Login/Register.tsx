@@ -36,7 +36,7 @@ const Register = ({navigation}: any) => {
   const [errEmails, setErrEmails] = useState('');
   const [erruserNames, setErrUsernames] = useState('');
   const [show, setShow] = useState(false);
-  const [register, {error, isLoading, isSuccess}] = useRegisterMutation();
+  const [register, {error, isLoading, isSuccess, data}] = useRegisterMutation();
   const submit = async () => {
     await register({
       username: userName,
@@ -55,8 +55,10 @@ const Register = ({navigation}: any) => {
     if (err) {
       setErrEmails(errexport(err));
       setErrUsernames(errexport(err));
+      console.log(err);
     }
   }, [error, isSuccess]);
+
   return (
     <View style={{flex: 1}}>
       <ScrollView style={styles.container}>

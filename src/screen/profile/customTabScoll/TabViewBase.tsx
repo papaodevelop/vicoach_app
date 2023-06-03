@@ -35,7 +35,7 @@ const TabViewContainer: React.FC<
     if (route.key == 'General') {
       return <General index={0} data={props.data} />;
     } else if (route.key == 'Security') {
-      return <Security index={1} />;
+      return <Security index={1} navigation={props.navigation} />;
     } else if (route.key == 'Location') {
       return <Location index={2} />;
     }

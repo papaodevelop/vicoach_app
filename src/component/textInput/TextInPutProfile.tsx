@@ -7,15 +7,18 @@ import stylescustom from '../../res/stylescustom';
 export default function TextInPutProfile({
   value,
   setValue,
+  secureTextEntry,
 }: {
   value?: string;
   setValue: (val?: string) => void;
+  secureTextEntry?: boolean;
 }) {
   return (
     <TextInput
       value={value}
       onChangeText={values => setValue(values)}
       style={styles.textInputStyle}
+      secureTextEntry={secureTextEntry}
     />
   );
 }

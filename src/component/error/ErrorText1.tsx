@@ -4,7 +4,7 @@ import colors from '../../res/colors';
 import sizes from '../../res/sizes';
 import fonts from '../../res/fonts';
 interface Props {
-  err: string;
+  err: string | undefined;
 }
 export default function ErrorText1(props: Props) {
   return <>{props.err && <Text style={styles.txt}>{props.err}</Text>}</>;

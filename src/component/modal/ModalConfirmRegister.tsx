@@ -10,11 +10,19 @@ import {
 import sizes from '../../res/sizes';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
+import {NavigationProp} from '@react-navigation/native';
 interface Props {
-  isShow: boolean;
-  toggleDate: () => void;
+  isShow?: boolean;
+  toggleDate?: () => void;
+  title?: string;
+  confirm?: boolean;
+  navigation?: NavigationProp<Record<string, any>>;
 }
+
 const ModalConfirmRegister = (props: Props) => {
+  const succes = () => {
+    props.navigation?.navigate('Login');
+  };
   const renderContent = () => (
     <View style={styles.content}>
       <View style={styles.head}>
@@ -22,10 +30,17 @@ const ModalConfirmRegister = (props: Props) => {
       </View>
       <View style={styles.view}>
         <Text style={styles.title}>
-          Đăng ký thành công. Trở lại màn hình đăng nhập để bắt đầu ?
+          {props.title
+            ? props.title
+            : 'Đăng ký thành công. Trở lại màn hình đăng nhập để bắt đầu'}
         </Text>
 
-        <TouchableOpacity style={styles.btn} onPress={props.toggleDate}>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={props.toggleDate}
+          onPressOut={() => {
+            props.confirm ? succes() : undefined;
+          }}>
           <Text style={styles.btntxt}>Đồng ý</Text>
         </TouchableOpacity>
       </View>

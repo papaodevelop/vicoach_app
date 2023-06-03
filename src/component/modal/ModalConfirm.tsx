@@ -13,10 +13,10 @@ import colors from '../../res/colors';
 import fonts from '../../res/fonts';
 import stylescustom from '../../res/stylescustom';
 interface Props {
-  isShow: boolean;
-  toggleDate: () => void;
-  confirm: () => void;
-  txt: string;
+  isShow?: boolean;
+  toggleDate?: () => void;
+  confirm?: () => void;
+  txt?: string;
   loading?: boolean;
 }
 const ModalConfirm = (props: Props) => {

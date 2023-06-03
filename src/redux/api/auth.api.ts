@@ -246,6 +246,15 @@ export const authApi = createApi({
       },
       invalidatesTags: result => [{type: tagTypes, id: result?.id}],
     }),
+    changePassWord: build.mutation({
+      query(data) {
+        return {
+          url: `users/change-password`,
+          method: 'PUT',
+          data,
+        };
+      },
+    }),
   }),
 });
 
@@ -264,4 +273,5 @@ export const {
   useGetProfileQuery,
   useGetQuizzMutation,
   useSubMitQuizMutation,
+  useChangePassWordMutation,
 } = authApi;
