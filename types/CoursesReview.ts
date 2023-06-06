@@ -150,3 +150,7 @@ interface DetailClassify {
   };
   reviews: string;
 }
+interface Provinces {
+  code: string;
+  name: string;
+}

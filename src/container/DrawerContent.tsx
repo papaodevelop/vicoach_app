@@ -27,7 +27,6 @@ export default function DrawerContent(props: Props) {
   const dispatch = useDispatch();
 
   const [logoutMutation] = useLogoutMutation();
-  const {data} = useGetProfileQuery('');
 
   const handleLogout = async () => {
     try {
@@ -46,11 +45,7 @@ export default function DrawerContent(props: Props) {
           <Image resizeMode="contain" source={images.kien} style={styles.img} />
           <Pressable
             style={styles.img2}
-            onPress={() =>
-              props.navigation.navigate('Profile', {
-                data,
-              })
-            }>
+            onPress={() => props.navigation.navigate('Profile')}>
             <Image source={images.setting} style={styles.img1} />
           </Pressable>
         </View>

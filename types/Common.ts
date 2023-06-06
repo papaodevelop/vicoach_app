@@ -10,6 +10,7 @@ export interface ListApiResponse<T> {
   featured_courses: [];
   count: number;
   instructors: [];
+  name: string;
 }
 
 export interface PaginationResponse {

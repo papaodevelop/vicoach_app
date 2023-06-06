@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Dimensions, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Alert, Platform} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -7,23 +7,31 @@ import Animated, {
   interpolate,
   Extrapolate,
 } from 'react-native-reanimated';
-
 import {TabViewContainer} from './TabViewBase';
 import {useHomeConfig} from './hook';
-import images from '../../../res/images';
 import {TabBar} from 'react-native-tab-view';
 import colors from '../../../res/colors';
 import sizes from '../../../res/sizes';
 import stylescustom from '../../../res/stylescustom';
 import {NavigationProp} from '@react-navigation/native';
-
-const G_WIN_WIDTH = Dimensions.get('window').width;
-const G_WIN_HEIGHT = Dimensions.get('window').height;
+import {
+  useGetProfileQuery,
+  useSettingProfileMutation,
+} from '../../../redux/state';
+import Loading from '../../../component/loading/Loading';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {launchImageLibrary} from 'react-native-image-picker';
+import axios from 'axios';
+import {BASE_URL} from '../../../Api/BaseURL';
+import {TypedUseSelectorHook, useSelector} from 'react-redux';
+import {RootState} from '../../../redux/store/store';
+const G_WIN_WIDTH = sizes._screen_width;
+const G_WIN_HEIGHT = sizes._screen_height;
 const HEAD_HEIGHT = G_WIN_HEIGHT * 0.3;
-
 const IMG_WH = 100;
-const MARGIN_H = 15;
-const MARGIN_V = 20;
+const IMG_WH1 = 100;
+const MARGIN_H = 25;
+const MARGIN_V = 0;
 const FROZE_TOP = IMG_WH;
 const LINE_HEIGHT = 20;
 const LINE_COUNT = 3;
@@ -31,12 +39,19 @@ const moveDistance = HEAD_HEIGHT - FROZE_TOP;
 const title_h = LINE_HEIGHT;
 const detail_h = LINE_HEIGHT * LINE_COUNT;
 const marginTop =
-  (HEAD_HEIGHT - IMG_WH - title_h - MARGIN_V * 2 - detail_h) * 0.5;
+  (HEAD_HEIGHT - IMG_WH - title_h - MARGIN_V * 2 - detail_h) * 0.72;
+const marginTop1 =
+  (HEAD_HEIGHT - IMG_WH1 - title_h - MARGIN_V * 2 - detail_h) * 0.5;
 interface Props {
-  data?: ProfileType;
   navigation: NavigationProp<Record<string, any>>;
 }
 const TotabScoll: React.FC<Props> = props => {
+  const {data, isLoading, refetch} = useGetProfileQuery('');
+  const [update, {isSuccess, error}] = useSettingProfileMutation();
+  console.log(isSuccess);
+
+  console.log(error);
+
   const {enableSnap} = useHomeConfig(props);
   const [scrollTrans, setScrollTrans] = useState(useSharedValue(0));
   const transXValue = useDerivedValue(() => {
@@ -50,7 +65,7 @@ const TotabScoll: React.FC<Props> = props => {
   });
   const transYValue = useDerivedValue(() => {
     const moveDistance = HEAD_HEIGHT - FROZE_TOP;
-    const Img_one_move = marginTop + title_h + detail_h + MARGIN_V * 2;
+    const Img_one_move = marginTop + title_h + detail_h + MARGIN_V / 0.7;
     return interpolate(
       scrollTrans.value,
       [0, moveDistance],
@@ -67,7 +82,117 @@ const TotabScoll: React.FC<Props> = props => {
       Extrapolate.CLAMP,
     );
   });
+  type Images = {
+    fileName: string;
+    fileSize: number;
+    height: number;
+    type: string;
+    uri: string;
+    width: number;
+  };
+  const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
+  const cookie = useAppSelect(data => data?.getAuth.auth);
+  let options = {
+    storageOption: {
+      path: 'images',
+      mediaType: 'photo',
+    },
+    includeBase64: false,
+  } as any;
+  const [loadings, setLoadings] = useState(false);
+  const openPicker = async () => {
+    const formData = new FormData();
+    await launchImageLibrary(options, response => {
+      if (response?.assets) {
+        const images = response?.assets[0] as Images;
+        const item = {
+          uri: images?.uri,
+          type: images?.type,
+          name: images?.fileName,
+        };
+        formData.append('image_file', item);
+      } else {
+        console.log('ccc');
+      }
+    });
+    try {
+      setLoadings(true);
 
+      await axios
+        .put(`${BASE_URL}users/profile-settings`, formData, {
+          headers: {
+            Authorization: `Cookie: ${cookie}`,
+            Accept: 'application/json',
+            // 'Content-Type': 'multipart/form-data',
+          },
+        })
+
+        .then(respon => {
+          console.log(respon.status);
+
+          if (respon.data) {
+            refetch();
+          }
+        });
+    } catch (error) {}
+    setLoadings(false);
+  };
+  const SmallImage = () => {
+    const transX = useDerivedValue(() => {
+      const left = (G_WIN_WIDTH - IMG_WH) / 2;
+      return interpolate(
+        scrollTrans.value,
+        [0, moveDistance],
+        [0, -left],
+        Extrapolate.CLAMP,
+      );
+    });
+    const transY = useDerivedValue(() => {
+      const moveDistance = HEAD_HEIGHT - FROZE_TOP;
+      const Img_one_move = marginTop1 + detail_h + MARGIN_V / 0.7;
+      return interpolate(
+        scrollTrans.value,
+        [0, moveDistance],
+        [0, Img_one_move],
+        Extrapolate.CLAMP,
+      );
+    });
+
+    const scaleV = useDerivedValue(() => {
+      const moveDistance = HEAD_HEIGHT - FROZE_TOP;
+      return interpolate(
+        scrollTrans.value,
+        [0, moveDistance],
+        [1, 0.7],
+        Extrapolate.CLAMP,
+      );
+    });
+    const headerTrans = useAnimatedStyle(() => {
+      return {
+        transform: [
+          {
+            translateX: transX.value,
+          },
+          {
+            translateY: transY.value,
+          },
+          {
+            scale: scaleV.value,
+          },
+        ],
+      };
+    });
+    return (
+      <Animated.View style={[styles.smallImage, headerTrans]}>
+        <FontAwesome
+          name="camera"
+          color={colors.GRAY}
+          size={30}
+          onPress={openPicker}
+        />
+      </Animated.View>
+    );
+  };
   const headerTransStyle = useAnimatedStyle(() => {
     return {
       transform: [
@@ -83,7 +208,6 @@ const TotabScoll: React.FC<Props> = props => {
       ],
     };
   });
-
   const titleOpacity = useDerivedValue(() => {
     return interpolate(
       scrollTrans.value,
@@ -108,7 +232,7 @@ const TotabScoll: React.FC<Props> = props => {
     return interpolate(
       scrollTrans.value,
       [0, moveDistance],
-      [0, marginTop - (IMG_WH - detail_h) * 1],
+      [0, marginTop - (IMG_WH - detail_h) * 1.5],
       Extrapolate.CLAMP,
     );
   });
@@ -135,7 +259,7 @@ const TotabScoll: React.FC<Props> = props => {
         tabStyle={{width: sizes._csreen_width / 3}}
         renderLabel={({route, focused, color}: any) => {
           return (
-            <View style={{height: '100%', justifyContent: 'center'}}>
+            <View style={styles.view2}>
               <Text
                 style={[
                   styles.txtheader,
@@ -153,53 +277,23 @@ const TotabScoll: React.FC<Props> = props => {
     return (
       <View style={styles.view}>
         <Animated.Image
-          source={images.kien}
-          style={[
-            {
-              backgroundColor: 'gray',
-              width: IMG_WH,
-              height: IMG_WH,
-              marginTop,
-              borderRadius: IMG_WH * 0.5,
-            },
-            headerTransStyle,
-          ]}
+          source={{uri: data?.image?.url}}
+          style={[styles.img, headerTransStyle]}
         />
-        <Animated.Text
-          style={[
-            {
-              fontSize: 18,
-              color: '#26323F',
-              marginTop: MARGIN_V,
-              lineHeight: LINE_HEIGHT,
-              textAlign: 'center',
-            },
-            titleStyle,
-          ]}>
+        <SmallImage />
+        <Animated.Text style={[styles.txt2, titleStyle]}>
           {` Xin Chào ! \n Chúc bạn một ngày tốt lành`}
         </Animated.Text>
-        <Animated.View
-          style={[
-            {
-              height: detail_h,
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: G_WIN_WIDTH - MARGIN_H - IMG_WH,
-              marginTop: MARGIN_V,
-            },
-            detailStyle,
-          ]}>
-          <Text style={styles.txt}>{props.data?.name}</Text>
-          <Text style={styles.txt1}>{props.data?.roles[0]}</Text>
+        <Animated.View style={[styles.view1, detailStyle]}>
+          <Text style={styles.txt}>{data?.name}</Text>
+          <Text style={styles.txt1}>{data?.roles[0]}</Text>
         </Animated.View>
       </View>
     );
   };
-
   const makeScrollTrans = (scrollTrans: Animated.SharedValue<number>) => {
     setScrollTrans(scrollTrans);
   };
-
   const Props = {
     renderScrollHeader,
     makeScrollTrans,
@@ -208,12 +302,15 @@ const TotabScoll: React.FC<Props> = props => {
   };
   return (
     <View style={stylescustom.container}>
-      <TabViewContainer
-        {...Props}
-        renderTabBar={_renderTabBar}
-        navigation={props.navigation}
-        data={props.data}
-      />
+      {data && (
+        <TabViewContainer
+          {...Props}
+          renderTabBar={_renderTabBar}
+          navigation={props.navigation}
+        />
+      )}
+      {isLoading && <Loading />}
+      {loadings && <Loading />}
     </View>
   );
 };
@@ -253,6 +350,30 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     width: '100%',
     height: HEAD_HEIGHT,
+    alignItems: 'center',
+  },
+  view1: {
+    height: detail_h,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: G_WIN_WIDTH - MARGIN_H - IMG_WH,
+    marginTop: MARGIN_V,
+  },
+  img: {
+    backgroundColor: 'gray',
+    width: IMG_WH,
+    height: IMG_WH,
+    marginTop: MARGIN_H,
+    borderRadius: IMG_WH * 0.5,
+  },
+  view2: {height: '100%', justifyContent: 'center'},
+  txt2: {
+    ...stylescustom.txt,
+    marginTop: MARGIN_V,
+    lineHeight: LINE_HEIGHT,
+    textAlign: 'center',
+  },
+  smallImage: {
     alignItems: 'center',
   },
 });

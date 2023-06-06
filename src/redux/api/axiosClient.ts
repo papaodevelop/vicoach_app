@@ -34,11 +34,12 @@ export const axiosBaseQuery =
       data?: AxiosRequestConfig['data'];
       params?: AxiosRequestConfig['params'];
       timeout?: AxiosRequestConfig['timeout'];
+      headers?: AxiosRequestConfig['headers'];
     },
     unknown,
     unknown
   > =>
-  async ({url, method, data, params, timeout}) => {
+  async ({url, method, data, params, timeout, headers}) => {
     try {
       const result = await axios({
         url: baseUrl + url,
@@ -46,6 +47,7 @@ export const axiosBaseQuery =
         data,
         params,
         timeout,
+        headers,
       });
 
       return {data: result.data};

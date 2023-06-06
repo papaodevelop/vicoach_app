@@ -7,6 +7,8 @@ import {
 import sizes from '../../../res/sizes';
 import {NavigationProp} from '@react-navigation/native';
 import {General, Location, Security} from './index';
+import Loading from '../../../component/loading/Loading';
+import {useGetProfileQuery} from '../../../redux/state';
 const TIMECOUNT = 3000;
 const HEAD_HEIGHT = sizes._screen_height * 0.3;
 
@@ -17,7 +19,7 @@ interface ScrollableTabViewContainerProps {
     | null;
   sceneRefreshEnabled?: boolean;
   tabsRefreshEnabled?: boolean;
-  data?: ProfileType;
+
   navigation: NavigationProp<Record<string, any>>;
 }
 const TabViewContainer: React.FC<
@@ -29,15 +31,15 @@ const TabViewContainer: React.FC<
     {key: 'Security', title: 'Đổi MK'},
     {key: 'Location', title: 'Địa chỉ'},
   ]);
-
+  const {data, refetch, isFetching} = useGetProfileQuery('');
   const _renderScene = (e: any) => {
     const {route} = e;
     if (route.key == 'General') {
-      return <General index={0} data={props.data} />;
+      return <General index={0} data={data} refetch={refetch} />;
     } else if (route.key == 'Security') {
       return <Security index={1} navigation={props.navigation} />;
     } else if (route.key == 'Location') {
-      return <Location index={2} />;
+      return <Location index={2} data={data} refect={refetch} />;
     }
     return null;
   };
@@ -47,13 +49,18 @@ const TabViewContainer: React.FC<
   };
 
   return (
-    <ZHeaderTabView
-      navigationState={{index, routes}}
-      renderScene={_renderScene}
-      onIndexChange={setIndex}
-      renderScrollHeader={_renderScrollHeader}
-      {...props}
-    />
+    <>
+      {data && (
+        <ZHeaderTabView
+          navigationState={{index, routes}}
+          renderScene={_renderScene}
+          onIndexChange={setIndex}
+          renderScrollHeader={_renderScrollHeader}
+          {...props}
+        />
+      )}
+      {isFetching && <Loading />}
+    </>
   );
 };
 

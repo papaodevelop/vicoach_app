@@ -21,7 +21,7 @@ import {CourseCategoryType} from '../../../../types/CourseCategoryType';
 import images from '../../../res/images';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
-  data: any;
+  data?: any;
 }
 export default function FeaturedCourses(props: Props) {
   const scrollX = React.useRef(new Animated.Value(0)).current;

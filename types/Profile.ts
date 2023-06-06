@@ -32,14 +32,33 @@ interface ProfileType {
     code: string;
   };
   position: null;
-  image: null;
+  image: {
+    url: string;
+    path: string;
+    fileName: string;
+    id: number;
+  };
   address: {
     id: number;
-    street: null;
-    state: null;
-    city: null;
-    country: null;
-    zip_code: null;
+    street: string;
+    country: string;
+    zip_code: number;
+    city: {
+      code: string;
+      name: string;
+      name_en: string;
+      full_name: string;
+      full_name_en: string;
+      code_name: string;
+    };
+    state: {
+      code: string;
+      name: string;
+      name_en: string;
+      full_name: string;
+      full_name_en: string;
+      code_name: string;
+    };
   };
   subscription: null;
 }

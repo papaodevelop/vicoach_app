@@ -33,6 +33,7 @@
     "react-native-countdown-circle-timer": "^3.2.1",
     "react-native-gesture-handler": "^2.10.2",
     "react-native-head-tab-view": "^4.0.0-rc.13",
+    "react-native-image-picker": "^5.4.0",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-orientation-locker": "^1.5.0",
     "react-native-pager-view": "^6.2.0",

@@ -8,17 +8,20 @@ export default function TextInPutProfile({
   value,
   setValue,
   secureTextEntry,
+  placeholder,
 }: {
   value?: string;
   setValue: (val?: string) => void;
   secureTextEntry?: boolean;
+  placeholder?: string;
 }) {
   return (
     <TextInput
       value={value}
-      onChangeText={values => setValue(values)}
+      onChangeText={setValue}
       style={styles.textInputStyle}
       secureTextEntry={secureTextEntry}
+      placeholder={placeholder}
     />
   );
 }

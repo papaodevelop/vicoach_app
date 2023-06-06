@@ -17,8 +17,6 @@ export function errexport(val: string) {
   return errors[val] || '';
 }
 export function kiemTraLoi(danhSachLoi: string[], chuoiKiemTra: string) {
-  console.log('cc');
-
   for (var i = 0; i < danhSachLoi.length; i++) {
     if (chuoiKiemTra.includes(danhSachLoi[i])) {
       return danhSachLoi[i];

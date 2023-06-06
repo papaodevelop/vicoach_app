@@ -9,17 +9,14 @@ import TotabScoll from './customTabScoll/ToptabScoll';
 import Loading from '../../component/loading/Loading';
 const Profile = ({
   navigation,
-  route,
 }: {
   navigation: NavigationProp<Record<string, any>>;
-  route: any;
 }) => {
-  const data = route.params.data;
   return (
     <View style={stylescustom.container}>
       <HeaderScreen navigation={navigation} title="Profile" />
       <GestureHandlerRootView style={{flex: 1}}>
-        <TotabScoll data={data} navigation={navigation} />
+        <TotabScoll navigation={navigation} />
       </GestureHandlerRootView>
     </View>
   );

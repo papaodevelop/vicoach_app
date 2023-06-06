@@ -62,3 +62,9 @@ export function convertByteToMB(byte: number) {
   const roundedMB = megabyte.toFixed(2);
   return roundedMB + ' MB';
 }
+export const normalizeString = (str: string) => {
+  return str
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+};

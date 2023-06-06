@@ -4,13 +4,13 @@ import {ListApiResponse} from '../../../types/Common';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';
 import {CourseDetail} from '../../../types/CourseDetail';
 import {Auth, ForgotPass, Payloadregiter} from '../../../types/Auth';
+import {BASE_URL} from '../../Api/BaseURL';
 
 const tagTypes = 'Auth' as const;
-
 export const authApi = createApi({
   reducerPath: 'authApi',
   tagTypes: [tagTypes],
-  baseQuery: axiosBaseQuery(),
+  baseQuery: axiosBaseQuery({baseUrl: BASE_URL}),
   endpoints: build => ({
     logout: build.mutation<{}, {}>({
       query() {
@@ -255,6 +255,60 @@ export const authApi = createApi({
         };
       },
     }),
+    settingProfile: build.mutation({
+      query(data) {
+        return {
+          url: `users/profile-settings`,
+          method: 'PUT',
+          data,
+        };
+      },
+      invalidatesTags: result => [{type: tagTypes, id: result?.id}],
+    }),
+    getProvinces: build.query({
+      query: queryString => ({
+        url: `country/provinces`,
+        method: 'GET',
+      }),
+      providesTags(result) {
+        if (result?.data) {
+          const detailClassify = result.data;
+          return [
+            ...detailClassify.map(({code}: Provinces) => ({
+              type: tagTypes,
+              code,
+            })),
+            {
+              type: tagTypes,
+              id: 'LIST',
+            },
+          ];
+        }
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
+    getDistric: build.query({
+      query: queryString => ({
+        url: `country/districts/${queryString}`,
+        method: 'GET',
+      }),
+      providesTags(result) {
+        if (result?.data) {
+          const detailClassify = result.data;
+          return [
+            ...detailClassify.map(({code}: Provinces) => ({
+              type: tagTypes,
+              code,
+            })),
+            {
+              type: tagTypes,
+              id: 'LIST',
+            },
+          ];
+        }
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
   }),
 });
 
@@ -274,4 +328,7 @@ export const {
   useGetQuizzMutation,
   useSubMitQuizMutation,
   useChangePassWordMutation,
+  useGetProvincesQuery,
+  useGetDistricQuery,
+  useSettingProfileMutation,
 } = authApi;
