@@ -25,6 +25,7 @@ interface Props {
 }
 export default function DrawerContent(props: Props) {
   const dispatch = useDispatch();
+  const {data} = useGetProfileQuery('');
 
   const [logoutMutation] = useLogoutMutation();
 
@@ -42,14 +43,18 @@ export default function DrawerContent(props: Props) {
       <SafeAreaView style={{marginLeft: 15}}>
         <View
           style={{...stylescustom.view1, width: sizes._screen_width * 0.14}}>
-          <Image resizeMode="contain" source={images.kien} style={styles.img} />
+          <Image
+            resizeMode="contain"
+            source={{uri: data?.image?.url}}
+            style={styles.img}
+          />
           <Pressable
             style={styles.img2}
             onPress={() => props.navigation.navigate('Profile')}>
             <Image source={images.setting} style={styles.img1} />
           </Pressable>
         </View>
-        <Text style={styles.name}>Nguyễn Văn Kiên</Text>
+        <Text style={styles.name}>{data?.name}</Text>
         <View style={styles.line} />
         <FlatList
           data={itemNavigationDrawer}

@@ -24,7 +24,7 @@ const BTNLogin = (props: Props) => {
 export default BTNLogin;
 const styles = StyleSheet.create({
   btn: {
-    height: sizes._screen_height * 0.05,
+    height: 40,
     width: sizes._screen_width * 0.7,
     alignItems: 'center',
     justifyContent: 'center',

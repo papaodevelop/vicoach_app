@@ -14,10 +14,7 @@ import colors from '../../../res/colors';
 import sizes from '../../../res/sizes';
 import stylescustom from '../../../res/stylescustom';
 import {NavigationProp} from '@react-navigation/native';
-import {
-  useGetProfileQuery,
-  useSettingProfileMutation,
-} from '../../../redux/state';
+import {useGetProfileQuery} from '../../../redux/state';
 import Loading from '../../../component/loading/Loading';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -27,7 +24,7 @@ import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {RootState} from '../../../redux/store/store';
 const G_WIN_WIDTH = sizes._screen_width;
 const G_WIN_HEIGHT = sizes._screen_height;
-const HEAD_HEIGHT = G_WIN_HEIGHT * 0.3;
+const HEAD_HEIGHT = G_WIN_HEIGHT * 0.35;
 const IMG_WH = 100;
 const IMG_WH1 = 100;
 const MARGIN_H = 25;
@@ -45,13 +42,16 @@ const marginTop1 =
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
 }
+type Images = {
+  fileName: string;
+  fileSize: number;
+  height: number;
+  type: string;
+  uri: string;
+  width: number;
+};
 const TotabScoll: React.FC<Props> = props => {
   const {data, isLoading, refetch} = useGetProfileQuery('');
-  const [update, {isSuccess, error}] = useSettingProfileMutation();
-  console.log(isSuccess);
-
-  console.log(error);
-
   const {enableSnap} = useHomeConfig(props);
   const [scrollTrans, setScrollTrans] = useState(useSharedValue(0));
   const transXValue = useDerivedValue(() => {
@@ -82,14 +82,7 @@ const TotabScoll: React.FC<Props> = props => {
       Extrapolate.CLAMP,
     );
   });
-  type Images = {
-    fileName: string;
-    fileSize: number;
-    height: number;
-    type: string;
-    uri: string;
-    width: number;
-  };
+
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
   const cookie = useAppSelect(data => data?.getAuth.auth);
   let options = {
@@ -110,32 +103,29 @@ const TotabScoll: React.FC<Props> = props => {
           type: images?.type,
           name: images?.fileName,
         };
-        formData.append('image_file', item);
-      } else {
-        console.log('ccc');
+        try {
+          setLoadings(true);
+          formData.append('image_file', item);
+          axios
+            .put(`${BASE_URL}users/profile-settings`, formData, {
+              headers: {
+                Authorization: `Cookie: ${cookie}`,
+                Accept: 'application/json',
+                'Content-Type': 'multipart/form-data',
+              },
+            })
+
+            .then(respon => {
+              console.log(respon.status);
+
+              if (respon.data) {
+                refetch();
+              }
+            });
+        } catch (error) {}
+        setLoadings(false);
       }
     });
-    try {
-      setLoadings(true);
-
-      await axios
-        .put(`${BASE_URL}users/profile-settings`, formData, {
-          headers: {
-            Authorization: `Cookie: ${cookie}`,
-            Accept: 'application/json',
-            // 'Content-Type': 'multipart/form-data',
-          },
-        })
-
-        .then(respon => {
-          console.log(respon.status);
-
-          if (respon.data) {
-            refetch();
-          }
-        });
-    } catch (error) {}
-    setLoadings(false);
   };
   const SmallImage = () => {
     const transX = useDerivedValue(() => {

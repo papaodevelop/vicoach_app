@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   view1: {
     backgroundColor: colors.ORANGE,
-    height: sizes._screen_width * 0.12,
+    height: 40,
     width: sizes._screen_width * 0.4,
     borderRadius: (sizes._screen_width * 0.12) / 2,
     alignItems: 'center',

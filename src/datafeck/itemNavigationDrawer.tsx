@@ -7,12 +7,12 @@ export const itemNavigationDrawer = [
     navigation: 'Trang chủ',
     icon: images.home,
   },
-  {
-    id: 2,
-    name: 'Dashboard',
-    navigation: 'DashBoard',
-    icon: images.dashboard,
-  },
+  // {
+  //   id: 2,
+  //   name: 'Dashboard',
+  //   navigation: 'DashBoard',
+  //   icon: images.dashboard,
+  // },
   {
     id: 3,
     name: 'Courses',
@@ -25,28 +25,28 @@ export const itemNavigationDrawer = [
     navigation: 'Quizzes',
     icon: images.quizzs,
   },
-  {
-    id: 6,
-    name: 'Certificate',
-    navigation: 'Certificate',
-    icon: images.certificate,
-  },
-  {
-    id: 7,
-    name: 'Favorites',
-    navigation: 'Favorite',
-    icon: images.favorite,
-  },
-  {
-    id: 8,
-    name: 'Comments',
-    navigation: 'Comment',
-    icon: images.comment,
-  },
-  {
-    id: 10,
-    name: 'Support',
-    navigation: 'Support',
-    icon: images.support,
-  },
+  // {
+  //   id: 6,
+  //   name: 'Certificate',
+  //   navigation: 'Certificate',
+  //   icon: images.certificate,
+  // },
+  // {
+  //   id: 7,
+  //   name: 'Favorites',
+  //   navigation: 'Favorite',
+  //   icon: images.favorite,
+  // },
+  // {
+  //   id: 8,
+  //   name: 'Comments',
+  //   navigation: 'Comment',
+  //   icon: images.comment,
+  // },
+  // {
+  //   id: 10,
+  //   name: 'Support',
+  //   navigation: 'Support',
+  //   icon: images.support,
+  // },
 ];

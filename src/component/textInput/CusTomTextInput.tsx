@@ -55,11 +55,11 @@ export default CusTomTextInput;
 const styles = StyleSheet.create({
   view: {
     width: sizes._screen_width * 0.85,
-    height: sizes._screen_height * 0.05,
+    height: 45,
     borderRadius: 60,
     borderWidth: 1,
     borderColor: colors.GRAY,
-
+    justifyContent: 'center',
     marginTop: 15,
   },
   textInput: {
@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
     fontSize: sizes._screen_width * 0.04,
     fontFamily: fonts.textRegular,
     width: sizes._screen_width * 0.7,
-    height: sizes._screen_height * 0.047,
     marginLeft: sizes._screen_width * 0.04,
   },
   txt: {

@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   view: {
     alignItems: 'center',
     marginTop: sizes._screen_height * 0.03,
-    height: sizes._csreen_height * 0.13,
+
     justifyContent: 'space-between',
   },
   txt2: {
