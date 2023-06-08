@@ -24,7 +24,7 @@ interface Props {
   data?: any;
 }
 export default function FeaturedCourses(props: Props) {
-  const scrollX = React.useRef(new Animated.Value(0)).current;
+  const scrollX = React.useRef(new Animated.Value(0))?.current;
   const RenderItem = ({item}: {item: CourseCategoryType}) => {
     const textTitle = item?.title?.vi || item?.title?.en;
     return (
@@ -112,7 +112,7 @@ export default function FeaturedCourses(props: Props) {
         renderItem={({item}) => <RenderItem item={item} />}
       />
       <ExpandingDot
-        data={props?.data}
+        data={props.data || []}
         scrollX={scrollX}
         dotStyle={styles.dot}
         inActiveDotOpacity={0.2}

@@ -186,7 +186,7 @@ const TotabScoll: React.FC<Props> = props => {
       <Animated.View style={[styles.smallImage, headerTrans]}>
         <FontAwesome
           name="camera"
-          color={colors.GRAY}
+          color={colors.BLACK}
           size={30}
           onPress={openPicker}
         />
