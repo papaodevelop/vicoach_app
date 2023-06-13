@@ -3,17 +3,18 @@ import React from 'react';
 import sizes from '../../res/sizes';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
-import {txt1Blog} from '../../res/convert';
 import stylescustom from '../../res/stylescustom';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {NavigationProp} from '@react-navigation/native';
+import {DateTimes} from '../../res/convert';
+import images from '../../res/images';
 export default function RenderBlog({
   item,
   index,
   navigation,
 }: {
   navigation: NavigationProp<Record<string, any>>;
-  item: any;
+  item: Blog;
   index: number;
 }) {
   return (
@@ -25,11 +26,12 @@ export default function RenderBlog({
           item: item,
         });
       }}>
-      <Image source={{uri: item?.img}} resizeMode="cover" style={styles.img} />
+      <Image
+        source={item?.banner?.url ? {uri: item?.banner?.url} : images.i2}
+        resizeMode="contain"
+        style={styles.img}
+      />
       <Text style={{...styles.title, marginTop: 15}}>{item?.title}</Text>
-      <Text style={{...styles.content, marginTop: 15}}>
-        {txt1Blog(item?.conten)}
-      </Text>
       <View
         style={{
           ...stylescustom.view,
@@ -42,16 +44,18 @@ export default function RenderBlog({
             color={colors.GRAY}
             size={sizes._screen_width * 0.04}
           />
-          <Text style={{...styles.content, marginLeft: 8}}>{item.time}</Text>
+          <Text style={{...styles.content, marginLeft: 8}}>
+            {DateTimes(item?.create_at)}
+          </Text>
         </View>
-        <View style={{...stylescustom.view1}}>
+        <View style={{...stylescustom.view1, marginLeft: 10}}>
           <Icon
             name="commenting"
             color={colors.GRAY}
             size={sizes._screen_width * 0.04}
           />
           <Text style={{...styles.content, marginLeft: 8}}>
-            {item?.comment?.length}
+            {item?.comments?.length}
           </Text>
         </View>
       </View>

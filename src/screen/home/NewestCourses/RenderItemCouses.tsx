@@ -28,12 +28,8 @@ export default function RenderItemCouses(props: Props) {
         })
       }>
       <Image
-        source={item?.thumbnail?.url ? {uri: item?.thumbnail?.url} : images.i1}
-        style={{
-          height: sizes._screen_height * 0.1,
-          width: sizes._screen_width * 0.35,
-          borderRadius: 15,
-        }}
+        source={item?.thumbnail?.url ? {uri: item?.thumbnail?.url} : images.i2}
+        style={styles.img}
       />
       <View style={styles.view1}>
         <Text style={styles.txt}>{textTitle}</Text>
@@ -94,5 +90,10 @@ const styles = StyleSheet.create({
     color: colors.GREEN,
     fontFamily: fonts.textRegular,
     fontSize: sizes._csreen_width * 0.04,
+  },
+  img: {
+    height: sizes._screen_height * 0.1,
+    width: sizes._screen_width * 0.35,
+    borderRadius: 15,
   },
 });

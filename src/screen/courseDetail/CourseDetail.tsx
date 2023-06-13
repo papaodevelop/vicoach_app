@@ -68,11 +68,7 @@ const CourseDetails = (props: Props) => {
         lazy={true}
         cancelLazyFadeIn={true}
         renderHeader={() => (
-          <Header
-            item={item}
-            onShow={() => refRBSheet.current.open()}
-            data={data}
-          />
+          <Header onShow={() => refRBSheet.current.open()} data={data} />
         )}>
         <Tabs.Tab name="Thông tin">
           <Tabs.ScrollView

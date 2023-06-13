@@ -19,7 +19,6 @@ export default function RenderComment({item}: {item: CoursesReview}) {
                 ? {uri: item?.user?.image?.url}
                 : images.noimage
             }
-            defaultSource={images.noimage}
             style={styles.img}
           />
           <View style={styles.view1}>

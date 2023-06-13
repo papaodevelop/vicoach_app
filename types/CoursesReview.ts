@@ -154,3 +154,94 @@ interface Provinces {
   code: string;
   name: string;
 }
+interface Blog {
+  data: [];
+  items: [];
+
+  id: number;
+  title: string;
+  content: string;
+  slug: string;
+  author: {
+    id: number;
+    name: string;
+    image: {
+      id: number;
+      url: string;
+      path: string;
+      fileName: string;
+    };
+    address: string;
+    subscription: string;
+  };
+  status: string;
+  postCategory: {
+    id: number;
+    name: {
+      en: string;
+      vi: string;
+    };
+    description: {
+      en: string;
+      vi: string;
+    };
+    status: string;
+  };
+  banner: {
+    url: string;
+  };
+  comments: [
+    {
+      id: number;
+      content: string;
+    },
+  ];
+  create_at: string;
+}
+interface Comment {
+  id: number;
+  content: string;
+  author: {
+    id: number;
+    name: string;
+    image: {
+      url: string;
+    };
+  };
+  parent_comment: null;
+  children_comment: [
+    {
+      id: number;
+      content: string;
+      created_at: string;
+      author: {
+        id: number;
+        name: string;
+        image: {
+          url: string;
+        };
+      };
+    },
+  ];
+  post: {
+    id: number;
+  };
+  create_at: string;
+}
+interface ChildrenComment {
+  id: number;
+  content: string;
+  created_at: string;
+  author: {
+    id: number;
+    name: string;
+    image: {
+      url: string;
+    };
+  };
+}
+interface postComment {
+  postId?: number;
+  content?: string;
+  parent_id?: number;
+}

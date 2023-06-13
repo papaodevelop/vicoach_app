@@ -1,12 +1,10 @@
 import {
-  Platform,
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
   TextInput,
   LayoutAnimation,
-  Animated,
   SafeAreaView,
   StatusBar,
 } from 'react-native';
@@ -17,6 +15,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import sizes from '../../res/sizes';
 import fonts from '../../res/fonts';
 import colors from '../../res/colors';
+import {useGetProfileQuery} from '../../redux/state';
 interface Props {
   navigation: any;
   value: string;
@@ -24,6 +23,8 @@ interface Props {
   show: boolean;
 }
 export default function HeaderHome(props: Props) {
+  const {data} = useGetProfileQuery('');
+
   useEffect(() => {
     const toggle = () => {
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -58,7 +59,9 @@ export default function HeaderHome(props: Props) {
 
                 width: sizes._screen_width * 0.5,
               }}>
-              <Text style={styles.txt}>Hi Kiên</Text>
+              <Text style={styles.txt} aria-checked>
+                {data?.name}
+              </Text>
               <Text style={styles.txt1}>Hãy bắt đầu học!</Text>
             </View>
           </View>

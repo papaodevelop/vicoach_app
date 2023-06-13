@@ -1,17 +1,18 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import React from 'react';
 import HeaderScreen1 from '../../component/header/HeaderScreen1';
-import DataBlog from '../../datafeck/feck/DataBlog';
 import RenderBlog from '../../component/renderItem/RenderBlog';
 import sizes from '../../res/sizes';
 import stylescustom from '../../res/stylescustom';
-
+import {useGetBlogPostQuery} from '../../redux/state';
 export default function Blog({navigation}: any) {
+  const {data} = useGetBlogPostQuery('');
   return (
     <View style={styles.container}>
       <HeaderScreen1 navigation={navigation} title="Blog" />
       <FlatList
-        data={DataBlog}
+        keyboardDismissMode="none"
+        data={data?.items}
         renderItem={({item, index}) => (
           <RenderBlog item={item} index={index} navigation={navigation} />
         )}
@@ -20,6 +21,8 @@ export default function Blog({navigation}: any) {
           ...stylescustom.paddingBottom,
         }}
         showsVerticalScrollIndicator={false}
+        keyExtractor={(item: Blog) => `${item.id}`}
+        removeClippedSubviews={true}
       />
     </View>
   );

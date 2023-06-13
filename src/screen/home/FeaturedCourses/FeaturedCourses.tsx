@@ -37,7 +37,6 @@ export default function FeaturedCourses(props: Props) {
         }>
         <Image
           style={styles.img}
-          defaultSource={images.i2}
           source={
             item?.thumbnail?.url ? {uri: item?.thumbnail?.url} : images.i2
           }></Image>

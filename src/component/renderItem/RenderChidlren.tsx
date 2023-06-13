@@ -42,9 +42,11 @@ export default function RenderChidlren({
           }}>
           <View style={{marginLeft: 16}}>
             <Text style={styles.title}>{i?.name?.vi || i?.name?.en}</Text>
-            <Text style={stylescustom.txt1}>
-              {i?.children?.length ? i?.children?.length : 0} Chilldren
-            </Text>
+            {i?.children?.length && (
+              <Text style={stylescustom.txt1}>
+                {i?.children?.length} Chilldren
+              </Text>
+            )}
           </View>
           {i?.children?.length && (
             <Icon

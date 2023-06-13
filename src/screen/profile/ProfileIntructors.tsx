@@ -9,8 +9,6 @@ import sizes from '../../res/sizes';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {Tabs} from 'react-native-collapsible-tab-view';
-import Content from '../courseDetail/Content';
-import Comment from '../courseDetail/Comment';
 import About from './profileIntructors/About';
 
 export default function ProfileIntructors({

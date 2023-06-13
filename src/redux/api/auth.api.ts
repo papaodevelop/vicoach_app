@@ -3,7 +3,12 @@ import {axiosBaseQuery} from './axiosClient';
 import {ListApiResponse} from '../../../types/Common';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';
 import {CourseDetail} from '../../../types/CourseDetail';
-import {Auth, ForgotPass, Payloadregiter} from '../../../types/Auth';
+import {
+  Auth,
+  CoursesReviewsComment,
+  ForgotPass,
+  Payloadregiter,
+} from '../../../types/Auth';
 import {BASE_URL} from '../../Api/BaseURL';
 
 const tagTypes = 'Auth' as const;
@@ -202,6 +207,18 @@ export const authApi = createApi({
         };
       },
     }),
+    createReviewCourses: build.mutation<
+      CoursesReviewsComment,
+      {id: number | undefined; data: CoursesReviewsComment}
+    >({
+      query({id, data}) {
+        return {
+          url: `class-course/${id}/reviews`,
+          method: 'POST',
+          data,
+        };
+      },
+    }),
     getProfile: build.query<ProfileType, string>({
       query: (queryString: string = '') => ({
         url: `users/profile-settings?${queryString}`,
@@ -309,6 +326,60 @@ export const authApi = createApi({
         return [{type: tagTypes, id: 'LIST'}];
       },
     }),
+    getBlogPost: build.query<Blog, string>({
+      query: queryString => ({
+        url: `blog/post/${queryString}`,
+        method: 'GET',
+      }),
+      providesTags(result) {
+        if (result?.data) {
+          const blog = result.data;
+          return [
+            ...blog.map(({id}) => ({
+              type: tagTypes,
+              id,
+            })),
+            {
+              type: tagTypes,
+              id: 'LIST',
+            },
+          ];
+        }
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
+    getCommentBlog: build.query<ListApiResponse<Blog>, string>({
+      query: queryString => ({
+        url: `comments/${queryString}`,
+        method: 'GET',
+      }),
+      providesTags(result) {
+        if (result?.data) {
+          const comment = result.data;
+          return [
+            ...comment.map(({id}) => ({
+              type: tagTypes,
+              id,
+            })),
+            {
+              type: tagTypes,
+              id: 'LIST',
+            },
+          ];
+        }
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
+    postComment: build.mutation({
+      query(data: postComment) {
+        return {
+          url: `comments`,
+          method: 'POST',
+          data,
+        };
+      },
+      invalidatesTags: result => [{type: tagTypes, id: result?.id}],
+    }),
   }),
 });
 
@@ -331,4 +402,8 @@ export const {
   useGetProvincesQuery,
   useGetDistricQuery,
   useSettingProfileMutation,
+  useCreateReviewCoursesMutation,
+  useGetBlogPostQuery,
+  useGetCommentBlogQuery,
+  usePostCommentMutation,
 } = authApi;

@@ -10,15 +10,7 @@ import sizes from '../../res/sizes';
 import colors from '../../res/colors';
 
 const Header = memo(
-  ({
-    item,
-    onShow,
-    data,
-  }: {
-    item: CourseCategoryType;
-    onShow: () => void;
-    data: CourseDetail | undefined;
-  }) => {
+  ({onShow, data}: {onShow: () => void; data: CourseDetail | undefined}) => {
     return (
       <View pointerEvents="auto">
         {data?.video_overview?.url ? (
@@ -48,7 +40,6 @@ const Header = memo(
               }
               style={styles.img}
               resizeMode="stretch"
-              defaultSource={images.i2}
             />
           </>
         )}
@@ -62,7 +53,6 @@ const Header = memo(
                   : images.noimage
               }
               style={styles.avt}
-              defaultSource={images.noimage}
             />
             <View style={{marginLeft: 8}}>
               <Text style={stylescustom.txt}>

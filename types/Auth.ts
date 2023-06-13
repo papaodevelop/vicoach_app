@@ -18,3 +18,7 @@ export interface Payloadregiter {
 export interface ForgotPass {
   email: string;
 }
+export interface CoursesReviewsComment {
+  rating: number | undefined;
+  content: string | undefined;
+}

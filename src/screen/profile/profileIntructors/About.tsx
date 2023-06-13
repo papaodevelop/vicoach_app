@@ -15,7 +15,9 @@ export default function About({
 }) {
   return (
     <View style={styles.view}>
-      <Text style={styles.txt1}>Địa chỉ: {item?.address?.street}</Text>
+      <Text style={styles.txt1}>
+        Địa chỉ: {item?.address?.street}, {item?.address?.country}
+      </Text>
       <Text style={styles.txt1}>Kinh nghiệm</Text>
       <Text style={styles.txt}>-Five-time TED speaker</Text>
       <Text style={styles.txt1}>Học vấn</Text>

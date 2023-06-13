@@ -32,6 +32,11 @@ const Login = ({navigation}: any) => {
     responseType: 'json',
     withCredentials: true,
   });
+  useEffect(() => {
+    if (remember.password) {
+      LoginUser();
+    }
+  }, []);
   const LoginUser = async () => {
     setIsLoading(true);
     try {

@@ -33,7 +33,6 @@ const RenderItemCourses = (props: Props) => {
           <Image
             source={item?.thumbnail ? {uri: item?.thumbnail} : images.i1}
             style={styles.img}
-            defaultSource={images.i1}
           />
           <View
             style={{

@@ -36,7 +36,6 @@ export default function NewestCourses(props: Props) {
             }
             style={styles.img}
             resizeMode="cover"
-            defaultSource={images.i2}
           />
           <LinearGradient
             start={{x: 2, y: 0}}

@@ -33,7 +33,6 @@ export default function RenderItemCategoriesData(props: Props) {
               : images.i2
           }
           style={styles.img}
-          defaultSource={images.i2}
         />
       </View>
       <View style={styles.view2}>

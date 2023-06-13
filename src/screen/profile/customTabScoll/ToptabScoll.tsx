@@ -36,9 +36,9 @@ const moveDistance = HEAD_HEIGHT - FROZE_TOP;
 const title_h = LINE_HEIGHT;
 const detail_h = LINE_HEIGHT * LINE_COUNT;
 const marginTop =
-  (HEAD_HEIGHT - IMG_WH - title_h - MARGIN_V * 2 - detail_h) * 0.72;
+  (HEAD_HEIGHT - IMG_WH - title_h - MARGIN_V * 2 - detail_h) * 0.79;
 const marginTop1 =
-  (HEAD_HEIGHT - IMG_WH1 - title_h - MARGIN_V * 2 - detail_h) * 0.5;
+  (HEAD_HEIGHT - IMG_WH1 - title_h - MARGIN_V * 2 - detail_h) * 0.65;
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
 }
@@ -116,8 +116,6 @@ const TotabScoll: React.FC<Props> = props => {
             })
 
             .then(respon => {
-              console.log(respon.status);
-
               if (respon.data) {
                 refetch();
               }
@@ -312,7 +310,6 @@ const styles = StyleSheet.create({
   txt: {
     textAlign: 'center',
     ...stylescustom.txtBold,
-    lineHeight: LINE_HEIGHT,
     fontSize: sizes._screen_width * 0.05,
   },
   txt1: {

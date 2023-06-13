@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -7,39 +7,68 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   ActivityIndicator,
+  TextInput,
 } from 'react-native';
 import sizes from '../../res/sizes';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
 import stylescustom from '../../res/stylescustom';
+import VoteRate from '../VoteRate';
+import ErrorText from '../error/ErrorText';
 interface Props {
   isShow?: boolean;
   toggleDate?: () => void;
   confirm?: () => void;
-  txt?: string;
   loading?: boolean;
+  start: (val: number) => void;
+  coment?: string | undefined;
+  setComment: (val: string) => void;
+  err: string | undefined;
 }
-const ModalConfirm = (props: Props) => {
+const ConfirmRating = (props: Props) => {
+  const [stars, setStars] = useState<number>();
   const renderContent = () => (
     <View style={styles.content}>
       <View style={styles.head}>
         <Text style={styles.txthead}>Viết đánh giá</Text>
       </View>
       <View style={styles.view}>
-        <Text style={styles.title}>{props.txt}</Text>
-        <View
-          style={{
-            ...stylescustom.view,
-            width: sizes._screen_width * 0.7,
-            alignSelf: 'center',
-          }}>
-          <TouchableOpacity style={styles.btn} onPress={props.confirm}>
-            {props.loading ? (
-              <ActivityIndicator />
-            ) : (
-              <Text style={styles.btntxt}>Đồng ý</Text>
-            )}
-          </TouchableOpacity>
+        <VoteRate
+          onchangStar={val => {
+            setStars(val);
+            props.start(val);
+          }}
+        />
+        <TextInput
+          style={styles.txtInput}
+          multiline
+          numberOfLines={3}
+          value={props.coment}
+          onChangeText={props.setComment}
+          placeholder="Bình luận"
+          maxLength={200}
+        />
+        {props.err && <ErrorText err={props.err} />}
+        <View style={styles.view1}>
+          {/*@ts-ignore */}
+          {props?.coment?.length >= 5 && stars ? (
+            <TouchableOpacity style={styles.btn} onPress={props.confirm}>
+              {props.loading ? (
+                <ActivityIndicator />
+              ) : (
+                <Text style={styles.btntxt}>Đồng ý</Text>
+              )}
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={{...styles.btn, backgroundColor: colors.GRAY}}>
+              {props.loading ? (
+                <ActivityIndicator />
+              ) : (
+                <Text style={styles.btntxt}>Đồng ý</Text>
+              )}
+            </TouchableOpacity>
+          )}
           <TouchableOpacity
             style={{...styles.btn, backgroundColor: colors.GRAY}}
             onPress={props.toggleDate}>
@@ -67,7 +96,7 @@ const ModalConfirm = (props: Props) => {
     </View>
   );
 };
-export default ModalConfirm;
+export default ConfirmRating;
 const styles = StyleSheet.create({
   container1: {
     flex: 1,
@@ -126,5 +155,21 @@ const styles = StyleSheet.create({
     color: colors.BLACK,
     fontFamily: fonts.textRegular,
     fontSize: sizes._screen_width * 0.043,
+  },
+  txtInput: {
+    height: 120,
+    width: sizes._screen_width * 0.8,
+    borderColor: colors.GRAY,
+    borderWidth: 1,
+    alignSelf: 'center',
+    borderRadius: 10,
+    marginTop: 8,
+    padding: 10,
+    ...stylescustom.txt,
+  },
+  view1: {
+    ...stylescustom.view,
+    width: sizes._screen_width * 0.7,
+    alignSelf: 'center',
   },
 });
