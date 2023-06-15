@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, Linking, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import colors from '../../res/colors';
 import sizes from '../../res/sizes';
@@ -20,19 +20,22 @@ import {getFCMToken} from '../../../utils/pushnotification_helper';
 const Login = ({navigation}: any) => {
   useEffect(() => {
     const fcmtoken = async () => {
-      await messaging().registerDeviceForRemoteMessages(); // đăng ký thiết bị
       const a = await getFCMToken();
-      console.log(a, 's');
+      console.log(a);
     };
+
     messaging().onNotificationOpenedApp(remoteMessage => {
       remoteMessage;
     });
     messaging().setBackgroundMessageHandler(async remoteMessage => {
-      console.log(remoteMessage.data);
+      console.log(remoteMessage.data, 'â');
     });
 
     messaging().onMessage(async remoteMessage => {
       console.log(remoteMessage.notification, 'sss');
+    });
+    messaging().onNotificationOpenedApp(remoteMessage => {
+      remoteMessage;
     });
     fcmtoken();
   }, []);

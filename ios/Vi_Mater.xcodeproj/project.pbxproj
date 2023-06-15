@@ -30,7 +30,7 @@
 		7467E55E29F2893400D41940 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7467E54E29F2893400D41940 /* EvilIcons.ttf */; };
 		7467E55F29F2893400D41940 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7467E54F29F2893400D41940 /* SimpleLineIcons.ttf */; };
 		7467E56029F2893400D41940 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7467E55029F2893400D41940 /* MaterialIcons.ttf */; };
-		74950BA12A39CE3800144388 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74950BA02A39CE3800144388 /* GoogleService-Info.plist */; };
+		74E383D52A3AEFA4009209A3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74E383D42A3AEFA4009209A3 /* GoogleService-Info.plist */; };
 		7699B88040F8A987B510C191 /* libPods-Vi_Mater-Vi_MaterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Vi_Mater-Vi_MaterTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		AFB319D5E8E64CF6B909B38A /* GoogleSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F26141BE3BA414AB9407E8D /* GoogleSans-Italic.ttf */; };
@@ -81,7 +81,7 @@
 		7467E54F29F2893400D41940 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		7467E55029F2893400D41940 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		746C5D0C2A39C5250051D999 /* Vi_Mater.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Vi_Mater.entitlements; path = Vi_Mater/Vi_Mater.entitlements; sourceTree = "<group>"; };
-		74950BA02A39CE3800144388 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		74E383D42A3AEFA4009209A3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Vi_Mater/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Vi_Mater-Vi_MaterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vi_Mater-Vi_MaterTests.release.xcconfig"; path = "Target Support Files/Pods-Vi_Mater-Vi_MaterTests/Pods-Vi_Mater-Vi_MaterTests.release.xcconfig"; sourceTree = "<group>"; };
 		8F26141BE3BA414AB9407E8D /* GoogleSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GoogleSans-Italic.ttf"; path = "../src/assets/fonts/GoogleSans-Italic.ttf"; sourceTree = "<group>"; };
@@ -131,13 +131,13 @@
 		13B07FAE1A68108700A75B9A /* Vi_Mater */ = {
 			isa = PBXGroup;
 			children = (
-				74950BA02A39CE3800144388 /* GoogleService-Info.plist */,
 				746C5D0C2A39C5250051D999 /* Vi_Mater.entitlements */,
 				7467E54029F2893400D41940 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				74E383D42A3AEFA4009209A3 /* GoogleService-Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -345,7 +345,7 @@
 				7467E56029F2893400D41940 /* MaterialIcons.ttf in Resources */,
 				7467E55A29F2893400D41940 /* FontAwesome5_Solid.ttf in Resources */,
 				7467E55629F2893400D41940 /* MaterialCommunityIcons.ttf in Resources */,
-				74950BA12A39CE3800144388 /* GoogleService-Info.plist in Resources */,
+				74E383D52A3AEFA4009209A3 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				BA266DC46EFB40078C4265DE /* GoogleSans-Bold.ttf in Resources */,
 				1B1C4C654EE149DFBDE18D76 /* GoogleSans-BoldItalic.ttf in Resources */,

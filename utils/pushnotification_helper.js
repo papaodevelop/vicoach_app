@@ -1,6 +1,5 @@
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 export async function requestUserPermission() {
   const authStatus = await messaging().requestPermission();
   const enabled =
@@ -16,7 +15,6 @@ export async function requestUserPermission() {
 
 export async function getFCMToken() {
   let fcmToken = await AsyncStorage.getItem('fcmtoken');
-
   if (!fcmToken) {
     try {
       await messaging().registerDeviceForRemoteMessages(); // đăng ký thiết bị
@@ -28,12 +26,9 @@ export async function getFCMToken() {
       console.log(error, 'okkw');
     }
   }
-
   return fcmToken;
 }
 export const registerNotificationListeners = async () => {
-  const notificationOpenedListener = messaging().onNotificationOpenedApp(remoteMessage => {});
-
   const initialNotification = messaging()
     .getInitialNotification()
     .then(remoteMessage => {
@@ -41,7 +36,9 @@ export const registerNotificationListeners = async () => {
       }
     });
 
-  const messageListener = messaging().onMessage(remoteMessage => {});
-
-  return Promise.all([notificationOpenedListener, initialNotification, messageListener]);
+  return Promise.all([
+    notificationOpenedListener,
+    initialNotification,
+    messageListener,
+  ]);
 };

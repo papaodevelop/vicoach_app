@@ -94,7 +94,7 @@ const Security = ({
         <View style={styles.btn}>
           <BTNLogin
             onPress={Sumit}
-            txt="Lưu "
+            txt="Cập nhật"
             active={passWord && passWordNew && cFPassWord ? false : true}
           />
         </View>

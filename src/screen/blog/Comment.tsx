@@ -1,4 +1,4 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import RenderComment from '../../component/renderItem/RenderComment';
 import {
@@ -11,6 +11,7 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import TextInputComment from './TextInputComment';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from '../../res/colors';
+import images from '../../res/images';
 export default function Comment({id}: {id: number}) {
   const refRBSheet = useRef<any>();
   const {data, refetch} = useGetCommentBlogQuery(`${id}`, {
@@ -59,7 +60,7 @@ export default function Comment({id}: {id: number}) {
             height: '80%',
           },
         }}>
-        <View>
+        {data?.items.length !== 0 ? (
           <View>
             <FlatList
               data={data?.items}
@@ -80,7 +81,11 @@ export default function Comment({id}: {id: number}) {
               updateCellsBatchingPeriod={10}
             />
           </View>
-        </View>
+        ) : (
+          <Text style={styles.txt1}>
+            Chưa có bình luận nào hãy là người bình luận đầu tiên
+          </Text>
+        )}
         <View style={styles.txt}>
           {parent_id && (
             <View style={{...stylescustom.view, marginTop: 5}}>
@@ -121,5 +126,12 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
 
     alignSelf: 'center',
+  },
+  txt1: {
+    ...stylescustom.txt,
+    width: sizes._screen_width * 0.8,
+    textAlign: 'center',
+    alignSelf: 'center',
+    marginTop: sizes._screen_height * 0.05,
   },
 });

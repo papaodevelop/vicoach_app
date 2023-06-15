@@ -25,7 +25,7 @@ const Location = ({
     data?.address?.state?.name,
   );
   const [city, setCity] = useState<string | undefined>(
-    data?.address.city?.name,
+    data?.address?.city?.name,
   );
   const [code, setCode] = useState<string | undefined>(
     data?.address?.city?.code,
@@ -73,7 +73,7 @@ const Location = ({
           />
         </View>
         <View style={styles.btn}>
-          <BTNLogin onPress={updateProfile} txt="Lưu " />
+          <BTNLogin onPress={updateProfile} txt="Cập nhật" />
         </View>
       </View>
     </HScrollView>

@@ -17,8 +17,6 @@ export default function Content({
   datas: CourseDetail | undefined;
 }) {
   const {data} = useGetCouseListQuery(`${datas?.id}`);
-  console.log(datas, 'ss');
-
   const videoLessons = data?.chapter_list.reduce(function (acc, chapter) {
     const videoLessonsInChapter = chapter?.lesson_list.filter(function (
       lesson,
@@ -98,6 +96,14 @@ export default function Content({
           />
         </View>
       )}
+      {!datas?.has_enroll && (
+        <View style={styles.view3}>
+          <Image source={images.hoctap1} style={styles.img1} />
+          <Text style={styles.txt1}>
+            Bạn không thể xem nội dung khoá học này
+          </Text>
+        </View>
+      )}
     </>
   );
   return (
@@ -122,5 +128,21 @@ const styles = StyleSheet.create({
   img: {
     height: sizes._screen_width * 0.7,
     width: sizes._screen_width * 0.7,
+  },
+  view3: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: sizes._screen_height * 0.1,
+  },
+  img1: {
+    height: sizes._screen_width * 0.5,
+    width: sizes._screen_width * 0.5,
+  },
+  txt1: {
+    ...stylescustom.txt,
+    marginTop: 20,
+    textAlign: 'center',
+    width: sizes._screen_width * 0.8,
   },
 });

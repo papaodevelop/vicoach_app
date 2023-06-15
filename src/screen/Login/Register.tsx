@@ -55,7 +55,6 @@ const Register = ({navigation}: any) => {
     if (err) {
       setErrEmails(errexport(err));
       setErrUsernames(errexport(err));
-      console.log(err);
     }
   }, [error, isSuccess]);
 

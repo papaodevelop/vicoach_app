@@ -32,6 +32,7 @@ export default function RenderItemCategoriesData(props: Props) {
               ? {uri: props.item?.thumbnail_image?.url}
               : images.i2
           }
+          resizeMode="cover"
           style={styles.img}
         />
       </View>
@@ -59,9 +60,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   img: {
-    height: sizes._screen_width * 0.1,
-    width: sizes._screen_width * 0.1,
+    height: sizes._screen_width * 0.12,
+    width: sizes._screen_width * 0.12,
     // tintColor: colors.WHITE,
+    borderRadius: 10,
   },
   view2: {
     marginLeft: sizes._screen_width * 0.03,

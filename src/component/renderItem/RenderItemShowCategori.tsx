@@ -22,7 +22,6 @@ interface Props {
 }
 export default function RenderItemShowCategori(props: Props) {
   const textTitle = props.item?.name?.vi || props.item?.name?.en;
-
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
 

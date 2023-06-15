@@ -22,6 +22,7 @@ import axios from 'axios';
 import {BASE_URL} from '../../../Api/BaseURL';
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {RootState} from '../../../redux/store/store';
+import images from '../../../res/images';
 const G_WIN_WIDTH = sizes._screen_width;
 const G_WIN_HEIGHT = sizes._screen_height;
 const HEAD_HEIGHT = G_WIN_HEIGHT * 0.35;
@@ -265,7 +266,7 @@ const TotabScoll: React.FC<Props> = props => {
     return (
       <View style={styles.view}>
         <Animated.Image
-          source={{uri: data?.image?.url}}
+          source={data?.image?.url ? {uri: data?.image?.url} : images.noimage}
           style={[styles.img, headerTransStyle]}
         />
         <SmallImage />

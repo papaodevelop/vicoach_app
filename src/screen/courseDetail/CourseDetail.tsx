@@ -64,7 +64,6 @@ const CourseDetails = (props: Props) => {
       <Tabs.Container
         initialTabName="Thông tin"
         snapThreshold={null}
-        tabBarHeight={400}
         lazy={true}
         cancelLazyFadeIn={true}
         renderHeader={() => (

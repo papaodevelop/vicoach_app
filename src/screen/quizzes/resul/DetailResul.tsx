@@ -9,7 +9,6 @@ import fonts from '../../../res/fonts';
 import {ProgressBar} from 'react-native-paper';
 import RenderDetailQuiz from './RenderDetailQuiz';
 import BTNQuizz from '../../../component/btn/BTNQuizz';
-import ModalConfirm from '../../../component/modal/ModalConfirm';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   route: any;

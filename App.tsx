@@ -5,9 +5,13 @@ import {Provider} from 'react-redux';
 import store from './src/redux/store/store';
 import {persistStore} from 'redux-persist';
 import {PersistGate} from 'redux-persist/integration/react';
+import messaging from '@react-native-firebase/messaging';
+
 const persistor = persistStore(store);
 LogBox.ignoreLogs(['Sending']);
 const App = () => {
+  messaging().requestPermission();
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

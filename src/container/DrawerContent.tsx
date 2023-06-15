@@ -44,8 +44,7 @@ export default function DrawerContent(props: Props) {
         <View
           style={{...stylescustom.view1, width: sizes._screen_width * 0.14}}>
           <Image
-            resizeMode="contain"
-            source={{uri: data?.image?.url}}
+            source={data?.image?.url ? {uri: data?.image?.url} : images.noimage}
             style={styles.img}
           />
           <Pressable

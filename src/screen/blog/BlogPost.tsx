@@ -48,14 +48,13 @@ export default function BlogPost({
             contentWidth={width}
             source={{html: `${item?.content}`}}
           />
-          {item?.comments?.length > 0 && (
-            <>
-              <Text style={{...styles.txt, marginTop: 15}}>
-                Bình luận ({item?.comments?.length})
-              </Text>
-              <Comment id={item?.id} />
-            </>
-          )}
+
+          <>
+            <Text style={{...styles.txt, marginTop: 15}}>
+              Bình luận ({item?.comments?.length})
+            </Text>
+            <Comment id={item?.id} />
+          </>
         </View>
       </>
     );
@@ -69,6 +68,7 @@ export default function BlogPost({
         ListFooterComponent={() => <ListFood />}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item: Blog) => `ass${item.id}`}
+        contentContainerStyle={stylescustom.paddingBottom}
       />
     </View>
   );

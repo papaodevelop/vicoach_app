@@ -75,6 +75,7 @@ export default function RenderComment({
                   ? {uri: item?.author?.image?.url}
                   : images.noimage
               }
+              defaultSource={images.noimage}
               style={styles.img}
             />
             <View style={{marginLeft: 10}}>

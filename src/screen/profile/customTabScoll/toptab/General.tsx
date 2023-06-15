@@ -86,7 +86,7 @@ const General = (props: Props) => {
           <TextInPutProfile value={instagram} setValue={setInstagram} />
         </View>
         <View style={styles.btn}>
-          <BTNLogin onPress={upDateProfile} txt="Lưu " />
+          <BTNLogin onPress={upDateProfile} txt="Cập nhật" />
         </View>
       </View>
     </HScrollView>
