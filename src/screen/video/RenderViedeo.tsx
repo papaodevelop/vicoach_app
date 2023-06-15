@@ -1,4 +1,11 @@
-import {Pressable, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {
+  Pressable,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+  useWindowDimensions,
+} from 'react-native';
 import React, {createRef, useEffect, useState} from 'react';
 import Video from 'react-native-video';
 import Orientation from 'react-native-orientation-locker';
@@ -6,6 +13,7 @@ import Control from './Control';
 import sizes from '../../res/sizes';
 import {NavigationProp} from '@react-navigation/native';
 import WebView from 'react-native-webview';
+import RenderHTML from 'react-native-render-html';
 const windowHeight = sizes._screen_width * (9 / 12);
 const windowWith = sizes._screen_width;
 export default function RenderViedeo({
@@ -24,6 +32,8 @@ export default function RenderViedeo({
   const onLoad = () => {
     console.log('endload');
   };
+  const {width} = useWindowDimensions();
+
   useEffect(() => {
     Orientation.addDeviceOrientationListener(handleOrientation);
     if (!fullscren) {
@@ -94,15 +104,15 @@ export default function RenderViedeo({
         }}
       />
       {/* <WebView
-        style={styles.backgroundVideo}
+        style={fullscren ? styles.backgroundVideofull : styles.backgroundVideo}
         source={{
           uri: url,
           headers: {
             Referer: 'https://api.vicoaching.vn/api/v1/',
           },
-
         }}
       /> */}
+
       {show && (
         <View style={styles.control}>
           <Control

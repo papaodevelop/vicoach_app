@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   FlatList,
   Image,
@@ -6,17 +7,19 @@ import {
   Pressable,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import sizes from '../../res/sizes';
 import stylescustom from '../../res/stylescustom';
 import {DateTimes} from '../../res/convert';
 import images from '../../res/images';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import colors from '../../res/colors';
 import RenderChildrenComment from './RenderChildrenComment';
+import {useDeleteCommentMutation} from '../../redux/state';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import PopoverDeleteCMT from '../popover/PopoverDeleteCMT';
+
 export default function RenderComment({
   item,
   focus,
@@ -26,7 +29,11 @@ export default function RenderComment({
   focus: () => void;
   setID: ({}) => void;
 }) {
+  const touchable = useRef<any>();
   const [show, setShow] = useState(false);
+  const [showPopover, setShowPopover] = useState(false);
+  const [idCMT, setIDCMT] = useState<number>();
+
   const showItem = () => {
     setShow(!show);
   };
@@ -40,9 +47,26 @@ export default function RenderComment({
   if (!show) {
     headerStyle;
   }
+  const [Deletes] = useDeleteCommentMutation();
+  const DeleteCMT = async () => {
+    try {
+      const aa = await Deletes({
+        id: idCMT,
+      }).unwrap();
+    } catch (error) {
+      Alert.alert('Không thể xoá bình luận');
+    }
+    setShowPopover(false);
+  };
   return (
     <>
-      <View style={styles.view}>
+      <Pressable
+        style={styles.view}
+        ref={touchable}
+        onLongPress={() => {
+          setShowPopover(true);
+          setIDCMT(item.id);
+        }}>
         <View>
           <View style={stylescustom.view1}>
             <Image
@@ -82,7 +106,7 @@ export default function RenderComment({
             </Pressable>
           </View>
         </View>
-      </View>
+      </Pressable>
       {show && (
         <FlatList
           data={item?.children_comment}
@@ -90,8 +114,15 @@ export default function RenderComment({
           renderItem={({item}) => <RenderChildrenComment item={item} />}
           removeClippedSubviews
           keyExtractor={item => `ccc${item.id}`}
+          maxToRenderPerBatch={6}
         />
       )}
+      <PopoverDeleteCMT
+        DeleteCMT={DeleteCMT}
+        setShowPopover={setShowPopover}
+        showPopover={showPopover}
+        touchable={touchable}
+      />
     </>
   );
 }

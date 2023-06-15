@@ -1,5 +1,5 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import RenderComment from '../../component/renderItem/RenderComment';
 import {
   useGetCommentBlogQuery,
@@ -11,25 +11,24 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import TextInputComment from './TextInputComment';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from '../../res/colors';
-export default function Comment({item}: {item: Blog}) {
+export default function Comment({id}: {id: number}) {
   const refRBSheet = useRef<any>();
-
-  const {data, refetch, isFetching} = useGetCommentBlogQuery(`${item.id}`, {
+  const {data, refetch} = useGetCommentBlogQuery(`${id}`, {
     pollingInterval: 5000,
   });
   const [comment, setComment] = useState<string>();
   const [parent_id, setParentID] = useState<any>();
   const refInput = React.useRef<any>(null);
   const [addCMT] = usePostCommentMutation();
-
   const Comments = async () => {
     try {
       let post = await addCMT({
         content: comment,
-        postId: item?.id,
+        postId: id,
         parent_id: parent_id?.id,
       }).unwrap();
       if (post) {
+        setComment('');
         refetch();
       }
     } catch (error) {}
@@ -63,7 +62,6 @@ export default function Comment({item}: {item: Blog}) {
         <View>
           <View>
             <FlatList
-              refreshing={isFetching}
               data={data?.items}
               renderItem={({item}: {item: Comment}) => (
                 <RenderComment
@@ -73,12 +71,13 @@ export default function Comment({item}: {item: Blog}) {
                 />
               )}
               scrollEnabled={true}
-              style={{marginTop: 20}}
               initialNumToRender={20}
               removeClippedSubviews={true}
               keyExtractor={item => `cmt${item?.id}`}
               contentContainerStyle={{paddingBottom: 120}}
               showsVerticalScrollIndicator={false}
+              maxToRenderPerBatch={10}
+              updateCellsBatchingPeriod={10}
             />
           </View>
         </View>
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: 'white',
     width: sizes._screen_width * 0.95,
-    height: sizes._screen_height * 0.12,
+    paddingVertical: 20,
 
     alignSelf: 'center',
   },

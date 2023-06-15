@@ -17,6 +17,8 @@ export default function Content({
   datas: CourseDetail | undefined;
 }) {
   const {data} = useGetCouseListQuery(`${datas?.id}`);
+  console.log(datas, 'ss');
+
   const videoLessons = data?.chapter_list.reduce(function (acc, chapter) {
     const videoLessonsInChapter = chapter?.lesson_list.filter(function (
       lesson,

@@ -43,7 +43,7 @@ export default function PlayVideo({
           contentContainerStyle={styles.view}
         />
       </View>
-      <BTNLogin onPress={() => navigation.goBack()} txt="Trở lại" />
+      {/* <BTNLogin onPress={() => navigation.goBack()} txt="Trở lại" /> */}
     </View>
   );
 }

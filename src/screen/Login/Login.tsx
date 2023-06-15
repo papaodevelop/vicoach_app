@@ -12,10 +12,31 @@ import Loading from '../../component/loading/Loading';
 import ErrorText from '../../component/error/ErrorText';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {setDataUser} from '../../redux/state/login.slice';
-import {RootState, useAppDispatch} from '../../redux/store/store';
+import {RootState} from '../../redux/store/store';
 import {BASE_URL} from '../../Api/BaseURL';
 import {setAuth} from '../../redux/state/auth.slice';
+import messaging from '@react-native-firebase/messaging';
+import {getFCMToken} from '../../../utils/pushnotification_helper';
 const Login = ({navigation}: any) => {
+  useEffect(() => {
+    const fcmtoken = async () => {
+      await messaging().registerDeviceForRemoteMessages(); // đăng ký thiết bị
+      const a = await getFCMToken();
+      console.log(a, 's');
+    };
+    messaging().onNotificationOpenedApp(remoteMessage => {
+      remoteMessage;
+    });
+    messaging().setBackgroundMessageHandler(async remoteMessage => {
+      console.log(remoteMessage.data);
+    });
+
+    messaging().onMessage(async remoteMessage => {
+      console.log(remoteMessage.notification, 'sss');
+    });
+    fcmtoken();
+  }, []);
+
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
   const remember = useAppSelect(data => data?.getdataUser?.getdataUser);
   const [userName, setusername] = useState(remember.username);

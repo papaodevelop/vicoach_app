@@ -326,7 +326,7 @@ export const authApi = createApi({
         return [{type: tagTypes, id: 'LIST'}];
       },
     }),
-    getBlogPost: build.query<Blog, string>({
+    getBlogPost: build.query<Blog | undefined, string>({
       query: queryString => ({
         url: `blog/post/${queryString}`,
         method: 'GET',
@@ -348,7 +348,7 @@ export const authApi = createApi({
         return [{type: tagTypes, id: 'LIST'}];
       },
     }),
-    getCommentBlog: build.query<ListApiResponse<Blog>, string>({
+    getCommentBlog: build.query<ListApiResponse<Blog | undefined>, string>({
       query: queryString => ({
         url: `comments/${queryString}`,
         method: 'GET',
@@ -357,7 +357,7 @@ export const authApi = createApi({
         if (result?.data) {
           const comment = result.data;
           return [
-            ...comment.map(({id}) => ({
+            ...comment.map(({id}: any) => ({
               type: tagTypes,
               id,
             })),
@@ -376,6 +376,15 @@ export const authApi = createApi({
           url: `comments`,
           method: 'POST',
           data,
+        };
+      },
+      invalidatesTags: result => [{type: tagTypes, id: result?.id}],
+    }),
+    deleteComment: build.mutation<ChildrenComment, {id: number | undefined}>({
+      query({id}) {
+        return {
+          url: `comments/${id}`,
+          method: 'DELETE',
         };
       },
       invalidatesTags: result => [{type: tagTypes, id: result?.id}],
@@ -406,4 +415,5 @@ export const {
   useGetBlogPostQuery,
   useGetCommentBlogQuery,
   usePostCommentMutation,
+  useDeleteCommentMutation,
 } = authApi;

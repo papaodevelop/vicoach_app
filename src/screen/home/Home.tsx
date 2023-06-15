@@ -115,7 +115,7 @@ export default function Home(props: Props) {
         show={showSearch}
       />
       {search ? (
-        <View>
+        <View style={{flex: 1}}>
           <SearchAll navigation={props.navigation} search={search} />
         </View>
       ) : (

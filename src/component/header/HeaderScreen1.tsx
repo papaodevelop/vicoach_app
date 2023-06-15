@@ -10,10 +10,7 @@ import React from 'react';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
 import sizes from '../../res/sizes';
-import Icon from 'react-native-vector-icons/Entypo';
 import Icons from 'react-native-vector-icons/AntDesign';
-
-const isAndroid = Platform.OS === 'android';
 interface Props {
   title: string;
   navigation?: any;

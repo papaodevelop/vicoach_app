@@ -1,27 +1,58 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {Alert, Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import React, {useRef, useState} from 'react';
 import sizes from '../../res/sizes';
 import stylescustom from '../../res/stylescustom';
 import images from '../../res/images';
 import {DateTimes} from '../../res/convert';
+import PopoverDeleteCMT from '../popover/PopoverDeleteCMT';
+import {useDeleteCommentMutation} from '../../redux/state';
 const RenderChildrenComment = ({item}: {item: ChildrenComment}) => {
+  const [showPopover, setShowPopover] = useState(false);
+  const touchable = useRef<any>();
+  const [idCMT, setIDCMT] = useState<number>();
+
+  const [Deletes] = useDeleteCommentMutation();
+  const DeleteCMT = async () => {
+    try {
+      const aa = await Deletes({
+        id: idCMT,
+      }).unwrap();
+    } catch (error) {
+      Alert.alert('Không thể xoá bình luận');
+    }
+    setShowPopover(false);
+  };
   return (
-    <View style={styles.view}>
-      <View style={stylescustom.view1}>
-        <Image
-          source={
-            item?.author?.image?.url
-              ? {uri: item?.author?.image?.url}
-              : images.noimage
-          }
-          style={styles.view1}
-        />
-        <Text style={{marginLeft: 10, ...stylescustom.txt}}>
-          {item?.content}
-        </Text>
-      </View>
-      <Text style={stylescustom.txt1}>{DateTimes(item?.created_at)}</Text>
-    </View>
+    <>
+      <Pressable
+        style={styles.view}
+        ref={touchable}
+        onLongPress={() => {
+          setShowPopover(true);
+          setIDCMT(item.id);
+        }}>
+        <View style={stylescustom.view1}>
+          <Image
+            source={
+              item?.author?.image?.url
+                ? {uri: item?.author?.image?.url}
+                : images.noimage
+            }
+            style={styles.view1}
+          />
+          <Text style={{marginLeft: 10, ...stylescustom.txt}}>
+            {item?.content}
+          </Text>
+        </View>
+        <Text style={stylescustom.txt1}>{DateTimes(item?.created_at)}</Text>
+      </Pressable>
+      <PopoverDeleteCMT
+        DeleteCMT={DeleteCMT}
+        setShowPopover={setShowPopover}
+        showPopover={showPopover}
+        touchable={touchable}
+      />
+    </>
   );
 };
 

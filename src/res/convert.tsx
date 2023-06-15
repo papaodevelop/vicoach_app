@@ -1,8 +1,11 @@
 export function money(val: string | number) {
   if (val === 0) {
-    return 'Free';
+    return 'Miễn phí';
   } else {
-    return '$' + Number(val).toLocaleString('en-US');
+    return Number(val).toLocaleString('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    });
   }
 }
 export function txt(val: string) {
