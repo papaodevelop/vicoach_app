@@ -6,6 +6,7 @@ import store from './src/redux/store/store';
 import {persistStore} from 'redux-persist';
 import {PersistGate} from 'redux-persist/integration/react';
 import messaging from '@react-native-firebase/messaging';
+import Test from './src/Test';
 
 const persistor = persistStore(store);
 LogBox.ignoreLogs(['Sending']);

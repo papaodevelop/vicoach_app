@@ -7,7 +7,6 @@ import Loading from '../../component/loading/Loading';
 import {NavigationProp} from '@react-navigation/native';
 import {useGetClassCourseQuery} from '../../redux/state';
 import images from '../../res/images';
-
 export default function Purchased({
   navigation,
 }: {
@@ -17,7 +16,6 @@ export default function Purchased({
   var courseTypeArray = data?.items.filter(function (phanTu: ClassCourse) {
     return phanTu.type === 'CourseType';
   });
-  console.log(courseTypeArray);
 
   return (
     <View style={styles.container}>
