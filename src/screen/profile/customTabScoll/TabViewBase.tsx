@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {
   CollapsibleHeaderTabView as ZHeaderTabView,
@@ -9,7 +9,6 @@ import {NavigationProp} from '@react-navigation/native';
 import {General, Location, Security} from './index';
 import Loading from '../../../component/loading/Loading';
 import {useGetProfileQuery} from '../../../redux/state';
-const TIMECOUNT = 3000;
 const HEAD_HEIGHT = sizes._screen_height * 0.3;
 
 interface ScrollableTabViewContainerProps {

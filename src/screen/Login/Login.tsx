@@ -77,6 +77,8 @@ const Login = ({navigation}: any) => {
             password: pass,
           }),
         );
+        setIsLoading(false);
+
         navigation.navigate('DrawerCustoms');
       }
     } catch (error: any) {

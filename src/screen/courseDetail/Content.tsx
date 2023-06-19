@@ -1,5 +1,5 @@
-import {FlatList, Image, Pressable, StyleSheet, Text, View} from 'react-native';
-import React, {memo} from 'react';
+import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
 import stylescustom from '../../res/stylescustom';
 import sizes from '../../res/sizes';
 import RenderContent from './RenderContent';
@@ -9,12 +9,16 @@ import {CourseDetail} from '../../../types/CourseDetail';
 import QuizDetail from './QuizDetail';
 import images from '../../res/images';
 import {useGetCouseListQuery} from '../../redux/state';
+import {HScrollView} from 'react-native-head-tab-view';
+
 export default function Content({
   navigation,
   datas,
+  index,
 }: {
   navigation: NavigationProp<Record<string, any>>;
   datas: CourseDetail | undefined;
+  index: number;
 }) {
   const {data} = useGetCouseListQuery(`${datas?.id}`);
   const videoLessons = data?.chapter_list.reduce(function (acc, chapter) {
@@ -33,9 +37,8 @@ export default function Content({
           obj => obj?.duration !== undefined,
         );
         const data2 = i?.lesson_list?.filter(obj => obj?.quiz !== undefined);
-
         return (
-          <View key={`5${i.id}`}>
+          <View key={`5${i.id}`} style={{width: sizes._screen_width}}>
             <Text style={styles.txt}>{i?.name}</Text>
 
             <View>
@@ -55,7 +58,6 @@ export default function Content({
                 keyExtractor={item => `${item?.id}2`}
               />
             </View>
-
             <View>
               <FlatList
                 data={data2}
@@ -75,15 +77,6 @@ export default function Content({
           </View>
         );
       })}
-      {!datas?.chapter_list[0] && (
-        <View style={styles.view2}>
-          <Image source={images.nodata} style={styles.img} />
-          <Text style={stylescustom.txtBold}>
-            Không tìm thấy nội dung khoá học
-          </Text>
-        </View>
-      )}
-
       {datas?.chapter_list[0] && datas?.has_enroll && (
         <View style={styles.view}>
           <BTNLogin
@@ -96,23 +89,29 @@ export default function Content({
           />
         </View>
       )}
-      {!datas?.has_enroll && (
+      {!datas?.has_enroll ? (
         <View style={styles.view3}>
           <Image source={images.hoctap1} style={styles.img1} />
           <Text style={styles.txt1}>
             Bạn không thể xem nội dung khoá học này
           </Text>
         </View>
+      ) : (
+        !datas?.chapter_list[0] && (
+          <View style={styles.view2}>
+            <Image source={images.nodata} style={styles.img} />
+            <Text style={stylescustom.txtBold}>
+              Không tìm thấy nội dung khoá học
+            </Text>
+          </View>
+        )
       )}
     </>
   );
   return (
-    <FlatList
-      data={[]}
-      renderItem={null}
-      scrollEnabled={false}
-      ListFooterComponent={() => <RendeFoodter />}
-    />
+    <HScrollView index={index} showsVerticalScrollIndicator={false}>
+      <RendeFoodter />
+    </HScrollView>
   );
 }
 
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
   },
   view: {alignItems: 'center', marginTop: 30},
   view1: {marginTop: sizes._screen_height * 0.02},
-  view2: {flex: 1, alignItems: 'center', justifyContent: 'center'},
+  view2: {alignItems: 'center', justifyContent: 'center'},
   img: {
     height: sizes._screen_width * 0.7,
     width: sizes._screen_width * 0.7,

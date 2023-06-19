@@ -1,25 +1,20 @@
-import {
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-  LayoutAnimation,
-  Image,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {FlatList, StyleSheet, Text, View, Image} from 'react-native';
+import React from 'react';
 import colors from '../../res/colors';
 import sizes from '../../res/sizes';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icons from 'react-native-vector-icons/AntDesign';
-
 import stylescustom from '../../res/stylescustom';
 import RenderDetail from './RenderDetail';
-import DataQuestion from '../../datafeck/feck/DataQuestion';
 import {CourseDetail} from '../../../types/CourseDetail';
 import images from '../../res/images';
+import {HScrollView} from 'react-native-head-tab-view';
 
-export default function Infomation({datas}: {datas: CourseDetail | undefined}) {
+export default function Infomation({
+  datas,
+  index,
+}: {
+  datas: CourseDetail | undefined;
+  index: number;
+}) {
   const data = [
     {
       id: 1,
@@ -58,121 +53,56 @@ export default function Infomation({datas}: {datas: CourseDetail | undefined}) {
       icon: 'bullseye',
     },
   ];
-  const RenderItem = ({item}: any) => {
-    const [show, setShow] = useState(false);
-    const showItem = () => {
-      setShow(!show);
-    };
-    useEffect(() => {
-      const toggle = () => {
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-      };
-      toggle();
-    }, [show]);
-    let headerStyle = Object.assign({}, styles.view1);
-    if (!show) {
-      headerStyle;
-    }
 
-    return (
-      <>
-        <Pressable style={styles.view3} onPress={showItem}>
-          <View style={stylescustom.view}>
-            <View style={stylescustom.view1}>
-              <View style={styles.view4}>
-                <Icons
-                  name="question"
-                  color={colors.WHITE}
-                  size={sizes._screen_width * 0.08}
-                />
-              </View>
-              <Text style={styles.txt}>{item.question}</Text>
-            </View>
-            <Icon
-              name="chevron-down"
-              color={colors.GRAY}
-              size={sizes._screen_width * 0.08}
-            />
-          </View>
-          {show && (
-            <View>
-              <Text style={styles.txt1}>{item.reply}</Text>
-            </View>
-          )}
-        </Pressable>
-      </>
-    );
-  };
   return (
-    <View style={styles.container}>
-      <View style={styles.view1}>
-        <View style={styles.view}>
-          <Icon
-            name="certificate"
-            color={colors.WHITE}
-            size={sizes._screen_width * 0.07}
+    <HScrollView index={index} showsVerticalScrollIndicator={false}>
+      <View style={styles.container}>
+        {datas?.assistant_instructor[0] && (
+          <>
+            <Text style={styles.txt2}>Trợ giảng</Text>
+            {datas?.assistant_instructor.map((i, index) => (
+              <View style={stylescustom.view1} key={i?.id}>
+                <Image
+                  source={i?.image?.url ? {uri: i?.image?.url} : images.noimage}
+                  style={styles.img}
+                />
+                <View style={{marginLeft: 15}}>
+                  <Text style={styles.txt2}>{i?.name}</Text>
+                  <Text>{i?.description}</Text>
+                </View>
+              </View>
+            ))}
+          </>
+        )}
+
+        {datas?.meta_description && (
+          <View style={{marginTop: 20}}>
+            <Text style={stylescustom.txt}>
+              <Text style={{color: colors.RED}}>
+                Mô tả: {datas?.meta_description}
+              </Text>
+            </Text>
+          </View>
+        )}
+
+        <View>
+          <FlatList
+            scrollEnabled={false}
+            data={data}
+            renderItem={({item, index}) => (
+              <RenderDetail item={item} index={index} />
+            )}
+            numColumns={2}
+            columnWrapperStyle={{
+              width: sizes._csreen_width * 0.9,
+              alignSelf: 'center',
+              justifyContent: 'space-around',
+            }}
+            keyExtractor={item => `8${item.id}`}
           />
         </View>
-        <View style={styles.view2}>
-          <Text style={stylescustom.txt3}>Certificate</Text>
-          <Text style={stylescustom.txt1}>Included</Text>
-        </View>
       </View>
-      {datas?.assistant_instructor[0] && (
-        <>
-          <Text style={styles.txt2}>Trợ giảng</Text>
-          {datas?.assistant_instructor.map((i, index) => (
-            <View style={stylescustom.view1} key={i?.id}>
-              <Image
-                source={i?.image?.url ? {uri: i?.image?.url} : images.noimage}
-                style={styles.img}
-              />
-              <View style={{marginLeft: 15}}>
-                <Text style={styles.txt2}>{i?.name}</Text>
-                <Text>{i?.description}</Text>
-              </View>
-            </View>
-          ))}
-        </>
-      )}
-
-      {datas?.meta_description && (
-        <View style={{marginTop: 20}}>
-          <Text style={stylescustom.txt}>
-            <Text style={{color: colors.RED}}>
-              Mô tả: {datas?.meta_description}
-            </Text>
-          </Text>
-        </View>
-      )}
-
-      <View>
-        <FlatList
-          scrollEnabled={false}
-          data={data}
-          renderItem={({item, index}) => (
-            <RenderDetail item={item} index={index} />
-          )}
-          numColumns={2}
-          columnWrapperStyle={{
-            width: sizes._csreen_width * 0.9,
-            alignSelf: 'center',
-            justifyContent: 'space-around',
-          }}
-          keyExtractor={item => `8${item.id}`}
-        />
-      </View>
-      <View style={styles.view5}>
-        <FlatList
-          data={DataQuestion}
-          renderItem={({item, index}) => (
-            <RenderItem item={item} index={index} />
-          )}
-          keyExtractor={item => `7${item.id}`}
-          scrollEnabled={false}
-        />
-      </View>
-    </View>
+    </HScrollView>
   );
 }
 

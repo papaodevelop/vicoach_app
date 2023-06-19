@@ -12,7 +12,7 @@ import colors from '../../res/colors';
 const Header = memo(
   ({onShow, data}: {onShow: () => void; data: CourseDetail | undefined}) => {
     return (
-      <View pointerEvents="auto">
+      <View pointerEvents="auto" style={{backgroundColor: 'white'}}>
         {data?.video_overview?.url ? (
           <>
             <Video

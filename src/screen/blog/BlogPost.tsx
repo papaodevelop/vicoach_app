@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   view: {
     width: sizes._csreen_width * 0.95,

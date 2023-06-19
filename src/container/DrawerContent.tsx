@@ -33,8 +33,8 @@ export default function DrawerContent(props: Props) {
     try {
       const result = await logoutMutation('');
       if (result) {
-        dispatch(authApi.util.resetApiState());
-        props.navigation.navigate('Login');
+        await dispatch(authApi.util.resetApiState());
+        await props.navigation.navigate('Login');
       }
     } catch (error) {}
   };

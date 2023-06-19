@@ -11,20 +11,21 @@ import React, {useState} from 'react';
 import RenderComment from './RenderComment';
 import BTNLogin from '../../component/btn/BTNLogin';
 import stylescustom from '../../res/stylescustom';
-import {NavigationProp} from '@react-navigation/native';
 import {CourseDetail} from '../../../types/CourseDetail';
 import {
   useCreateReviewCoursesMutation,
   useGetReviewCouresQuery,
 } from '../../redux/state';
 import ConfirmRating from '../../component/modal/ConfirmRating';
+import {HScrollView} from 'react-native-head-tab-view';
+import sizes from '../../res/sizes';
 
 export default function Comment({
-  navigation,
   item,
+  index,
 }: {
-  navigation: NavigationProp<Record<string, any>>;
   item: CourseDetail | undefined;
+  index: number;
 }) {
   const {data, refetch} = useGetReviewCouresQuery(`${item?.id}`);
   const [comment, setComment] = useState<string>();
@@ -50,9 +51,10 @@ export default function Comment({
       setErr('Bạn không thể đánh giá bài viết này');
     }
   };
+
   return (
-    <View>
-      <View>
+    <HScrollView index={index} showsVerticalScrollIndicator={false}>
+      <View style={{width: sizes._screen_width}}>
         <FlatList
           data={data?.items}
           scrollEnabled={false}
@@ -84,7 +86,7 @@ export default function Comment({
         coment={comment}
         err={err}
       />
-    </View>
+    </HScrollView>
   );
 }
 
