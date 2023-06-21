@@ -17,13 +17,19 @@ import {BASE_URL} from '../../Api/BaseURL';
 import {setAuth} from '../../redux/state/auth.slice';
 import messaging from '@react-native-firebase/messaging';
 import {getFCMToken} from '../../../utils/pushnotification_helper';
-const Login = ({navigation}: any) => {
+import {NavigationProp, useFocusEffect} from '@react-navigation/native';
+import {usePutFcmTokenMutation} from '../../redux/state';
+const Login = ({
+  navigation,
+}: {
+  navigation: NavigationProp<Record<string, any>>;
+}) => {
+  const [fcmToken, setfcmToken] = useState<string | null>();
   useEffect(() => {
     const fcmtoken = async () => {
       const a = await getFCMToken();
-      console.log(a);
+      setfcmToken(a);
     };
-
     messaging().onNotificationOpenedApp(remoteMessage => {
       remoteMessage;
     });
@@ -39,13 +45,13 @@ const Login = ({navigation}: any) => {
     });
     fcmtoken();
   }, []);
-
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
   const remember = useAppSelect(data => data?.getdataUser?.getdataUser);
   const [userName, setusername] = useState(remember.username);
   const [pass, setPass] = useState(remember.password);
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [putFCM] = usePutFcmTokenMutation();
   const [err, setErr] = useState<string>();
   const dispatch = useDispatch();
   const axiosObj = axios.create({
@@ -60,7 +66,13 @@ const Login = ({navigation}: any) => {
     if (remember.password) {
       LoginUser();
     }
-  }, []);
+  }, [fcmToken]);
+  useFocusEffect(
+    React.useCallback(() => {
+      setPass(remember.password);
+      setusername(remember.username);
+    }, [remember]),
+  );
   const LoginUser = async () => {
     setIsLoading(true);
     try {
@@ -78,7 +90,9 @@ const Login = ({navigation}: any) => {
           }),
         );
         setIsLoading(false);
-
+        await putFCM({
+          fcm_token: fcmToken,
+        });
         navigation.navigate('DrawerCustoms');
       }
     } catch (error: any) {
@@ -86,7 +100,6 @@ const Login = ({navigation}: any) => {
     }
     setIsLoading(false);
   };
-
   return (
     <View style={styles.container}>
       <Image source={images.logo} resizeMode="contain" style={styles.img} />
@@ -142,7 +155,6 @@ const styles = StyleSheet.create({
   view: {
     alignItems: 'center',
     marginTop: sizes._screen_height * 0.03,
-
     justifyContent: 'space-between',
   },
   txt2: {

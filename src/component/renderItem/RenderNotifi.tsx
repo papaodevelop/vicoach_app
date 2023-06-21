@@ -1,13 +1,20 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import colors from '../../res/colors';
 import sizes from '../../res/sizes';
 import stylescustom from '../../res/stylescustom';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-export default function RenderNotifi({item}: any) {
+import {DateTimes, txt4} from '../../res/convert';
+export default function RenderNotifi({
+  item,
+  onPressItem,
+}: {
+  item: Notification;
+  onPressItem: (val: any) => void;
+}) {
   return (
-    <View style={styles.view}>
+    <Pressable style={styles.view} onPress={() => onPressItem(item)}>
       <View style={stylescustom.view1}>
         <View style={styles.view1}>
           <Icon
@@ -15,13 +22,14 @@ export default function RenderNotifi({item}: any) {
             size={sizes._screen_width * 0.08}
             color={colors.WHITE}
           />
+          {item?.status == 'UNREAD' && <View style={styles.view3} />}
         </View>
         <View style={styles.view2}>
-          <Text>{item.name}</Text>
-          <View style={stylescustom.view1}>
-            <Text>{item.date}</Text>
-            <Text>{item.time}</Text>
-          </View>
+          <Text style={stylescustom.txtBold}>{txt4(item?.title)}</Text>
+          <Text style={stylescustom.txt}>{txt4(item?.body)}</Text>
+          <Text style={stylescustom.txtGray}>
+            {DateTimes(item?.created_at)}
+          </Text>
         </View>
       </View>
       <FontAwesome
@@ -29,7 +37,7 @@ export default function RenderNotifi({item}: any) {
         color={colors.BLACK}
         size={sizes._screen_width * 0.08}
       />
-    </View>
+    </Pressable>
   );
 }
 const styles = StyleSheet.create({
@@ -51,8 +59,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   view2: {
-    height: sizes._screen_width * 0.12,
     justifyContent: 'space-between',
     marginLeft: 10,
+    height: sizes._screen_width * 0.15,
+  },
+  view3: {
+    backgroundColor: 'red',
+    height: sizes._screen_width * 0.03,
+    width: sizes._screen_width * 0.03,
+    position: 'absolute',
+    top: 10,
+    right: 17,
+    borderRadius: 20,
   },
 });

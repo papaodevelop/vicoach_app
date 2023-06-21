@@ -17,24 +17,32 @@ import fonts from '../res/fonts';
 import RenderItemDrawer from '../component/renderItem/RenderItemDrawer';
 import stylescustom from '../res/stylescustom';
 import {itemNavigationDrawer} from '../datafeck/itemNavigationDrawer';
-
-import {useDispatch} from 'react-redux';
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {authApi, useGetProfileQuery, useLogoutMutation} from '../redux/state';
+import {setDataUser} from '../redux/state/login.slice';
+import {RootState} from '../redux/store/store';
+import {NavigationProp} from '@react-navigation/native';
 interface Props {
-  navigation: any;
+  navigation: NavigationProp<Record<string, any>>;
 }
 export default function DrawerContent(props: Props) {
   const dispatch = useDispatch();
   const {data} = useGetProfileQuery('');
-
+  const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
+  const remember = useAppSelect(data => data?.getdataUser?.getdataUser);
   const [logoutMutation] = useLogoutMutation();
-
   const handleLogout = async () => {
     try {
       const result = await logoutMutation('');
       if (result) {
-        await dispatch(authApi.util.resetApiState());
-        await props.navigation.navigate('Login');
+        dispatch(authApi.util.resetApiState());
+        dispatch(
+          setDataUser({
+            username: remember.username,
+            password: '',
+          }),
+        );
+        props.navigation.navigate('Login');
       }
     } catch (error) {}
   };

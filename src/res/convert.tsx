@@ -29,6 +29,13 @@ export function txt3(val: string) {
     return val?.substring(0, 19) + '...';
   }
 }
+export function txt4(val: string) {
+  if (val?.length < 25) {
+    return val;
+  } else {
+    return val?.substring(0, 24) + '...';
+  }
+}
 export function txt2(val: string) {
   if (val?.length < 50) {
     return val;
@@ -54,11 +61,17 @@ export const DateTime = (val: string) => {
   var formattedDate = date.toLocaleDateString('vi-VN');
   return formattedDate;
 };
-export const DateTimes = (val: string) => {
+export const DateTimes = (val: any) => {
   var date = new Date(val);
-  var formattedDate = date.toLocaleDateString('vi-VN');
-  var formatTime = date.toLocaleTimeString('vi-VN');
-  return formattedDate + ' ' + formatTime;
+  var formattedDate = date.toLocaleDateString('vi-VN', {
+    month: 'long',
+    day: 'numeric',
+  });
+  var formatTime = date.toLocaleTimeString('vi-VN', {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+  return formattedDate + ' | ' + formatTime;
 };
 export function convertByteToMB(byte: number) {
   const megabyte = byte / (1024 * 1024);

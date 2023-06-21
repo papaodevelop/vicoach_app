@@ -16,6 +16,8 @@ const isAndroid = Platform.OS === 'android';
 interface Props {
   title: string;
   navigation: NavigationProp<Record<string, any>>;
+  onPress?: () => void;
+  dot?: boolean;
 }
 export default function HeaderScreen(props: Props) {
   return (
@@ -36,6 +38,15 @@ export default function HeaderScreen(props: Props) {
             style={styles.icon}
             onPress={() => props.navigation.goBack()}
           />
+          {props.dot && (
+            <Icon
+              name="dots-three-vertical"
+              size={sizes._screen_width * 0.08}
+              color={'white'}
+              style={styles.icon1}
+              onPress={props.onPress}
+            />
+          )}
         </View>
       </SafeAreaView>
     </View>
@@ -64,4 +75,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  icon1: {right: 5, position: 'absolute'},
 });

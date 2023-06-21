@@ -1,30 +1,122 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import React, {useRef, useState} from 'react';
 import HeaderScreen from '../../component/header/HeaderScreen';
 import RenderNotifi from '../../component/renderItem/RenderNotifi';
-import {dataNotification} from '../../datafeck/feck/Notification';
 import sizes from '../../res/sizes';
 import {NavigationProp} from '@react-navigation/native';
+import {
+  useGetallNotificationQuery,
+  useReadNotifiMutation,
+} from '../../redux/state';
+import Loading from '../../component/loading/Loading';
+import stylescustom from '../../res/stylescustom';
+import images from '../../res/images';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import colors from '../../res/colors';
+import {DateTimes} from '../../res/convert';
+import BTNLogin from '../../component/btn/BTNLogin';
 
 export default function Notification({
   navigation,
 }: {
   navigation: NavigationProp<Record<string, any>>;
 }) {
+  const {data, isLoading} = useGetallNotificationQuery('', {
+    pollingInterval: 5000,
+  });
+  const refRBSheet = useRef<any>();
+  const [dataNotifi, setdataNotifi] = useState<Notification>();
+  const [ReadID] = useReadNotifiMutation();
+
   return (
     <View style={styles.container}>
-      <HeaderScreen navigation={navigation} title="THÔNG BÁO" />
-      <FlatList
-        renderItem={({item}) => <RenderNotifi item={item} />}
-        data={dataNotification}
-        keyExtractor={item => `${item.id}`}
-        style={{marginTop: sizes._screen_height * 0.01, paddingBottom: 50}}
-      />
+      <HeaderScreen navigation={navigation} title="THÔNG BÁO" dot />
+      {data?.items.length !== 0 ? (
+        <FlatList
+          renderItem={({item}: {item: Notification}) => (
+            <RenderNotifi
+              item={item}
+              onPressItem={async (val: Notification) => {
+                console.log(val?.id);
+
+                setdataNotifi(val);
+                ReadID(val?.id);
+                await refRBSheet.current.open();
+              }}
+            />
+          )}
+          data={data?.items}
+          keyExtractor={item => `${item.id}`}
+          style={styles.view}
+          maxToRenderPerBatch={20}
+          initialNumToRender={20}
+          removeClippedSubviews
+        />
+      ) : (
+        <View style={styles.view1}>
+          <Image source={images.no_notification} style={styles.img} />
+          <Text style={stylescustom.txt}>Bạn không có thông báo nào</Text>
+        </View>
+      )}
+      {isLoading && <Loading />}
+      {/* @ts-ignore */}
+      <RBSheet
+        ref={refRBSheet}
+        closeOnDragDown={true}
+        closeOnPressMask={false}
+        dragFromTopOnly={true}
+        customStyles={{
+          wrapper: {
+            backgroundColor: 'rgba(0,0,0,0.3)',
+          },
+          draggableIcon: {
+            backgroundColor: '#000',
+          },
+        }}>
+        <>
+          <View style={styles.txt}>
+            <Text style={stylescustom.txtBold}>{dataNotifi?.topic}</Text>
+            <Text style={stylescustom.txtGray}>
+              {DateTimes(dataNotifi?.created_at)}
+            </Text>
+          </View>
+          <View style={styles.line} />
+          <View style={styles.txt}>
+            <Text style={stylescustom.txtBold}>{dataNotifi?.title}</Text>
+            <Text style={stylescustom.txt}>{dataNotifi?.body}</Text>
+          </View>
+          <View style={{alignItems: 'center', bottom: 0, marginTop: 50}}>
+            <BTNLogin onPress={() => refRBSheet.current.close()} txt="Đóng" />
+          </View>
+        </>
+      </RBSheet>
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  view: {marginTop: sizes._screen_height * 0.01, paddingBottom: 50},
+  view1: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: sizes._screen_height * 0.1,
+  },
+  img: {
+    height: sizes._screen_width * 0.7,
+    width: sizes._screen_width * 0.7,
+  },
+  line: {
+    width: sizes._csreen_width * 0.95,
+    backgroundColor: colors.GRAY,
+    height: 1,
+    alignSelf: 'center',
+    marginTop: 10,
+  },
+  txt: {
+    width: sizes._csreen_width * 0.95,
+    alignSelf: 'center',
+    marginTop: 10,
   },
 });

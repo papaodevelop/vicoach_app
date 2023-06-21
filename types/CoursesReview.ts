@@ -245,3 +245,12 @@ interface postComment {
   content?: string;
   parent_id?: number;
 }
+interface Notification {
+  id: number;
+  title: string;
+  body: string;
+  topic: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}

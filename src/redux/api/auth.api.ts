@@ -125,7 +125,6 @@ export const authApi = createApi({
       query: queryString => ({
         url: `class-course/${queryString}/reviews`,
         method: 'GET',
-        timeout: 5000,
       }),
       providesTags(result) {
         if (result?.data) {
@@ -389,6 +388,46 @@ export const authApi = createApi({
       },
       invalidatesTags: result => [{type: tagTypes, id: result?.id}],
     }),
+    putFcmToken: build.mutation({
+      query(data) {
+        return {
+          url: `notification/accept`,
+          method: 'PUT',
+          data,
+        };
+      },
+    }),
+    getallNotification: build.query<ListApiResponse<Notification>, string>({
+      query: () => ({
+        url: `notification`,
+        method: 'GET',
+      }),
+      providesTags(result) {
+        if (result?.data) {
+          const notifi = result.data;
+          return [
+            ...notifi.map(({id}) => ({
+              type: tagTypes,
+              id,
+            })),
+            {
+              type: tagTypes,
+              id: 'LIST',
+            },
+          ];
+        }
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
+    readNotifi: build.mutation({
+      query(id: number | undefined) {
+        return {
+          url: `notification/${id}`,
+          method: 'PUT',
+        };
+      },
+      invalidatesTags: result => [{type: tagTypes, id: result?.id}],
+    }),
   }),
 });
 
@@ -416,4 +455,7 @@ export const {
   useGetCommentBlogQuery,
   usePostCommentMutation,
   useDeleteCommentMutation,
+  usePutFcmTokenMutation,
+  useGetallNotificationQuery,
+  useReadNotifiMutation,
 } = authApi;

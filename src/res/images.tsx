@@ -4,7 +4,8 @@
   */
   
   const images = {
-      certificate: require('../assets/images/certificate.png'),
+      blog: require('../assets/images/blog.png'),
+    certificate: require('../assets/images/certificate.png'),
     comment: require('../assets/images/comment.png'),
     courses: require('../assets/images/courses.png'),
     dashboard: require('../assets/images/dashboard.png'),
@@ -30,6 +31,7 @@
     marketing: require('../assets/images/marketing.png'),
     mess: require('../assets/images/mess.png'),
     nen: require('../assets/images/nen.png'),
+    no_notification: require('../assets/images/no-notification.png'),
     noCart: require('../assets/images/noCart.png'),
     nodata: require('../assets/images/nodata.png'),
     noimage: require('../assets/images/noimage.jpeg'),
