@@ -65,6 +65,7 @@ export interface CourseCategoryType {
   price: number;
   created_at: string;
   updated_at: string;
+  discount: number;
   category: {
     name: {
       en: string;

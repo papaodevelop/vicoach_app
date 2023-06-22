@@ -95,6 +95,7 @@ const TotabScoll: React.FC<Props> = props => {
   } as any;
   const [loadings, setLoadings] = useState(false);
   const openPicker = async () => {
+    setLoadings(true);
     const formData = new FormData();
     await launchImageLibrary(options, response => {
       if (response?.assets) {
@@ -105,23 +106,27 @@ const TotabScoll: React.FC<Props> = props => {
           name: images?.fileName,
         };
         try {
-          setLoadings(true);
-          formData.append('image_file', item);
-          axios
-            .put(`${BASE_URL}users/profile-settings`, formData, {
-              headers: {
-                Authorization: `Cookie: ${cookie}`,
-                Accept: 'application/json',
-                'Content-Type': 'multipart/form-data',
-              },
-            })
+          const upload = async () => {
+            formData.append('image_file', item);
+            await axios
+              .put(`${BASE_URL}users/profile-settings`, formData, {
+                headers: {
+                  Authorization: `Cookie: ${cookie}`,
+                  Accept: 'application/json',
+                  'Content-Type': 'multipart/form-data',
+                },
+              })
 
-            .then(respon => {
-              if (respon.data) {
-                refetch();
-              }
-            });
+              .then(respon => {
+                if (respon.status == 200) {
+                  refetch();
+                  setLoadings(false);
+                }
+              });
+          };
+          upload();
         } catch (error) {}
+      } else {
         setLoadings(false);
       }
     });

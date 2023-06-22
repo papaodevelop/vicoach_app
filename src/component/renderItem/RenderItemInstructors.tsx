@@ -16,10 +16,7 @@ export default function RenderItemInstructors({
   navigation: NavigationProp<Record<string, any>>;
 }) {
   return (
-    <Pressable
-      style={styles.view}
-      key={index}
-      onPress={() => navigation.navigate('ProfileIntructors', {item: item})}>
+    <Pressable style={styles.view} key={index}>
       <View style={styles.view1}>
         {item?.image?.url ? (
           <Image source={{uri: item?.image?.url}} style={styles.img} />

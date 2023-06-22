@@ -11,6 +11,7 @@ import {NavigationProp} from '@react-navigation/native';
 import Loading from '../../component/loading/Loading';
 import SearchAll from '../search/SearchAll';
 import {useGetCategoryQuery} from '../../redux/state';
+import DiscountCouses from './DiscountCouses';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
 }
@@ -25,7 +26,7 @@ export default function Home(props: Props) {
         <Text style={styles.title}>Khoá học nổi bật</Text>
         <FeaturedCourses
           navigation={props.navigation}
-          data={data?.featured_courses}
+          data={data?.featured_courses.slice(0, 5)}
         />
         <View style={styles.view}>
           <Text style={styles.title1}>Khoá học học mới nhất</Text>
@@ -41,7 +42,7 @@ export default function Home(props: Props) {
           </Text>
         </View>
         <NewestCourses
-          data={data?.newest_courses}
+          data={data?.newest_courses.slice(0, 5)}
           navigation={props.navigation}
         />
         <View style={styles.view}>
@@ -58,42 +59,19 @@ export default function Home(props: Props) {
           </Text>
         </View>
         <NewestCourses
-          data={data?.newest_courses}
+          data={data?.newest_courses.slice(0, 5)}
           navigation={props.navigation}
         />
-        <View style={styles.view}>
-          <Text style={styles.title1}>Khoá học giảm giá</Text>
-          <Text
-            style={styles.txt}
-            onPress={() =>
-              props.navigation.navigate('ViewAll', {
-                title: 'Khoá học giảm giá',
-                item: data?.newest_courses,
-              })
-            }>
-            Xem thêm
-          </Text>
-        </View>
-        <NewestCourses
-          data={data?.newest_courses}
+        <DiscountCouses
           navigation={props.navigation}
+          api="?course_filter=DISCOUNT_COURSE"
+          title="Khoá học giảm giá"
         />
-        <View style={styles.view}>
-          <Text style={styles.title1}>Khoá học miễn phí</Text>
-          <Text
-            style={styles.txt}
-            onPress={() =>
-              props.navigation.navigate('ViewAll', {
-                title: 'Khoá học miễn phí',
-                item: data?.newest_courses,
-              })
-            }>
-            Xem thêm
-          </Text>
-        </View>
-        <NewestCourses
-          data={data?.newest_courses}
+
+        <DiscountCouses
+          api="?course_filter=FREE_COURSE"
           navigation={props.navigation}
+          title="Khoá học miễn phí"
         />
       </>
     );

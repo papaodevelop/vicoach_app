@@ -80,15 +80,15 @@ export default function NewestCourses(props: Props) {
         </View>
         <View style={styles.view2}>
           <Text style={styles.txt3}>
-            {money(item?.price) ? money(item?.price) : item?.price}
+            {item.price !== 0 && money(item?.price)}
           </Text>
           <Text style={styles.txt2}>
-            {money(item?.price) ? money(item?.price) : item?.price}
+            {money(item?.price - (item?.price * item?.discount) / 100)}
           </Text>
         </View>
-        {item?.status && (
+        {item?.discount !== 0 && (
           <View style={styles.view5}>
-            <Text style={styles.txt4}>{item?.status}% Off</Text>
+            <Text style={styles.txt4}>{item?.discount}% Off</Text>
           </View>
         )}
       </Pressable>
@@ -144,11 +144,11 @@ const styles = StyleSheet.create({
     marginTop: sizes._screen_height * 0.01,
   },
   txt2: {
-    ...stylescustom.txt,
+    ...stylescustom.txt1,
     color: colors.GREEN,
   },
   txt3: {
-    ...stylescustom.txt,
+    ...stylescustom.txt1,
     color: colors.GRAY,
     fontSize: sizes._screen_width * 0.04,
     textDecorationLine: 'line-through',

@@ -6,7 +6,7 @@ interface ProfileType {
   email: string;
   isEmailConfirmed: boolean;
   dob: string;
-  gender: null;
+  gender: string;
   short_description: string;
   description: string;
   roles: string[];

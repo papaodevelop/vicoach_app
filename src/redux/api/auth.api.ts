@@ -121,6 +121,28 @@ export const authApi = createApi({
         return [{type: tagTypes, id: 'LIST'}];
       },
     }),
+    getCourse: build.query<ListApiResponse<CourseCategoryType>, string>({
+      query: queryString => ({
+        url: `course-list/${queryString}`,
+        method: 'GET',
+      }),
+      providesTags(result) {
+        if (result?.data) {
+          const detailCourse = result.data;
+          return [
+            ...detailCourse.map(({id}) => ({
+              type: tagTypes,
+              id,
+            })),
+            {
+              type: tagTypes,
+              id: 'LIST',
+            },
+          ];
+        }
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
     getReviewCoures: build.query<ListApiResponse<CoursesReview>, string>({
       query: queryString => ({
         url: `class-course/${queryString}/reviews`,
@@ -458,4 +480,5 @@ export const {
   usePutFcmTokenMutation,
   useGetallNotificationQuery,
   useReadNotifiMutation,
+  useGetCourseQuery,
 } = authApi;

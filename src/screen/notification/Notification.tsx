@@ -27,18 +27,15 @@ export default function Notification({
   const refRBSheet = useRef<any>();
   const [dataNotifi, setdataNotifi] = useState<Notification>();
   const [ReadID] = useReadNotifiMutation();
-
   return (
     <View style={styles.container}>
-      <HeaderScreen navigation={navigation} title="THÔNG BÁO" dot />
+      <HeaderScreen navigation={navigation} title="THÔNG BÁO" />
       {data?.items.length !== 0 ? (
         <FlatList
           renderItem={({item}: {item: Notification}) => (
             <RenderNotifi
               item={item}
               onPressItem={async (val: Notification) => {
-                console.log(val?.id);
-
                 setdataNotifi(val);
                 ReadID(val?.id);
                 await refRBSheet.current.open();
@@ -51,6 +48,7 @@ export default function Notification({
           maxToRenderPerBatch={20}
           initialNumToRender={20}
           removeClippedSubviews
+          showsVerticalScrollIndicator={false}
         />
       ) : (
         <View style={styles.view1}>
@@ -63,6 +61,7 @@ export default function Notification({
       <RBSheet
         ref={refRBSheet}
         closeOnDragDown={true}
+        animationType="fade"
         closeOnPressMask={false}
         dragFromTopOnly={true}
         customStyles={{

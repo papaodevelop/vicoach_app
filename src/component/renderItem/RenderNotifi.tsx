@@ -22,7 +22,7 @@ export default function RenderNotifi({
             size={sizes._screen_width * 0.08}
             color={colors.WHITE}
           />
-          {item?.status == 'UNREAD' && <View style={styles.view3} />}
+          {item?.status == 'READ' && <View style={styles.view3} />}
         </View>
         <View style={styles.view2}>
           <Text style={stylescustom.txtBold}>{txt4(item?.title)}</Text>

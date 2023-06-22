@@ -7,13 +7,13 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Star from '../../../component/Star';
 import fonts from '../../../res/fonts';
-import {Time, money} from '../../../res/convert';
+import {Time, money, txt1} from '../../../res/convert';
 import {NavigationProp} from '@react-navigation/native';
 import {CourseCategoryType} from '../../../../types/CourseCategoryType';
 import images from '../../../res/images';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
-  item: CourseCategoryType | DetailClassify;
+  item: CourseCategoryType;
 }
 export default function RenderItemCouses(props: Props) {
   let item = props.item;
@@ -32,7 +32,7 @@ export default function RenderItemCouses(props: Props) {
         style={styles.img}
       />
       <View style={styles.view1}>
-        <Text style={styles.txt}>{textTitle}</Text>
+        <Text style={styles.txt}>{txt1(textTitle)}</Text>
         <View style={stylescustom.view1}>
           <FontAwesome
             name="user"
@@ -41,7 +41,7 @@ export default function RenderItemCouses(props: Props) {
           />
           <Text style={styles.txt1}>{item?.assign_instructor?.name}</Text>
         </View>
-        <Star star={item?.reviews} />
+        <Star star={item?.reviews} width={sizes._screen_width * 0.2} />
         <View style={stylescustom.view}>
           <View style={stylescustom.view1}>
             <Icon
@@ -52,7 +52,7 @@ export default function RenderItemCouses(props: Props) {
             <Text style={styles.txt1}>{Time(item?.duration)} giờ </Text>
           </View>
           <Text style={styles.txt2}>
-            {money(item?.price) ? money(item?.price) : item?.price}
+            {money(item?.price - (item?.price * item?.discount) / 100)}
           </Text>
         </View>
       </View>
@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
   },
   view1: {
     marginLeft: sizes._screen_width * 0.05,
-    height: sizes._screen_height * 0.1,
     justifyContent: 'space-between',
     width: sizes._screen_width * 0.9 - sizes._screen_width * 0.46,
   },

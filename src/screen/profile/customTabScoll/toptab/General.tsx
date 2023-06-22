@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, TextInput, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {StyleSheet} from 'react-native';
 import {HScrollView} from 'react-native-head-tab-view';
 import sizes from '../../../../res/sizes';
@@ -8,6 +8,8 @@ import colors from '../../../../res/colors';
 import TextInPutProfile from '../../../../component/textInput/TextInPutProfile';
 import BTNLogin from '../../../../component/btn/BTNLogin';
 import {useSettingProfileMutation} from '../../../../redux/state';
+import {Sex} from '../../../../datafeck/Sex';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 interface Props {
   index: number;
   data?: ProfileType;
@@ -16,6 +18,7 @@ interface Props {
 
 const General = (props: Props) => {
   const [name, setName] = useState<string | undefined>(props.data?.name);
+
   const [facebook, setFacebook] = useState<string | undefined>(
     props.data?.facebook,
   );
@@ -31,6 +34,10 @@ const General = (props: Props) => {
   const [twitter, setTwitter] = useState<string | undefined>(
     props.data?.twitter,
   );
+  const [checkbox, setCheckbox] = useState<string | undefined>(
+    props.data?.gender,
+  );
+
   const [update] = useSettingProfileMutation();
   const upDateProfile = async () => {
     try {
@@ -41,6 +48,7 @@ const General = (props: Props) => {
         twitter: twitter,
         linkedin: linkedin,
         instagram: instagram,
+        gender: checkbox,
       }).unwrap();
       if (upd) {
         props.refetch();
@@ -84,6 +92,28 @@ const General = (props: Props) => {
         <View style={styles.view}>
           <Text style={stylescustom.txt1}>Instagram</Text>
           <TextInPutProfile value={instagram} setValue={setInstagram} />
+        </View>
+        <View
+          style={{
+            width: sizes._screen_width * 0.6,
+            ...stylescustom.view,
+            marginTop: 20,
+          }}>
+          {Sex.map((item, index) => (
+            <View key={index} style={stylescustom.view1}>
+              <Ionicons
+                onPress={() => setCheckbox(item.name.en)}
+                name={
+                  checkbox === item.name.en
+                    ? 'ios-radio-button-on'
+                    : 'ios-radio-button-off'
+                }
+                color={colors.RED}
+                size={20}
+              />
+              <Text style={stylescustom.txt}>{item.name.vi}</Text>
+            </View>
+          ))}
         </View>
         <View style={styles.btn}>
           <BTNLogin onPress={upDateProfile} txt="Cập nhật" />
