@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     fontSize: sizes._csreen_width * 0.04,
   },
   img: {
-    height: sizes._screen_height * 0.1,
+    height: sizes._screen_height * 0.15,
     width: sizes._screen_width * 0.35,
     borderRadius: 15,
   },

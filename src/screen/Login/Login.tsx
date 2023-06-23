@@ -15,7 +15,6 @@ import {setDataUser} from '../../redux/state/login.slice';
 import {RootState} from '../../redux/store/store';
 import {BASE_URL} from '../../Api/BaseURL';
 import {setAuth} from '../../redux/state/auth.slice';
-import messaging from '@react-native-firebase/messaging';
 import {getFCMToken} from '../../../utils/pushnotification_helper';
 import {NavigationProp, useFocusEffect} from '@react-navigation/native';
 import {usePutFcmTokenMutation} from '../../redux/state';
@@ -24,27 +23,6 @@ const Login = ({
 }: {
   navigation: NavigationProp<Record<string, any>>;
 }) => {
-  const [fcmToken, setfcmToken] = useState<string | null>();
-  useEffect(() => {
-    const fcmtoken = async () => {
-      const a = await getFCMToken();
-      setfcmToken(a);
-    };
-    messaging().onNotificationOpenedApp(remoteMessage => {
-      remoteMessage;
-    });
-    messaging().setBackgroundMessageHandler(async remoteMessage => {
-      console.log(remoteMessage.data, 'â');
-    });
-
-    messaging().onMessage(async remoteMessage => {
-      console.log(remoteMessage.notification, 'sss');
-    });
-    messaging().onNotificationOpenedApp(remoteMessage => {
-      remoteMessage;
-    });
-    fcmtoken();
-  }, []);
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
   const remember = useAppSelect(data => data?.getdataUser?.getdataUser);
   const [userName, setusername] = useState(remember.username);
@@ -62,11 +40,6 @@ const Login = ({
     responseType: 'json',
     withCredentials: true,
   });
-  useEffect(() => {
-    if (remember.password) {
-      LoginUser();
-    }
-  }, [fcmToken]);
   useFocusEffect(
     React.useCallback(() => {
       setPass(remember.password);
@@ -75,12 +48,13 @@ const Login = ({
   );
   const LoginUser = async () => {
     setIsLoading(true);
+    const a = await getFCMToken();
     try {
       const response = await axiosObj.post('auth/login', {
         username: userName,
         password: pass,
       });
-      if (response.status == 200) {
+      if (response.status === 200) {
         dispatch(setAuth(response.headers['set-cookie']));
         setErr('');
         dispatch(
@@ -91,7 +65,7 @@ const Login = ({
         );
         setIsLoading(false);
         await putFCM({
-          fcm_token: fcmToken,
+          fcm_token: a,
         });
         navigation.navigate('DrawerCustoms');
       }
@@ -100,6 +74,11 @@ const Login = ({
     }
     setIsLoading(false);
   };
+  useEffect(() => {
+    if (remember.password) {
+      LoginUser();
+    }
+  }, []);
   return (
     <View style={styles.container}>
       <Image source={images.logo} resizeMode="contain" style={styles.img} />

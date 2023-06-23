@@ -8,6 +8,7 @@ import images from '../../res/images';
 import sizes from '../../res/sizes';
 import stylescustom from '../../res/stylescustom';
 import {useGetDetailClassifyQuery} from '../../redux/state';
+import {CourseCategoryType} from '../../../types/CourseCategoryType';
 export default function DetailCategories({
   route,
   navigation,
@@ -23,7 +24,7 @@ export default function DetailCategories({
       {data?.items.length !== 0 ? (
         <FlatList
           data={data?.items}
-          renderItem={({item}: {item: DetailClassify}) => (
+          renderItem={({item}: {item: CourseCategoryType}) => (
             <RenderItemCouses item={item} navigation={navigation} />
           )}
           keyExtractor={item => `${item?.id}`}

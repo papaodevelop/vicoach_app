@@ -103,7 +103,7 @@ export default function NewestCourses(props: Props) {
       horizontal
       contentContainerStyle={{
         paddingRight: sizes._screen_width * 0.05,
-        height: sizes._screen_height * 0.3,
+        marginTop: 10,
       }}
       scrollEventThrottle={16}
     />
@@ -113,13 +113,12 @@ export default function NewestCourses(props: Props) {
 const styles = StyleSheet.create({
   container: {},
   img: {
-    height: sizes._screen_height * 0.12,
+    height: sizes._screen_height * 0.14,
     width: sizes._screen_width * 0.44,
     borderRadius: 20,
     position: 'absolute',
   },
   view: {
-    marginTop: sizes._screen_height * 0.01,
     width: sizes._screen_width * 0.44,
     marginLeft: sizes._screen_width * 0.05,
   },
@@ -127,7 +126,7 @@ const styles = StyleSheet.create({
     color: colors.BLACK,
     fontFamily: fonts.textBold,
     fontSize: sizes._screen_width * 0.045,
-    marginTop: 5,
+    marginTop: 20,
   },
   view1: {
     ...stylescustom.view,
@@ -176,10 +175,8 @@ const styles = StyleSheet.create({
   },
   view5: {
     backgroundColor: '#f8bebe',
-    paddingLeft: 8,
-    paddingRight: 8,
-    paddingBottom: 3,
-    paddingTop: 3,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
     borderRadius: 30,
     width: sizes._screen_width * 0.21,
     marginTop: 5,

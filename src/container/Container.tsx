@@ -1,5 +1,5 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import OnboardingFirst from '../screen/slapscreen/OnboardingFirst';
 import Login from '../screen/login/Login';
@@ -20,14 +20,12 @@ import CourseDetail from '../screen/courseDetail/CourseDetail';
 import PlayVideo from '../screen/video/PlayVideo';
 import Profile from '../screen/profile/Profile';
 import DetailCategories from '../screen/categories/DetailCategories';
-
 export default function Container() {
   const Stack = createNativeStackNavigator();
-
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Spapscreen1"
+        initialRouteName={'Spapscreen1'}
         screenOptions={{
           headerShown: false,
         }}>

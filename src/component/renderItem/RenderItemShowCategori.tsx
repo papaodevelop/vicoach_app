@@ -55,12 +55,6 @@ export default function RenderItemShowCategori(props: Props) {
               <View style={stylescustom.view1}>
                 <View style={styles.view2}>
                   <Text style={styles.title}>{textTitle}</Text>
-                  <Text style={stylescustom.txt1}>
-                    {props?.item?.children?.length
-                      ? props?.item?.children?.length
-                      : 0}{' '}
-                    Children
-                  </Text>
                 </View>
               </View>
               <Icon
@@ -99,12 +93,6 @@ export default function RenderItemShowCategori(props: Props) {
           <View style={stylescustom.view1}>
             <View style={styles.view2}>
               <Text style={styles.title}>{textTitle}</Text>
-              <Text style={stylescustom.txt1}>
-                {props?.item?.children?.length
-                  ? props?.item?.children?.length
-                  : 0}{' '}
-                Children
-              </Text>
             </View>
           </View>
         </Pressable>

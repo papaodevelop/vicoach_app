@@ -22,23 +22,25 @@ export async function getFCMToken() {
       fcmToken = remoteMessage;
 
       await AsyncStorage.setItem('fcmtoken', fcmToken);
-    } catch (error) {
-      console.log(error, 'okkw');
-    }
+    } catch (error) {}
   }
   return fcmToken;
 }
 export const registerNotificationListeners = async () => {
+  const notificationOpenedListener = messaging().onNotificationOpenedApp(
+    remoteMessage => {},
+  );
   const initialNotification = messaging()
     .getInitialNotification()
     .then(remoteMessage => {
       if (remoteMessage) {
+        console.log('ádasdas');
       }
     });
 
   return Promise.all([
-    notificationOpenedListener,
-    initialNotification,
-    messageListener,
+    // notificationOpenedListener,
+    // initialNotification,
+    // messageListener
   ]);
 };

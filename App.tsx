@@ -1,18 +1,20 @@
 import {StatusBar, StyleSheet, Text, View, LogBox} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Container from './src/container/Container';
 import {Provider} from 'react-redux';
 import store from './src/redux/store/store';
 import {persistStore} from 'redux-persist';
 import {PersistGate} from 'redux-persist/integration/react';
 import messaging from '@react-native-firebase/messaging';
-import Test from './src/Test';
+import {registerNotificationListeners} from './utils/pushnotification_helper';
 
 const persistor = persistStore(store);
 LogBox.ignoreLogs(['Sending']);
 const App = () => {
   messaging().requestPermission();
-
+  useEffect(() => {
+    registerNotificationListeners();
+  }, []);
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

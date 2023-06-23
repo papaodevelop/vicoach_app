@@ -24,10 +24,12 @@ export default function Home(props: Props) {
     return (
       <>
         <Text style={styles.title}>Khoá học nổi bật</Text>
-        <FeaturedCourses
-          navigation={props.navigation}
-          data={data?.featured_courses.slice(0, 5)}
-        />
+        <View style={{marginTop: 15}}>
+          <FeaturedCourses
+            navigation={props.navigation}
+            data={data?.featured_courses.slice(0, 5)}
+          />
+        </View>
         <View style={styles.view}>
           <Text style={styles.title1}>Khoá học học mới nhất</Text>
           <Text
@@ -131,11 +133,13 @@ const styles = StyleSheet.create({
     color: colors.BLACK,
     fontFamily: fonts.textBold,
     fontSize: sizes._csreen_width * 0.06,
+    marginTop: 10,
   },
   view: {
     ...stylescustom.view,
     width: sizes._csreen_width * 0.9,
     alignSelf: 'center',
+    marginTop: 20,
   },
   txt: {
     color: colors.GRAY,
