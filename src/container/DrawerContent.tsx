@@ -23,7 +23,7 @@ import {setDataUser} from '../redux/state/login.slice';
 import {RootState} from '../redux/store/store';
 import {NavigationProp} from '@react-navigation/native';
 interface Props {
-  navigation: NavigationProp<Record<string, any>>;
+  navigation: any;
 }
 export default function DrawerContent(props: Props) {
   const dispatch = useDispatch();

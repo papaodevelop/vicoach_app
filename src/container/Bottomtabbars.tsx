@@ -1,5 +1,5 @@
 import {StyleSheet, Text, Platform, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Providers from '../screen/providers/Providers';
 import Home from '../screen/home/Home';
@@ -14,6 +14,8 @@ import Categories from '../screen/categories/Categories';
 import fonts from '../res/fonts';
 import sizes from '../res/sizes';
 import {NavigationProp} from '@react-navigation/native';
+import messaging from '@react-native-firebase/messaging';
+import {navigate} from '../../RootNavigation';
 const Tab = createBottomTabNavigator();
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
@@ -41,6 +43,37 @@ const CustomtabBarBuuton = ({children, onPress}: any) => (
   </TouchableOpacity>
 );
 const Bottomtabbars = (props: Props) => {
+  const [notifi, setnotifi] = useState<any>();
+
+  useEffect(() => {
+    const timeout = setTimeout(async () => {
+      await messaging().onNotificationOpenedApp(remoteMessage => {
+        navigate('Notification');
+      });
+      if (Platform.OS === 'ios') {
+        messaging().setBackgroundMessageHandler(async remoteMessage => {
+          await messaging()
+            .getInitialNotification()
+            .then(remoteMessages => {
+              if (remoteMessage) {
+                navigate('Notification');
+              }
+            });
+        });
+      } else {
+        await messaging()
+          .getInitialNotification()
+          .then(remoteMessages => {
+            if (remoteMessages) {
+              navigate('Notification');
+            }
+          });
+      }
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
     <Tab.Navigator
       initialRouteName="Trang chủ"

@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import DrawerContent from './DrawerContent';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Bottomtabbars from './Bottomtabbars';
@@ -10,8 +10,8 @@ import Support from '../screen/support/Support';
 import Certificate from '../screen/certificate/Certificate';
 import DashBoard from '../screen/dashboard/DashBoard';
 import Comment from '../screen/comment/Comment';
-const Drawer = createDrawerNavigator();
 
+const Drawer = createDrawerNavigator();
 const DrawerCustoms = () => {
   return (
     <Drawer.Navigator

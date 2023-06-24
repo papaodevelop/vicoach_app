@@ -20,10 +20,12 @@ import CourseDetail from '../screen/courseDetail/CourseDetail';
 import PlayVideo from '../screen/video/PlayVideo';
 import Profile from '../screen/profile/Profile';
 import DetailCategories from '../screen/categories/DetailCategories';
+import {navigate, navigationRef} from '../../RootNavigation';
+
 export default function Container() {
   const Stack = createNativeStackNavigator();
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
         initialRouteName={'Spapscreen1'}
         screenOptions={{

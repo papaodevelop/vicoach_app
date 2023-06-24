@@ -27,9 +27,6 @@ export async function getFCMToken() {
   return fcmToken;
 }
 export const registerNotificationListeners = async () => {
-  const notificationOpenedListener = messaging().onNotificationOpenedApp(
-    remoteMessage => {},
-  );
   const initialNotification = messaging()
     .getInitialNotification()
     .then(remoteMessage => {

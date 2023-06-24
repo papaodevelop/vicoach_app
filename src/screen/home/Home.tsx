@@ -111,7 +111,6 @@ export default function Home(props: Props) {
           }}
         />
       )}
-
       {isLoading && <Loading />}
     </View>
   );
