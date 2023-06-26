@@ -46,7 +46,7 @@ const Header = ({
               data?.thumbnail?.url ? {uri: data?.thumbnail?.url} : images.i2
             }
             style={styles.img}
-            resizeMode="stretch"
+            resizeMode="cover"
           />
         </>
       )}
