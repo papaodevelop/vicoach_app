@@ -8,7 +8,6 @@ import Icon from 'react-native-vector-icons/Entypo';
 import sizes from '../../res/sizes';
 import colors from '../../res/colors';
 import Loading from '../../component/loading/Loading';
-
 const Header = ({
   onShow,
   data,
@@ -46,7 +45,7 @@ const Header = ({
               data?.thumbnail?.url ? {uri: data?.thumbnail?.url} : images.i2
             }
             style={styles.img}
-            resizeMode="cover"
+            resizeMode="stretch"
           />
         </>
       )}

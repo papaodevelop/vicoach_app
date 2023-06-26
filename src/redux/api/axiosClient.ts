@@ -7,6 +7,8 @@ import {Auth} from '../../../types/Auth';
 import {setAuth} from '../state/auth.slice';
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {RootState} from '../store/store';
+import {Alert} from 'react-native';
+import {navigate} from '../../../RootNavigation';
 export const axiosAuth = () => {
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
 
@@ -24,6 +26,23 @@ export const axiosAuth = () => {
     },
   );
 };
+axios.interceptors.response.use(
+  function (response: AxiosResponse) {
+    return response;
+  },
+  function (error) {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    if (error.response.status === 401) {
+      Alert.alert(
+        'Bạn đã hết hạn đăng nhập, vui lòng đăng nhập lại để tiếp tục',
+        ' ',
+        [{text: 'Đồng ý', onPress: () => navigate('Login')}],
+      );
+    }
+    // Do something with response error
+    return Promise.reject(error);
+  },
+);
 export const axiosBaseQuery =
   (
     {baseUrl}: {baseUrl: string} = {baseUrl: BASE_URL},
