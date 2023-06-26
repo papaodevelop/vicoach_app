@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   view: {alignItems: 'center', marginTop: 30},
   view1: {marginTop: sizes._screen_height * 0.02},
-  view2: {alignItems: 'center', justifyContent: 'center'},
+  view2: {alignItems: 'center', marginTop: sizes._screen_height * 0.1},
   img: {
     height: sizes._screen_width * 0.7,
     width: sizes._screen_width * 0.7,
@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
   view3: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     marginTop: sizes._screen_height * 0.1,
   },
   img1: {

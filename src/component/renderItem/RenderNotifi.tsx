@@ -9,9 +9,11 @@ import {DateTimes, txt4} from '../../res/convert';
 export default function RenderNotifi({
   item,
   onPressItem,
+  deletes,
 }: {
   item: Notification;
   onPressItem: (val: any) => void;
+  deletes: (val: number) => void;
 }) {
   return (
     <Pressable style={styles.view} onPress={() => onPressItem(item)}>
@@ -22,7 +24,7 @@ export default function RenderNotifi({
             size={sizes._screen_width * 0.08}
             color={colors.WHITE}
           />
-          {item?.status == 'READ' && <View style={styles.view3} />}
+          {item?.status == 'UNREAD' && <View style={styles.view3} />}
         </View>
         <View style={styles.view2}>
           <Text style={stylescustom.txtBold}>{txt4(item?.title)}</Text>
@@ -33,6 +35,7 @@ export default function RenderNotifi({
         </View>
       </View>
       <FontAwesome
+        onPress={async () => deletes(item.id)}
         name="trash"
         color={colors.BLACK}
         size={sizes._screen_width * 0.08}

@@ -450,6 +450,15 @@ export const authApi = createApi({
       },
       invalidatesTags: result => [{type: tagTypes, id: result?.id}],
     }),
+    deleteNotifi: build.mutation<ChildrenComment, {id: number | undefined}>({
+      query({id}) {
+        return {
+          url: `notification/${id}`,
+          method: 'DELETE',
+        };
+      },
+      invalidatesTags: result => [{type: tagTypes, id: result?.id}],
+    }),
   }),
 });
 
@@ -481,4 +490,5 @@ export const {
   useGetallNotificationQuery,
   useReadNotifiMutation,
   useGetCourseQuery,
+  useDeleteNotifiMutation,
 } = authApi;

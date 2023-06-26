@@ -5,6 +5,7 @@ import RenderNotifi from '../../component/renderItem/RenderNotifi';
 import sizes from '../../res/sizes';
 import {NavigationProp} from '@react-navigation/native';
 import {
+  useDeleteNotifiMutation,
   useGetallNotificationQuery,
   useReadNotifiMutation,
 } from '../../redux/state';
@@ -27,6 +28,16 @@ export default function Notification({
   const refRBSheet = useRef<any>();
   const [dataNotifi, setdataNotifi] = useState<Notification>();
   const [ReadID] = useReadNotifiMutation();
+  const [loading, setLoading] = useState(false);
+
+  const [Delete] = useDeleteNotifiMutation();
+  const deleteItem = async (id: number) => {
+    setLoading(true);
+    await Delete({
+      id: id,
+    });
+    setLoading(false);
+  };
   return (
     <View style={styles.container}>
       <HeaderScreen navigation={navigation} title="THÔNG BÁO" />
@@ -34,6 +45,7 @@ export default function Notification({
         <FlatList
           renderItem={({item}: {item: Notification}) => (
             <RenderNotifi
+              deletes={deleteItem}
               item={item}
               onPressItem={async (val: Notification) => {
                 setdataNotifi(val);
@@ -56,7 +68,7 @@ export default function Notification({
           <Text style={stylescustom.txt}>Bạn không có thông báo nào</Text>
         </View>
       )}
-      {isLoading && <Loading />}
+      {isLoading || (loading && <Loading />)}
       {/* @ts-ignore */}
       <RBSheet
         ref={refRBSheet}
