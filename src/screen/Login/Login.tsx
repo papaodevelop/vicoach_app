@@ -1,4 +1,12 @@
-import {Image, Linking, StyleSheet, Text, View} from 'react-native';
+import {
+  BackHandler,
+  Image,
+  Linking,
+  StyleSheet,
+  Text,
+  ToastAndroid,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import colors from '../../res/colors';
 import sizes from '../../res/sizes';
@@ -80,6 +88,48 @@ const Login = ({
       LoginUser();
     }
   }, []);
+  let backPressCount = 0;
+  let backPressTimer: any = null;
+  const [currentScreen, setCurrentScreen] = useState<number>(0);
+
+  const handleBackPress = () => {
+    if (backPressCount === 0) {
+      backPressCount += 1;
+      ToastAndroid.show('Nhấn back một lần nữa để thoát', ToastAndroid.SHORT);
+      backPressTimer = setTimeout(() => {
+        backPressCount = 0;
+      }, 2000);
+      return true;
+    } else {
+      clearTimeout(backPressTimer);
+      BackHandler.exitApp();
+      return false;
+    }
+  };
+
+  const handleBackPresss = () => {
+    if (currentScreen === 1) {
+      return handleBackPress();
+    } else {
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    const navigationStateListener = navigation.addListener('state', state => {
+      console.log(state.data.state.history);
+
+      const currentRoute = state.data.state.index;
+      setCurrentScreen(currentRoute);
+    });
+
+    BackHandler.addEventListener('hardwareBackPress', handleBackPresss);
+
+    return () => {
+      navigationStateListener();
+      BackHandler.removeEventListener('hardwareBackPress', handleBackPresss);
+    };
+  }, [navigation, currentScreen]);
   return (
     <View style={styles.container}>
       <Image source={images.logo} resizeMode="contain" style={styles.img} />

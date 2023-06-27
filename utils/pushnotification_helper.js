@@ -6,9 +6,7 @@ export async function requestUserPermission() {
     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
     authStatus === messaging.AuthorizationStatus.PROVISIONAL;
   if (enabled) {
-    console.log('Authorization status:', authStatus);
     const fcmToken = await getFCMToken();
-    console.log('FCM token:', fcmToken);
     await registerNotificationListeners();
   }
 }

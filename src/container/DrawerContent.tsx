@@ -21,7 +21,6 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {authApi, useGetProfileQuery, useLogoutMutation} from '../redux/state';
 import {setDataUser} from '../redux/state/login.slice';
 import {RootState} from '../redux/store/store';
-import {NavigationProp} from '@react-navigation/native';
 interface Props {
   navigation: any;
 }
