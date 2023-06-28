@@ -1,4 +1,5 @@
 import {
+  BackHandler,
   FlatList,
   ScrollView,
   StyleSheet,
@@ -144,6 +145,18 @@ export default function StartQuizz({
     setShow(true);
     dispatch(DeleteForm([]));
   };
+  useEffect(() => {
+    const backAction = () => {
+      return true; // Ngăn không cho ứng dụng thoát
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, []);
   return (
     <View style={[stylescustom.container]}>
       <HeaderScreen title="Làm bài" navigation={navigation} />

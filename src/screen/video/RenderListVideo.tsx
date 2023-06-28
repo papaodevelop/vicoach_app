@@ -3,7 +3,7 @@ import React from 'react';
 import stylescustom from '../../res/stylescustom';
 import sizes from '../../res/sizes';
 import {Image} from 'react-native';
-import {DateTime, Time, txt2, txt3} from '../../res/convert';
+import {DateTime, txt2} from '../../res/convert';
 import images from '../../res/images';
 
 const RenderListVideo = ({
@@ -31,9 +31,6 @@ const RenderListVideo = ({
           <Text style={stylescustom.txt}>{txt2(item.name)}</Text>
           <Text style={{...stylescustom.txt1, marginTop: 10}}>
             Bắt đầu: {DateTime(item.material.created_at)}
-          </Text>
-          <Text style={{...stylescustom.txt1, marginTop: 10}}>
-            {Time(item.duration)}
           </Text>
         </View>
       </View>

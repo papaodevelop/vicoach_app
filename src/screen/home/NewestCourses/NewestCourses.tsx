@@ -6,7 +6,7 @@ import fonts from '../../../res/fonts';
 import stylescustom from '../../../res/stylescustom';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {Time, money, txt, txt1, txt3} from '../../../res/convert';
+import {Time, money, txt, txt1} from '../../../res/convert';
 import LinearGradient from 'react-native-linear-gradient';
 import {NavigationProp} from '@react-navigation/native';
 import {CourseCategoryType} from '../../../../types/CourseCategoryType';
@@ -15,11 +15,9 @@ interface Props {
   data: any;
   navigation: NavigationProp<Record<string, any>>;
 }
-
 export default function NewestCourses(props: Props) {
   const RederItem = ({item}: {item: CourseCategoryType}) => {
     const textTitle = item?.title?.vi || item?.title?.en;
-
     return (
       <Pressable
         style={styles.view}
@@ -79,9 +77,13 @@ export default function NewestCourses(props: Props) {
           </View>
         </View>
         <View style={styles.view2}>
-          <Text style={styles.txt3}>
-            {item.price !== 0 && money(item?.price)}
-          </Text>
+          {item?.discount !== 0 ? (
+            <Text style={styles.txt3}>
+              {item.price !== 0 && money(item?.price)}
+            </Text>
+          ) : (
+            <View></View>
+          )}
           <Text style={styles.txt2}>
             {money(item?.price - (item?.price * item?.discount) / 100)}
           </Text>
@@ -111,7 +113,6 @@ export default function NewestCourses(props: Props) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
   img: {
     height: sizes._screen_height * 0.14,
     width: sizes._screen_width * 0.44,

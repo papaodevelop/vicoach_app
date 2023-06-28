@@ -209,13 +209,12 @@ export const authApi = createApi({
         return [{type: tagTypes, id: 'LIST'}];
       },
     }),
-
-    register: build.mutation<Auth, Payloadregiter>({
+    register: build.mutation({
       query(data) {
         return {
-          url: 'auth/register',
+          url: `auth/register`,
           method: 'POST',
-          body: data,
+          data,
         };
       },
     }),
@@ -224,7 +223,7 @@ export const authApi = createApi({
         return {
           url: 'auth/forgot-password',
           method: 'POST',
-          body: data,
+          data,
         };
       },
     }),
@@ -459,6 +458,50 @@ export const authApi = createApi({
       },
       invalidatesTags: result => [{type: tagTypes, id: result?.id}],
     }),
+    getTermPage: build.query<TermsPage, string>({
+      query: queryString => ({
+        url: `terms`,
+        method: 'GET',
+      }),
+      providesTags(result) {
+        if (result?.data) {
+          const detailClassify = result.data;
+          return [
+            ...detailClassify.map(({id}) => ({
+              type: tagTypes,
+              id,
+            })),
+            {
+              type: tagTypes,
+              id: 'LIST',
+            },
+          ];
+        }
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
+    getStoreInfo: build.query<ListApiResponse<StoreInfo>, string>({
+      query: queryString => ({
+        url: `store-inform`,
+        method: 'GET',
+      }),
+      providesTags(result) {
+        if (result?.data) {
+          const detailClassify = result.data;
+          return [
+            ...detailClassify.map(({id}) => ({
+              type: tagTypes,
+              id,
+            })),
+            {
+              type: tagTypes,
+              id: 'LIST',
+            },
+          ];
+        }
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
   }),
 });
 
@@ -491,4 +534,6 @@ export const {
   useReadNotifiMutation,
   useGetCourseQuery,
   useDeleteNotifiMutation,
+  useGetTermPageQuery,
+  useGetStoreInfoQuery,
 } = authApi;

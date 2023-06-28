@@ -11,7 +11,6 @@ import {NavigationProp} from '@react-navigation/native';
 import {DateTimes} from '../../res/convert';
 import images from '../../res/images';
 import Comment from './Comment';
-import WebView from 'react-native-webview';
 import RenderHtml from 'react-native-render-html';
 import Author from './Author';
 export default function BlogPost({

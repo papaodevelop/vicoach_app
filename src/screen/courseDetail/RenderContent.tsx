@@ -44,9 +44,7 @@ export default function RenderContent(props: Props) {
       .then(res => {
         setProgress('Hoàn thành');
       })
-      .catch(error => {
-        console.log('Lỗi:', error);
-      });
+      .catch(error => {});
   };
 
   return (

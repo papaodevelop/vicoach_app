@@ -4,6 +4,7 @@ import colors from '../../res/colors';
 import HeaderScreen1 from '../../component/header/HeaderScreen1';
 import {NavigationProp} from '@react-navigation/native';
 import TopTabCourse from './TopTabCourse';
+import Purchased from './Purchased';
 
 export default function Mycourses({
   navigation,
@@ -13,8 +14,8 @@ export default function Mycourses({
   return (
     <View style={styles.container}>
       <HeaderScreen1 navigation={navigation} title="Khoá học" />
-      {/* <Purchased navigation={navigation} /> */}
-      <TopTabCourse />
+      <Purchased navigation={navigation} />
+      {/* <TopTabCourse /> */}
     </View>
   );
 }

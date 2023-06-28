@@ -9,7 +9,6 @@ import colors from '../../../res/colors';
 import BTNLogin from '../../../component/btn/BTNLogin';
 import ModalConfirm from '../../../component/modal/ModalConfirm';
 import {NavigationProp} from '@react-navigation/native';
-import {useGetQuizzMutation} from '../../../redux/api/quiz.api';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   route: any;

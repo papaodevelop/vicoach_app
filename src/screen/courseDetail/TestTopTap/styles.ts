@@ -11,8 +11,15 @@ export const styles = StyleSheet.create({
   },
   tabbarStyle: {
     height: 50,
-    marginTop: sizes._csreen_height * 0.03,
     backgroundColor: '#fff',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   tabbarBtn: {
     justifyContent: 'center',
@@ -106,5 +113,11 @@ export const styles = StyleSheet.create({
   view3: {
     ...stylescustom.view1,
     marginTop: 15,
+  },
+  txt3: {
+    ...stylescustom.txt3,
+    fontSize: sizes._screen_width * 0.05,
+    alignSelf: 'center',
+    marginTop: sizes._screen_height * 0.1,
   },
 });

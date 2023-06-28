@@ -103,7 +103,7 @@ const Slapscreen1 = ({
   return (
     <ImageBackground style={styles.container} source={images.nen}>
       <Image source={images.logoslap} style={styles.img} />
-      <Text style={styles.txt}>Vi Master</Text>
+      <Text style={styles.txt}>Vi Coaching</Text>
       <Text style={styles.txt1}>Đang kiểm tra dữ liệu ...</Text>
       <View style={styles.main}>
         {dots.map(i => (

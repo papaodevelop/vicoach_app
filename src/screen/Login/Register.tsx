@@ -11,7 +11,6 @@ import ModalConfirmRegister from '../../component/modal/ModalConfirmRegister';
 import {Payloadregiter} from '../../../types/Auth';
 import Loading from '../../component/loading/Loading';
 import {
-  isRequired,
   validateEmail,
   validatePassword,
   validateUsername,
@@ -20,14 +19,6 @@ import ErrorText1 from '../../component/error/ErrorText1';
 import {errEmail, errPassWord, errUserName, errexport} from '../../res/err';
 import {Errors} from '../../../types/Err';
 import {useRegisterMutation} from '../../redux/state';
-interface ErrorRegister {
-  data: {
-    error: string;
-    message: [];
-  };
-  statusCode: number;
-  status: number;
-}
 const Register = ({navigation}: any) => {
   const [name, setName] = useState('');
   const [userName, setUsername] = useState('');
@@ -44,7 +35,7 @@ const Register = ({navigation}: any) => {
       name: name,
       password: pass,
       password_confirmation: pass,
-    } as Payloadregiter);
+    });
   };
   useEffect(() => {
     if (isSuccess) {

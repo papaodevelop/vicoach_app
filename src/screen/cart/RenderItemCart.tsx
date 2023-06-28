@@ -50,12 +50,12 @@ const styles = StyleSheet.create({
     ...stylescustom.view,
   },
   view1: {
-    height: sizes._screen_width * 0.2,
+    height: sizes._screen_width * 0.23,
     justifyContent: 'space-between',
     marginLeft: 10,
   },
   img: {
-    height: sizes._screen_width * 0.2,
+    height: sizes._screen_width * 0.23,
     width: sizes._screen_width * 0.3,
     borderRadius: 15,
   },

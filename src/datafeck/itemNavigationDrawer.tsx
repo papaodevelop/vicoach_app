@@ -31,22 +31,28 @@ export const itemNavigationDrawer = [
   //   navigation: 'Certificate',
   //   icon: images.certificate,
   // },
-  {
-    id: 7,
-    name: 'Favorites',
-    navigation: 'Favorite',
-    icon: images.favorite,
-  },
+  // {
+  //   id: 7,
+  //   name: 'Favorites',
+  //   navigation: 'Favorite',
+  //   icon: images.favorite,
+  // },
   // {
   //   id: 8,
   //   name: 'Comments',
   //   navigation: 'Comment',
   //   icon: images.comment,
   // },
-  // {
-  //   id: 10,
-  //   name: 'Support',
-  //   navigation: 'Support',
-  //   icon: images.support,
-  // },
+  {
+    id: 9,
+    name: 'Hỗ trợ',
+    navigation: 'Support',
+    icon: images.iconsub,
+  },
+  {
+    id: 10,
+    name: 'Điều khoản điều kiện',
+    navigation: 'TermsAndConditions',
+    icon: images.support,
+  },
 ];

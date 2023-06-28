@@ -20,7 +20,9 @@ import CourseDetail from '../screen/courseDetail/CourseDetail';
 import PlayVideo from '../screen/video/PlayVideo';
 import Profile from '../screen/profile/Profile';
 import DetailCategories from '../screen/categories/DetailCategories';
-import {navigate, navigationRef} from '../../RootNavigation';
+import {navigationRef} from '../../RootNavigation';
+import TermsAndConditions from '../screen/termsandconditions/TermsAndConditions';
+import Support from '../screen/support/Support';
 
 export default function Container() {
   const Stack = createNativeStackNavigator();
@@ -50,6 +52,11 @@ export default function Container() {
         <Stack.Screen name="PlayVideo" component={PlayVideo} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="DetailCategories" component={DetailCategories} />
+        <Stack.Screen
+          name="TermsAndConditions"
+          component={TermsAndConditions}
+        />
+        <Stack.Screen name="Support" component={Support} />
       </Stack.Navigator>
     </NavigationContainer>
   );

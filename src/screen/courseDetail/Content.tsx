@@ -30,6 +30,7 @@ export default function Content({
     //@ts-ignore
     return acc.concat(videoLessonsInChapter);
   }, []);
+
   const RendeFoodter = () => (
     <>
       {data?.chapter_list.map(i => {
@@ -39,7 +40,9 @@ export default function Content({
         const data2 = i?.lesson_list?.filter(obj => obj?.quiz !== undefined);
         return (
           <View key={`5${i.id}`} style={{width: sizes._screen_width}}>
-            <Text style={styles.txt}>{i?.name}</Text>
+            {datas?.chapter_list[0].lesson_list.length !== 0 && (
+              <Text style={styles.txt}>{i?.name}</Text>
+            )}
 
             <View>
               <FlatList
@@ -77,7 +80,7 @@ export default function Content({
           </View>
         );
       })}
-      {datas?.chapter_list[0] && datas?.has_enroll && (
+      {videoLessons?.length !== 0 && datas?.has_enroll && (
         <View style={styles.view}>
           <BTNLogin
             onPress={() =>
@@ -89,6 +92,7 @@ export default function Content({
           />
         </View>
       )}
+
       {!datas?.has_enroll ? (
         <View style={styles.view3}>
           <Image source={images.hoctap1} style={styles.img1} />
@@ -96,16 +100,15 @@ export default function Content({
             Bạn không thể xem nội dung khoá học này
           </Text>
         </View>
-      ) : (
-        !datas?.chapter_list[0] && (
-          <View style={styles.view2}>
-            <Image source={images.nodata} style={styles.img} />
-            <Text style={stylescustom.txtBold}>
-              Không tìm thấy nội dung khoá học
-            </Text>
-          </View>
-        )
-      )}
+      ) : datas?.chapter_list[0]?.lesson_list.length === 0 ||
+        datas?.chapter_list?.length === 0 ? (
+        <View style={styles.view2}>
+          <Image source={images.nodata} style={styles.img} />
+          <Text style={stylescustom.txtBold}>
+            Không tìm thấy nội dung khoá học
+          </Text>
+        </View>
+      ) : null}
     </>
   );
   return (

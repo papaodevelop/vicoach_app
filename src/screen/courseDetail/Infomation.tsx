@@ -66,25 +66,36 @@ export default function Infomation({
                   source={i?.image?.url ? {uri: i?.image?.url} : images.noimage}
                   style={styles.img}
                 />
-                <View style={{marginLeft: 15}}>
+                <View
+                  style={{marginLeft: 15, width: sizes._screen_width * 0.8}}>
                   <Text style={styles.txt2}>{i?.name}</Text>
-                  <Text>{i?.description}</Text>
+                  <Text style={styles.txt1}>{i?.description}</Text>
                 </View>
               </View>
             ))}
           </>
         )}
 
-        {datas?.meta_description && (
+        {datas?.requirements?.vi && (
           <View style={{marginTop: 20}}>
             <Text style={stylescustom.txt}>
-              <Text style={{color: colors.RED}}>
-                Mô tả: {datas?.meta_description}
+              <Text style={{color: colors.BLACK}}>
+                <Text style={{color: colors.RED}}>Yêu cầu:</Text>{' '}
+                {datas?.requirements?.vi}
               </Text>
             </Text>
           </View>
         )}
-
+        {datas?.description?.vi && (
+          <View style={{marginTop: 20}}>
+            <Text style={stylescustom.txt}>
+              <Text style={{color: colors.BLACK}}>
+                <Text style={{color: colors.RED}}>Kết quả:</Text>{' '}
+                {datas?.description?.vi}
+              </Text>
+            </Text>
+          </View>
+        )}
         <View>
           <FlatList
             scrollEnabled={false}

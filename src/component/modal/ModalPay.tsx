@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -10,31 +10,11 @@ import {
 import sizes from '../../res/sizes';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
-import CusTombtn from '../../component/textInput/CusTomTextInput';
-import {ActivityIndicator} from 'react-native-paper';
-import {validateEmail} from '../../res/require';
-import ErrorText1 from '../error/ErrorText1';
-import {ErrValiEmail, errEmail} from '../../res/err';
-import {useForgotpwMutation} from '../../redux/state';
 interface Props {
   isShow: boolean;
   toggleDate: () => void;
 }
-const ModalForgotPassword = (props: Props) => {
-  const [forgot, {data, error, isSuccess, isLoading, isError}] =
-    useForgotpwMutation();
-  const [email, setEmail] = useState('');
-  const [Erremail, setErrEmail] = useState('');
-  const SentForgot = () => {
-    forgot({
-      email: email,
-    });
-  };
-  useEffect(() => {
-    if (error) {
-      setErrEmail(ErrValiEmail);
-    }
-  }, [error]);
+const ModalPay = (props: Props) => {
   const renderContent = () => (
     <View style={styles.content}>
       <View style={styles.head}>
@@ -42,35 +22,15 @@ const ModalForgotPassword = (props: Props) => {
       </View>
       <View style={styles.view}>
         <View style={styles.view1}>
-          <Text style={styles.txt}>Nhập email khôi phục tài khoản</Text>
-          <CusTombtn
-            placeholder="Nhập email tài khoản"
-            value={email}
-            setValue={setEmail}
-            require
-          />
-          {email && !validateEmail(email) ? (
-            <ErrorText1 err={errEmail} />
-          ) : null}
-          {isSuccess && (
-            <ErrorText1 err={'Kiểm tra email để khôi phục tài khoản'} />
-          )}
-          {isError && <ErrorText1 err={Erremail} />}
+          <Text style={styles.txt}>
+            Đơn hàng của bạn đã được gửi đi chúng tôi sẽ liên hệ với bạn trong
+            thời gian ngắn nhất hoặc liên hệ{' '}
+            <Text style={{color: colors.RED}}>0865312138</Text> để được hỗ trợ.
+            Xin cảm ơn!
+          </Text>
         </View>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => (isSuccess ? props.toggleDate() : SentForgot())}>
-          {isLoading ? (
-            <ActivityIndicator color="white" />
-          ) : (
-            <>
-              {isSuccess ? (
-                <Text style={styles.btntxt}>Đóng</Text>
-              ) : (
-                <Text style={styles.btntxt}>Gửi</Text>
-              )}
-            </>
-          )}
+        <TouchableOpacity style={styles.btn} onPress={() => props.toggleDate()}>
+          <Text style={styles.btntxt}>Đóng</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -93,7 +53,7 @@ const ModalForgotPassword = (props: Props) => {
     </View>
   );
 };
-export default ModalForgotPassword;
+export default ModalPay;
 const styles = StyleSheet.create({
   container1: {
     flex: 1,
@@ -154,12 +114,12 @@ const styles = StyleSheet.create({
     fontSize: sizes._screen_width * 0.043,
   },
   txt: {
-    alignSelf: 'flex-start',
-    marginLeft: 20,
     marginBottom: 10,
     color: colors.BLACK,
     fontFamily: fonts.textRegular,
-    fontSize: sizes._screen_width * 0.038,
+    fontSize: sizes._screen_width * 0.04,
+    alignSelf: 'center',
+    textAlign: 'center',
   },
   view1: {alignItems: 'center', marginTop: 15},
 });

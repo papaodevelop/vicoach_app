@@ -36,7 +36,6 @@ const TabViewContainer: React.FC<
     {key: 'Content', title: 'Nội dung'},
     {key: 'Comment', title: 'Đánh giá'},
   ]);
-
   const _renderScene = (e: any) => {
     const {route} = e;
     if (route.key == 'Infomation') {
@@ -54,9 +53,7 @@ const TabViewContainer: React.FC<
   const category =
     props.data?.category?.name?.vi || props.data?.category?.name?.en;
   const refRBSheet = useRef<any>();
-
   const dispatch = useDispatch();
-
   const addCarts = () => {
     dispatch(
       addCart({
@@ -66,13 +63,14 @@ const TabViewContainer: React.FC<
         thumbnail: props.data?.thumbnail?.url || null,
         startDate: props.data?.created_at,
         price: props.data?.price,
+        discount: props.data?.discount,
       }),
     );
     refRBSheet.current.close();
   };
   const _renderScrollHeader = () => {
     return (
-      <View>
+      <>
         <View style={styles.view}>
           <Text style={styles.txt}>{textTitle}</Text>
           <View style={styles.view1}>
@@ -84,13 +82,21 @@ const TabViewContainer: React.FC<
           </View>
         </View>
         <Header onShow={() => refRBSheet.current.open()} data={props.data} />
-      </View>
+      </>
     );
   };
 
   return (
     <>
-      {props.data && (
+      {props.data ? (
+        <ZHeaderTabView
+          navigationState={{index, routes}}
+          renderScene={_renderScene}
+          onIndexChange={setIndex}
+          renderScrollHeader={_renderScrollHeader}
+          {...props}
+        />
+      ) : (
         <ZHeaderTabView
           navigationState={{index, routes}}
           renderScene={_renderScene}
@@ -123,16 +129,20 @@ const TabViewContainer: React.FC<
             />
             <Text style={styles.txt2}>Thêm vào mục yêu thích</Text>
           </View>
-          <View style={styles.view3}>
-            <Icons
-              name="shoppingcart"
-              color={colors.BLACK}
-              size={sizes._screen_width * 0.06}
-            />
-            <Text style={styles.txt2} onPress={addCarts}>
-              Thêm vào giỏ hàng
-            </Text>
-          </View>
+
+          {!props.data?.has_enroll && (
+            <View style={styles.view3}>
+              <Icons
+                name="shoppingcart"
+                color={colors.BLACK}
+                size={sizes._screen_width * 0.06}
+              />
+
+              <Text style={styles.txt2} onPress={addCarts}>
+                Thêm vào giỏ hàng
+              </Text>
+            </View>
+          )}
         </View>
       </RBSheet>
     </>

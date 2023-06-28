@@ -1,5 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {CourseCategoryType} from '../../../types/CourseCategoryType';
 const initialState = {
   cart: [],
 };
@@ -21,7 +20,10 @@ const cartSlice = createSlice({
       const itemId = action.payload;
       state.cart = state.cart.filter((item: any) => item.id !== itemId);
     },
+    removeAll: (state: any, action) => {
+      state.cart = action.payload;
+    },
   },
 });
-export const {addCart, removeCart} = cartSlice.actions;
+export const {addCart, removeCart, removeAll} = cartSlice.actions;
 export default cartSlice.reducer;

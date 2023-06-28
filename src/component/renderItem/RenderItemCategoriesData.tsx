@@ -27,12 +27,8 @@ export default function RenderItemCategoriesData(props: Props) {
       }>
       <View style={{...styles.view1}}>
         <Image
-          source={
-            props.item?.thumbnail_image?.url
-              ? {uri: props.item?.thumbnail_image?.url}
-              : images.i2
-          }
-          resizeMode="cover"
+          source={{uri: props.item?.icon?.url}}
+          resizeMode="contain"
           style={styles.img}
         />
       </View>

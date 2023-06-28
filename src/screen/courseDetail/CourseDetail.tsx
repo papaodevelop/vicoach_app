@@ -13,6 +13,7 @@ const CourseDetails = (props: Props) => {
   const item =
     (props.route.params.item as CourseCategoryType) ||
     (props.route.params as CourseDetail);
+
   return (
     <GestureHandlerRootView style={{flex: 1, backgroundColor: 'white'}}>
       <HeaderScreen navigation={props.navigation} title="Chi tiết khoá học" />

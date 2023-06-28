@@ -48,6 +48,7 @@ export default function DrawerCustom({
       return true;
     } else {
       clearTimeout(backPressTimer);
+
       BackHandler.exitApp();
       return false;
     }
@@ -63,8 +64,6 @@ export default function DrawerCustom({
 
   useEffect(() => {
     const navigationStateListener = navigation.addListener('state', state => {
-      console.log(state.data.state.history);
-
       const currentRoute = state.data.state.index;
       setCurrentScreen(currentRoute);
     });

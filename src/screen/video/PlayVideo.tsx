@@ -3,10 +3,9 @@ import React, {useState} from 'react';
 import sizes from '../../res/sizes';
 import stylescustom from '../../res/stylescustom';
 import RenderListVideo from './RenderListVideo';
-import BTNLogin from '../../component/btn/BTNLogin';
 import {NavigationProp} from '@react-navigation/native';
 import RenderViedeo from './RenderViedeo';
-
+import BTNLogin from '../../component/btn/BTNLogin';
 export default function PlayVideo({
   navigation,
   route,
@@ -19,10 +18,15 @@ export default function PlayVideo({
 
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
-      <RenderViedeo
-        navigation={navigation}
-        url={item?.material?.active_file?.videoEmbebUrl}
-      />
+      <View
+        style={{
+          height: sizes._screen_width * (9 / 12),
+        }}>
+        <RenderViedeo
+          navigation={navigation}
+          url={item?.material?.active_file?.videoEmbebUrl}
+        />
+      </View>
       <Text style={styles.title}>{item?.name}</Text>
       <View
         style={{
@@ -43,7 +47,7 @@ export default function PlayVideo({
           contentContainerStyle={styles.view}
         />
       </View>
-      {/* <BTNLogin onPress={() => navigation.goBack()} txt="Trở lại" /> */}
+      <BTNLogin onPress={() => navigation.goBack()} txt="Trở lại" />
     </View>
   );
 }

@@ -1,4 +1,4 @@
-import {FlatList, LayoutAnimation, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import HeaderScreen1 from '../../component/header/HeaderScreen1';
 import stylescustom from '../../res/stylescustom';
@@ -9,6 +9,7 @@ import fonts from '../../res/fonts';
 import Loading from '../../component/loading/Loading';
 import {NavigationProp} from '@react-navigation/native';
 import {useGetCategoryQuery} from '../../redux/state';
+import {CourseCategoryType} from '../../../types/CourseCategoryType';
 
 export default function Categories({
   navigation,
@@ -22,13 +23,21 @@ export default function Categories({
         <Text style={styles.txt}>Xu hướng</Text>
         <FlatList
           data={data?.trending_categories}
-          renderItem={({item, index}) => (
+          renderItem={({
+            item,
+            index,
+          }: {
+            item: CourseCategoryType;
+            index: number;
+          }) => (
             <RenderItemCategoriesData
               item={item}
               index={index}
               navigation={navigation}
             />
           )}
+          keyExtractor={item => `${item.id}`}
+          removeClippedSubviews
           showsHorizontalScrollIndicator={false}
           horizontal
           contentContainerStyle={{
@@ -48,7 +57,13 @@ export default function Categories({
 
       <FlatList
         data={data?.categories}
-        renderItem={({item, index}) => (
+        renderItem={({
+          item,
+          index,
+        }: {
+          item: CourseCategoryType;
+          index: number;
+        }) => (
           <RenderItemShowCategori
             item={item}
             index={index}
@@ -58,6 +73,8 @@ export default function Categories({
         showsVerticalScrollIndicator={false}
         style={styles.view1}
         contentContainerStyle={stylescustom.paddingBottom}
+        removeClippedSubviews
+        keyExtractor={item => `cc${item.id}`}
       />
       {isLoading && <Loading />}
     </View>

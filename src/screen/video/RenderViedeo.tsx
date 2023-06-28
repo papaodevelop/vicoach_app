@@ -13,7 +13,6 @@ import Control from './Control';
 import sizes from '../../res/sizes';
 import {NavigationProp} from '@react-navigation/native';
 import WebView from 'react-native-webview';
-import RenderHTML from 'react-native-render-html';
 const windowHeight = sizes._screen_width * (9 / 12);
 const windowWith = sizes._screen_width;
 export default function RenderViedeo({
@@ -32,7 +31,6 @@ export default function RenderViedeo({
   const onLoad = () => {
     console.log('endload');
   };
-  const {width} = useWindowDimensions();
 
   useEffect(() => {
     Orientation.addDeviceOrientationListener(handleOrientation);
@@ -74,7 +72,7 @@ export default function RenderViedeo({
 
   return (
     <Pressable onPress={() => setShow(!show)}>
-      <Video
+      {/* <Video
         ref={videoRef}
         style={[
           fullscren ? styles.backgroundVideofull : styles.backgroundVideo,
@@ -87,7 +85,7 @@ export default function RenderViedeo({
         source={{
           uri: url,
           headers: {
-            Referer: 'https://api.vicoaching.vn/api/v1/',
+            Referer: 'https://api.vicoaching.vn/api/v1',
           },
         }}
         resizeMode="contain"
@@ -102,8 +100,8 @@ export default function RenderViedeo({
           setCurrentTime(data.currentTime);
           setDuration(data.playableDuration);
         }}
-      />
-      {/* <WebView
+      /> */}
+      <WebView
         style={fullscren ? styles.backgroundVideofull : styles.backgroundVideo}
         source={{
           uri: url,
@@ -111,9 +109,9 @@ export default function RenderViedeo({
             Referer: 'https://api.vicoaching.vn/api/v1/',
           },
         }}
-      /> */}
+      />
 
-      {show && (
+      {/* {show && (
         <View style={styles.control}>
           <Control
             back={() => navigation.goBack()}
@@ -134,14 +132,14 @@ export default function RenderViedeo({
             }}
           />
         </View>
-      )}
+      )} */}
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   backgroundVideo: {
-    height: windowHeight,
+    height: sizes._screen_height,
     width: windowWith,
     backgroundColor: 'black',
     alignSelf: 'center',

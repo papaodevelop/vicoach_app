@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';
 import RenderChidlren from './RenderChidlren';
 import {NavigationProp} from '@react-navigation/native';
+
 interface Props {
   item: CourseCategoryType;
   index: number;
@@ -39,6 +40,7 @@ export default function RenderItemShowCategori(props: Props) {
   if (!show && !show1) {
     headerStyle;
   }
+
   return (
     <>
       {props.item?.children?.length >= 1 ? (

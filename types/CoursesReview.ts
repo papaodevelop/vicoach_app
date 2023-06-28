@@ -254,3 +254,30 @@ interface Notification {
   created_at: string;
   updated_at: string;
 }
+interface TermsPage {
+  data: [];
+  items: [];
+  id: number;
+  title: {
+    en: string;
+    vi: string;
+  };
+  content: {
+    en: string;
+    vi: string;
+  };
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
+interface StoreInfo {
+  id: number;
+  title: string;
+  subtitle: string;
+  email: string;
+  phone_number: string;
+  code: string;
+  icon: string;
+  street: string;
+  status: string;
+}

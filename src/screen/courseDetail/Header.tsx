@@ -17,7 +17,7 @@ const Header = ({
 }) => {
   const [load, setLoad] = useState(false);
   return (
-    <View pointerEvents="auto" style={{backgroundColor: 'white'}}>
+    <View pointerEvents="auto" style={{paddingBottom: 30}}>
       {data?.video_overview?.url ? (
         <>
           <Video
@@ -35,6 +35,8 @@ const Header = ({
             repeat={false}
             controls={true}
             onLoad={() => setLoad(false)}
+            playInBackground={false}
+            playWhenInactive={false}
           />
           {load && <Loading />}
         </>
@@ -100,5 +102,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.WHITE,
     borderRadius: 15,
   },
-  viewHeader: {...stylescustom.view, marginTop: 15, marginLeft: 10},
+  viewHeader: {
+    ...stylescustom.view,
+    marginTop: 15,
+    marginLeft: 10,
+  },
 });

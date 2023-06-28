@@ -1,5 +1,5 @@
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import stylescustom from '../../res/stylescustom';
 import HeaderScreen from '../../component/header/HeaderScreen';
 import RenderItemCart from './RenderItemCart';
@@ -11,23 +11,32 @@ import {SwipeListView} from 'react-native-swipe-list-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../redux/store/store';
-import {removeCart} from '../../redux/state/cart.reducer';
+import {removeAll, removeCart} from '../../redux/state/cart.reducer';
 import images from '../../res/images';
+import ModalPay from '../../component/modal/ModalPay';
 export default function Cart({navigation}: any) {
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
   const dataCart: any = useAppSelect(data => data.getCart.cart);
   let total = 0;
-  for (let i = 0; i < dataCart.length; i++) {
-    total += dataCart[i].price;
+  for (let i = 0; i < dataCart?.length; i++) {
+    total += dataCart[i]?.price;
   }
+  let discount = 0;
+  for (let i = 0; i < dataCart.length; i++) {
+    discount +=
+      dataCart[i]?.price - (dataCart[i]?.price * dataCart[i]?.discount) / 100;
+  }
+
   const dispatch = useDispatch();
   const deleteCart = (id: number) => {
     dispatch(removeCart(id));
   };
+  const [show, setShow] = useState(false);
+
   return (
     <View style={stylescustom.container}>
       <HeaderScreen navigation={navigation} title="Đơn hàng" />
-      {dataCart.length !== 0 ? (
+      {dataCart?.length !== 0 ? (
         <>
           <SwipeListView
             data={dataCart}
@@ -59,15 +68,17 @@ export default function Cart({navigation}: any) {
               <Text style={stylescustom.txtGray}>{money(total)}</Text>
             </View>
             <View style={styles.view2}>
-              <Text style={stylescustom.txtBold}>Giảm giá</Text>
-              <Text style={stylescustom.txtGray}>{'0%'}</Text>
+              <Text style={stylescustom.txtBold}>Giảm được</Text>
+              <Text style={stylescustom.txtGray}>
+                {money(total - discount)}
+              </Text>
             </View>
             <View style={styles.view2}>
               <Text style={stylescustom.txtBold}>Tổng tiền</Text>
-              <Text style={stylescustom.txtGray}>{money(total)}</Text>
+              <Text style={stylescustom.txtGray}>{money(discount)}</Text>
             </View>
             <View style={{marginTop: sizes._screen_height * 0.04}}>
-              <BTNLogin txt="Thanh toán" onPress={() => {}} />
+              <BTNLogin txt="Thanh toán" onPress={() => setShow(true)} />
             </View>
           </View>
         </>
@@ -81,6 +92,13 @@ export default function Cart({navigation}: any) {
             }>{`Rất tiếc, bạn không có sản phẩm trong giỏ hàng.\nBắt đầu mua sắm ngay`}</Text>
         </View>
       )}
+      <ModalPay
+        isShow={show}
+        toggleDate={() => {
+          setShow(false);
+          dispatch(removeAll([]));
+        }}
+      />
     </View>
   );
 }

@@ -93,27 +93,14 @@ export interface CourseDetail {
     key: number;
     type: string;
   };
-  chapter_list: [
-    {
-      id: number;
-      name: string;
-      lesson_list: [
+  chapter_list:
+    | [
         {
           id: number;
-          privacy: string;
-          status: string;
           name: string;
-          duration: number;
-          description: string;
-          quiz: {
-            title: {
-              en: string;
-              vi: string;
-            };
-          };
+          lesson_list: [];
         },
-      ];
-    },
-  ];
+      ]
+    | any;
   has_enroll: boolean;
 }

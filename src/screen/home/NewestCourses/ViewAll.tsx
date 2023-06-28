@@ -20,6 +20,10 @@ export default function ViewAll({
           <RenderItemCouses item={item} navigation={navigation} />
         )}
         keyExtractor={item => `${item.id}`}
+        showsVerticalScrollIndicator={false}
+        removeClippedSubviews
+        contentContainerStyle={{marginBottom: 20}}
+        maxToRenderPerBatch={10}
       />
     </View>
   );
