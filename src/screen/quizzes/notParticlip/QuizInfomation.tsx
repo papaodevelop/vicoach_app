@@ -1,5 +1,5 @@
 import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import stylescustom from '../../../res/stylescustom';
 import HeaderScreen from '../../../component/header/HeaderScreen';
 import sizes from '../../../res/sizes';
@@ -19,17 +19,11 @@ const QuizInfomation = (props: Props) => {
 
   const [show, setShow] = useState(false);
   const Confirm = () => {
-    // props.navigation.navigate('StartQuizz', {
-    //   item: item,
-    // });
     setShow(false);
   };
-
   const RenderItem = () => (
     <>
       <View style={styles.view}>
-        {/* <Text style={stylescustom.txt2}>{item.name}</Text>
-        <Text style={stylescustom.txt1}>{item.title}</Text> */}
         <Image source={images.quizz} style={styles.img} />
         <View style={styles.view1}>
           <View style={styles.view2}>
