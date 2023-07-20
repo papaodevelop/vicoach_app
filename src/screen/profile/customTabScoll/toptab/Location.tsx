@@ -1,11 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, FlatList} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet} from 'react-native';
 import {HScrollView} from 'react-native-head-tab-view';
 import sizes from '../../../../res/sizes';
-import stylescustom from '../../../../res/stylescustom';
 import TextInPutProfile from '../../../../component/textInput/TextInPutProfile';
 import BTNLogin from '../../../../component/btn/BTNLogin';
-import Search from '../../../../component/textInput/Search';
 import {useSettingProfileMutation} from '../../../../redux/state';
 import District from '../../component/District';
 import Province from '../../component/Province';

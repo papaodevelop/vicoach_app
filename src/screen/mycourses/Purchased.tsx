@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     ...stylescustom.txt,
     alignSelf: 'flex-end',
     right: 20,
-    marginTop: sizes._screen_height * 0.01,
+    marginTop: sizes._screen_height * 0.02,
     paddingBottom: 10,
   },
   view: {

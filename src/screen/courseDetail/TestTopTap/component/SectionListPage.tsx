@@ -12,7 +12,9 @@ interface Props {
 }
 const SectionListPage = (props: Props) => {
   const renderFooterComponent = () => {
-    return <Comment item={props.data} navigation={props.navigation} />;
+    return (
+      <Comment item={props.data} navigation={props.navigation} index={5} />
+    );
   };
   return (
     <HFlatList

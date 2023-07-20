@@ -64,7 +64,7 @@ export default function Province({
           contentContainerStyle={{
             maxHeight: sizes._screen_height * 0.2,
             borderRadius: 10,
-            backgroundColor: colors.GRAY,
+            backgroundColor: '#e3e3e3',
             marginTop: 10,
           }}
         />

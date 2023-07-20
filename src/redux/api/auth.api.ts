@@ -449,6 +449,15 @@ export const authApi = createApi({
       },
       invalidatesTags: result => [{type: tagTypes, id: result?.id}],
     }),
+    addCousesFree: build.mutation({
+      query(slug) {
+        return {
+          url: `course-list/take-free-course/${slug}`,
+          method: 'POST',
+        };
+      },
+      invalidatesTags: result => [{type: tagTypes, id: result?.id}],
+    }),
     deleteNotifi: build.mutation<ChildrenComment, {id: number | undefined}>({
       query({id}) {
         return {
@@ -536,4 +545,5 @@ export const {
   useDeleteNotifiMutation,
   useGetTermPageQuery,
   useGetStoreInfoQuery,
+  useAddCousesFreeMutation,
 } = authApi;

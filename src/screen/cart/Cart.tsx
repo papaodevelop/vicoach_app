@@ -89,7 +89,7 @@ export default function Cart({navigation}: any) {
           <Text
             style={
               styles.txt
-            }>{`Rất tiếc, bạn không có sản phẩm trong giỏ hàng.\nBắt đầu mua sắm ngay`}</Text>
+            }>{`Nếu bạn muốn mua khoá học vui lòng lên trang web chính https://khoahoc.vicoaching.vn/vi đăng nhập để mua khoá học`}</Text>
         </View>
       )}
       <ModalPay

@@ -1,4 +1,5 @@
 import {
+  Alert,
   FlatList,
   Pressable,
   ScrollView,
@@ -19,13 +20,16 @@ import {
 import ConfirmRating from '../../component/modal/ConfirmRating';
 import {HScrollView} from 'react-native-head-tab-view';
 import sizes from '../../res/sizes';
+import {NavigationProp} from '@react-navigation/native';
 
 export default function Comment({
   item,
   index,
+  navigation,
 }: {
   item: CourseDetail | undefined;
   index: number;
+  navigation: NavigationProp<Record<string, any>>;
 }) {
   const {data, refetch} = useGetReviewCouresQuery(`${item?.id}`);
   const [comment, setComment] = useState<string>();
@@ -45,6 +49,7 @@ export default function Comment({
       }).unwrap();
       if (up) {
         refetch();
+        Alert.alert('Bình luận của bạn đang chờ quản trị viên duyệt');
         setShow(false);
       }
     } catch (error: any) {

@@ -24,7 +24,7 @@ const TermsAndConditions = ({
     <View style={stylescustom.container}>
       <HeaderScreen navigation={navigation} title="Điều khoản điều kiện" />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Text style={styles.txt}>{data?.title?.vi}</Text>
+        <Text style={styles.txt}>{data ? data?.title?.vi : ''}</Text>
         <RenderHtml
           contentWidth={width}
           source={{

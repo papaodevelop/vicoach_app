@@ -10,8 +10,10 @@ import stylescustom from '../../res/stylescustom';
 import {NavigationProp} from '@react-navigation/native';
 import Loading from '../../component/loading/Loading';
 import SearchAll from '../search/SearchAll';
-import {useGetCategoryQuery} from '../../redux/state';
+import {useGetCategoryQuery, useGetCourseSearchQuery} from '../../redux/state';
 import DiscountCouses from './DiscountCouses';
+import {normalizeString} from '../../res/convert';
+import {CourseCategoryType} from '../../../types/CourseCategoryType';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
 }
@@ -19,7 +21,16 @@ export default function Home(props: Props) {
   const [search, setSearch] = useState('');
   const [showSearch, setShowSearch] = useState(true);
   const {data, isLoading} = useGetCategoryQuery('');
+  const {data: ItemSearch} = useGetCourseSearchQuery('');
+  const [searchResults, setSearchResults] = useState<undefined | string[]>([]);
 
+  const searchByName = (tuKhoa: string) => {
+    const tuKhoaChuanHoa = normalizeString(tuKhoa);
+    const ketQua = ItemSearch?.items.filter((item: CourseCategoryType) =>
+      normalizeString(item?.title?.vi).includes(tuKhoaChuanHoa),
+    );
+    setSearchResults(ketQua || []);
+  };
   const ListFooter = () => {
     return (
       <>
@@ -66,12 +77,12 @@ export default function Home(props: Props) {
         />
         <DiscountCouses
           navigation={props.navigation}
-          api="?course_filter=DISCOUNT_COURSE"
+          api="?course_filter[]=DISCOUNT_COURSE"
           title="Khoá học giảm giá"
         />
 
         <DiscountCouses
-          api="?course_filter=FREE_COURSE"
+          api="?course_filter[]=FREE_COURSE"
           navigation={props.navigation}
           title="Khoá học miễn phí"
         />
@@ -91,12 +102,20 @@ export default function Home(props: Props) {
       <HeaderHome
         navigation={props.navigation}
         value={search}
-        setValue={setSearch}
+        setValue={val => {
+          setSearch(val);
+          searchByName(val);
+        }}
         show={showSearch}
       />
       {search ? (
         <View style={{flex: 1}}>
-          <SearchAll navigation={props.navigation} search={search} />
+          <SearchAll
+            navigation={props.navigation}
+            search={search}
+            data={ItemSearch}
+            searchResults={searchResults}
+          />
         </View>
       ) : (
         <FlatList

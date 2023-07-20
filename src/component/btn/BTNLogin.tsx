@@ -15,7 +15,7 @@ const BTNLogin = (props: Props) => {
       activeOpacity={0.5}
       style={{
         ...styles.btn,
-        backgroundColor: props.active ? '#DDDDDD' : colors.ORANGE,
+        backgroundColor: props.active ? '#DDDDDD' : colors.GREEN,
       }}>
       <Text style={styles.txt}>{props.txt}</Text>
     </TouchableOpacity>

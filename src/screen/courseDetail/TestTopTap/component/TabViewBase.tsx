@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {Text, View} from 'react-native';
+import {Alert, Pressable, Text, View} from 'react-native';
 import {
   CollapsibleHeaderTabView as ZHeaderTabView,
   ZTabViewProps,
@@ -20,6 +20,7 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import colors from '../../../../res/colors';
 import {useDispatch} from 'react-redux';
 import {addCart} from '../../../../redux/state/cart.reducer';
+import {useAddCousesFreeMutation} from '../../../../redux/state';
 
 interface ScrollableTabViewContainerProps {
   navigation: NavigationProp<Record<string, any>>;
@@ -36,6 +37,16 @@ const TabViewContainer: React.FC<
     {key: 'Content', title: 'Nội dung'},
     {key: 'Comment', title: 'Đánh giá'},
   ]);
+  const [buyCouses] = useAddCousesFreeMutation();
+  const add = async (slug: string) => {
+    try {
+      const aa = await buyCouses(slug).unwrap();
+      Alert.alert('Thêm khoá học thành công');
+    } catch (error) {
+      Alert.alert('Thêm khoá học thất bại');
+    }
+    refRBSheet.current.close();
+  };
   const _renderScene = (e: any) => {
     const {route} = e;
     if (route.key == 'Infomation') {
@@ -45,7 +56,9 @@ const TabViewContainer: React.FC<
         <Content index={1} navigation={props.navigation} datas={props.data} />
       );
     } else if (route.key == 'Comment') {
-      return <Comment index={2} item={props.data} />;
+      return (
+        <Comment index={2} item={props.data} navigation={props.navigation} />
+      );
     }
     return null;
   };
@@ -59,7 +72,7 @@ const TabViewContainer: React.FC<
       addCart({
         id: props.item?.id,
         name: textTitle,
-        reviews: props.item?.reviews,
+        reviews: props.item?.avg_review,
         thumbnail: props.data?.thumbnail?.url || null,
         startDate: props.data?.created_at,
         price: props.data?.price,
@@ -76,7 +89,7 @@ const TabViewContainer: React.FC<
           <View style={styles.view1}>
             <Text style={stylescustom.txt1}>{category}</Text>
             <Star
-              star={props.item?.reviews}
+              star={props.item?.avg_review}
               width={sizes._screen_width * 0.2}
             />
           </View>
@@ -142,6 +155,19 @@ const TabViewContainer: React.FC<
                 Thêm vào giỏ hàng
               </Text>
             </View>
+          )}
+          {!props.data?.has_enroll && props.data?.price == 0 && (
+            <Pressable
+              style={styles.view3}
+              onPress={() => add(props.data?.slug)}>
+              <Icons
+                name="shoppingcart"
+                color={colors.BLACK}
+                size={sizes._screen_width * 0.06}
+              />
+
+              <Text style={styles.txt2}>Nhận khoá học</Text>
+            </Pressable>
           )}
         </View>
       </RBSheet>

@@ -91,7 +91,7 @@ export interface CourseCategoryType {
       type: string;
     };
   };
-  reviews: string;
+  avg_review: string;
   address: {
     id: number;
     street: string;

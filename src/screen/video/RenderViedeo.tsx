@@ -12,7 +12,6 @@ import Orientation from 'react-native-orientation-locker';
 import Control from './Control';
 import sizes from '../../res/sizes';
 import {NavigationProp} from '@react-navigation/native';
-import WebView from 'react-native-webview';
 const windowHeight = sizes._screen_width * (9 / 12);
 const windowWith = sizes._screen_width;
 export default function RenderViedeo({
@@ -72,7 +71,7 @@ export default function RenderViedeo({
 
   return (
     <Pressable onPress={() => setShow(!show)}>
-      {/* <Video
+      <Video
         ref={videoRef}
         style={[
           fullscren ? styles.backgroundVideofull : styles.backgroundVideo,
@@ -83,9 +82,9 @@ export default function RenderViedeo({
         onError={val => console.log(val)}
         fullscreenOrientation="all"
         source={{
-          uri: url,
+          uri: 'https://vz-bf3c3d29-a25.b-cdn.net/135152/b2805bd6-61e7-417e-85a0-48445d3f0291/playlist.m3u8',
           headers: {
-            Referer: 'https://api.vicoaching.vn/api/v1',
+            Referer: 'https://khoahoc.phanmemmkt.vn',
           },
         }}
         resizeMode="contain"
@@ -100,18 +99,9 @@ export default function RenderViedeo({
           setCurrentTime(data.currentTime);
           setDuration(data.playableDuration);
         }}
-      /> */}
-      <WebView
-        style={fullscren ? styles.backgroundVideofull : styles.backgroundVideo}
-        source={{
-          uri: url,
-          headers: {
-            Referer: 'https://api.vicoaching.vn/api/v1/',
-          },
-        }}
       />
 
-      {/* {show && (
+      {show && (
         <View style={styles.control}>
           <Control
             back={() => navigation.goBack()}
@@ -132,7 +122,7 @@ export default function RenderViedeo({
             }}
           />
         </View>
-      )} */}
+      )}
     </Pressable>
   );
 }

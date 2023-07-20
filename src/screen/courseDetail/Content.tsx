@@ -50,6 +50,7 @@ export default function Content({
                 horizontal
                 renderItem={({item, index}) => (
                   <RenderContent
+                    navigation={navigation}
                     item={item}
                     index={index}
                     idCourse={data?.id}
@@ -80,18 +81,6 @@ export default function Content({
           </View>
         );
       })}
-      {videoLessons?.length !== 0 && datas?.has_enroll && (
-        <View style={styles.view}>
-          <BTNLogin
-            onPress={() =>
-              navigation.navigate('PlayVideo', {
-                item: videoLessons,
-              })
-            }
-            txt="Xem video"
-          />
-        </View>
-      )}
 
       {!datas?.has_enroll ? (
         <View style={styles.view3}>

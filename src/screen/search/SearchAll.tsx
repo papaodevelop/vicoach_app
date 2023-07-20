@@ -1,22 +1,25 @@
 import {FlatList, View} from 'react-native';
-import React, {memo} from 'react';
+import React, {memo, useState} from 'react';
 import RenderItemCouses from '../home/newestCourses/RenderItemCouses';
 import {NavigationProp} from '@react-navigation/native';
 import stylescustom from '../../res/stylescustom';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';
-import {useGetCourseSearchQuery} from '../../redux/state';
+import {ListApiResponse} from '../../../types/Common';
 
 const SearchAll = ({
   navigation,
   search,
+  searchResults,
+  data,
 }: {
   navigation: NavigationProp<Record<string, any>>;
   search: string;
+  searchResults: any;
+  data: any;
 }) => {
-  const {data, isFetching} = useGetCourseSearchQuery(`${search}`);
   return (
     <FlatList
-      data={data?.items}
+      data={searchResults}
       renderItem={({item}: {item: CourseCategoryType}) => (
         <RenderItemCouses item={item} navigation={navigation} />
       )}

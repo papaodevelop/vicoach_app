@@ -41,7 +41,7 @@ export default function RenderItemCouses(props: Props) {
           />
           <Text style={styles.txt1}>{item?.assign_instructor?.name}</Text>
         </View>
-        <Star star={item?.reviews} width={sizes._screen_width * 0.2} />
+        <Star star={item?.avg_review} width={sizes._screen_width * 0.2} />
         <View style={stylescustom.view}>
           <View style={stylescustom.view1}>
             <Icon
@@ -66,9 +66,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.WHITE,
     padding: 10,
     alignSelf: 'center',
-    marginTop: sizes._screen_height * 0.017,
     borderRadius: 20,
     ...stylescustom.view1,
+    marginBottom: 20,
   },
   view1: {
     marginLeft: sizes._screen_width * 0.05,

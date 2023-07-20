@@ -16,23 +16,27 @@ const DiscountCouses = (props: Props) => {
   const {data} = useGetCourseQuery(`${props?.api}`);
   return (
     <>
-      <View style={styles.view}>
-        <Text style={styles.title1}>{props?.title}</Text>
-        <Text
-          style={styles.txt}
-          onPress={() =>
-            props.navigation.navigate('ViewAll', {
-              title: props?.title,
-              item: data?.items,
-            })
-          }>
-          Xem thêm
-        </Text>
-      </View>
-      <NewestCourses
-        data={data?.items.slice(0, 5)}
-        navigation={props.navigation}
-      />
+      {data?.items.length !== 0 && (
+        <>
+          <View style={styles.view}>
+            <Text style={styles.title1}>{props?.title}</Text>
+            <Text
+              style={styles.txt}
+              onPress={() =>
+                props.navigation.navigate('ViewAll', {
+                  title: props?.title,
+                  item: data?.items,
+                })
+              }>
+              Xem thêm
+            </Text>
+          </View>
+          <NewestCourses
+            data={data?.items.slice(0, 5)}
+            navigation={props.navigation}
+          />
+        </>
+      )}
     </>
   );
 };

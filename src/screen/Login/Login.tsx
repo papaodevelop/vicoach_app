@@ -129,7 +129,7 @@ const Login = ({
   }, [navigation, currentScreen]);
   return (
     <View style={styles.container}>
-      <Image source={images.logo} resizeMode="contain" style={styles.img} />
+      <Image source={images.logomkt2} resizeMode="contain" style={styles.img} />
       <Text style={styles.login}>LOGIN</Text>
       <View style={styles.view}>
         <CusTombtn
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     color: colors.ORANGE,
     fontFamily: fonts.textBold,
     fontSize: sizes._screen_width * 0.055,
-    marginTop: sizes._csreen_height * 0.1,
+
     alignSelf: 'center',
   },
   view: {
@@ -197,12 +197,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   img: {
-    tintColor: colors.ORANGE,
     alignSelf: 'center',
     marginTop: sizes._csreen_height * 0.1,
+    height: 200,
+    width: sizes._screen_width * 0.8,
   },
   txt3: {
-    color: colors.GREEN,
+    color: 'green',
     fontFamily: fonts.textRegular,
     fontSize: sizes._csreen_width * 0.04,
     alignSelf: 'center',

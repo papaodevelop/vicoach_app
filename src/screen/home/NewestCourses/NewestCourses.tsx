@@ -24,7 +24,7 @@ export default function NewestCourses(props: Props) {
         onPress={() =>
           props.navigation.navigate('CourseDetail', {
             id: item.id,
-            reviews: item.reviews,
+            reviews: item.avg_review,
           })
         }>
         <View>
@@ -51,7 +51,7 @@ export default function NewestCourses(props: Props) {
                 color={'#FFD700'}
                 size={sizes._screen_width * 0.04}
               />
-              <Text style={styles.txt5}>{item?.reviews}</Text>
+              <Text style={styles.txt5}>{item?.avg_review}</Text>
             </View>
           </View>
         </View>

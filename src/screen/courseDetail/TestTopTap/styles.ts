@@ -2,6 +2,7 @@ import {StyleSheet, Dimensions, Platform} from 'react-native';
 import stylescustom from '../../../res/stylescustom';
 import sizes from '../../../res/sizes';
 import fonts from '../../../res/fonts';
+import colors from '../../../res/colors';
 const G_WIN_WIDTH = Dimensions.get('window').width;
 
 export const styles = StyleSheet.create({
@@ -119,5 +120,10 @@ export const styles = StyleSheet.create({
     fontSize: sizes._screen_width * 0.05,
     alignSelf: 'center',
     marginTop: sizes._screen_height * 0.1,
+  },
+  view2: {
+    backgroundColor: colors.ORANGE,
+    height: 2,
+    borderRadius: 10,
   },
 });

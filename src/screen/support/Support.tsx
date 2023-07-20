@@ -73,10 +73,14 @@ export default function Support({
   return (
     <View style={stylescustom.container}>
       <HeaderScreen1 title="Hỗ Trợ khoá học" navigation={navigation} />
-      <FlatList
-        data={data?.items}
-        renderItem={({item}: {item: StoreInfo}) => <RenderItem item={item} />}
-      />
+      {data?.items.length !== 0 ? (
+        <FlatList
+          data={data?.items}
+          renderItem={({item}: {item: StoreInfo}) => <RenderItem item={item} />}
+        />
+      ) : (
+        <Text style={styles.txt}>Chưa có thông tin hỗ trợ hoá học</Text>
+      )}
       {isLoading && <Loading />}
     </View>
   );
@@ -95,5 +99,10 @@ const styles = StyleSheet.create({
     height: 15,
     width: 15,
     borderRadius: 20,
+  },
+  txt: {
+    ...stylescustom.txt,
+    alignSelf: 'center',
+    marginTop: 30,
   },
 });

@@ -53,7 +53,7 @@ export default function FeaturedCourses(props: Props) {
           </View>
           <View style={styles.view3}>
             <Text style={styles.txt3}>{txt1(textTitle)}</Text>
-            <Star star={item.reviews} />
+            <Star star={item.avg_review} />
             <View
               style={{
                 ...styles.view4,
@@ -117,7 +117,7 @@ export default function FeaturedCourses(props: Props) {
         scrollX={scrollX}
         dotStyle={styles.dot}
         inActiveDotOpacity={0.2}
-        activeDotColor={'#ee782c'}
+        activeDotColor={'#214987'}
         containerStyle={styles.view2}
       />
     </View>

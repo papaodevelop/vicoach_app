@@ -17,7 +17,6 @@ const RenderChildrenComment = ({item}: {item: ChildrenComment}) => {
       const aa = await Deletes({
         id: idCMT,
       }).unwrap();
-      console.log(aa);
     } catch (error) {
       Alert.alert('Không thể xoá bình luận');
     }

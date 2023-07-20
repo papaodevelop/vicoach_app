@@ -27,6 +27,7 @@ export default function DetailCategories({
           renderItem={({item}: {item: CourseCategoryType}) => (
             <RenderItemCouses item={item} navigation={navigation} />
           )}
+          showsVerticalScrollIndicator={false}
           keyExtractor={item => `${item?.id}`}
         />
       ) : (

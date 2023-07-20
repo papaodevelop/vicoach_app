@@ -20,6 +20,7 @@ interface Props {
 }
 const ExampleCustomTabbar = (props: Props) => {
   const {data, isLoading} = useGetdetailCourseQuery(`${props.id}`);
+
   const _renderTabBar = (props: any) => {
     return (
       <TabBar
@@ -27,11 +28,7 @@ const ExampleCustomTabbar = (props: Props) => {
         inactiveColor={'black'}
         activeColor={'red'}
         style={styles.tabbarStyle}
-        indicatorStyle={{
-          backgroundColor: colors.ORANGE,
-          height: 2,
-          borderRadius: 10,
-        }}
+        indicatorStyle={styles.view2}
       />
     );
   };

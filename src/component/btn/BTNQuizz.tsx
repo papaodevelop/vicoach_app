@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     ...stylescustom.view,
   },
   view1: {
-    backgroundColor: colors.ORANGE,
+    backgroundColor: colors.GREEN,
     height: 40,
     width: sizes._screen_width * 0.4,
     borderRadius: (sizes._screen_width * 0.12) / 2,

@@ -276,7 +276,7 @@ const TotabScoll: React.FC<Props> = props => {
         />
         <SmallImage />
         <Animated.Text style={[styles.txt2, titleStyle]}>
-          {` Xin Chào ! \n Chúc bạn một ngày tốt lành`}
+          {` Xin Chào ! \n Chúc bạn ngày mới tốt lành`}
         </Animated.Text>
         <Animated.View style={[styles.view1, detailStyle]}>
           <Text style={styles.txt}>{data?.name}</Text>

@@ -5,7 +5,6 @@ import stylescustom from '../../res/stylescustom';
 import RenderListVideo from './RenderListVideo';
 import {NavigationProp} from '@react-navigation/native';
 import RenderViedeo from './RenderViedeo';
-import BTNLogin from '../../component/btn/BTNLogin';
 export default function PlayVideo({
   navigation,
   route,
@@ -15,7 +14,6 @@ export default function PlayVideo({
 }) {
   const [select, setSelect] = useState<number>(0);
   const item = route?.params?.item[select];
-
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
       <View
@@ -27,27 +25,6 @@ export default function PlayVideo({
           url={item?.material?.active_file?.videoEmbebUrl}
         />
       </View>
-      <Text style={styles.title}>{item?.name}</Text>
-      <View
-        style={{
-          maxHeight: sizes._screen_height * 0.5,
-          paddingBottom: sizes._screen_height * 0.01,
-        }}>
-        <FlatList
-          data={route?.params?.item}
-          showsVerticalScrollIndicator={false}
-          renderItem={({item, index}: {item: MaterialType; index: number}) => (
-            <RenderListVideo
-              item={item}
-              index={index}
-              select={select}
-              setSelect={setSelect}
-            />
-          )}
-          contentContainerStyle={styles.view}
-        />
-      </View>
-      <BTNLogin onPress={() => navigation.goBack()} txt="Trở lại" />
     </View>
   );
 }

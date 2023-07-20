@@ -101,16 +101,18 @@ const Slapscreen1 = ({
   }
 
   return (
-    <ImageBackground style={styles.container} source={images.nen}>
-      <Image source={images.logoslap} style={styles.img} />
-      <Text style={styles.txt}>Vi Coaching</Text>
+    <View style={styles.container}>
+      <View style={styles.boderImg}>
+        <Image source={images.logomkt1} style={styles.img} />
+      </View>
+      <Text style={styles.txt}>MKT Software - Phần mềm MKT</Text>
       <Text style={styles.txt1}>Đang kiểm tra dữ liệu ...</Text>
       <View style={styles.main}>
         {dots.map(i => (
           <Dot key={i} active={i === active} />
         ))}
       </View>
-    </ImageBackground>
+    </View>
   );
 };
 
@@ -119,20 +121,20 @@ export default Slapscreen1;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.ORANGE,
+    backgroundColor: '#214987',
     alignItems: 'center',
     tintColor: 'white',
   },
   img: {
     height: sizes._screen_width * 0.6,
     width: sizes._screen_width * 0.6,
-    marginTop: sizes._screen_height * 0.2,
   },
   txt: {
     color: 'white',
     fontSize: sizes._screen_width * 0.07,
     fontFamily: fonts.textBold,
-    marginTop: sizes._screen_height * 0.04,
+    textAlign: 'center',
+    width: sizes._screen_width * 0.8,
   },
   txt1: {
     color: 'white',
@@ -146,5 +148,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     bottom: sizes._screen_height * 0.1,
     position: 'absolute',
+  },
+  boderImg: {
+    height: sizes._screen_width * 0.6,
+    width: sizes._screen_width * 0.6,
+    borderRadius: (sizes._screen_width * 0.6) / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    marginTop: sizes._screen_height * 0.2,
   },
 });

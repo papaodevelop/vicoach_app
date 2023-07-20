@@ -7,7 +7,6 @@ import stylescustom from '../../res/stylescustom';
 import Icon from 'react-native-vector-icons/Entypo';
 import sizes from '../../res/sizes';
 import colors from '../../res/colors';
-import Loading from '../../component/loading/Loading';
 const Header = ({
   onShow,
   data,
@@ -24,21 +23,17 @@ const Header = ({
             style={styles.img}
             rate={1}
             muted={false}
-            onError={val => Alert.alert('Không thể phát video')}
             fullscreenOrientation="all"
-            source={{uri: data?.video_overview?.url}}
+            source={{
+              uri: 'https://cdn81168665.blazingcdn.net/timeline/hartley-e001-s001a-01-2b6d4c/stream/index.m3u8',
+            }}
             resizeMode="contain"
             volume={8}
             ignoreSilentSwitch="ignore"
             fullscreenAutorotate={true}
-            onLoadStart={() => setLoad(true)}
             repeat={false}
             controls={true}
-            onLoad={() => setLoad(false)}
-            playInBackground={false}
-            playWhenInactive={false}
           />
-          {load && <Loading />}
         </>
       ) : (
         <>
@@ -65,7 +60,7 @@ const Header = ({
             <Text style={stylescustom.txt}>
               {data?.assign_instructor?.name}
             </Text>
-            <Text style={stylescustom.txt1}>
+            <Text style={styles.view}>
               {data?.assign_instructor?.short_description}
             </Text>
           </View>
@@ -107,4 +102,5 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginLeft: 10,
   },
+  view: {...stylescustom.txt1, width: sizes._screen_width * 0.6},
 });

@@ -7,17 +7,18 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import {Time, convertByteToMB} from '../../res/convert';
 import RNFetchBlob from 'rn-fetch-blob';
 import {BASE_URL} from '../../Api/BaseURL';
+import {NavigationProp} from '@react-navigation/native';
 interface Props {
   item: DocumentType;
   index: number;
   idCourse: number;
   check: number;
+  navigation: NavigationProp<Record<string, any>>;
 }
 export default function RenderContent(props: Props) {
   const [progress, setProgress] = useState<number | string>(0);
   const dowLoadFile = ({id, chapterId}: {id: number; chapterId: number}) => {
     const url = `${BASE_URL}course-list/streaming/${props.idCourse}/${chapterId}/${id}`;
-
     let dirs = RNFetchBlob.fs.dirs;
     const filePath = `${dirs.DocumentDir}`;
     var filename = props.item?.name;
@@ -53,7 +54,9 @@ export default function RenderContent(props: Props) {
       key={`3${props.index}`}
       onPress={() =>
         props.item?.material?.type == 'VIDEO'
-          ? undefined
+          ? props.navigation.navigate('PlayVideo', {
+              item: props?.item?.material?.active_file?.videoEmbebUrl,
+            })
           : dowLoadFile({id: props.item?.id, chapterId: props.check})
       }>
       <View style={styles.view1}>

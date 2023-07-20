@@ -19,12 +19,12 @@ export const itemNavigationDrawer = [
     navigation: 'Khoá học',
     icon: images.courses,
   },
-  {
-    id: 5,
-    name: 'Quizzes',
-    navigation: 'Quizzes',
-    icon: images.quizzs,
-  },
+  // {
+  //   id: 5,
+  //   name: 'Quizzes',
+  //   navigation: 'Quizzes',
+  //   icon: images.quizzs,
+  // },
   // {
   //   id: 6,
   //   name: 'Certificate',
