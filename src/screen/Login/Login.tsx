@@ -130,7 +130,7 @@ const Login = ({
   return (
     <View style={styles.container}>
       <Image source={images.logomkt2} resizeMode="contain" style={styles.img} />
-      <Text style={styles.login}>LOGIN</Text>
+      <Text style={styles.login}>ĐĂNG NHẬP</Text>
       <View style={styles.view}>
         <CusTombtn
           placeholder="Tên đăng nhập"

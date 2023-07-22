@@ -1,5 +1,6 @@
 import {
   Pressable,
+  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
@@ -12,6 +13,9 @@ import Orientation from 'react-native-orientation-locker';
 import Control from './Control';
 import sizes from '../../res/sizes';
 import {NavigationProp} from '@react-navigation/native';
+import WebView from 'react-native-webview';
+import Loading from '../../component/loading/Loading';
+
 const windowHeight = sizes._screen_width * (9 / 12);
 const windowWith = sizes._screen_width;
 export default function RenderViedeo({
@@ -25,6 +29,8 @@ export default function RenderViedeo({
   const [fullscren, setFullscren] = useState(false);
   const [show, setShow] = useState(false);
   const [play, setPlay] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const onLoad = () => {
@@ -70,67 +76,72 @@ export default function RenderViedeo({
   };
 
   return (
-    <Pressable onPress={() => setShow(!show)}>
-      <Video
-        ref={videoRef}
-        style={[
-          fullscren ? styles.backgroundVideofull : styles.backgroundVideo,
-        ]}
-        paused={play}
-        rate={1}
-        muted={false}
-        onError={val => console.log(val)}
-        fullscreenOrientation="all"
-        source={{
-          uri: 'https://vz-bf3c3d29-a25.b-cdn.net/135152/b2805bd6-61e7-417e-85a0-48445d3f0291/playlist.m3u8',
-          headers: {
-            Referer: 'https://khoahoc.phanmemmkt.vn',
-          },
-        }}
-        resizeMode="contain"
-        volume={8}
-        ignoreSilentSwitch="ignore"
-        fullscreenAutorotate={true}
-        onLoad={onLoad}
-        onLoadStart={() => console.log('loadStart')}
-        repeat={false}
-        controls={false}
-        onProgress={data => {
-          setCurrentTime(data.currentTime);
-          setDuration(data.playableDuration);
-        }}
-      />
+    <>
+      <Pressable onPress={() => setShow(!show)}>
+        <WebView
+          ref={videoRef}
+          style={[
+            fullscren ? styles.backgroundVideofull : styles.backgroundVideo,
+          ]}
+          // paused={play}
+          // rate={1}
+          // muted={false}
+          // onError={val => console.log(val)}
+          // fullscreenOrientation="all"
+          onLoadStart={() => setLoading(true)}
+          onLoadEnd={() => setLoading(false)}
+          source={{
+            uri: `${url}`,
+            headers: {
+              referer: 'https://khoahoc.phanmemmkt.vn',
+            },
+          }}
+          // resizeMode="contain"
+          // volume={8}
+          // ignoreSilentSwitch="ignore"
+          // fullscreenAutorotate={true}
+          // onLoad={onLoad}
+          // onLoadStart={() => console.log('loadStart')}
+          // repeat={false}
+          // controls={false}
+          // onProgress={data => {
+          //   setCurrentTime(data.currentTime);
+          //   setDuration(data.playableDuration);
+          // }}
+        />
 
-      {show && (
-        <View style={styles.control}>
-          <Control
-            back={() => navigation.goBack()}
-            currentTime={currentTime}
-            duration={duration > 0 ? duration : 0}
-            previous={previous}
-            onplay={play}
-            fullscren={fullscren}
-            handleFullScreen={handleFullScreen}
-            show={show}
-            setShow={setShow}
-            pause={handlePause}
-            play={handlePlay}
-            next={next}
-            onSlideCapture={(val: number) => {
-              videoRef.current.seek(val);
-              setCurrentTime(val);
-            }}
-          />
-        </View>
-      )}
-    </Pressable>
+        {show && (
+          <View style={styles.control}>
+            <Control
+              back={() => navigation.goBack()}
+              currentTime={currentTime}
+              duration={duration > 0 ? duration : 0}
+              previous={previous}
+              onplay={play}
+              fullscren={fullscren}
+              handleFullScreen={handleFullScreen}
+              show={show}
+              setShow={setShow}
+              pause={handlePause}
+              play={handlePlay}
+              next={next}
+              onSlideCapture={(val: number) => {
+                videoRef.current.seek(val);
+                setCurrentTime(val);
+              }}
+            />
+          </View>
+        )}
+      </Pressable>
+      {loading && <Loading />}
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   backgroundVideo: {
     height: sizes._screen_height,
-    width: windowWith,
+    width: sizes.width,
     backgroundColor: 'black',
     alignSelf: 'center',
   },

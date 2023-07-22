@@ -13,17 +13,15 @@ export default function PlayVideo({
   route: any;
 }) {
   const [select, setSelect] = useState<number>(0);
-  const item = route?.params?.item[select];
+  const item = route?.params?.item;
+
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
       <View
         style={{
           height: sizes._screen_width * (9 / 12),
         }}>
-        <RenderViedeo
-          navigation={navigation}
-          url={item?.material?.active_file?.videoEmbebUrl}
-        />
+        <RenderViedeo navigation={navigation} url={item} />
       </View>
     </View>
   );

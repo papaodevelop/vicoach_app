@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {Alert, Pressable, Text, View} from 'react-native';
+import {Alert, Linking, Pressable, Text, View} from 'react-native';
 import {
   CollapsibleHeaderTabView as ZHeaderTabView,
   ZTabViewProps,
@@ -15,12 +15,12 @@ import Infomation from '../../Infomation';
 import Content from '../../Content';
 import Comment from '../../Comment';
 import Icons from 'react-native-vector-icons/AntDesign';
-
 import RBSheet from 'react-native-raw-bottom-sheet';
 import colors from '../../../../res/colors';
 import {useDispatch} from 'react-redux';
 import {addCart} from '../../../../redux/state/cart.reducer';
 import {useAddCousesFreeMutation} from '../../../../redux/state';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface ScrollableTabViewContainerProps {
   navigation: NavigationProp<Record<string, any>>;
@@ -67,19 +67,38 @@ const TabViewContainer: React.FC<
     props.data?.category?.name?.vi || props.data?.category?.name?.en;
   const refRBSheet = useRef<any>();
   const dispatch = useDispatch();
-  const addCarts = () => {
-    dispatch(
-      addCart({
-        id: props.item?.id,
-        name: textTitle,
-        reviews: props.item?.avg_review,
-        thumbnail: props.data?.thumbnail?.url || null,
-        startDate: props.data?.created_at,
-        price: props.data?.price,
-        discount: props.data?.discount,
-      }),
+  const openWebsite = () => {
+    const url = 'https://vicoaching.vn/ungdung/'; // Thay đổi URL thành trang web bạn muốn mở
+    Linking.openURL(url).catch(error =>
+      console.error('Lỗi khi mở trang web: ', error),
     );
-    refRBSheet.current.close();
+  };
+  const addCarts = () => {
+    // dispatch(
+    //   addCart({
+    //     id: props.item?.id,
+    //     name: textTitle,
+    //     reviews: props.item?.avg_review,
+    //     thumbnail: props.data?.thumbnail?.url || null,
+    //     startDate: props.data?.created_at,
+    //     price: props.data?.price,
+    //     discount: props.data?.discount,
+    //   }),
+    // );
+    // refRBSheet.current.close();
+
+    Alert.alert(
+      `Thông báo`,
+      'Xin lỗi tính năng này của chúng tôi đang trong qúa trình phát triển bạn hãy truy cập trang web của chúng tôi để tiến hành mua khoá học',
+      [
+        {
+          text: 'Hủy bỏ',
+          style: 'cancel',
+          onPress: () => console.log('Bạn đã hủy bỏ.'),
+        },
+        {text: 'Truy cập', onPress: () => openWebsite()},
+      ],
+    );
   };
   const _renderScrollHeader = () => {
     return (
@@ -160,8 +179,8 @@ const TabViewContainer: React.FC<
             <Pressable
               style={styles.view3}
               onPress={() => add(props.data?.slug)}>
-              <Icons
-                name="shoppingcart"
+              <MaterialCommunityIcons
+                name="book-plus"
                 color={colors.BLACK}
                 size={sizes._screen_width * 0.06}
               />

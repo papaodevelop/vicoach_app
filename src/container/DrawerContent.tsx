@@ -79,7 +79,7 @@ export default function DrawerContent(props: Props) {
           }}>
           <Image source={images.logout} style={styles.icon} />
           <Text style={styles.txt} onPress={handleLogout}>
-            Logout
+            Đăng xuất
           </Text>
         </TouchableOpacity>
       </SafeAreaView>

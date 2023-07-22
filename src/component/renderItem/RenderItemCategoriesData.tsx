@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     ...stylescustom.view1,
     width: sizes._csreen_width * 0.6,
+    marginRight: 10,
   },
   view1: {
     height: sizes._screen_width * 0.17,

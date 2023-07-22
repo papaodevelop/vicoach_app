@@ -20,6 +20,7 @@ interface Props {
 }
 const ExampleCustomTabbar = (props: Props) => {
   const {data, isLoading} = useGetdetailCourseQuery(`${props.id}`);
+  console.log(data?.id);
 
   const _renderTabBar = (props: any) => {
     return (

@@ -3,7 +3,7 @@ import images from '../res/images';
 export const itemNavigationDrawer = [
   {
     id: 1,
-    name: 'Home',
+    name: 'Trang chủ',
     navigation: 'Trang chủ',
     icon: images.home,
   },
@@ -15,7 +15,7 @@ export const itemNavigationDrawer = [
   // },
   {
     id: 3,
-    name: 'Courses',
+    name: 'Khoá học của tôi',
     navigation: 'Khoá học',
     icon: images.courses,
   },

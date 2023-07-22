@@ -7,6 +7,7 @@ import stylescustom from '../../res/stylescustom';
 import Icon from 'react-native-vector-icons/Entypo';
 import sizes from '../../res/sizes';
 import colors from '../../res/colors';
+import WebView from 'react-native-webview';
 const Header = ({
   onShow,
   data,
@@ -15,24 +16,26 @@ const Header = ({
   data: CourseDetail | undefined;
 }) => {
   const [load, setLoad] = useState(false);
+  let url = data?.youtube_link as string;
+  function layMaVideoTuURL(urls: string) {
+    let maVideo = urls.substring(urls.lastIndexOf('/') + 1);
+    if (maVideo.includes('?')) {
+      maVideo = maVideo.substring(0, maVideo.indexOf('?'));
+    }
+    return maVideo;
+  }
+
   return (
     <View pointerEvents="auto" style={{paddingBottom: 30}}>
-      {data?.video_overview?.url ? (
+      {data?.youtube_link ? (
         <>
-          <Video
+          <WebView
             style={styles.img}
-            rate={1}
-            muted={false}
-            fullscreenOrientation="all"
             source={{
-              uri: 'https://cdn81168665.blazingcdn.net/timeline/hartley-e001-s001a-01-2b6d4c/stream/index.m3u8',
+              uri: `https://youtobe.com/embed/${layMaVideoTuURL(
+                url,
+              )}?rel=0&autoplay=0&showinfo=0`,
             }}
-            resizeMode="contain"
-            volume={8}
-            ignoreSilentSwitch="ignore"
-            fullscreenAutorotate={true}
-            repeat={false}
-            controls={true}
           />
         </>
       ) : (

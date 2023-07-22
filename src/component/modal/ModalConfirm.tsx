@@ -23,7 +23,7 @@ const ModalConfirm = (props: Props) => {
   const renderContent = () => (
     <View style={styles.content}>
       <View style={styles.head}>
-        <Text style={styles.txthead}>Viết đánh giá</Text>
+        <Text style={styles.txthead}>Phần mềm MKT</Text>
       </View>
       <View style={styles.view}>
         <Text style={styles.title}>{props.txt}</Text>
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   txthead: {
     color: 'white',
     fontFamily: fonts.textBold,
-    fontSize: sizes._screen_width * 0.06,
+    fontSize: sizes._screen_width * 0.055,
   },
   view: {
     backgroundColor: 'white',

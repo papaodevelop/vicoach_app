@@ -32,7 +32,7 @@ export interface CourseDetail {
   complete_course_sequence: boolean;
   show_overview_media: boolean;
   host: string;
-  youtube_link: null;
+  youtube_link: string;
   category: {
     id: number;
     name: {

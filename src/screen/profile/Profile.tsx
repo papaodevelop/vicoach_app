@@ -12,7 +12,7 @@ const Profile = ({
 }) => {
   return (
     <View style={stylescustom.container}>
-      <HeaderScreen navigation={navigation} title="Profile" />
+      <HeaderScreen navigation={navigation} title="Hồ sơ" />
       <GestureHandlerRootView style={{flex: 1}}>
         <TotabScoll navigation={navigation} />
       </GestureHandlerRootView>

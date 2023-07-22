@@ -63,7 +63,7 @@ export default function Support({
           style={{
             ...styles.view1,
             backgroundColor:
-              item?.status === 'ACTIVE' ? colors.GREEN : colors.GRAY,
+              item?.status === 'ACTIVE' ? '#66e901' : colors.GRAY,
           }}
         />
       </View>

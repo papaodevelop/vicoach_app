@@ -6,8 +6,9 @@ import sizes from '../../res/sizes';
 import stylescustom from '../../res/stylescustom';
 import {useGetBlogPostQuery} from '../../redux/state';
 import images from '../../res/images';
+import Loading from '../../component/loading/Loading';
 export default function Blog({navigation}: any) {
-  const {data} = useGetBlogPostQuery('');
+  const {data, isLoading} = useGetBlogPostQuery('');
   return (
     <View style={styles.container}>
       <HeaderScreen1 navigation={navigation} title="Blog" />
@@ -32,6 +33,7 @@ export default function Blog({navigation}: any) {
           <Text style={stylescustom.txtBold}>Không có bài viết nào</Text>
         </View>
       )}
+      {isLoading && <Loading />}
     </View>
   );
 }

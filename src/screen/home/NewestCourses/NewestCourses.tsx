@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   txt4: {
     color: colors.RED,
     fontFamily: fonts.textRegular,
-    fontSize: sizes._screen_width * 0.04,
+    fontSize: sizes._screen_width * 0.03,
   },
   view3: {
     backgroundColor: colors.WHITE,
