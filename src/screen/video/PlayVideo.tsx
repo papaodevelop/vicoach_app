@@ -1,10 +1,10 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
 import sizes from '../../res/sizes';
 import stylescustom from '../../res/stylescustom';
-import RenderListVideo from './RenderListVideo';
 import {NavigationProp} from '@react-navigation/native';
-import RenderViedeo from './RenderViedeo';
+
+import WatchCoses from './WatchCoses';
 export default function PlayVideo({
   navigation,
   route,
@@ -12,8 +12,7 @@ export default function PlayVideo({
   navigation: NavigationProp<Record<string, any>>;
   route: any;
 }) {
-  const [select, setSelect] = useState<number>(0);
-  const item = route?.params?.item;
+  const item = route?.params;
 
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
@@ -21,7 +20,7 @@ export default function PlayVideo({
         style={{
           height: sizes._screen_width * (9 / 12),
         }}>
-        <RenderViedeo navigation={navigation} url={item} />
+        <WatchCoses navigation={navigation} item={item} />
       </View>
     </View>
   );

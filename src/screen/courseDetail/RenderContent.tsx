@@ -55,7 +55,8 @@ export default function RenderContent(props: Props) {
       onPress={() =>
         props.item?.material?.type == 'VIDEO'
           ? props.navigation.navigate('PlayVideo', {
-              item: props?.item?.material?.active_file?.videoEmbebUrl,
+              url: props?.item?.material?.active_file?.videoEmbebUrl,
+              title: props?.item?.name,
             })
           : dowLoadFile({id: props.item?.id, chapterId: props.check})
       }>

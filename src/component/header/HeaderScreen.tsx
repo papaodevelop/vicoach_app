@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   title: {
     color: colors.WHITE,
     fontFamily: fonts.textBold,
-    fontSize: sizes._screen_width * 0.06,
+    fontSize: sizes._screen_width * 0.055,
     alignSelf: 'center',
     textTransform: 'uppercase',
     width: sizes._screen_width * 0.8,
