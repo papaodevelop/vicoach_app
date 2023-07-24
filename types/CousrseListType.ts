@@ -168,3 +168,46 @@ interface DocumentType {
     time: number;
   };
 }
+interface LeasionList {
+  id: number;
+  privacy: string;
+  status: string;
+  name: string;
+  description: string;
+  duration: number;
+  material: {
+    id: number;
+    title: string;
+    type: string;
+    status: string;
+    created_at: string;
+    updated_at: string;
+
+    active_file: {
+      id: number;
+      version: number;
+      file_size: number;
+      created_at: string;
+      updated_at: string;
+      path: string;
+      fileName: string;
+      videoEmbebUrl: string;
+      videoId: string;
+      videoLibraryId: number;
+      collectionId: string | number;
+      status: number;
+    };
+  };
+  quiz: {
+    id: number;
+    title: {
+      en: string;
+      vi: string;
+    };
+    instruction: {
+      en: string;
+      vi: string;
+    };
+    time: number;
+  };
+}

@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   view: {
-    marginTop: sizes._screen_height * 0.035,
+    marginTop: sizes._screen_height * 0.02,
   },
   icon: {
     tintColor: colors.WHITE,

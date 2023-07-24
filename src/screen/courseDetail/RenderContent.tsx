@@ -57,6 +57,8 @@ export default function RenderContent(props: Props) {
           ? props.navigation.navigate('PlayVideo', {
               url: props?.item?.material?.active_file?.videoEmbebUrl,
               title: props?.item?.name,
+              idCourse: props.idCourse,
+              id: props.item.material.id,
             })
           : dowLoadFile({id: props.item?.id, chapterId: props.check})
       }>

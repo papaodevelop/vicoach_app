@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   txt: {
     color: 'white',
     fontFamily: fonts.textBold,
-    fontSize: sizes._screen_width * 0.065,
+    fontSize: sizes._screen_width * 0.05,
   },
   txt1: {
     color: 'white',

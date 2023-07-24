@@ -15,13 +15,20 @@ interface Props {
 }
 export default function BTNQuizz(props: Props) {
   return (
-    <View style={{...styles.view, ...props.view}}>
+    <View>
       {props.index == 0 ? (
-        <Pressable onPress={props.next} style={styles.btn}>
-          <Text style={styles.txt}>Tiếp theo</Text>
-        </Pressable>
+        <View style={{width: sizes._screen_width, marginTop: 20}}>
+          <Pressable onPress={props.next} style={styles.btn}>
+            <Text style={styles.txt}>Tiếp theo</Text>
+          </Pressable>
+        </View>
       ) : props.index == props.maxIndex ? (
-        <>
+        <View
+          style={{
+            ...styles.view,
+            ...props.view,
+            width: sizes._screen_width * 0.9,
+          }}>
           {props.complete ? (
             <>
               <Pressable
@@ -42,9 +49,14 @@ export default function BTNQuizz(props: Props) {
               <Text style={styles.txt}>Trở lại</Text>
             </Pressable>
           )}
-        </>
+        </View>
       ) : (
-        <>
+        <View
+          style={{
+            ...styles.view,
+            ...props.view,
+            width: sizes._screen_width * 0.9,
+          }}>
           <Pressable
             style={{...styles.view1, backgroundColor: colors.GRAY}}
             onPress={props.return}>
@@ -53,7 +65,7 @@ export default function BTNQuizz(props: Props) {
           <Pressable style={styles.view1} onPress={props.next}>
             <Text style={styles.txt}>Tiếp theo</Text>
           </Pressable>
-        </>
+        </View>
       )}
     </View>
   );
@@ -77,10 +89,11 @@ const styles = StyleSheet.create({
   },
   btn: {
     backgroundColor: colors.ORANGE,
-    height: sizes._screen_width * 0.12,
-    width: sizes._screen_width * 0.9,
+    height: 45,
+    width: sizes._screen_width * 0.65,
     borderRadius: (sizes._screen_width * 0.12) / 2,
     alignItems: 'center',
     justifyContent: 'center',
+    alignSelf: 'center',
   },
 });

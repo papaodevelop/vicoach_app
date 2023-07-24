@@ -21,15 +21,7 @@ export default function Content({
   index: number;
 }) {
   const {data} = useGetCouseListQuery(`${datas?.id}`);
-  const videoLessons = data?.chapter_list.reduce(function (acc, chapter) {
-    const videoLessonsInChapter = chapter?.lesson_list.filter(function (
-      lesson,
-    ) {
-      return lesson?.material?.type === 'VIDEO';
-    });
-    //@ts-ignore
-    return acc.concat(videoLessonsInChapter);
-  }, []);
+ 
 
   const RendeFoodter = () => (
     <>

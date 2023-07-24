@@ -7,7 +7,6 @@ import {NavigationProp} from '@react-navigation/native';
 import {CourseCategoryType} from '../../../../types/CourseCategoryType';
 import {useGetdetailCourseQuery} from '../../../redux/state';
 import Loading from '../../../component/loading/Loading';
-import colors from '../../../res/colors';
 import {TabViewContainer} from './component/TabViewBase';
 import {Text} from 'react-native-animatable';
 import images from '../../../res/images';

@@ -267,7 +267,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   btn: {
-    width: sizes._screen_width * 0.9,
     alignSelf: 'center',
 
     marginTop: sizes._screen_height * 0.02,

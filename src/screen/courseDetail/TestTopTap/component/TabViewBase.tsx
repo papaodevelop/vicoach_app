@@ -66,7 +66,6 @@ const TabViewContainer: React.FC<
   const category =
     props.data?.category?.name?.vi || props.data?.category?.name?.en;
   const refRBSheet = useRef<any>();
-  const dispatch = useDispatch();
   const openWebsite = () => {
     const url = 'https://vicoaching.vn/ungdung/'; // Thay đổi URL thành trang web bạn muốn mở
     Linking.openURL(url).catch(error =>

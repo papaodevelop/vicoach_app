@@ -38,6 +38,7 @@
     noCart: require('../assets/images/noCart.png'),
     nodata: require('../assets/images/nodata.png'),
     noimage: require('../assets/images/noimage.jpeg'),
+    playvideo: require('../assets/images/playvideo.png'),
     quizz: require('../assets/images/quizz.png'),
     quizzs: require('../assets/images/quizzs.png'),
     setting: require('../assets/images/setting.png'),

@@ -34,7 +34,7 @@ export default function HeaderScreen1(props: Props) {
           <Text style={styles.title}>{props.title}</Text>
           <Icons
             name="menu-fold"
-            size={sizes._screen_width * 0.09}
+            size={sizes._screen_width * 0.075}
             color={'white'}
             style={styles.icon}
             onPress={() => props.navigation.toggleDrawer()}
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   title: {
     color: colors.WHITE,
     fontFamily: fonts.textBold,
-    fontSize: sizes._screen_width * 0.06,
+    fontSize: sizes._screen_width * 0.055,
     alignSelf: 'center',
     textTransform: 'uppercase',
   },
