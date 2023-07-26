@@ -2,6 +2,7 @@ import {
   FlatList,
   Pressable,
   ScrollView,
+  SectionList,
   StyleSheet,
   Text,
   View,
@@ -27,50 +28,60 @@ export default function WatchCoses({
     title: string;
     idCourse: number;
     id: number;
+    indexs: number;
+    index: number;
   };
 }) {
-  interface List {
-    name: string;
-    lesson_list: LeasionList[];
-    id: number;
-  }
-
   const [url, setUrl] = useState(item?.url);
-  const flatListRef = useRef<FlatList>(null);
+  const flatListRef = useRef<SectionList>(null);
   const [select, setSelect] = useState(item?.id);
   const [title, setTitle] = useState(item?.title);
   const {data, isLoading} = useGetCouseListQuery(`${item?.idCourse}`);
+  const du_lieu_moi: any = data?.chapter_list.map(chapter => ({
+    ...chapter,
+    data: [...chapter?.lesson_list],
+  }));
 
-  const RendeItem = ({item}: {item: List}) => {
+  useEffect(() => {
+    setTimeout(() => {
+      flatListRef?.current?.scrollToLocation({
+        sectionIndex: item?.indexs,
+        itemIndex: item?.index,
+        viewPosition: 0,
+        animated: true,
+      });
+    }, 1000);
+  }, []);
+  du_lieu_moi.forEach((chapter: any) => delete chapter?.lesson_list);
+  console.log(du_lieu_moi);
+  const renderSectionHeader = ({section: {name}}: any) => (
+    <View style={styles.view2}>
+      <Text style={styles.txt1}>{name}</Text>
+    </View>
+  );
+  const RendeItem = ({item}: {item: any}) => {
     return (
       <View
         style={{
           width: sizes._screen_width * 0.95,
         }}>
-        <Text style={styles.txt1}>{item?.name}</Text>
-        {item?.lesson_list?.map((items, index) => {
-          return (
-            <Pressable
-              onPress={() => {
-                setSelect(items?.id);
-                setTitle(items?.name);
-                setUrl(items?.material?.active_file?.videoEmbebUrl);
-              }}
-              key={index}
-              style={[
-                styles.view,
-                {
-                  backgroundColor:
-                    select == items?.id ? '#dfdfdf' : 'transparent',
-                },
-              ]}>
-              <View style={styles.view1}>
-                <Image source={images.playvideo} style={styles.img} />
-              </View>
-              <Text style={styles.txt2}>{items?.name}</Text>
-            </Pressable>
-          );
-        })}
+        <Pressable
+          onPress={() => {
+            setSelect(item?.id);
+            setTitle(item?.name);
+            setUrl(item?.material?.active_file?.videoEmbebUrl);
+          }}
+          style={[
+            styles.view,
+            {
+              backgroundColor: select == item?.id ? '#dfdfdf' : 'transparent',
+            },
+          ]}>
+          <View style={styles.view1}>
+            <Image source={images.playvideo} style={styles.img} />
+          </View>
+          <Text style={styles.txt2}>{item?.name}</Text>
+        </Pressable>
       </View>
     );
   };
@@ -82,14 +93,14 @@ export default function WatchCoses({
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.txt}>Video liên quan</Text>
       <View style={{marginBottom: 20}}>
-        <FlatList
+        <SectionList
           ref={flatListRef}
-          data={data?.chapter_list}
+          sections={du_lieu_moi}
           renderItem={RendeItem}
           contentContainerStyle={{alignItems: 'center'}}
-          keyExtractor={item => `cc${item?.id}`}
+          keyExtractor={(item, index) => `cc${item?.id + index}`}
           style={{marginTop: 10}}
-          initialNumToRender={2}
+          renderSectionHeader={renderSectionHeader}
         />
       </View>
       {isLoading && <Loading />}
@@ -149,4 +160,5 @@ const styles = StyleSheet.create({
     ...stylescustom.txt,
   },
   img: {width: 50, height: 50},
+  view2: {backgroundColor: 'white', padding: 10, borderRadius: 10},
 });

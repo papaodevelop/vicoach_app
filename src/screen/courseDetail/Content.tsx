@@ -23,7 +23,7 @@ export default function Content({
 
   const RendeFoodter = () => (
     <>
-      {data?.chapter_list.map(i => {
+      {data?.chapter_list.map((i, indexs) => {
         const data1 = i?.lesson_list?.filter(
           obj => obj?.duration !== undefined,
         );
@@ -45,6 +45,7 @@ export default function Content({
                     index={index}
                     idCourse={data?.id}
                     check={i?.id}
+                    indexs={indexs}
                   />
                 )}
                 style={{marginTop: sizes._screen_height * 0.02}}

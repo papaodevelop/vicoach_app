@@ -14,6 +14,7 @@ interface Props {
   idCourse: number;
   check: number;
   navigation: NavigationProp<Record<string, any>>;
+  indexs: number;
 }
 export default function RenderContent(props: Props) {
   const [progress, setProgress] = useState<number | string>(0);
@@ -59,6 +60,8 @@ export default function RenderContent(props: Props) {
               title: props?.item?.name,
               idCourse: props.idCourse,
               id: props.item.id,
+              indexs: props.indexs,
+              index: props.index,
             })
           : dowLoadFile({id: props.item?.id, chapterId: props.check});
       }}>
