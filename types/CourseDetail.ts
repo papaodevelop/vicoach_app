@@ -10,6 +10,7 @@ export interface CourseDetail {
     en: string;
     vi: string;
   };
+  achieved: string[];
   language: string;
   duration: number;
   view_scope: string;

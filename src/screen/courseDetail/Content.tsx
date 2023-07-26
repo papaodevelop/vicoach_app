@@ -3,7 +3,6 @@ import React from 'react';
 import stylescustom from '../../res/stylescustom';
 import sizes from '../../res/sizes';
 import RenderContent from './RenderContent';
-import BTNLogin from '../../component/btn/BTNLogin';
 import {NavigationProp} from '@react-navigation/native';
 import {CourseDetail} from '../../../types/CourseDetail';
 import QuizDetail from './QuizDetail';
@@ -21,7 +20,6 @@ export default function Content({
   index: number;
 }) {
   const {data} = useGetCouseListQuery(`${datas?.id}`);
- 
 
   const RendeFoodter = () => (
     <>

@@ -18,7 +18,7 @@ const ModalPay = (props: Props) => {
   const renderContent = () => (
     <View style={styles.content}>
       <View style={styles.head}>
-        <Text style={styles.txthead}>Vi Coaching</Text>
+        <Text style={styles.txthead}>Phần mềm MKT</Text>
       </View>
       <View style={styles.view}>
         <View style={styles.view1}>

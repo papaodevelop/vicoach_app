@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import sizes from '../../res/sizes';
 import colors from '../../res/colors';
 import WebView from 'react-native-webview';
+import Loading from '../../component/loading/Loading';
 const Header = ({
   onShow,
   data,
@@ -31,12 +32,15 @@ const Header = ({
         <>
           <WebView
             style={styles.img}
+            onLoadStart={() => setLoad(true)}
+            onLoadEnd={() => setLoad(false)}
             source={{
               uri: `https://youtobe.com/embed/${layMaVideoTuURL(
                 url,
               )}?rel=0&autoplay=0&showinfo=0`,
             }}
           />
+          {load && <Loading />}
         </>
       ) : (
         <>

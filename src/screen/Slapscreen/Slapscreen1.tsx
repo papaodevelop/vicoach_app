@@ -105,7 +105,7 @@ const Slapscreen1 = ({
       <View style={styles.boderImg}>
         <Image source={images.logomkt1} style={styles.img} />
       </View>
-      <Text style={styles.txt}>MKT Software - Phần mềm MKT</Text>
+      <Text style={styles.txt}>Phần mềm MKT</Text>
       <Text style={styles.txt1}>Đang kiểm tra dữ liệu ...</Text>
       <View style={styles.main}>
         {dots.map(i => (

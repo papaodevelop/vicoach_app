@@ -28,6 +28,7 @@ export default function FeaturedCourses(props: Props) {
   const scrollX = React.useRef(new Animated.Value(0))?.current;
   const RenderItem = ({item}: {item: CourseCategoryType}) => {
     const textTitle = item?.title?.vi || item?.title?.en;
+
     return (
       <Pressable
         style={styles.view}
@@ -109,6 +110,7 @@ export default function FeaturedCourses(props: Props) {
         )}
         pagingEnabled
         horizontal
+        decelerationRate={'normal'}
         scrollEventThrottle={16}
         renderItem={({item}) => <RenderItem item={item} />}
       />
@@ -159,9 +161,10 @@ const styles = StyleSheet.create({
     color: colors.WHITE,
   },
   view3: {
-    marginTop: sizes._screen_height * 0.11,
     width: sizes._screen_width * 0.8,
     alignSelf: 'center',
+    position: 'absolute',
+    bottom: 20,
   },
   view4: {
     alignItems: 'center',

@@ -59,7 +59,11 @@ const Register = ({navigation}: any) => {
           style={styles.icon}
           onPress={() => navigation.goBack()}
         />
-        <Image source={images.logo} resizeMode="contain" style={styles.img} />
+        <Image
+          source={images.logomkt1}
+          resizeMode="contain"
+          style={styles.img}
+        />
         <Text style={styles.login}>ĐĂNG KÝ</Text>
         <View style={styles.view}>
           <CusTombtn
@@ -126,7 +130,6 @@ const styles = StyleSheet.create({
     color: colors.ORANGE,
     fontFamily: fonts.textBold,
     fontSize: sizes._screen_width * 0.055,
-    marginTop: sizes._csreen_height * 0.05,
     alignSelf: 'center',
   },
   view: {
@@ -140,9 +143,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   img: {
-    tintColor: colors.ORANGE,
     alignSelf: 'center',
     marginTop: sizes._csreen_height * 0.03,
+    height: sizes._screen_width * 0.5,
+    width: sizes._screen_width * 0.5,
   },
   icon: {marginTop: sizes._screen_height * 0.05, marginLeft: 15},
 });

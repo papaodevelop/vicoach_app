@@ -52,16 +52,16 @@ export default function RenderContent(props: Props) {
     <Pressable
       style={styles.view}
       key={`3${props.index}`}
-      onPress={() =>
+      onPress={() => {
         props.item?.material?.type == 'VIDEO'
           ? props.navigation.navigate('PlayVideo', {
               url: props?.item?.material?.active_file?.videoEmbebUrl,
               title: props?.item?.name,
               idCourse: props.idCourse,
-              id: props.item.material.id,
+              id: props.item.id,
             })
-          : dowLoadFile({id: props.item?.id, chapterId: props.check})
-      }>
+          : dowLoadFile({id: props.item?.id, chapterId: props.check});
+      }}>
       <View style={styles.view1}>
         {props.item?.material?.type == 'VIDEO' ? (
           <Icon
@@ -82,7 +82,7 @@ export default function RenderContent(props: Props) {
         <Text style={styles.txt}>
           {props.item?.material?.type}{' '}
           {props.item?.material?.type == 'VIDEO'
-            ? Time(props.item.duration)
+            ? Time(props.item?.duration)
             : convertByteToMB(props.item?.material?.active_file?.file_size)}
         </Text>
         {progress ? (

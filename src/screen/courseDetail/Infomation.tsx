@@ -75,7 +75,16 @@ export default function Infomation({
             ))}
           </>
         )}
-
+        {datas?.description?.vi && (
+          <View style={{marginTop: 20}}>
+            <Text style={stylescustom.txt}>
+              <Text style={{color: colors.BLACK}}>
+                <Text style={{color: colors.RED}}>Miêu tả:</Text>{' '}
+                {datas?.description?.vi}
+              </Text>
+            </Text>
+          </View>
+        )}
         {datas?.requirements?.vi && (
           <View style={{marginTop: 20}}>
             <Text style={stylescustom.txt}>
@@ -86,16 +95,27 @@ export default function Infomation({
             </Text>
           </View>
         )}
-        {datas?.description?.vi && (
+        {datas?.achieved.length !== 0 && (
           <View style={{marginTop: 20}}>
             <Text style={stylescustom.txt}>
               <Text style={{color: colors.BLACK}}>
-                <Text style={{color: colors.RED}}>Kết quả:</Text>{' '}
-                {datas?.description?.vi}
+                <Text style={{color: colors.RED}}>Đạt được :</Text>{' '}
+                {datas?.achieved}
               </Text>
             </Text>
           </View>
         )}
+        {datas?.outcomes.vi && (
+          <View style={{marginTop: 20}}>
+            <Text style={stylescustom.txt}>
+              <Text style={{color: colors.BLACK}}>
+                <Text style={{color: colors.RED}}>Kết quả :</Text>{' '}
+                {datas?.outcomes?.vi}
+              </Text>
+            </Text>
+          </View>
+        )}
+
         <View>
           <FlatList
             scrollEnabled={false}

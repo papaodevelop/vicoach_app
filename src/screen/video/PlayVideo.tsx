@@ -1,7 +1,6 @@
-import {StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
+import {View} from 'react-native';
+import React from 'react';
 import sizes from '../../res/sizes';
-import stylescustom from '../../res/stylescustom';
 import {NavigationProp} from '@react-navigation/native';
 
 import WatchCoses from './WatchCoses';
@@ -25,17 +24,3 @@ export default function PlayVideo({
     </View>
   );
 }
-const styles = StyleSheet.create({
-  title: {
-    ...stylescustom.txtBold,
-    fontSize: sizes._screen_width * 0.05,
-    width: sizes._screen_width * 0.96,
-    alignSelf: 'center',
-    marginTop: 10,
-  },
-  view: {
-    marginTop: 10,
-    width: sizes._screen_width,
-    alignItems: 'center',
-  },
-});

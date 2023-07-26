@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import HeaderScreen from '../../component/header/HeaderScreen';
 import RenderViedeo from './RenderViedeo';
 import {NavigationProp} from '@react-navigation/native';
@@ -17,7 +17,6 @@ import Loading from '../../component/loading/Loading';
 import stylescustom from '../../res/stylescustom';
 import {Image} from 'react-native';
 import images from '../../res/images';
-import colors from '../../res/colors';
 export default function WatchCoses({
   navigation,
   item,
@@ -33,12 +32,15 @@ export default function WatchCoses({
   interface List {
     name: string;
     lesson_list: LeasionList[];
+    id: number;
   }
-  const [select, setSelect] = useState(item.id);
-  const [url, setUrl] = useState(item.url);
-  const [title, setTitle] = useState(item.title);
 
+  const [url, setUrl] = useState(item?.url);
+  const flatListRef = useRef<FlatList>(null);
+  const [select, setSelect] = useState(item?.id);
+  const [title, setTitle] = useState(item?.title);
   const {data, isLoading} = useGetCouseListQuery(`${item?.idCourse}`);
+
   const RendeItem = ({item}: {item: List}) => {
     return (
       <View
@@ -46,29 +48,26 @@ export default function WatchCoses({
           width: sizes._screen_width * 0.95,
         }}>
         <Text style={styles.txt1}>{item?.name}</Text>
-        {item?.lesson_list?.map((item, index) => {
+        {item?.lesson_list?.map((items, index) => {
           return (
             <Pressable
               onPress={() => {
-                setSelect(item?.id);
-                setTitle(item?.name);
-                setUrl(item?.material?.active_file?.videoEmbebUrl);
+                setSelect(items?.id);
+                setTitle(items?.name);
+                setUrl(items?.material?.active_file?.videoEmbebUrl);
               }}
               key={index}
               style={[
                 styles.view,
                 {
                   backgroundColor:
-                    select === item?.id ? '#dfdfdf' : 'transparent',
-                  height: 90,
-                  padding: 10,
-                  alignItems: 'center',
+                    select == items?.id ? '#dfdfdf' : 'transparent',
                 },
               ]}>
               <View style={styles.view1}>
                 <Image source={images.playvideo} style={styles.img} />
               </View>
-              <Text style={styles.txt2}>{item?.name}</Text>
+              <Text style={styles.txt2}>{items?.name}</Text>
             </Pressable>
           );
         })}
@@ -82,12 +81,15 @@ export default function WatchCoses({
       <RenderViedeo url={url} />
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.txt}>Video liên quan</Text>
-      <View>
+      <View style={{marginBottom: 20}}>
         <FlatList
+          ref={flatListRef}
           data={data?.chapter_list}
           renderItem={RendeItem}
           contentContainerStyle={{alignItems: 'center'}}
-          keyExtractor={item => `cc${item.id}`}
+          keyExtractor={item => `cc${item?.id}`}
+          style={{marginTop: 10}}
+          initialNumToRender={2}
         />
       </View>
       {isLoading && <Loading />}
@@ -129,6 +131,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'row',
     borderRadius: 15,
+    height: 90,
+    padding: 10,
+    alignItems: 'center',
   },
   view1: {
     height: 67,
