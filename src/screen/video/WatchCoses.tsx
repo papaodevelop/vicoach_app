@@ -113,28 +113,27 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: sizes._screen_width * 0.05,
+    fontSize: sizes._screen_width * 0.045,
     fontFamily: fonts.textBold,
     marginTop: 10,
     marginLeft: 20,
   },
   title1: {
-    marginTop: 20,
-    fontSize: sizes._screen_width * 0.05,
+    marginTop: 10,
+    fontSize: sizes._screen_width * 0.045,
     fontFamily: fonts.textBold,
     marginLeft: 10,
   },
   txt: {
     fontFamily: fonts.textBold,
-    fontSize: sizes._screen_width * 0.045,
-    marginTop: 20,
+    fontSize: sizes._screen_width * 0.04,
+    marginTop: 5,
     marginLeft: 10,
   },
 
   txt1: {
     fontSize: sizes._screen_width * 0.04,
     fontFamily: fonts.textBold,
-    marginTop: 20,
   },
   view: {
     width: sizes._screen_width * 0.95,

@@ -86,10 +86,7 @@ export default function Cart({navigation}: any) {
         <View
           style={{alignItems: 'center', marginTop: sizes._screen_height * 0.2}}>
           <Image source={images.noCart} />
-          <Text
-            style={
-              styles.txt
-            }>{`Nếu bạn muốn mua khoá học vui lòng lên trang web chính https://khoahoc.phanmemmkt.vn/vi đăng nhập để mua khoá học`}</Text>
+          <Text style={styles.txt}>{`Rất tiếc bạn chưa có đơn hàng nào`}</Text>
         </View>
       )}
       <ModalPay

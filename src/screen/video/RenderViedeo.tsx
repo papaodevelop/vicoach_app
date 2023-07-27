@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
   video: {
     height: sizes._screen_width * (9 / 12),
     width: sizes._screen_width,
-    marginTop: 20,
+    marginTop: 10,
   },
 });

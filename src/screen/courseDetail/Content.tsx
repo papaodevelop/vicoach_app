@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   },
   view: {alignItems: 'center', marginTop: 30},
   view1: {marginTop: sizes._screen_height * 0.02},
-  view2: {alignItems: 'center', marginTop: sizes._screen_height * 0.1},
+  view2: {alignItems: 'center'},
   img: {
     height: sizes._screen_width * 0.7,
     width: sizes._screen_width * 0.7,

@@ -2,10 +2,11 @@ export function money(val: string | number) {
   if (val === 0) {
     return 'Miễn phí';
   } else {
-    return Number(val).toLocaleString('vi-VN', {
-      style: 'currency',
-      currency: 'VND',
-    });
+    return 'Đăng kí tư vấn';
+    // Number(val).toLocaleString('vi-VN', {
+    //   style: 'currency',
+    //   currency: 'VND',
+    // });
   }
 }
 export function txt(val: string) {

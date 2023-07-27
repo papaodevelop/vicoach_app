@@ -17,8 +17,6 @@ import Comment from '../../Comment';
 import Icons from 'react-native-vector-icons/AntDesign';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import colors from '../../../../res/colors';
-import {useDispatch} from 'react-redux';
-import {addCart} from '../../../../redux/state/cart.reducer';
 import {useAddCousesFreeMutation} from '../../../../redux/state';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -160,6 +158,23 @@ const TabViewContainer: React.FC<
             />
             <Text style={styles.txt2}>Thêm vào mục yêu thích</Text>
           </View>
+          {props.data?.price !== 0 && (
+            <Pressable
+              style={styles.view3}
+              onPress={() => {
+                Alert.alert(
+                  `Đăng kí tư vấn thành công \n chúng tôi sẽ liên hệ với bạn,hoặc bạn có thể liên hệ với chúng tôi qua phần hỗ trợ`,
+                );
+                refRBSheet.current.close();
+              }}>
+              <Icons
+                name="customerservice"
+                color={colors.BLACK}
+                size={sizes._screen_width * 0.06}
+              />
+              <Text style={styles.txt2}>Đăng kí tư vấn về khoá học</Text>
+            </Pressable>
+          )}
 
           {!props.data?.has_enroll && (
             <View style={styles.view3}>
