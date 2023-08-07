@@ -25,6 +25,8 @@ interface Props {
   data?: any;
 }
 export default function FeaturedCourses(props: Props) {
+  const datas = props.data?.filter((item: any) => item?.price <= 0);
+
   const scrollX = React.useRef(new Animated.Value(0))?.current;
   const RenderItem = ({item}: {item: CourseCategoryType}) => {
     const textTitle = item?.title?.vi || item?.title?.en;
@@ -99,7 +101,7 @@ export default function FeaturedCourses(props: Props) {
   return (
     <View style={styles.view1}>
       <FlatList
-        data={props?.data}
+        data={datas}
         showsHorizontalScrollIndicator={false}
         keyExtractor={item => `${item.id}`}
         onScroll={Animated.event(
@@ -115,7 +117,7 @@ export default function FeaturedCourses(props: Props) {
         renderItem={({item}) => <RenderItem item={item} />}
       />
       <ExpandingDot
-        data={props.data || []}
+        data={datas || []}
         scrollX={scrollX}
         dotStyle={styles.dot}
         inActiveDotOpacity={0.2}

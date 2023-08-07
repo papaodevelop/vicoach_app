@@ -18,6 +18,7 @@ interface Props {
 export default function NewestCourses(props: Props) {
   const RederItem = ({item}: {item: CourseCategoryType}) => {
     const textTitle = item?.title?.vi || item?.title?.en;
+
     return (
       <Pressable
         style={styles.view}
@@ -96,9 +97,12 @@ export default function NewestCourses(props: Props) {
       </Pressable>
     );
   };
+  const datas = props.data?.filter((item: any) => item.price <= 0) as
+    | string[]
+    | any;
   return (
     <FlatList
-      data={props.data}
+      data={datas}
       renderItem={({item}) => <RederItem item={item} />}
       showsHorizontalScrollIndicator={false}
       keyExtractor={item => `${item.id}`}

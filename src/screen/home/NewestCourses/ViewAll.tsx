@@ -11,11 +11,12 @@ export default function ViewAll({
   navigation: NavigationProp<Record<string, any>>;
 }) {
   const {title, item} = route.params;
+  const datas = item.filter((item: any) => item.price <= 0) as string[] | any;
   return (
     <View style={styles.container}>
       <HeaderScreen title={title} navigation={navigation} />
       <FlatList
-        data={item}
+        data={datas}
         renderItem={({item}) => (
           <RenderItemCouses item={item} navigation={navigation} />
         )}
