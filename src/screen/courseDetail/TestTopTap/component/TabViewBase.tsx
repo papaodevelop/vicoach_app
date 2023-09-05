@@ -19,6 +19,8 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import colors from '../../../../res/colors';
 import {useAddCousesFreeMutation} from '../../../../redux/state';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useDispatch} from 'react-redux';
+import {addFavorite} from '../../../../redux/state/favorite';
 
 interface ScrollableTabViewContainerProps {
   navigation: NavigationProp<Record<string, any>>;
@@ -70,6 +72,8 @@ const TabViewContainer: React.FC<
       console.error('Lỗi khi mở trang web: ', error),
     );
   };
+  const dispatch = useDispatch();
+
   const addCarts = () => {
     // dispatch(
     //   addCart({
@@ -96,6 +100,10 @@ const TabViewContainer: React.FC<
         {text: 'Truy cập', onPress: () => openWebsite()},
       ],
     );
+  };
+  const AddToFavorite = async () => {
+    await dispatch(addFavorite(props.data));
+    await refRBSheet.current.close();
   };
   const _renderScrollHeader = () => {
     return (
@@ -150,14 +158,14 @@ const TabViewContainer: React.FC<
         }}>
         <View style={{marginLeft: 15}}>
           <Text style={styles.txt1}>Tuỳ chọn</Text>
-          <View style={styles.view3}>
+          <Pressable style={styles.view3} onPress={AddToFavorite}>
             <Icons
               name="hearto"
               color={colors.BLACK}
               size={sizes._screen_width * 0.06}
             />
             <Text style={styles.txt2}>Thêm vào mục yêu thích</Text>
-          </View>
+          </Pressable>
           {props.data?.price !== 0 && (
             <Pressable
               style={styles.view3}

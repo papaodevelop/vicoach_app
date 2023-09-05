@@ -31,12 +31,12 @@ export const itemNavigationDrawer = [
   //   navigation: 'Certificate',
   //   icon: images.certificate,
   // },
-  // {
-  //   id: 7,
-  //   name: 'Favorites',
-  //   navigation: 'Favorite',
-  //   icon: images.favorite,
-  // },
+  {
+    id: 7,
+    name: 'Favorites',
+    navigation: 'Favorite',
+    icon: images.favorite,
+  },
   // {
   //   id: 8,
   //   name: 'Comments',

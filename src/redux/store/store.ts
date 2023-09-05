@@ -16,6 +16,8 @@ import {useDispatch} from 'react-redux';
 import getdataUser from '../state/login.slice';
 import getAuth from '../state/auth.slice';
 import getCart from '../state/cart.reducer';
+import getFavori from '../state/favorite';
+
 import {authApi} from '../api/auth.api';
 const reducers = combineReducers({
   getcheck: getCheck,
@@ -24,6 +26,7 @@ const reducers = combineReducers({
   getAuth: getAuth,
   getCart: getCart,
   [authApi.reducerPath]: authApi.reducer,
+  getFavori: getFavori,
 });
 const persistConfig = {
   key: 'root',
