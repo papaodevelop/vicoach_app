@@ -5,7 +5,6 @@ import HeaderScreen from '../../component/header/HeaderScreen';
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {RootState} from '../../redux/store/store';
 import {FlatList} from 'react-native';
-import RenderItemCourses from '../../component/renderItem/RenderItemCourses';
 import RenderItemCouses from '../home/newestCourses/RenderItemCouses';
 
 export default function Favorite({navigation}: any) {

@@ -53,7 +53,6 @@ export default function WatchCoses({
     }, 1000);
   }, []);
   du_lieu_moi.forEach((chapter: any) => delete chapter?.lesson_list);
-  console.log(du_lieu_moi);
   const renderSectionHeader = ({section: {name}}: any) => (
     <View style={styles.view2}>
       <Text style={styles.txt1}>{name}</Text>
