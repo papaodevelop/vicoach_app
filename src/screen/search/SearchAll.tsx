@@ -1,6 +1,6 @@
 import {FlatList, View} from 'react-native';
 import React, {memo, useState} from 'react';
-import RenderItemCouses from '../home/newestCourses/RenderItemCouses';
+import RenderItemCouses from '../home/NewestCourses/RenderItemCouses';
 import {NavigationProp} from '@react-navigation/native';
 import stylescustom from '../../res/stylescustom';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';

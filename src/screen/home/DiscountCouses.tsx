@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import NewestCourses from './newestCourses/NewestCourses';
+import NewestCourses from './NewestCourses/NewestCourses';
 import {NavigationProp} from '@react-navigation/native';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';

@@ -1,7 +1,7 @@
 import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import HeaderScreen from '../../component/header/HeaderScreen';
-import RenderItemCouses from '../home/newestCourses/RenderItemCouses';
+import RenderItemCouses from '../home/NewestCourses/RenderItemCouses';
 import {NavigationProp} from '@react-navigation/native';
 import Loading from '../../component/loading/Loading';
 import images from '../../res/images';

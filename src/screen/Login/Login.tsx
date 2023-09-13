@@ -25,6 +25,7 @@ import {setAuth} from '../../redux/state/auth.slice';
 import {getFCMToken} from '../../../utils/pushnotification_helper';
 import {NavigationProp, useFocusEffect} from '@react-navigation/native';
 import {usePutFcmTokenMutation} from '../../redux/state';
+import {validateInputFields} from '../../res/require';
 const Login = ({
   navigation,
 }: {
@@ -38,6 +39,8 @@ const Login = ({
   const [isLoading, setIsLoading] = useState(false);
   const [putFCM] = usePutFcmTokenMutation();
   const [err, setErr] = useState<string>();
+  const [severErr, setSeverErr] = useState<string>();
+
   const dispatch = useDispatch();
 
   const axiosObj = axios.create({
@@ -56,14 +59,17 @@ const Login = ({
       setusername(remember.username);
     }, [remember]),
   );
+
   const LoginUser = async () => {
     setIsLoading(true);
+
     const a = await getFCMToken();
     try {
       const response = await axiosObj.post('auth/login', {
         username: userName,
         password: pass,
       });
+
       if (response.status === 200) {
         dispatch(setAuth(response.headers['set-cookie']));
         setErr('');
@@ -80,7 +86,11 @@ const Login = ({
         navigation.navigate('DrawerCustoms');
       }
     } catch (error: any) {
-      setErr(error?.response?.data.message);
+      if (error?.response.status === 502) {
+        setSeverErr('Có sự cố xảy ra xin vui lòng thử lại sau.');
+      } else if (error?.response.status === 401) {
+        setErr('Thông tin tài khoản không chính xác');
+      }
     }
     setIsLoading(false);
   };
@@ -146,7 +156,8 @@ const Login = ({
           setValue={setPass}
         />
       </View>
-      {err && <ErrorText err={'Tài khoản không chính xác'} />}
+      {err && <ErrorText err={err} />}
+      {severErr && <ErrorText err={severErr} />}
       <Text style={styles.txt2} onPress={() => setShow(true)}>
         Quên mật khẩu ?
       </Text>

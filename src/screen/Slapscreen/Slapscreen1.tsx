@@ -1,11 +1,4 @@
-import {
-  Animated,
-  Image,
-  ImageBackground,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Animated, Image, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import images from '../../res/images';
 import sizes from '../../res/sizes';

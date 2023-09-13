@@ -34,3 +34,22 @@ export function validatePassword(password: string) {
 
   return true;
 }
+export function validateInputFields(inputs: {email: string; password: string}) {
+  const errors = {
+    email: '',
+    password: '',
+  };
+
+  // Kiểm tra trường nhập email
+  if (!inputs.email || inputs.email.trim() === '') {
+    errors.email = 'Vui lòng nhập tài khoản';
+  }
+  // Kiểm tra trường nhập mật khẩu
+  if (!inputs.password || inputs.password.trim() === '') {
+    errors.password = 'Vui lòng nhập mật khẩu';
+  } else if (inputs.password.length < 6) {
+    errors.password = 'Mật khẩu phải có ít nhất 6 ký tự';
+  }
+
+  return errors;
+}

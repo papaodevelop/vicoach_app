@@ -5,7 +5,7 @@ import HeaderScreen from '../../component/header/HeaderScreen';
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {RootState} from '../../redux/store/store';
 import {FlatList} from 'react-native';
-import RenderItemCouses from '../home/newestCourses/RenderItemCouses';
+import RenderItemCouses from '../home/NewestCourses/RenderItemCouses';
 
 export default function Favorite({navigation}: any) {
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;

@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import OnboardingFirst from '../screen/slapscreen/OnboardingFirst';
-import Login from '../screen/login/Login';
-import Register from '../screen/login/Register';
-import Spapscreen1 from '../screen/slapscreen/Slapscreen1';
-import ViewAll from '../screen/home/newestCourses/ViewAll';
+import OnboardingFirst from '../screen/Slapscreen/OnboardingFirst';
+import Login from '../screen/Login/Login';
+import Register from '../screen/Login/Register';
+import Spapscreen1 from '../screen/Slapscreen/Slapscreen1';
+import ViewAll from '../screen/home/NewestCourses/ViewAll';
 import DrawerCustom from './DrawerCustom';
 import BlogPost from '../screen/blog/BlogPost';
 import MeetingsDetails from '../screen/meetings/MeetingsDetails';
@@ -16,7 +16,7 @@ import QuizInfomation from '../screen/quizzes/notParticlip/QuizInfomation';
 import StartQuizz from '../screen/quizzes/notParticlip/StartQuizz';
 import TestResul from '../screen/quizzes/notParticlip/TestResul';
 import Cart from '../screen/cart/Cart';
-import CourseDetail from '../screen/courseDetail/CourseDetail';
+import CourseDetails from '../screen/courseDetail/CourseDetail';
 import PlayVideo from '../screen/video/PlayVideo';
 import Profile from '../screen/profile/Profile';
 import DetailCategories from '../screen/categories/DetailCategories';
@@ -48,7 +48,7 @@ export default function Container() {
         <Stack.Screen name="QuizInfomation" component={QuizInfomation} />
         <Stack.Screen name="StartQuizz" component={StartQuizz} />
         <Stack.Screen name="TestResul" component={TestResul} />
-        <Stack.Screen name="CourseDetail" component={CourseDetail} />
+        <Stack.Screen name="CourseDetail" component={CourseDetails} />
         <Stack.Screen name="PlayVideo" component={PlayVideo} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="DetailCategories" component={DetailCategories} />
