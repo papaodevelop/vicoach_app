@@ -1,6 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import HeaderScreen from '../../component/header/HeaderScreen';
 import HeaderScreen1 from '../../component/header/HeaderScreen1';
 import ToptabQuiz from './ToptabQuiz';
 import {NavigationProp} from '@react-navigation/native';
