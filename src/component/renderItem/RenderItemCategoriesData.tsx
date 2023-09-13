@@ -14,6 +14,8 @@ interface Props {
 }
 export default function RenderItemCategoriesData(props: Props) {
   const textTitle = props.item?.name?.vi || props.item?.name?.en;
+  const url =
+    'https://public-phanmemmkt-846c4b8e-66af-4f65-bc02-44d2a784ce4f.b-cdn.net/default/e576968a-a17c-4b17-988a-05aad49a079c-9106e34e-b48d-404e-8313-d3322165b87e-Logo%20MKT%20200x200.png';
   return (
     <Pressable
       style={styles.view}
@@ -27,7 +29,7 @@ export default function RenderItemCategoriesData(props: Props) {
       }>
       <View style={{...styles.view1}}>
         <Image
-          source={{uri: props.item?.icon?.url}}
+          source={{uri: props.item?.icon?.url ? props.item?.icon?.url : url}}
           resizeMode="contain"
           style={styles.img}
         />

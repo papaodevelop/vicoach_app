@@ -27,15 +27,17 @@ const Register = ({navigation}: any) => {
   const [errEmails, setErrEmails] = useState('');
   const [erruserNames, setErrUsernames] = useState('');
   const [show, setShow] = useState(false);
-  const [register, {error, isLoading, isSuccess, data}] = useRegisterMutation();
+  const [register, {error, isLoading, isSuccess}] = useRegisterMutation();
   const submit = async () => {
-    await register({
-      username: userName,
-      email: email,
-      name: name,
-      password: pass,
-      password_confirmation: pass,
-    });
+    try {
+      const a = await register({
+        username: userName,
+        email: email,
+        name: name,
+        password: pass,
+        password_confirmation: pass,
+      }).unwrap();
+    } catch (error) {}
   };
   useEffect(() => {
     if (isSuccess) {

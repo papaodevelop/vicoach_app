@@ -114,6 +114,7 @@ const TotabScoll: React.FC<Props> = props => {
                   Authorization: `Cookie: ${cookie}`,
                   Accept: 'application/json',
                   'Content-Type': 'multipart/form-data',
+                  Referer: 'https://khoahoc.phanmemmkt.vn',
                 },
               })
 

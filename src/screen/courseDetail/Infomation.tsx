@@ -7,6 +7,7 @@ import RenderDetail from './RenderDetail';
 import {CourseDetail} from '../../../types/CourseDetail';
 import images from '../../res/images';
 import {HScrollView} from 'react-native-head-tab-view';
+import HTML from 'react-native-render-html';
 
 export default function Infomation({
   datas,
@@ -69,7 +70,10 @@ export default function Infomation({
                 <View
                   style={{marginLeft: 15, width: sizes._screen_width * 0.8}}>
                   <Text style={styles.txt2}>{i?.name}</Text>
-                  <Text style={styles.txt1}>{i?.description}</Text>
+                  <HTML
+                    source={{html: i?.description}}
+                    contentWidth={sizes.width}
+                  />
                 </View>
               </View>
             ))}
@@ -79,8 +83,13 @@ export default function Infomation({
           <View style={{marginTop: 20}}>
             <Text style={stylescustom.txt}>
               <Text style={{color: colors.BLACK}}>
-                <Text style={{color: colors.RED}}>Miêu tả:</Text>{' '}
-                {datas?.description?.vi}
+                <Text style={{color: colors.RED}}>
+                  Miêu tả:{' '}
+                  <HTML
+                    source={{html: datas?.description?.vi}}
+                    contentWidth={sizes.width}
+                  />
+                </Text>
               </Text>
             </Text>
           </View>
@@ -90,7 +99,10 @@ export default function Infomation({
             <Text style={stylescustom.txt}>
               <Text style={{color: colors.BLACK}}>
                 <Text style={{color: colors.RED}}>Yêu cầu:</Text>{' '}
-                {datas?.requirements?.vi}
+                <HTML
+                  source={{html: datas?.requirements?.vi}}
+                  contentWidth={sizes.width}
+                />
               </Text>
             </Text>
           </View>
@@ -110,7 +122,10 @@ export default function Infomation({
             <Text style={stylescustom.txt}>
               <Text style={{color: colors.BLACK}}>
                 <Text style={{color: colors.RED}}>Kết quả :</Text>{' '}
-                {datas?.outcomes?.vi}
+                <HTML
+                  source={{html: datas?.outcomes?.vi}}
+                  contentWidth={sizes.width}
+                />
               </Text>
             </Text>
           </View>

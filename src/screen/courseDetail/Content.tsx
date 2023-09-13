@@ -19,7 +19,7 @@ export default function Content({
   datas: CourseDetail | undefined;
   index: number;
 }) {
-  const {data} = useGetCouseListQuery(`${datas?.id}`);
+  const {data} = useGetCouseListQuery(`${datas?.slug}`);
 
   const RendeFoodter = () => (
     <>

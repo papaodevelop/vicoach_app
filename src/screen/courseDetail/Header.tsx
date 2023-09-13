@@ -1,7 +1,8 @@
 import {Alert, Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {CourseDetail} from '../../../types/CourseDetail';
-import Video from 'react-native-video';
+import HTML from 'react-native-render-html';
+
 import images from '../../res/images';
 import stylescustom from '../../res/stylescustom';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -68,7 +69,12 @@ const Header = ({
               {data?.assign_instructor?.name}
             </Text>
             <Text style={styles.view}>
-              {data?.assign_instructor?.short_description}
+              <HTML
+                source={{
+                  html: data?.assign_instructor?.short_description || '',
+                }}
+                contentWidth={sizes.width}
+              />
             </Text>
           </View>
         </View>

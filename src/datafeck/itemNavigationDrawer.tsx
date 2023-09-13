@@ -25,12 +25,12 @@ export const itemNavigationDrawer = [
   //   navigation: 'Quizzes',
   //   icon: images.quizzs,
   // },
-  // {
-  //   id: 6,
-  //   name: 'Certificate',
-  //   navigation: 'Certificate',
-  //   icon: images.certificate,
-  // },
+  {
+    id: 6,
+    name: 'Học trực tuyến',
+    navigation: 'Meetings',
+    icon: images.mess,
+  },
   {
     id: 7,
     name: 'Favorites',

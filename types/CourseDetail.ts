@@ -15,6 +15,7 @@ export interface CourseDetail {
   duration: number;
   view_scope: string;
   price: number;
+  slug: string;
   type: string;
   status: string;
   created_at: string;

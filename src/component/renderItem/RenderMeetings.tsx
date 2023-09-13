@@ -22,38 +22,34 @@ export default function RenderMeetings(props: Props) {
           item: props.item,
         })
       }>
-      <View style={styles.item}>
-        <Image
-          source={props.item.image}
-          style={styles.img}
-          resizeMode="contain"
-        />
+      <Image
+        source={props.item.image}
+        style={styles.img}
+        resizeMode="contain"
+      />
+      <View style={{marginLeft: 15}}>
+        <Text
+          style={{
+            fontFamily: fonts.textRegular,
+            fontSize: 20,
+            color: colors.BLACK,
+          }}>
+          {props.item.name}
+        </Text>
         <View style={styles.view1}>
-          <View style={stylescustom.view}>
-            <Text style={stylescustom.txt2}>{props.item.name}</Text>
-            <View style={styles.view2}>
-              <Text style={styles.status}>{props.item.status}</Text>
-            </View>
+          <Icon name="user" color={colors.BLACK} size={20} />
+          <Text style={styles.txt}>{props.item.position}</Text>
+        </View>
+        <View style={stylescustom.view}>
+          <View style={styles.view1}>
+            <Icon name="calendar" color={colors.BLACK} size={20} />
+            <Text style={styles.txt}>{props.item.startDate}</Text>
           </View>
-          <View style={stylescustom.view}>
-            <View style={stylescustom.view1}>
-              <Icon
-                name="calendar"
-                color={colors.GRAY}
-                size={sizes._screen_width * 0.04}
-              />
-              <Text style={styles.txt}>{props.item.startDate}</Text>
-            </View>
-            <View style={{...stylescustom.view1, marginLeft: 10}}>
-              <Icon
-                name="clock-o"
-                color={colors.GRAY}
-                size={sizes._screen_width * 0.04}
-              />
-              <Text style={styles.txt}>
-                {props.item.startTime + '-' + props.item.endTime}
-              </Text>
-            </View>
+          <View style={{...styles.view1, marginLeft: 10}}>
+            <Icon name="clock-o" color={colors.BLACK} size={20} />
+            <Text style={styles.txt}>
+              {props.item.startTime}-{props.item.endTime}
+            </Text>
           </View>
         </View>
       </View>
@@ -64,8 +60,6 @@ export default function RenderMeetings(props: Props) {
 const styles = StyleSheet.create({
   item: {
     ...stylescustom.view1,
-    width: sizes._screen_width * 0.85,
-    alignSelf: 'center',
   },
   img: {
     height: sizes._screen_width * 0.18,
@@ -76,28 +70,19 @@ const styles = StyleSheet.create({
     width: sizes._screen_width * 0.9,
     alignSelf: 'center',
     backgroundColor: colors.WHITE,
-    borderRadius: sizes._screen_width * 0.9 * 0.04,
-    paddingTop: 5,
-    paddingBottom: 5,
-  },
-  view1: {
-    justifyContent: 'space-between',
-    marginLeft: 10,
-    height: sizes._screen_width * 0.14,
+    borderRadius: 15,
+    paddingVertical: 10,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
   },
   txt: {
-    marginLeft: 5,
-    ...stylescustom.txt1,
-  },
-  status: {
-    color: colors.WHITE,
+    color: colors.BLACK,
     fontFamily: fonts.textRegular,
-    fontSize: sizes._screen_width * 0.035,
+    fontSize: sizes._csreen_width * 0.035,
+    marginLeft: 5,
   },
-  view2: {
-    backgroundColor: colors.GREEN,
-    paddingHorizontal: 8,
-    borderRadius: 10,
-    paddingVertical: 3,
+  view1: {
+    ...stylescustom.view1,
+    marginTop: 5,
   },
 });

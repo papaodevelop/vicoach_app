@@ -9,7 +9,9 @@ export interface ListApiResponse<T> {
   newest_courses: [];
   featured_courses: [];
   count: number;
-  instructors: [];
+  instructors: {
+    instructors: [];
+  };
   name: string;
 }
 

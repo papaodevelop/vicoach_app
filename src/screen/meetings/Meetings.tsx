@@ -3,13 +3,23 @@ import React from 'react';
 import HeaderScreen1 from '../../component/header/HeaderScreen1';
 import DataMettings from '../../datafeck/feck/DataMettings';
 import RenderMeetings from '../../component/renderItem/RenderMeetings';
+import fonts from '../../res/fonts';
 interface Props {
   navigation: any;
 }
 export default function Meetings(props: Props) {
   return (
     <View style={styles.container}>
-      <HeaderScreen1 navigation={props.navigation} title="meetings" />
+      <HeaderScreen1 navigation={props.navigation} title="Học trực tuyến" />
+      <Text
+        style={{
+          marginTop: 20,
+          marginLeft: 20,
+          fontFamily: fonts.textBold,
+          fontSize: 20,
+        }}>
+        Danh sách các lớp học
+      </Text>
       <FlatList
         data={DataMettings}
         style={styles.view}

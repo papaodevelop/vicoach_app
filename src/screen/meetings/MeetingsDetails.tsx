@@ -100,22 +100,10 @@ export default function MeetingsDetails(props: Props) {
           </View>
           <View style={styles.view5}>
             <Text style={stylescustom.txt1}>Thành viên tham gia</Text>
-            <Text style={stylescustom.txt3}>Group ({item.duration})</Text>
+            <Text style={stylescustom.txt3}>{item.duration}</Text>
           </View>
         </View>
-        <View style={styles.view2}>
-          <View style={styles.view4}>
-            <Icon
-              name="money"
-              color={colors.GRAY}
-              size={sizes._screen_width * 0.04}
-            />
-          </View>
-          <View style={styles.view5}>
-            <Text style={stylescustom.txt1}>Giá</Text>
-            <Text style={stylescustom.txt3}>{money(item.amount)}</Text>
-          </View>
-        </View>
+
         <View style={styles.view2}>
           <View style={styles.view4}>
             <Icon
@@ -134,25 +122,19 @@ export default function MeetingsDetails(props: Props) {
         <Text style={stylescustom.txt3}>Miêu tả</Text>
         <Text style={stylescustom.txt1}>{item.descrption}</Text>
       </View>
+      <View style={styles.view7}>
+        <BTNLogin txt="Bắt đầu" onPress={() => {}} />
+      </View>
     </View>
   );
   return (
     <View style={styles.container}>
-      <HeaderScreen title="MEETING DETAILS" navigation={props.navigation} />
+      <HeaderScreen title="Chi tiết lớp học" navigation={props.navigation} />
       <FlatList
         data={[]}
         renderItem={null}
         ListFooterComponent={() => <RenderItem />}
       />
-      <View
-        style={{
-          position: 'absolute',
-          alignItems: 'center',
-          bottom: 20,
-          alignSelf: 'center',
-        }}>
-        <BTNLogin txt="Bắt đầu" onPress={() => {}} />
-      </View>
     </View>
   );
 }
@@ -214,5 +196,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.GRAY,
     marginTop: 10,
+  },
+  view7: {
+    alignItems: 'center',
+    marginBottom: 20,
+    alignSelf: 'center',
+    marginTop: 20,
   },
 });

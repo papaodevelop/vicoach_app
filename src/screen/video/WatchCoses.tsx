@@ -52,12 +52,13 @@ export default function WatchCoses({
       });
     }, 1000);
   }, []);
-  du_lieu_moi.forEach((chapter: any) => delete chapter?.lesson_list);
+  du_lieu_moi.data?.forEach((chapter: any) => delete chapter?.lesson_list);
   const renderSectionHeader = ({section: {name}}: any) => (
     <View style={styles.view2}>
       <Text style={styles.txt1}>{name}</Text>
     </View>
   );
+
   const RendeItem = ({item}: {item: any}) => {
     return (
       <View

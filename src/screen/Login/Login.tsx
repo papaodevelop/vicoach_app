@@ -44,8 +44,10 @@ const Login = ({
     baseURL: BASE_URL,
     headers: {
       'Content-Type': 'application/json',
+      Referer: 'https://khoahoc.phanmemmkt.vn',
     },
     responseType: 'json',
+
     withCredentials: true,
   });
   useFocusEffect(

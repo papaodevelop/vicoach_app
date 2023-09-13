@@ -5,30 +5,34 @@ import stylescustom from '../../res/stylescustom';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';
 import {NavigationProp} from '@react-navigation/native';
 import {useGetCategoryQuery} from '../../redux/state';
+import Loading from '../../component/loading/Loading';
 
 export default function Instructors({
   navigation,
 }: {
   navigation: NavigationProp<Record<string, any>>;
 }) {
-  const {data, isFetching, refetch} = useGetCategoryQuery('');
+  const {data, isFetching, refetch, isLoading} = useGetCategoryQuery('');
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={data?.instructors}
+        data={data?.instructors.instructors}
         renderItem={({
           item,
           index,
         }: {
           item: CourseCategoryType;
           index: number;
-        }) => (
-          <RenderItemInstructors
-            item={item}
-            index={index}
-            navigation={navigation}
-          />
-        )}
+        }) => {
+          return (
+            <RenderItemInstructors
+              item={item}
+              index={index}
+              navigation={navigation}
+            />
+          );
+        }}
         numColumns={2}
         keyExtractor={item => `${item?.id}`}
         scrollEventThrottle={16}
@@ -38,6 +42,7 @@ export default function Instructors({
         onRefresh={refetch}
         refreshing={isFetching}
       />
+      {isLoading && <Loading />}
     </View>
   );
 }
