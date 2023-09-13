@@ -3,12 +3,7 @@ import {axiosBaseQuery} from './axiosClient';
 import {ListApiResponse} from '../../../types/Common';
 import {CourseCategoryType} from '../../../types/CourseCategoryType';
 import {CourseDetail} from '../../../types/CourseDetail';
-import {
-  Auth,
-  CoursesReviewsComment,
-  ForgotPass,
-  Payloadregiter,
-} from '../../../types/Auth';
+import {Auth, CoursesReviewsComment, ForgotPass} from '../../../types/Auth';
 import {BASE_URL} from '../../Api/BaseURL';
 
 const tagTypes = 'Auth' as const;
