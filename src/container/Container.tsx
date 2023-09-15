@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 import OnboardingFirst from '../screen/Slapscreen/OnboardingFirst';
 import Login from '../screen/Login/Login';
 import Register from '../screen/Login/Register';
@@ -23,6 +23,8 @@ import DetailCategories from '../screen/categories/DetailCategories';
 import {navigationRef} from '../../RootNavigation';
 import TermsAndConditions from '../screen/termsandconditions/TermsAndConditions';
 import Support from '../screen/support/Support';
+import Meeting from '../screen/meetings/Meeting';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 export default function Container() {
   const Stack = createNativeStackNavigator();
@@ -52,6 +54,7 @@ export default function Container() {
         <Stack.Screen name="PlayVideo" component={PlayVideo} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="DetailCategories" component={DetailCategories} />
+        <Stack.Screen name="Meeting" component={Meeting} />
         <Stack.Screen
           name="TermsAndConditions"
           component={TermsAndConditions}

@@ -1,6 +1,7 @@
 import {
   BackHandler,
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   ToastAndroid,
@@ -141,40 +142,49 @@ const Login = ({
   }, [navigation, currentScreen]);
   return (
     <View style={styles.container}>
-      <Image source={images.logomkt2} resizeMode="contain" style={styles.img} />
-      <Text style={styles.login}>ĐĂNG NHẬP</Text>
-      <View style={styles.view}>
-        <CusTombtn
-          placeholder="Tên đăng nhập"
-          value={userName}
-          setValue={setusername}
+      <ScrollView
+        automaticallyAdjustKeyboardInsets={true}
+        keyboardDismissMode="interactive"
+        keyboardShouldPersistTaps={'handled'}>
+        <Image
+          source={images.logomkt2}
+          resizeMode="contain"
+          style={styles.img}
         />
-        <CusTombtn
-          placeholder="Mật khẩu"
-          pass={true}
-          value={pass}
-          setValue={setPass}
-        />
-      </View>
-      {err && <ErrorText err={err} />}
-      {severErr && <ErrorText err={severErr} />}
-      <Text style={styles.txt2} onPress={() => setShow(true)}>
-        Quên mật khẩu ?
-      </Text>
-      <View style={styles.btn}>
-        <BTNLogin txt="ĐĂNG NHẬP" onPress={LoginUser} />
-      </View>
-      <Text style={styles.txt3}>
-        Bạn chưa có tài khoản?{' '}
-        <Text
-          style={{color: 'red'}}
-          onPress={() => navigation.navigate('Register')}>
-          {' '}
-          Đăng ký
+        <Text style={styles.login}>ĐĂNG NHẬP</Text>
+        <View style={styles.view}>
+          <CusTombtn
+            placeholder="Tên đăng nhập"
+            value={userName}
+            setValue={setusername}
+          />
+          <CusTombtn
+            placeholder="Mật khẩu"
+            pass={true}
+            value={pass}
+            setValue={setPass}
+          />
+        </View>
+        {err && <ErrorText err={err} />}
+        {severErr && <ErrorText err={severErr} />}
+        <Text style={styles.txt2} onPress={() => setShow(true)}>
+          Quên mật khẩu ?
         </Text>
-      </Text>
-      <ModalForgotPassword isShow={show} toggleDate={() => setShow(false)} />
+        <View style={styles.btn}>
+          <BTNLogin txt="ĐĂNG NHẬP" onPress={LoginUser} />
+        </View>
+        <Text style={styles.txt3}>
+          Bạn chưa có tài khoản?{' '}
+          <Text
+            style={{color: 'red'}}
+            onPress={() => navigation.navigate('Register')}>
+            {' '}
+            Đăng ký
+          </Text>
+        </Text>
+      </ScrollView>
       {isLoading && <Loading />}
+      <ModalForgotPassword isShow={show} toggleDate={() => setShow(false)} />
     </View>
   );
 };

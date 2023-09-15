@@ -506,6 +506,16 @@ export const authApi = createApi({
         return [{type: tagTypes, id: 'LIST'}];
       },
     }),
+    getTokenZoom: build.query<TokenMeeting, {id: number}>({
+      query: ({id}) => ({
+        method: 'GET',
+
+        url: `meeting-management/${id}/token`,
+      }),
+      providesTags: () => {
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
   }),
 });
 
@@ -541,4 +551,5 @@ export const {
   useGetTermPageQuery,
   useGetStoreInfoQuery,
   useAddCousesFreeMutation,
+  useGetTokenZoomQuery,
 } = authApi;

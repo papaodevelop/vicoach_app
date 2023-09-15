@@ -53,7 +53,11 @@ const Register = ({navigation}: any) => {
 
   return (
     <View style={{flex: 1}}>
-      <ScrollView style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        automaticallyAdjustKeyboardInsets={true}
+        keyboardDismissMode="interactive"
+        keyboardShouldPersistTaps={'handled'}>
         <Icon
           name="chevron-left"
           size={40}

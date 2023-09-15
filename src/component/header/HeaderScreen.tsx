@@ -1,11 +1,4 @@
-import {
-  Platform,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
@@ -17,6 +10,7 @@ interface Props {
   navigation: NavigationProp<Record<string, any>>;
   onPress?: () => void;
   dot?: boolean;
+  nameIcon?: string;
 }
 export default function HeaderScreen(props: Props) {
   return (
@@ -39,7 +33,7 @@ export default function HeaderScreen(props: Props) {
           />
           {props.dot && (
             <Icon
-              name="dots-three-vertical"
+              name={props.nameIcon ? props.nameIcon : 'dots-three-vertical'}
               size={sizes._screen_width * 0.08}
               color={'white'}
               style={styles.icon1}

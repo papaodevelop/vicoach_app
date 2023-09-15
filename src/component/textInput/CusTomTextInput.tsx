@@ -4,8 +4,9 @@ import {TextInput} from 'react-native';
 import sizes from '../../res/sizes';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
-import Icon from 'react-native-vector-icons/Ionicons';
 import stylescustom from '../../res/stylescustom';
+import Icons from 'react-native-vector-icons/Ionicons';
+
 interface Props {
   placeholder?: string;
   pass?: boolean;
@@ -32,7 +33,7 @@ const CusTomTextInput = (props: Props) => {
           onChangeText={props.setValue}
         />
         {props.value ? (
-          <Icon
+          <Icons
             onPress={() => props.setValue('')}
             name="close-circle"
             color={colors.GRAY}
@@ -40,7 +41,7 @@ const CusTomTextInput = (props: Props) => {
           />
         ) : null}
         {props.pass === true && (
-          <Icon
+          <Icons
             onPress={onPress}
             name={show ? 'md-eye-off' : 'md-eye'}
             color={colors.GRAY}

@@ -6,15 +6,19 @@ import sizes from '../../res/sizes';
 import stylescustom from '../../res/stylescustom';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colors from '../../res/colors';
-import {money} from '../../res/convert';
 import BTNLogin from '../../component/btn/BTNLogin';
 import {NavigationProp} from '@react-navigation/native';
+import {useGetTokenZoomQuery} from '../../redux/state';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   route: any;
 }
 export default function MeetingsDetails(props: Props) {
   let item = props.route.params.item as MeetingsTypes;
+  const {data, error} = useGetTokenZoomQuery({
+    id: 1,
+  });
+
   const RenderItem = () => (
     <View style={styles.view}>
       <View style={styles.viewImg}>
@@ -123,7 +127,10 @@ export default function MeetingsDetails(props: Props) {
         <Text style={stylescustom.txt1}>{item.descrption}</Text>
       </View>
       <View style={styles.view7}>
-        <BTNLogin txt="Bắt đầu" onPress={() => {}} />
+        <BTNLogin
+          txt="Bắt đầu"
+          onPress={() => props.navigation.navigate('Meeting', {data})}
+        />
       </View>
     </View>
   );

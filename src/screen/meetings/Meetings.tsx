@@ -1,25 +1,25 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import HeaderScreen1 from '../../component/header/HeaderScreen1';
+import React, {useState} from 'react';
 import DataMettings from '../../datafeck/feck/DataMettings';
 import RenderMeetings from '../../component/renderItem/RenderMeetings';
 import fonts from '../../res/fonts';
+import HeaderScreen from '../../component/header/HeaderScreen';
+import ModalFindMeeting from '../../component/modal/ModalFindMeeting';
 interface Props {
   navigation: any;
 }
 export default function Meetings(props: Props) {
+  const [showFind, setShowFind] = useState(false);
   return (
     <View style={styles.container}>
-      <HeaderScreen1 navigation={props.navigation} title="Học trực tuyến" />
-      <Text
-        style={{
-          marginTop: 20,
-          marginLeft: 20,
-          fontFamily: fonts.textBold,
-          fontSize: 20,
-        }}>
-        Danh sách các lớp học
-      </Text>
+      <HeaderScreen
+        navigation={props.navigation}
+        title="Học trực tuyến"
+        dot
+        onPress={() => setShowFind(true)}
+        nameIcon="magnifying-glass"
+      />
+      <Text style={styles.txt}>Danh sách các lớp học</Text>
       <FlatList
         data={DataMettings}
         style={styles.view}
@@ -31,6 +31,10 @@ export default function Meetings(props: Props) {
           />
         )}
       />
+      <ModalFindMeeting
+        isShow={showFind}
+        toggleDate={() => setShowFind(false)}
+      />
     </View>
   );
 }
@@ -40,4 +44,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   view: {marginTop: 20, paddingBottom: 30},
+  txt: {
+    marginTop: 20,
+    marginLeft: 20,
+    fontFamily: fonts.textBold,
+    fontSize: 20,
+  },
 });

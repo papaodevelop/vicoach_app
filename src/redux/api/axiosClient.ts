@@ -12,14 +12,12 @@ export const axiosAuth = () => {
   const auths = useAppSelect(data => data.getAuth.auth);
   axios.interceptors.request.use(
     function (config: InternalAxiosRequestConfig) {
-      // Do something before request is sent
       // config.headers.Referer = 'https://khoahoc.phanmemmkt.vn';
       config.headers.Accept = 'application/json';
       config.headers.Cookie = auths;
       return config;
     },
     function (error: AxiosError) {
-      // Do something with request error
       return Promise.reject(error);
     },
   );
@@ -59,7 +57,8 @@ export const axiosBaseQuery =
   async ({url, method, data, params, timeout, headers}) => {
     const newHeaders = {
       ...headers,
-      Referer: 'https://khoahoc.phanmemmkt.vn', // Thay đổi thành giá trị Referer bạn muốn sử dụng
+      // Referer: 'https://khoahoc.phanmemmkt.vn', // Thay đổi thành giá trị Referer bạn muốn sử dụng
+      Referer: 'https://khoahoc.phanmemmkt.vn',
     };
     try {
       const result = await axios({
