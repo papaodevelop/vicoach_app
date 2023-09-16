@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import OnboardingFirst from '../screen/slapscreen/OnboardingFirst';
-import Login from '../screen/login/Login';
-import Register from '../screen/login/Register';
-import Spapscreen1 from '../screen/slapscreen/Slapscreen1';
-import ViewAll from '../screen/home/newestCourses/ViewAll';
+import OnboardingFirst from '../screen/Slapscreen/OnboardingFirst';
+import Login from '../screen/Login/Login';
+import Register from '../screen/Login/Register';
+import Spapscreen1 from '../screen/Slapscreen/Slapscreen1';
+import ViewAll from '../screen/home/NewestCourses/ViewAll';
 import DrawerCustom from './DrawerCustom';
 import BlogPost from '../screen/blog/BlogPost';
 import MeetingsDetails from '../screen/meetings/MeetingsDetails';
@@ -23,7 +23,6 @@ import DetailCategories from '../screen/categories/DetailCategories';
 import {navigationRef} from '../../RootNavigation';
 import TermsAndConditions from '../screen/termsandconditions/TermsAndConditions';
 import Support from '../screen/support/Support';
-
 export default function Container() {
   const Stack = createNativeStackNavigator();
   return (
