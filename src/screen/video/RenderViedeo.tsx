@@ -5,7 +5,7 @@ import sizes from '../../res/sizes';
 
 import WebView from 'react-native-webview';
 import Loading from '../../component/loading/Loading';
-import {Renferer} from '../../redux/api/\bRenferer';
+import {Renferer} from '../../redux/api/renferer';
 export default function RenderViedeo({url}: {url: string}) {
   const videoRef = createRef<any>();
 

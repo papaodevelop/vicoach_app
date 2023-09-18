@@ -6,7 +6,7 @@ import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {RootState} from '../store/store';
 import {Alert} from 'react-native';
 import {navigate} from '../../../RootNavigation';
-import {Renferer} from './\bRenferer';
+import {Renferer} from './renferer';
 export const axiosAuth = () => {
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
 

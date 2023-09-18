@@ -25,7 +25,7 @@ import {setAuth} from '../../redux/state/auth.slice';
 import {getFCMToken} from '../../../utils/pushnotification_helper';
 import {NavigationProp, useFocusEffect} from '@react-navigation/native';
 import {usePutFcmTokenMutation} from '../../redux/state';
-import {Renferer} from '../../redux/api/\bRenferer';
+import {Renferer} from '../../redux/api/renferer';
 const Login = ({
   navigation,
 }: {
