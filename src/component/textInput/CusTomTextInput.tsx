@@ -12,6 +12,7 @@ interface Props {
   value?: string;
   setValue: (val: string) => void;
   require?: boolean;
+  numberic?: boolean;
 }
 const CusTomTextInput = (props: Props) => {
   const [show, setShow] = useState(true);
@@ -30,6 +31,7 @@ const CusTomTextInput = (props: Props) => {
           secureTextEntry={props.pass ? show : undefined}
           value={props.value}
           onChangeText={props.setValue}
+          keyboardType={props.numberic ? 'numeric' : undefined}
         />
         {props.value ? (
           <Icon

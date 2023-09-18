@@ -1,4 +1,4 @@
-package com.vi_mater;
+package com.vi_coaching;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

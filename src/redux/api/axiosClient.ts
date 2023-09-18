@@ -6,14 +6,13 @@ import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {RootState} from '../store/store';
 import {Alert} from 'react-native';
 import {navigate} from '../../../RootNavigation';
+import {Renferer} from './\bRenferer';
 export const axiosAuth = () => {
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
 
   const auths = useAppSelect(data => data.getAuth.auth);
   axios.interceptors.request.use(
     function (config: InternalAxiosRequestConfig) {
-      // Do something before request is sent
-      // config.headers.Referer = 'https://khoahoc.phanmemmkt.vn';
       config.headers.Accept = 'application/json';
       config.headers.Cookie = auths;
       return config;
@@ -59,7 +58,8 @@ export const axiosBaseQuery =
   async ({url, method, data, params, timeout, headers}) => {
     const newHeaders = {
       ...headers,
-      Referer: 'https://khoahoc.phanmemmkt.vn', // Thay đổi thành giá trị Referer bạn muốn sử dụng
+      Referer: Renferer,
+      // Thay đổi thành giá trị Referer bạn muốn sử dụng
     };
     try {
       const result = await axios({

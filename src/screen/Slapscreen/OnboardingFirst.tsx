@@ -11,7 +11,7 @@ import {
 import sizes from '../../res/sizes';
 import {slides} from '../../datafeck/DataFirst';
 import fonts from '../../res/fonts';
-import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {Check} from '../../redux/state/Check.reducer';
 import {NavigationProp} from '@react-navigation/native';
 const COLORS = {

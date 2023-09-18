@@ -9,7 +9,6 @@ import {
 import React, {useEffect, useRef, useState} from 'react';
 import images from '../../res/images';
 import sizes from '../../res/sizes';
-import colors from '../../res/colors';
 import fonts from '../../res/fonts';
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {NavigationProp} from '@react-navigation/native';
@@ -103,9 +102,9 @@ const Slapscreen1 = ({
   return (
     <View style={styles.container}>
       <View style={styles.boderImg}>
-        <Image source={images.logomkt1} style={styles.img} />
+        <Image source={images.Vicoaching} style={styles.img} />
       </View>
-      <Text style={styles.txt}>Phần mềm MKT</Text>
+      <Text style={styles.txt}>Vi Coaching</Text>
       <Text style={styles.txt1}>Đang kiểm tra dữ liệu ...</Text>
       <View style={styles.main}>
         {dots.map(i => (

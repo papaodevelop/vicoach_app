@@ -11,6 +11,8 @@ const errors: any = {
   'new_password_confirmation must match new_password':
     'Mật khẩu không mới và xác nhận mật khẩu không khớp',
   'current_password not match!': 'Mật khẩu cũ không đúng',
+  'phone_number must match /(0[3|5|7|8|9])+([0-9]{8})\\b/g regular expression':
+    'Số điện thoại không đúng ',
 };
 
 export function errexport(val: string) {

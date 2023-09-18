@@ -23,6 +23,7 @@ import {BASE_URL} from '../../../Api/BaseURL';
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {RootState} from '../../../redux/store/store';
 import images from '../../../res/images';
+import {Renferer} from '../../../redux/api/\bRenferer';
 const G_WIN_WIDTH = sizes._screen_width;
 const G_WIN_HEIGHT = sizes._screen_height;
 const HEAD_HEIGHT = G_WIN_HEIGHT * 0.35;
@@ -114,7 +115,7 @@ const TotabScoll: React.FC<Props> = props => {
                   Authorization: `Cookie: ${cookie}`,
                   Accept: 'application/json',
                   'Content-Type': 'multipart/form-data',
-                  Referer: 'https://khoahoc.phanmemmkt.vn',
+                  Referer: Renferer,
                 },
               })
 

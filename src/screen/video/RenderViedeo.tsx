@@ -5,6 +5,7 @@ import sizes from '../../res/sizes';
 
 import WebView from 'react-native-webview';
 import Loading from '../../component/loading/Loading';
+import {Renferer} from '../../redux/api/\bRenferer';
 export default function RenderViedeo({url}: {url: string}) {
   const videoRef = createRef<any>();
 
@@ -21,7 +22,7 @@ export default function RenderViedeo({url}: {url: string}) {
         source={{
           uri: `${url}`,
           headers: {
-            Referer: 'https://khoahoc.phanmemmkt.vn',
+            Referer: Renferer,
           },
         }}
         video

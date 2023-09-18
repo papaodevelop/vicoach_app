@@ -23,7 +23,13 @@ export function validateUsername(username: string) {
 
   return true;
 }
+export function isValidVietnamesePhoneNumber(phoneNumber: string) {
+  // Biểu thức chính quy cho số điện thoại Việt Nam theo định dạng cụ thể
+  var vietnamesePhoneRegex = /^(0[3|5|7|8|9])+([0-9]{8})\b/g;
 
+  // Sử dụng test() để kiểm tra chuỗi với biểu thức chính quy.
+  return vietnamesePhoneRegex.test(phoneNumber);
+}
 export function validatePassword(password: string) {
   const regex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[a-zA-Z\d!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,24}$/;

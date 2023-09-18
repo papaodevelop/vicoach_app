@@ -26,7 +26,7 @@ const ModalConfirmRegister = (props: Props) => {
   const renderContent = () => (
     <View style={styles.content}>
       <View style={styles.head}>
-        <Text style={styles.txthead}>Phần mềm MKT</Text>
+        <Text style={styles.txthead}>Vi_Coaching</Text>
       </View>
       <View style={styles.view}>
         <Text style={styles.title}>

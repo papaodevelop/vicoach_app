@@ -9,7 +9,6 @@ import {useChangePassWordMutation} from '../../../../redux/state';
 import {validatePassword} from '../../../../res/require';
 import ErrorText1 from '../../../../component/error/ErrorText1';
 import {errPassWord, errexport, kiemTraLoi} from '../../../../res/err';
-import ModalConfirm from '../../../../component/modal/ModalConfirm';
 import ModalConfirmRegister from '../../../../component/modal/ModalConfirmRegister';
 import {NavigationProp} from '@react-navigation/native';
 type Err = {

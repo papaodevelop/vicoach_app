@@ -8,9 +8,9 @@ import BTNLogin from '../../component/btn/BTNLogin';
 import images from '../../res/images';
 import Icon from 'react-native-vector-icons/Entypo';
 import ModalConfirmRegister from '../../component/modal/ModalConfirmRegister';
-import {Payloadregiter} from '../../../types/Auth';
 import Loading from '../../component/loading/Loading';
 import {
+  isValidVietnamesePhoneNumber,
   validateEmail,
   validatePassword,
   validateUsername,
@@ -24,20 +24,28 @@ const Register = ({navigation}: any) => {
   const [userName, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
+  const [err, setErr] = useState('');
   const [errEmails, setErrEmails] = useState('');
-  const [erruserNames, setErrUsernames] = useState('');
+  const [errUsernames, setErrUsernames] = useState('');
+
   const [show, setShow] = useState(false);
+  const [phone_number, setphone_number] = useState('');
+  const [errphone_number, setErrphone_number] = useState('');
+
   const [register, {error, isLoading, isSuccess}] = useRegisterMutation();
   const submit = async () => {
     try {
-      const a = await register({
+      await register({
         username: userName,
         email: email,
         name: name,
         password: pass,
         password_confirmation: pass,
+        phone_number: phone_number,
       }).unwrap();
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     if (isSuccess) {
@@ -48,6 +56,8 @@ const Register = ({navigation}: any) => {
     if (err) {
       setErrEmails(errexport(err));
       setErrUsernames(errexport(err));
+      setErrphone_number(errexport(err));
+      setErr('Đăng ký thất bại');
     }
   }, [error, isSuccess]);
 
@@ -62,7 +72,7 @@ const Register = ({navigation}: any) => {
           onPress={() => navigation.goBack()}
         />
         <Image
-          source={images.logomkt1}
+          source={images.Vicoaching}
           resizeMode="contain"
           style={styles.img}
         />
@@ -83,7 +93,6 @@ const Register = ({navigation}: any) => {
           {userName && !validateUsername(userName) ? (
             <ErrorText1 err={errUserName} />
           ) : null}
-          <ErrorText1 err={erruserNames} />
 
           <CusTombtn
             placeholder="Email"
@@ -94,8 +103,16 @@ const Register = ({navigation}: any) => {
           {email && !validateEmail(email) ? (
             <ErrorText1 err={errEmail} />
           ) : null}
-          <ErrorText1 err={errEmails} />
-
+          <CusTombtn
+            placeholder="Số điện thoại"
+            value={phone_number}
+            setValue={setphone_number}
+            require
+            numberic
+          />
+          {phone_number && !isValidVietnamesePhoneNumber(phone_number) ? (
+            <ErrorText1 err={errphone_number} />
+          ) : null}
           <CusTombtn
             placeholder="Mật khẩu"
             value={pass}
@@ -105,12 +122,15 @@ const Register = ({navigation}: any) => {
           {pass && !validatePassword(pass) ? (
             <ErrorText1 err={errPassWord} />
           ) : null}
+          <ErrorText1 err={err} />
         </View>
         <View style={styles.btn}>
           <BTNLogin
             txt="ĐĂNG KÝ"
             onPress={submit}
-            active={name && email && userName && pass ? false : true}
+            active={
+              name && email && userName && pass && phone_number ? false : true
+            }
           />
         </View>
         <ModalConfirmRegister isShow={show} toggleDate={() => setShow(false)} />
@@ -133,6 +153,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.textBold,
     fontSize: sizes._screen_width * 0.055,
     alignSelf: 'center',
+    marginTop: -40,
   },
   view: {
     alignItems: 'center',
@@ -147,8 +168,8 @@ const styles = StyleSheet.create({
   img: {
     alignSelf: 'center',
     marginTop: sizes._csreen_height * 0.03,
-    height: sizes._screen_width * 0.5,
-    width: sizes._screen_width * 0.5,
+    height: sizes._screen_width * 0.7,
+    width: sizes._screen_width * 0.7,
   },
   icon: {marginTop: sizes._screen_height * 0.05, marginLeft: 15},
 });

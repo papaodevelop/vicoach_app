@@ -25,6 +25,7 @@ import {setAuth} from '../../redux/state/auth.slice';
 import {getFCMToken} from '../../../utils/pushnotification_helper';
 import {NavigationProp, useFocusEffect} from '@react-navigation/native';
 import {usePutFcmTokenMutation} from '../../redux/state';
+import {Renferer} from '../../redux/api/\bRenferer';
 const Login = ({
   navigation,
 }: {
@@ -44,7 +45,7 @@ const Login = ({
     baseURL: BASE_URL,
     headers: {
       'Content-Type': 'application/json',
-      Referer: 'https://khoahoc.phanmemmkt.vn',
+      Referer: Renferer,
     },
     responseType: 'json',
 
@@ -81,6 +82,7 @@ const Login = ({
       }
     } catch (error: any) {
       setErr(error?.response?.data.message);
+      console.log(error);
     }
     setIsLoading(false);
   };
@@ -131,7 +133,11 @@ const Login = ({
   }, [navigation, currentScreen]);
   return (
     <View style={styles.container}>
-      <Image source={images.logomkt2} resizeMode="contain" style={styles.img} />
+      <Image
+        source={images.Vicoaching}
+        resizeMode="contain"
+        style={styles.img}
+      />
       <Text style={styles.login}>ĐĂNG NHẬP</Text>
       <View style={styles.view}>
         <CusTombtn
