@@ -9,6 +9,8 @@ import QuizDetail from './QuizDetail';
 import images from '../../res/images';
 import {useGetCouseListQuery} from '../../redux/state';
 import {HScrollView} from 'react-native-head-tab-view';
+import {TypedUseSelectorHook, useSelector} from 'react-redux';
+import {RootState} from '../../redux/store/store';
 
 export default function Content({
   navigation,
@@ -20,6 +22,8 @@ export default function Content({
   index: number;
 }) {
   const {data} = useGetCouseListQuery(`${datas?.slug}`);
+  const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
+  const isEmail = useAppSelect(data => data?.getUser.user);
 
   const RendeFoodter = () => (
     <>
@@ -30,7 +34,7 @@ export default function Content({
         const data2 = i?.lesson_list?.filter(obj => obj?.quiz !== undefined);
         return (
           <View key={`5${i.id}`} style={{width: sizes._screen_width}}>
-            {datas?.chapter_list[0].lesson_list.length !== 0 && (
+            {datas?.chapter_list[0]?.lesson_list.length !== 0 && (
               <Text style={styles.txt}>{i?.name}</Text>
             )}
 
@@ -82,12 +86,21 @@ export default function Content({
         </View>
       ) : datas?.chapter_list[0]?.lesson_list.length === 0 ||
         datas?.chapter_list?.length === 0 ? (
-        <View style={styles.view2}>
-          <Image source={images.nodata} style={styles.img} />
-          <Text style={stylescustom.txtBold}>
-            Không tìm thấy nội dung khoá học
-          </Text>
-        </View>
+        <>
+          {isEmail ? (
+            <View style={styles.view2}>
+              <Image source={images.nodata} style={styles.img} />
+              <Text style={stylescustom.txtBold}>
+                Không tìm thấy nội dung khoá học
+              </Text>
+            </View>
+          ) : (
+            <>
+              <Image source={images.nodata} style={styles.img} />
+              <Text style={stylescustom.txtBold}>Bạn chưa xác nhận email</Text>
+            </>
+          )}
+        </>
       ) : null}
     </>
   );

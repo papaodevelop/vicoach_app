@@ -32,7 +32,7 @@ const ModalConfirmRegister = (props: Props) => {
         <Text style={styles.title}>
           {props.title
             ? props.title
-            : 'Đăng ký thành công. Trở lại màn hình đăng nhập để bắt đầu'}
+            : 'Đăng ký thành công vui lòng xác nhận email.'}
         </Text>
 
         <TouchableOpacity

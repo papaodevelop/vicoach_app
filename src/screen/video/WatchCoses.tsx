@@ -52,7 +52,8 @@ export default function WatchCoses({
       });
     }, 1000);
   }, []);
-  du_lieu_moi.data?.forEach((chapter: any) => delete chapter?.lesson_list);
+  du_lieu_moi?.data?.forEach((chapter: any) => chapter?.lesson_list);
+
   const renderSectionHeader = ({section: {name}}: any) => (
     <View style={styles.view2}>
       <Text style={styles.txt1}>{name}</Text>
@@ -95,7 +96,7 @@ export default function WatchCoses({
       <View style={{marginBottom: 20}}>
         <SectionList
           ref={flatListRef}
-          sections={du_lieu_moi}
+          sections={du_lieu_moi || []}
           renderItem={RendeItem}
           contentContainerStyle={{alignItems: 'center'}}
           keyExtractor={(item, index) => `cc${item?.id + index}`}

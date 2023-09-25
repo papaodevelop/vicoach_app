@@ -1,6 +1,7 @@
 import {
   BackHandler,
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   ToastAndroid,
@@ -25,6 +26,7 @@ import {setAuth} from '../../redux/state/auth.slice';
 import {getFCMToken} from '../../../utils/pushnotification_helper';
 import {NavigationProp, useFocusEffect} from '@react-navigation/native';
 import {usePutFcmTokenMutation} from '../../redux/state';
+import {setUser} from '../../redux/state/user';
 const Login = ({
   navigation,
 }: {
@@ -38,6 +40,8 @@ const Login = ({
   const [isLoading, setIsLoading] = useState(false);
   const [putFCM] = usePutFcmTokenMutation();
   const [err, setErr] = useState<string>();
+  const [severErr, setSeverErr] = useState<string>();
+
   const dispatch = useDispatch();
 
   const axiosObj = axios.create({
@@ -56,14 +60,17 @@ const Login = ({
       setusername(remember.username);
     }, [remember]),
   );
+
   const LoginUser = async () => {
     setIsLoading(true);
+
     const a = await getFCMToken();
     try {
       const response = await axiosObj.post('auth/login', {
         username: userName,
         password: pass,
       });
+      dispatch(setUser(response.data?.isEmailConfirmed));
       if (response.status === 200) {
         dispatch(setAuth(response.headers['set-cookie']));
         setErr('');
@@ -80,7 +87,11 @@ const Login = ({
         navigation.navigate('DrawerCustoms');
       }
     } catch (error: any) {
-      setErr(error?.response?.data.message);
+      if (error?.response.status === 502) {
+        setSeverErr('Có sự cố xảy ra xin vui lòng thử lại sau.');
+      } else if (error?.response.status === 401) {
+        setErr('Thông tin tài khoản không chính xác');
+      }
     }
     setIsLoading(false);
   };
@@ -131,39 +142,48 @@ const Login = ({
   }, [navigation, currentScreen]);
   return (
     <View style={styles.container}>
-      <Image source={images.logomkt2} resizeMode="contain" style={styles.img} />
-      <Text style={styles.login}>ĐĂNG NHẬP</Text>
-      <View style={styles.view}>
-        <CusTombtn
-          placeholder="Tên đăng nhập"
-          value={userName}
-          setValue={setusername}
+      <ScrollView
+        automaticallyAdjustKeyboardInsets={true}
+        keyboardDismissMode="interactive"
+        keyboardShouldPersistTaps={'handled'}>
+        <Image
+          source={images.logomkt2}
+          resizeMode="contain"
+          style={styles.img}
         />
-        <CusTombtn
-          placeholder="Mật khẩu"
-          pass={true}
-          value={pass}
-          setValue={setPass}
-        />
-      </View>
-      {err && <ErrorText err={'Tài khoản không chính xác'} />}
-      <Text style={styles.txt2} onPress={() => setShow(true)}>
-        Quên mật khẩu ?
-      </Text>
-      <View style={styles.btn}>
-        <BTNLogin txt="ĐĂNG NHẬP" onPress={LoginUser} />
-      </View>
-      <Text style={styles.txt3}>
-        Bạn chưa có tài khoản?{' '}
-        <Text
-          style={{color: 'red'}}
-          onPress={() => navigation.navigate('Register')}>
-          {' '}
-          Đăng ký
+        <Text style={styles.login}>ĐĂNG NHẬP</Text>
+        <View style={styles.view}>
+          <CusTombtn
+            placeholder="Tên đăng nhập"
+            value={userName}
+            setValue={setusername}
+          />
+          <CusTombtn
+            placeholder="Mật khẩu"
+            pass={true}
+            value={pass}
+            setValue={setPass}
+          />
+        </View>
+        {err && <ErrorText err={err} />}
+        {severErr && <ErrorText err={severErr} />}
+        <Text style={styles.txt2} onPress={() => setShow(true)}>
+          Quên mật khẩu ?
         </Text>
-      </Text>
-      <ModalForgotPassword isShow={show} toggleDate={() => setShow(false)} />
+        <View style={styles.btn}>
+          <BTNLogin txt="ĐĂNG NHẬP" onPress={LoginUser} />
+        </View>
+        <Text style={styles.txt3}>
+          Bạn chưa có tài khoản?{' '}
+          <Text
+            style={{color: 'red'}}
+            onPress={() => navigation.navigate('Register')}>
+            Đăng ký
+          </Text>
+        </Text>
+      </ScrollView>
       {isLoading && <Loading />}
+      <ModalForgotPassword isShow={show} toggleDate={() => setShow(false)} />
     </View>
   );
 };

@@ -37,27 +37,14 @@ const ExampleCustomTabbar = (props: Props) => {
 
   return (
     <>
-      {data ? (
-        <TabViewContainer
-          {...Props}
-          renderTabBar={_renderTabBar}
-          data={data}
-          item={props.item}
-          navigation={props.navigation}
-        />
-      ) : (
-        <>
-          <Text style={styles.txt3}>Khoá học không tồn tại</Text>
-          <Image
-            source={images.nodata}
-            style={{
-              height: sizes._screen_width * 0.8,
-              width: sizes._screen_width * 0.8,
-              alignSelf: 'center',
-            }}
-          />
-        </>
-      )}
+      <TabViewContainer
+        {...Props}
+        renderTabBar={_renderTabBar}
+        data={data}
+        item={props.item}
+        navigation={props.navigation}
+      />
+
       {isLoading && <Loading />}
     </>
   );

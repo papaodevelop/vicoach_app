@@ -26,6 +26,8 @@ const Register = ({navigation}: any) => {
   const [pass, setPass] = useState('');
   const [errEmails, setErrEmails] = useState('');
   const [erruserNames, setErrUsernames] = useState('');
+  const [phone_number, setphone_number] = useState('');
+  const [errphone_number, setErrphone_number] = useState('');
   const [show, setShow] = useState(false);
   const [register, {error, isLoading, isSuccess}] = useRegisterMutation();
   const submit = async () => {
@@ -36,6 +38,7 @@ const Register = ({navigation}: any) => {
         name: name,
         password: pass,
         password_confirmation: pass,
+        phone_number: phone_number,
       }).unwrap();
     } catch (error) {}
   };
@@ -53,7 +56,11 @@ const Register = ({navigation}: any) => {
 
   return (
     <View style={{flex: 1}}>
-      <ScrollView style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        automaticallyAdjustKeyboardInsets={true}
+        keyboardDismissMode="interactive"
+        keyboardShouldPersistTaps={'handled'}>
         <Icon
           name="chevron-left"
           size={40}
@@ -95,6 +102,13 @@ const Register = ({navigation}: any) => {
             <ErrorText1 err={errEmail} />
           ) : null}
           <ErrorText1 err={errEmails} />
+          <CusTombtn
+            placeholder="Số điện thoại"
+            value={phone_number}
+            setValue={setphone_number}
+            require
+            numberic
+          />
 
           <CusTombtn
             placeholder="Mật khẩu"
@@ -110,7 +124,9 @@ const Register = ({navigation}: any) => {
           <BTNLogin
             txt="ĐĂNG KÝ"
             onPress={submit}
-            active={name && email && userName && pass ? false : true}
+            active={
+              name && email && userName && pass && phone_number ? false : true
+            }
           />
         </View>
         <ModalConfirmRegister isShow={show} toggleDate={() => setShow(false)} />

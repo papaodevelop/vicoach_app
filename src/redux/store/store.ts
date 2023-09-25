@@ -17,7 +17,7 @@ import getdataUser from '../state/login.slice';
 import getAuth from '../state/auth.slice';
 import getCart from '../state/cart.reducer';
 import getFavori from '../state/favorite';
-
+import getUser from '../state/user';
 import {authApi} from '../api/auth.api';
 const reducers = combineReducers({
   getcheck: getCheck,
@@ -27,11 +27,12 @@ const reducers = combineReducers({
   getCart: getCart,
   [authApi.reducerPath]: authApi.reducer,
   getFavori: getFavori,
+  getUser: getUser,
 });
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['getQuizz', authApi.reducerPath, 'getAuth'],
+  blacklist: ['getQuizz', authApi.reducerPath, 'getAuth', 'getUser'],
 };
 const persistedReducer = persistReducer(persistConfig, reducers);
 

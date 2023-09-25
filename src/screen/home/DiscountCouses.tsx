@@ -14,9 +14,13 @@ interface Props {
 }
 const DiscountCouses = (props: Props) => {
   const {data} = useGetCourseQuery(`${props?.api}`);
+  const datas = data?.items?.filter((item: any) => item.price <= 0) as
+    | string[]
+    | any;
+
   return (
     <>
-      {data?.items.length !== 0 && (
+      {datas?.length !== 0 && (
         <>
           <View style={styles.view}>
             <Text style={styles.title1}>{props?.title}</Text>
@@ -25,7 +29,7 @@ const DiscountCouses = (props: Props) => {
               onPress={() =>
                 props.navigation.navigate('ViewAll', {
                   title: props?.title,
-                  item: data?.items,
+                  item: datas,
                 })
               }>
               Xem thêm

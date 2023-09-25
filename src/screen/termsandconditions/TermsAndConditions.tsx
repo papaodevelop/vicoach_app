@@ -37,14 +37,14 @@ const TermsAndConditions = ({
             html: `${data?.content?.vi}`,
           }}
         />
-        {/* <View style={{alignItems: 'center', marginBottom: 50, marginTop: 20}}>
+        <View style={{alignItems: 'center', marginBottom: 50, marginTop: 20}}>
           <BTNLogin
             txt="Yêu cầu xoá tài khoản"
             onPress={async () => {
               setShow(true);
             }}
           />
-        </View> */}
+        </View>
       </ScrollView>
       {isLoading && <Loading />}
       <ModalConfirm
