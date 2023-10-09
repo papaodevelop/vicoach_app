@@ -106,7 +106,6 @@ const Register = ({navigation}: any) => {
             placeholder="Số điện thoại"
             value={phone_number}
             setValue={setphone_number}
-            require
             numberic
           />
 
@@ -124,9 +123,7 @@ const Register = ({navigation}: any) => {
           <BTNLogin
             txt="ĐĂNG KÝ"
             onPress={submit}
-            active={
-              name && email && userName && pass && phone_number ? false : true
-            }
+            active={name && email && userName && pass ? false : true}
           />
         </View>
         <ModalConfirmRegister isShow={show} toggleDate={() => setShow(false)} />
