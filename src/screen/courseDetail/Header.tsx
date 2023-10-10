@@ -43,6 +43,18 @@ const Header = ({
           />
           {load && <Loading />}
         </>
+      ) : data?.video_overview?.url ? (
+        <>
+          <WebView
+            style={styles.img}
+            onLoadStart={() => setLoad(true)}
+            onLoadEnd={() => setLoad(false)}
+            source={{
+              uri: data?.video_overview?.url,
+            }}
+            mediaPlaybackRequiresUserAction={false}
+          />
+        </>
       ) : (
         <>
           <Image
@@ -64,9 +76,15 @@ const Header = ({
             }
             style={styles.avt}
           />
-          <View style={{marginLeft: 8}}>
+          <View
+            style={{
+              marginLeft: 8,
+              justifyContent: 'center',
+            }}>
             <Text style={stylescustom.txt}>
-              {data?.assign_instructor?.name}
+              {data?.assign_instructor?.name
+                ? data?.assign_instructor?.name
+                : 'Admin'}
             </Text>
             <Text style={styles.view}>
               <HTML

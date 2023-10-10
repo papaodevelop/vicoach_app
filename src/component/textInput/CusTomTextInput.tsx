@@ -13,6 +13,7 @@ interface Props {
   setValue: (val: string) => void;
   require?: boolean;
   numberic?: boolean;
+  maxnumber?: number;
 }
 const CusTomTextInput = (props: Props) => {
   const [show, setShow] = useState(true);
@@ -32,6 +33,7 @@ const CusTomTextInput = (props: Props) => {
           value={props.value}
           onChangeText={props.setValue}
           keyboardType={props.numberic ? 'numeric' : undefined}
+          maxLength={props.maxnumber}
         />
         {props.value ? (
           <Icon

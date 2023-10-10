@@ -33,6 +33,7 @@
     logout: require('../assets/images/logout.png'),
     management: require('../assets/images/management.png'),
     marketing: require('../assets/images/marketing.png'),
+    megaone: require('../assets/images/megaone.png'),
     mess: require('../assets/images/mess.png'),
     nen: require('../assets/images/nen.png'),
     no_notification: require('../assets/images/no-notification.png'),

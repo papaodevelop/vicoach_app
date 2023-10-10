@@ -26,13 +26,13 @@ const ModalConfirmRegister = (props: Props) => {
   const renderContent = () => (
     <View style={styles.content}>
       <View style={styles.head}>
-        <Text style={styles.txthead}>Vi_Coaching</Text>
+        <Text style={styles.txthead}>Megaone</Text>
       </View>
       <View style={styles.view}>
         <Text style={styles.title}>
           {props.title
             ? props.title
-            : 'Đăng ký thành công. Trở lại màn hình đăng nhập để bắt đầu'}
+            : 'Đăng ký thành công. Vui lòng xác nhận email để bắt đầu'}
         </Text>
 
         <TouchableOpacity

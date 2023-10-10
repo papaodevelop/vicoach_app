@@ -63,7 +63,12 @@ const Register = ({navigation}: any) => {
 
   return (
     <View style={{flex: 1}}>
-      <ScrollView style={styles.container}>
+      <ScrollView
+        bounces={false}
+        style={styles.container}
+        automaticallyAdjustKeyboardInsets={true}
+        keyboardDismissMode="interactive"
+        keyboardShouldPersistTaps={'handled'}>
         <Icon
           name="chevron-left"
           size={40}
@@ -72,7 +77,7 @@ const Register = ({navigation}: any) => {
           onPress={() => navigation.goBack()}
         />
         <Image
-          source={images.Vicoaching}
+          source={images.megaone}
           resizeMode="contain"
           style={styles.img}
         />
@@ -107,8 +112,8 @@ const Register = ({navigation}: any) => {
             placeholder="Số điện thoại"
             value={phone_number}
             setValue={setphone_number}
-            require
             numberic
+            maxnumber={10}
           />
           {phone_number && !isValidVietnamesePhoneNumber(phone_number) ? (
             <ErrorText1 err={errphone_number} />
@@ -153,7 +158,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.textBold,
     fontSize: sizes._screen_width * 0.055,
     alignSelf: 'center',
-    marginTop: -40,
+    marginTop: -10,
   },
   view: {
     alignItems: 'center',
@@ -168,8 +173,8 @@ const styles = StyleSheet.create({
   img: {
     alignSelf: 'center',
     marginTop: sizes._csreen_height * 0.03,
-    height: sizes._screen_width * 0.7,
-    width: sizes._screen_width * 0.7,
+    height: sizes._screen_width * 0.5,
+    width: sizes._screen_width * 0.5,
   },
   icon: {marginTop: sizes._screen_height * 0.05, marginLeft: 15},
 });

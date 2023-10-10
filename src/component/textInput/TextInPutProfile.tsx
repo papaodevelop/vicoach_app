@@ -1,4 +1,11 @@
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextInput,
+  TextStyle,
+  View,
+} from 'react-native';
 import React from 'react';
 import sizes from '../../res/sizes';
 import colors from '../../res/colors';
@@ -9,19 +16,27 @@ export default function TextInPutProfile({
   setValue,
   secureTextEntry,
   placeholder,
+  stylecustom,
+  maxlength,
+  numberic,
 }: {
   value?: string;
-  setValue: (val?: string) => void;
+  setValue: (val: string) => void;
   secureTextEntry?: boolean;
   placeholder?: string;
+  stylecustom?: StyleProp<TextStyle>;
+  maxlength?: number;
+  numberic?: boolean;
 }) {
   return (
     <TextInput
       value={value}
       onChangeText={setValue}
-      style={styles.textInputStyle}
+      style={[styles.textInputStyle, stylecustom]}
       secureTextEntry={secureTextEntry}
       placeholder={placeholder}
+      maxLength={maxlength}
+      keyboardType={numberic ? 'numeric' : undefined}
     />
   );
 }

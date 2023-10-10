@@ -97,12 +97,9 @@ export default function NewestCourses(props: Props) {
       </Pressable>
     );
   };
-  const datas = props.data?.filter((item: any) => item.price <= 0) as
-    | string[]
-    | any;
   return (
     <FlatList
-      data={datas}
+      data={props.data}
       renderItem={({item}) => <RederItem item={item} />}
       showsHorizontalScrollIndicator={false}
       keyExtractor={item => `${item.id}`}

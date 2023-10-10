@@ -96,12 +96,12 @@ lintOptions {
     }
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.vi_coaching"
+    namespace "com.megaone"
     defaultConfig {
-        applicationId "com.vi_coaching"
+        applicationId "com.megaone"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 6
+        versionCode 1
         versionName "1.0"
     }
 

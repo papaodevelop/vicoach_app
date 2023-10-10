@@ -39,12 +39,14 @@ const TermsAndConditions = ({
             <Text style={stylescustom.txtBold}>Không dữ có liệu</Text>
           </View>
         ) : (
-          <RenderHtml
-            contentWidth={width}
-            source={{
-              html: `${data?.content?.vi}`,
-            }}
-          />
+          <View style={{width: sizes._screen_width * 0.9, alignSelf: 'center'}}>
+            <RenderHtml
+              contentWidth={width}
+              source={{
+                html: `${data?.content?.vi}`,
+              }}
+            />
+          </View>
         )}
 
         {/* <View style={{alignItems: 'center', marginBottom: 50, marginTop: 20}}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Image, View} from 'react-native';
 import {TabBar} from 'react-native-tab-view';
 // import {TabViewContainer} from './component/TabViewBase';
@@ -11,11 +11,13 @@ import {TabViewContainer} from './component/TabViewBase';
 import {Text} from 'react-native-animatable';
 import images from '../../../res/images';
 import sizes from '../../../res/sizes';
+import ModalContact from '../../../component/modal/ModalContact';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   route: any;
   item: CourseCategoryType;
   id: number;
+  setShow: (val: boolean) => void;
 }
 const ExampleCustomTabbar = (props: Props) => {
   const {data, isLoading} = useGetdetailCourseQuery(`${props.id}`);
@@ -36,10 +38,11 @@ const ExampleCustomTabbar = (props: Props) => {
   };
 
   return (
-    <>
+    <View style={{flex: 1}}>
       {data ? (
         <TabViewContainer
           {...Props}
+          setShow={props.setShow}
           renderTabBar={_renderTabBar}
           data={data}
           item={props.item}
@@ -59,7 +62,7 @@ const ExampleCustomTabbar = (props: Props) => {
         </>
       )}
       {isLoading && <Loading />}
-    </>
+    </View>
   );
 };
 export default ExampleCustomTabbar;

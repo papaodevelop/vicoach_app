@@ -506,6 +506,16 @@ export const authApi = createApi({
         return [{type: tagTypes, id: 'LIST'}];
       },
     }),
+    postContact: build.mutation({
+      query(data: Contact) {
+        return {
+          url: `contact`,
+          method: 'POST',
+          data,
+        };
+      },
+      invalidatesTags: result => [{type: tagTypes, id: result?.id}],
+    }),
   }),
 });
 
@@ -541,4 +551,5 @@ export const {
   useGetTermPageQuery,
   useGetStoreInfoQuery,
   useAddCousesFreeMutation,
+  usePostContactMutation,
 } = authApi;

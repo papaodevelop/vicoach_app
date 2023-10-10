@@ -4,6 +4,13 @@ export function isRequired(str = '') {
   }
   return false;
 }
+export function kiem_tra(chuoi: string) {
+  if (chuoi.length > 20) {
+    return true;
+  } else {
+    return false;
+  }
+}
 export function validateEmail(email: string) {
   let status = email.match(
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -24,10 +31,7 @@ export function validateUsername(username: string) {
   return true;
 }
 export function isValidVietnamesePhoneNumber(phoneNumber: string) {
-  // Biểu thức chính quy cho số điện thoại Việt Nam theo định dạng cụ thể
   var vietnamesePhoneRegex = /^(0[3|5|7|8|9])+([0-9]{8})\b/g;
-
-  // Sử dụng test() để kiểm tra chuỗi với biểu thức chính quy.
   return vietnamesePhoneRegex.test(phoneNumber);
 }
 export function validatePassword(password: string) {

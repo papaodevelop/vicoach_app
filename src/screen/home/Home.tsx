@@ -34,13 +34,18 @@ export default function Home(props: Props) {
   const ListFooter = () => {
     return (
       <>
-        <Text style={styles.title}>Khoá học nổi bật</Text>
-        <View style={{marginTop: 15}}>
-          <FeaturedCourses
-            navigation={props.navigation}
-            data={data?.featured_courses.slice(0, 5)}
-          />
-        </View>
+        {data?.featured_courses.length !== 0 && (
+          <>
+            <Text style={styles.title}>Khoá học nổi bật</Text>
+            <View style={{marginTop: 15}}>
+              <FeaturedCourses
+                navigation={props.navigation}
+                data={data?.featured_courses.slice(0, 5)}
+              />
+            </View>
+          </>
+        )}
+
         <View style={styles.view}>
           <Text style={styles.title1}>Khoá học học mới nhất</Text>
           <Text

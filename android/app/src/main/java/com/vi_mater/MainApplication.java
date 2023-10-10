@@ -1,4 +1,4 @@
-package com.vi_coaching;
+package com.megaone;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

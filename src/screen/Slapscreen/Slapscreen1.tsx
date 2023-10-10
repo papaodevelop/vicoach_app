@@ -102,9 +102,9 @@ const Slapscreen1 = ({
   return (
     <View style={styles.container}>
       <View style={styles.boderImg}>
-        <Image source={images.Vicoaching} style={styles.img} />
+        <Image source={images.megaone} style={styles.img} />
       </View>
-      <Text style={styles.txt}>Vi Coaching</Text>
+      <Text style={styles.txt}>MegaOne</Text>
       <Text style={styles.txt1}>Đang kiểm tra dữ liệu ...</Text>
       <View style={styles.main}>
         {dots.map(i => (
@@ -125,8 +125,8 @@ const styles = StyleSheet.create({
     tintColor: 'white',
   },
   img: {
-    height: sizes._screen_width * 0.6,
-    width: sizes._screen_width * 0.6,
+    height: sizes._screen_width * 0.4,
+    width: sizes._screen_width * 0.4,
   },
   txt: {
     color: 'white',
@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.textBold,
     textAlign: 'center',
     width: sizes._screen_width * 0.8,
+    marginTop: 10,
   },
   txt1: {
     color: 'white',

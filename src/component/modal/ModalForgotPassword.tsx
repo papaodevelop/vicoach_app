@@ -38,7 +38,7 @@ const ModalForgotPassword = (props: Props) => {
   const renderContent = () => (
     <View style={styles.content}>
       <View style={styles.head}>
-        <Text style={styles.txthead}>Vi_Coaching</Text>
+        <Text style={styles.txthead}>Megaone</Text>
       </View>
       <View style={styles.view}>
         <View style={styles.view1}>

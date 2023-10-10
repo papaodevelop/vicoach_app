@@ -281,3 +281,9 @@ interface StoreInfo {
   street: string;
   status: string;
 }
+interface Contact {
+  email: string;
+  message: string;
+  name: string;
+  phone_number: string;
+}
