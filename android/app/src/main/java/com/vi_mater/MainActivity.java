@@ -1,4 +1,4 @@
-package com.asana;
+package com.viasana;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

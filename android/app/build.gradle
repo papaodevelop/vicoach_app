@@ -96,9 +96,9 @@ lintOptions {
     }
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.asana"
+    namespace "com.viasana"
     defaultConfig {
-        applicationId "com.asana"
+        applicationId "com.viasana"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

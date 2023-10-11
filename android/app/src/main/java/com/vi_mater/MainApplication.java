@@ -1,4 +1,4 @@
-package com.asana;
+package com.viasana;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

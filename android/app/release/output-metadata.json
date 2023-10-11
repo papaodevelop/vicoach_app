@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.asana",
+  "applicationId": "com.viasana",
   "variantName": "release",
   "elements": [
     {

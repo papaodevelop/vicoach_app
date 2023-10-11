@@ -34,7 +34,7 @@ export default function Support({
     <View style={styles.view}>
       <Text style={stylescustom.txtBold}>{item?.title}</Text>
 
-      <View style={stylescustom.view}>
+      <View style={styles.view2}>
         <Text style={stylescustom.txt}>Địa chỉ email: {item?.email}</Text>
         <MaterialIcons
           name="email"
@@ -45,7 +45,7 @@ export default function Support({
           }}
         />
       </View>
-      <View style={stylescustom.view}>
+      <View style={styles.view2}>
         <Text style={stylescustom.txt}>
           Số điện thoại: {item?.phone_number}
         </Text>
@@ -57,7 +57,7 @@ export default function Support({
         />
       </View>
 
-      <View style={stylescustom.view}>
+      <View style={styles.view2}>
         <Text style={stylescustom.txt}>Địa chỉ: {item?.street}</Text>
         <View
           style={{
@@ -105,4 +105,5 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 30,
   },
+  view2: {...stylescustom.view, width: sizes._csreen_width * 0.82},
 });
