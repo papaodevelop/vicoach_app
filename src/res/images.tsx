@@ -4,7 +4,8 @@
   */
   
   const images = {
-      Vicoaching: require('../assets/images/Vicoaching.png'),
+      Asana: require('../assets/images/Asana.png'),
+    Vicoaching: require('../assets/images/Vicoaching.png'),
     blog: require('../assets/images/blog.png'),
     certificate: require('../assets/images/certificate.png'),
     comment: require('../assets/images/comment.png'),

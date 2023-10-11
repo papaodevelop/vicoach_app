@@ -54,6 +54,9 @@ export default function Infomation({
       icon: 'bullseye',
     },
   ];
+  const bothe = (chuoi: string) => {
+    return chuoi.replace(/<[^>]*><\/[^>]*>/g, '');
+  };
 
   return (
     <HScrollView index={index} showsVerticalScrollIndicator={false}>
@@ -79,14 +82,15 @@ export default function Infomation({
             ))}
           </>
         )}
-        {datas?.description?.vi && (
+
+        {bothe(datas?.description?.vi || '') && (
           <View style={{marginTop: 20}}>
             <Text style={stylescustom.txt}>
               <Text style={{color: colors.BLACK}}>
                 <Text style={{color: colors.RED}}>
                   Miêu tả:{' '}
                   <HTML
-                    source={{html: datas?.description?.vi}}
+                    source={{html: datas?.description?.vi || ''}}
                     contentWidth={sizes.width}
                   />
                 </Text>
@@ -94,13 +98,13 @@ export default function Infomation({
             </Text>
           </View>
         )}
-        {datas?.requirements?.vi && (
+        {bothe(datas?.requirements?.vi || '') && (
           <View style={{marginTop: 20}}>
             <Text style={stylescustom.txt}>
               <Text style={{color: colors.BLACK}}>
                 <Text style={{color: colors.RED}}>Yêu cầu:</Text>{' '}
                 <HTML
-                  source={{html: datas?.requirements?.vi}}
+                  source={{html: datas?.requirements?.vi || ''}}
                   contentWidth={sizes.width}
                 />
               </Text>
@@ -117,13 +121,13 @@ export default function Infomation({
             </Text>
           </View>
         )}
-        {datas?.outcomes.vi && (
+        {bothe(datas?.outcomes.vi || '') && (
           <View style={{marginTop: 20}}>
             <Text style={stylescustom.txt}>
               <Text style={{color: colors.BLACK}}>
                 <Text style={{color: colors.RED}}>Kết quả :</Text>{' '}
                 <HTML
-                  source={{html: datas?.outcomes?.vi}}
+                  source={{html: datas?.outcomes?.vi || ''}}
                   contentWidth={sizes.width}
                 />
               </Text>

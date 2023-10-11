@@ -22,6 +22,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {useDispatch} from 'react-redux';
 import {addFavorite} from '../../../../redux/state/favorite';
 import ModalContact from '../../../../component/modal/ModalContact';
+import {Renferer} from '../../../../redux/api/renferer';
 
 interface ScrollableTabViewContainerProps {
   navigation: NavigationProp<Record<string, any>>;
@@ -69,8 +70,9 @@ const TabViewContainer: React.FC<
   const category =
     props.data?.category?.name?.vi || props.data?.category?.name?.en;
   const refRBSheet = useRef<any>();
+
   const openWebsite = () => {
-    const url = 'https://megaone.edu.vn/vi';
+    const url = `${Renferer}/vi/courses/${props?.data?.slug}`;
     Linking.openURL(url).catch(error =>
       console.error('Lỗi khi mở trang web: ', error),
     );
@@ -78,19 +80,6 @@ const TabViewContainer: React.FC<
   const dispatch = useDispatch();
 
   const addCarts = () => {
-    // dispatch(
-    //   addCart({
-    //     id: props.item?.id,
-    //     name: textTitle,
-    //     reviews: props.item?.avg_review,
-    //     thumbnail: props.data?.thumbnail?.url || null,
-    //     startDate: props.data?.created_at,
-    //     price: props.data?.price,
-    //     discount: props.data?.discount,
-    //   }),
-    // );
-    // refRBSheet.current.close();
-
     Alert.alert(
       `Thông báo`,
       'Xin lỗi tính năng này của chúng tôi đang trong qúa trình phát triển bạn hãy truy cập trang web của chúng tôi để tiến hành mua khoá học',

@@ -140,11 +140,7 @@ const Login = ({
         keyboardDismissMode="interactive"
         bounces={false}
         keyboardShouldPersistTaps={'handled'}>
-        <Image
-          source={images.megaone}
-          resizeMode="contain"
-          style={styles.img}
-        />
+        <Image source={images.Asana} resizeMode="contain" style={styles.img} />
         <Text style={styles.login}>ĐĂNG NHẬP</Text>
         <View style={styles.view}>
           <CusTombtn

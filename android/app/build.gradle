@@ -96,9 +96,9 @@ lintOptions {
     }
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.megaone"
+    namespace "com.asana"
     defaultConfig {
-        applicationId "com.megaone"
+        applicationId "com.asana"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

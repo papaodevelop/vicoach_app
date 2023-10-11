@@ -119,7 +119,7 @@ export default function FeaturedCourses(props: Props) {
         scrollX={scrollX}
         dotStyle={styles.dot}
         inActiveDotOpacity={0.2}
-        activeDotColor={'#214987'}
+        activeDotColor={'#6E0101'}
         containerStyle={styles.view2}
       />
     </View>

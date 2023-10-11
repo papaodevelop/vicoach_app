@@ -76,11 +76,7 @@ const Register = ({navigation}: any) => {
           style={styles.icon}
           onPress={() => navigation.goBack()}
         />
-        <Image
-          source={images.megaone}
-          resizeMode="contain"
-          style={styles.img}
-        />
+        <Image source={images.Asana} resizeMode="contain" style={styles.img} />
         <Text style={styles.login}>ĐĂNG KÝ</Text>
         <View style={styles.view}>
           <CusTombtn

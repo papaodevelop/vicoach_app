@@ -1,4 +1,4 @@
-package com.megaone;
+package com.asana;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

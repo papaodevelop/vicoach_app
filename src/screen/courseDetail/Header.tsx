@@ -86,14 +86,6 @@ const Header = ({
                 ? data?.assign_instructor?.name
                 : 'Admin'}
             </Text>
-            <Text style={styles.view}>
-              <HTML
-                source={{
-                  html: data?.assign_instructor?.short_description || '',
-                }}
-                contentWidth={sizes.width}
-              />
-            </Text>
           </View>
         </View>
         <Pressable style={styles.view2} onPress={onShow}>

@@ -102,9 +102,9 @@ const Slapscreen1 = ({
   return (
     <View style={styles.container}>
       <View style={styles.boderImg}>
-        <Image source={images.megaone} style={styles.img} />
+        <Image source={images.Asana} style={styles.img} />
       </View>
-      <Text style={styles.txt}>MegaOne</Text>
+      <Text style={styles.txt}>Asana</Text>
       <Text style={styles.txt1}>Đang kiểm tra dữ liệu ...</Text>
       <View style={styles.main}>
         {dots.map(i => (
@@ -120,7 +120,7 @@ export default Slapscreen1;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#214987',
+    backgroundColor: '#6E0101',
     alignItems: 'center',
     tintColor: 'white',
   },

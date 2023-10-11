@@ -36,7 +36,7 @@ const CustomtabBarBuuton = ({children, onPress}: any) => (
         width: 70,
         height: 70,
         borderRadius: 35,
-        backgroundColor: '#214987',
+        backgroundColor: '#6E0101',
       }}>
       {children}
     </View>
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
   },
   item1: {
     height: 70,
-    backgroundColor: '#214987',
+    backgroundColor: '#6E0101',
     position: 'absolute',
     justifyContent: 'center',
     shadowColor: '#7F5DF0',
