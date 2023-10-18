@@ -20,12 +20,14 @@ import Star from '../../../component/Star';
 import {NavigationProp} from '@react-navigation/native';
 import {CourseCategoryType} from '../../../../types/CourseCategoryType';
 import images from '../../../res/images';
+import {useGetShowPriceQuery} from '../../../redux/state';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   data?: any;
 }
 export default function FeaturedCourses(props: Props) {
   const datas = props.data?.filter((item: any) => item?.price <= 0);
+  const {data: dataShow} = useGetShowPriceQuery('');
 
   const scrollX = React.useRef(new Animated.Value(0))?.current;
   const RenderItem = ({item}: {item: CourseCategoryType}) => {
@@ -101,7 +103,7 @@ export default function FeaturedCourses(props: Props) {
   return (
     <View style={styles.view1}>
       <FlatList
-        data={datas}
+        data={!dataShow?.show_course_price ? datas : props.data}
         showsHorizontalScrollIndicator={false}
         keyExtractor={item => `${item.id}`}
         onScroll={Animated.event(
@@ -117,7 +119,9 @@ export default function FeaturedCourses(props: Props) {
         renderItem={({item}) => <RenderItem item={item} />}
       />
       <ExpandingDot
-        data={datas || []}
+        data={
+          (datas && (!dataShow?.show_course_price ? datas : props.data)) || []
+        }
         scrollX={scrollX}
         dotStyle={styles.dot}
         inActiveDotOpacity={0.2}

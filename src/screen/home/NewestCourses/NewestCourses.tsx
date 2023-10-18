@@ -11,6 +11,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {NavigationProp} from '@react-navigation/native';
 import {CourseCategoryType} from '../../../../types/CourseCategoryType';
 import images from '../../../res/images';
+import {useGetShowPriceQuery} from '../../../redux/state';
 interface Props {
   data: any;
   navigation: NavigationProp<Record<string, any>>;
@@ -97,12 +98,14 @@ export default function NewestCourses(props: Props) {
       </Pressable>
     );
   };
+  const {data: dataShow} = useGetShowPriceQuery('');
+
   const datas = props.data?.filter((item: any) => item.price <= 0) as
     | string[]
     | any;
   return (
     <FlatList
-      data={datas}
+      data={!dataShow?.show_course_price ? datas : props.data}
       renderItem={({item}) => <RederItem item={item} />}
       showsHorizontalScrollIndicator={false}
       keyExtractor={item => `${item.id}`}

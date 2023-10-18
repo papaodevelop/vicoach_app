@@ -281,3 +281,10 @@ interface StoreInfo {
   street: string;
   status: string;
 }
+interface ShowPrice {
+  id: number;
+  show_course_price: boolean;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}

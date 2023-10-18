@@ -3,6 +3,7 @@ import React from 'react';
 import HeaderScreen from '../../../component/header/HeaderScreen';
 import RenderItemCouses from './RenderItemCouses';
 import {NavigationProp} from '@react-navigation/native';
+import {useGetShowPriceQuery} from '../../../redux/state';
 export default function ViewAll({
   route,
   navigation,
@@ -11,12 +12,11 @@ export default function ViewAll({
   navigation: NavigationProp<Record<string, any>>;
 }) {
   const {title, item} = route.params;
-  const datas = item?.filter((item: any) => item.price <= 0) as string[] | any;
   return (
     <View style={styles.container}>
       <HeaderScreen title={title} navigation={navigation} />
       <FlatList
-        data={datas}
+        data={item}
         renderItem={({item}) => (
           <RenderItemCouses item={item} navigation={navigation} />
         )}

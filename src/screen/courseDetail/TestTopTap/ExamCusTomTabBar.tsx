@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Image, View} from 'react-native';
 import {TabBar} from 'react-native-tab-view';
 // import {TabViewContainer} from './component/TabViewBase';
@@ -16,6 +16,7 @@ interface Props {
   route: any;
   item: CourseCategoryType;
   id: number;
+  setShow: (val: boolean) => void;
 }
 const ExampleCustomTabbar = (props: Props) => {
   const {data, isLoading} = useGetdetailCourseQuery(`${props.id}`);
@@ -36,17 +37,31 @@ const ExampleCustomTabbar = (props: Props) => {
   };
 
   return (
-    <>
-      <TabViewContainer
-        {...Props}
-        renderTabBar={_renderTabBar}
-        data={data}
-        item={props.item}
-        navigation={props.navigation}
-      />
-
+    <View style={{flex: 1}}>
+      {data ? (
+        <TabViewContainer
+          {...Props}
+          setShow={props.setShow}
+          renderTabBar={_renderTabBar}
+          data={data}
+          item={props.item}
+          navigation={props.navigation}
+        />
+      ) : (
+        <>
+          <Text style={styles.txt3}>Khoá học không tồn tại</Text>
+          <Image
+            source={images.nodata}
+            style={{
+              height: sizes._screen_width * 0.8,
+              width: sizes._screen_width * 0.8,
+              alignSelf: 'center',
+            }}
+          />
+        </>
+      )}
       {isLoading && <Loading />}
-    </>
+    </View>
   );
 };
 export default ExampleCustomTabbar;

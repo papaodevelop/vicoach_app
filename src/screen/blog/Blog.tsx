@@ -9,10 +9,11 @@ import images from '../../res/images';
 import Loading from '../../component/loading/Loading';
 export default function Blog({navigation}: any) {
   const {data, isLoading} = useGetBlogPostQuery('');
+
   return (
     <View style={styles.container}>
       <HeaderScreen1 navigation={navigation} title="Blog" />
-      {data?.items.length !== 0 ? (
+      {data?.items.length !== 0 && data !== undefined ? (
         <FlatList
           keyboardDismissMode="none"
           data={data?.items}
