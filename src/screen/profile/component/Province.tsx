@@ -1,12 +1,10 @@
-import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {useGetProvincesQuery} from '../../../redux/state';
 import {normalizeString} from '../../../res/convert';
 import sizes from '../../../res/sizes';
 import Search from '../../../component/textInput/Search';
-import colors from '../../../res/colors';
 import stylescustom from '../../../res/stylescustom';
-import fonts from '../../../res/fonts';
 
 export default function Province({
   district,

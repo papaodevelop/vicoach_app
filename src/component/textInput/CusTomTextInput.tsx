@@ -29,6 +29,7 @@ const CusTomTextInput = (props: Props) => {
           cursorColor={'black'}
           placeholder={props.placeholder}
           selectionColor={'black'}
+          placeholderTextColor={colors.GRAY}
           secureTextEntry={props.pass ? show : undefined}
           value={props.value}
           onChangeText={props.setValue}

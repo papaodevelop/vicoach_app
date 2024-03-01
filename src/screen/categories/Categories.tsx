@@ -17,6 +17,7 @@ export default function Categories({
   navigation: NavigationProp<Record<string, any>>;
 }) {
   const {data, isLoading} = useGetCategoryQuery('');
+
   const ListFoodter = () => {
     return (
       <View style={styles.view}>

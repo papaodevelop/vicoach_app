@@ -28,6 +28,7 @@ export default function Content({
           obj => obj?.duration !== undefined,
         );
         const data2 = i?.lesson_list?.filter(obj => obj?.quiz !== undefined);
+
         return (
           <View key={`5${i.id}`} style={{width: sizes._screen_width}}>
             {datas?.chapter_list[0].lesson_list.length !== 0 && (
@@ -46,6 +47,7 @@ export default function Content({
                     idCourse={data?.id}
                     check={i?.id}
                     indexs={indexs}
+                    data={data}
                   />
                 )}
                 style={{marginTop: sizes._screen_height * 0.02}}

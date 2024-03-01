@@ -30,6 +30,7 @@ export default function WatchCoses({
     id: number;
     indexs: number;
     index: number;
+    item: any;
   };
 }) {
   const [url, setUrl] = useState(item?.url);
@@ -37,7 +38,7 @@ export default function WatchCoses({
   const [select, setSelect] = useState(item?.id);
   const [title, setTitle] = useState(item?.title);
   const {data, isLoading} = useGetCouseListQuery(`${item?.idCourse}`);
-  const du_lieu_moi: any = data?.chapter_list.map(chapter => ({
+  const du_lieu_moi: any = item?.data?.chapter_list?.map(chapter => ({
     ...chapter,
     data: [...chapter?.lesson_list],
   }));
@@ -52,7 +53,9 @@ export default function WatchCoses({
       });
     }, 1000);
   }, []);
-  du_lieu_moi.data?.forEach((chapter: any) => delete chapter?.lesson_list);
+
+  du_lieu_moi?.data?.forEach((chapter: any) => delete chapter?.lesson_list);
+
   const renderSectionHeader = ({section: {name}}: any) => (
     <View style={styles.view2}>
       <Text style={styles.txt1}>{name}</Text>
@@ -100,6 +103,11 @@ export default function WatchCoses({
           contentContainerStyle={{alignItems: 'center'}}
           keyExtractor={(item, index) => `cc${item?.id + index}`}
           style={{marginTop: 10}}
+          getItemLayout={(data, index) => ({
+            length: 90,
+            offset: 90 * index,
+            index,
+          })}
           renderSectionHeader={renderSectionHeader}
         />
       </View>

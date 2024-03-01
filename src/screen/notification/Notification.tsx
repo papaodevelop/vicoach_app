@@ -27,6 +27,9 @@ export default function Notification({
   });
   const refRBSheet = useRef<any>();
   const [dataNotifi, setdataNotifi] = useState<Notification>();
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
   const [ReadID] = useReadNotifiMutation();
   const [loading, setLoading] = useState(false);
 
@@ -38,6 +41,7 @@ export default function Notification({
     });
     setLoading(false);
   };
+
   return (
     <View style={styles.container}>
       <HeaderScreen navigation={navigation} title="THÔNG BÁO" />
@@ -50,6 +54,12 @@ export default function Notification({
               onPressItem={async (val: Notification) => {
                 setdataNotifi(val);
                 ReadID(val?.id);
+                let doiTuong = JSON.parse(val?.title);
+                let title = doiTuong?.vi;
+                let content = JSON.parse(val?.body);
+                let contentnoti = content?.title?.vi;
+                setContent(contentnoti);
+                setTitle(title);
                 await refRBSheet.current.open();
               }}
             />
@@ -86,17 +96,17 @@ export default function Notification({
         }}>
         <>
           <View style={styles.txt}>
-            <Text style={stylescustom.txtBold}>{dataNotifi?.topic}</Text>
+            <Text style={stylescustom.txtBold}>{title}</Text>
             <Text style={stylescustom.txtGray}>
               {DateTimes(dataNotifi?.created_at)}
             </Text>
           </View>
           <View style={styles.line} />
           <View style={styles.txt}>
-            <Text style={stylescustom.txtBold}>{dataNotifi?.title}</Text>
-            <Text style={stylescustom.txt}>{dataNotifi?.body}</Text>
+            <Text style={stylescustom.txtBold}>{title}</Text>
+            <Text style={stylescustom.txt}>{content}</Text>
           </View>
-          <View style={{alignItems: 'center', bottom: 0, marginTop: 50}}>
+          <View style={{alignItems: 'center', marginTop: 10}}>
             <BTNLogin onPress={() => refRBSheet.current.close()} txt="Đóng" />
           </View>
         </>

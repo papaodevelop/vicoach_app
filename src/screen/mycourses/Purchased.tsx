@@ -20,12 +20,12 @@ export default function Purchased({
   return (
     <View style={styles.container}>
       <Text style={styles.txt}>
-        Bạn có ({courseTypeArray ? courseTypeArray?.length : 0}) khoá học
+        Bạn có ({data?.items ? data?.items?.length : 0}) khoá học
       </Text>
       <>
-        {courseTypeArray?.length !== 0 && courseTypeArray != undefined ? (
+        {data?.items?.length !== 0 && courseTypeArray != undefined ? (
           <FlatList
-            data={courseTypeArray}
+            data={data?.items}
             renderItem={({item, index}: {item: ClassCourse; index: number}) => (
               <RenderItemCourses
                 index={index}

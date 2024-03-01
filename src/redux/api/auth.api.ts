@@ -516,6 +516,28 @@ export const authApi = createApi({
       },
       invalidatesTags: result => [{type: tagTypes, id: result?.id}],
     }),
+    streamfile: build.query<ListApiResponse<StoreInfo>, string>({
+      query: queryString => ({
+        url: `course-list/streaming/${queryString}`,
+        method: 'GET',
+      }),
+      providesTags(result) {
+        if (result?.data) {
+          const detailClassify = result.data;
+          return [
+            ...detailClassify.map(({id}) => ({
+              type: tagTypes,
+              id,
+            })),
+            {
+              type: tagTypes,
+              id: 'LIST',
+            },
+          ];
+        }
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
   }),
 });
 
@@ -552,4 +574,5 @@ export const {
   useGetStoreInfoQuery,
   useAddCousesFreeMutation,
   usePostContactMutation,
+  useStreamfileQuery,
 } = authApi;

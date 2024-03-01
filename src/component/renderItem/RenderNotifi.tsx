@@ -15,6 +15,10 @@ export default function RenderNotifi({
   onPressItem: (val: any) => void;
   deletes: (val: number) => void;
 }) {
+  let doiTuong = JSON.parse(item?.title);
+  let title = doiTuong?.vi;
+  let content = JSON.parse(item?.body);
+  let contentnoti = content?.title?.vi;
   return (
     <Pressable style={styles.view} onPress={() => onPressItem(item)}>
       <View style={stylescustom.view1}>
@@ -27,8 +31,8 @@ export default function RenderNotifi({
           {item?.status == 'UNREAD' && <View style={styles.view3} />}
         </View>
         <View style={styles.view2}>
-          <Text style={stylescustom.txtBold}>{txt4(item?.title)}</Text>
-          <Text style={stylescustom.txt}>{txt4(item?.body)}</Text>
+          <Text style={stylescustom.txtBold}>{txt4(title)}</Text>
+          <Text style={stylescustom.txt}>{txt4(contentnoti)}</Text>
           <Text style={stylescustom.txtGray}>
             {DateTimes(item?.created_at)}
           </Text>

@@ -1,4 +1,4 @@
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Alert, Pressable, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import sizes from '../../res/sizes';
 import colors from '../../res/colors';
@@ -8,6 +8,10 @@ import {Time, convertByteToMB} from '../../res/convert';
 import RNFetchBlob from 'rn-fetch-blob';
 import {BASE_URL} from '../../Api/BaseURL';
 import {NavigationProp} from '@react-navigation/native';
+import {TypedUseSelectorHook, useSelector} from 'react-redux';
+import {RootState} from '../../redux/store/store';
+import {Renferer} from '../../redux/api/renferer';
+import {useStreamfileQuery} from '../../redux/state';
 interface Props {
   item: DocumentType;
   index: number;
@@ -15,38 +19,52 @@ interface Props {
   check: number;
   navigation: NavigationProp<Record<string, any>>;
   indexs: number;
+  data: any;
 }
 export default function RenderContent(props: Props) {
   const [progress, setProgress] = useState<number | string>(0);
+  const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
+  const cookie = useAppSelect(data => data?.getAuth.auth);
+
   const dowLoadFile = ({id, chapterId}: {id: number; chapterId: number}) => {
-    const url = `${BASE_URL}course-list/streaming/${props.idCourse}/${chapterId}/${id}`;
-    let dirs = RNFetchBlob.fs.dirs;
-    const filePath = `${dirs.DocumentDir}`;
-    var filename = props.item?.name;
-    RNFetchBlob.config({
-      fileCache: true,
-      path: `${filePath}/${filename}`,
-      IOSBackgroundTask: true,
-      addAndroidDownloads: {
-        useDownloadManager: true,
-        title: filename,
-        description: props.item?.description,
-        notification: true,
+    try {
+      const url = `${BASE_URL}course-list/streaming/${props.idCourse}/${chapterId}/${id}`;
+      let dirs = RNFetchBlob.fs.dirs;
+      const filePath = `${dirs.DownloadDir}`;
+      var filename = props.item?.name;
+      RNFetchBlob.config({
+        fileCache: true,
         path: `${filePath}/${filename}`,
-      },
-    })
-      .fetch('GET', url)
-      .progress(received => {
-        setProgress(
-          Math.floor(
-            (received / props.item?.material?.active_file?.file_size) * 100,
-          ) + '%',
-        );
+        IOSBackgroundTask: true,
+        addAndroidDownloads: {
+          useDownloadManager: true,
+          title: filename,
+          description: props.item?.description,
+          notification: true,
+        },
       })
-      .then(res => {
-        setProgress('Hoàn thành');
-      })
-      .catch(error => {});
+        .fetch('GET', url, {
+          Referer: Renferer,
+          Authorization: `Cookie: ${cookie}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/octet-stream',
+        })
+        .progress(received => {
+          setProgress(
+            Math.floor(
+              (received / props.item?.material?.active_file?.file_size) * 100,
+            ) + '%',
+          );
+        })
+        .then(res => {
+          setProgress('Hoàn thành');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -62,6 +80,8 @@ export default function RenderContent(props: Props) {
               id: props.item.id,
               indexs: props.indexs,
               index: props.index,
+              item: props.item,
+              data: props.data,
             })
           : dowLoadFile({id: props.item?.id, chapterId: props.check});
       }}>
