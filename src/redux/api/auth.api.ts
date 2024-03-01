@@ -538,6 +538,15 @@ export const authApi = createApi({
         return [{type: tagTypes, id: 'LIST'}];
       },
     }),
+    getShowPrice: build.query<ShowPrice, string>({
+      query: () => ({
+        url: `front-end/mobile-setting`,
+        method: 'GET',
+      }),
+      providesTags(result) {
+        return [{type: tagTypes, id: 'LIST'}];
+      },
+    }),
   }),
 });
 
@@ -575,4 +584,5 @@ export const {
   useAddCousesFreeMutation,
   usePostContactMutation,
   useStreamfileQuery,
+  useGetShowPriceQuery,
 } = authApi;

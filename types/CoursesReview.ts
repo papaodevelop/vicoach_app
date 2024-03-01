@@ -287,3 +287,10 @@ interface Contact {
   name: string;
   phone_number: string;
 }
+interface ShowPrice {
+  id: number;
+  show_course_price: boolean;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}

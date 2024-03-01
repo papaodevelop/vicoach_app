@@ -12,11 +12,12 @@ import stylescustom from '../../res/stylescustom';
 import HeaderScreen from '../../component/header/HeaderScreen';
 import {NavigationProp} from '@react-navigation/native';
 import RenderHtml from 'react-native-render-html';
-import {useGetTermPageQuery} from '../../redux/state';
+import {useGetShowPriceQuery, useGetTermPageQuery} from '../../redux/state';
 import Loading from '../../component/loading/Loading';
 import ModalConfirm from '../../component/modal/ModalConfirm';
 import images from '../../res/images';
 import sizes from '../../res/sizes';
+import BTNLogin from '../../component/btn/BTNLogin';
 
 const TermsAndConditions = ({
   navigation,
@@ -25,7 +26,7 @@ const TermsAndConditions = ({
 }) => {
   const {width} = useWindowDimensions();
   const [show, setShow] = useState(false);
-
+  const {data: dataShow} = useGetShowPriceQuery('');
   const {data, isLoading, refetch, isFetching} = useGetTermPageQuery('');
 
   return (
@@ -49,14 +50,16 @@ const TermsAndConditions = ({
           </View>
         )}
 
-        {/* <View style={{alignItems: 'center', marginBottom: 50, marginTop: 20}}>
-          <BTNLogin
-            txt="Yêu cầu xoá tài khoản"
-            onPress={async () => {
-              setShow(true);
-            }}
-          />
-        </View> */}
+        {!dataShow?.show_course_price && (
+          <View style={{alignItems: 'center', marginBottom: 50, marginTop: 20}}>
+            <BTNLogin
+              txt="Yêu cầu xoá tài khoản"
+              onPress={async () => {
+                setShow(true);
+              }}
+            />
+          </View>
+        )}
       </ScrollView>
       {isLoading && <Loading />}
       <ModalConfirm

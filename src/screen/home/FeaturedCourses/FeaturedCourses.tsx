@@ -20,12 +20,15 @@ import Star from '../../../component/Star';
 import {NavigationProp} from '@react-navigation/native';
 import {CourseCategoryType} from '../../../../types/CourseCategoryType';
 import images from '../../../res/images';
+import {useGetShowPriceQuery} from '../../../redux/state';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   data?: any;
 }
 export default function FeaturedCourses(props: Props) {
+  const {data: dataShow} = useGetShowPriceQuery('');
   const scrollX = React.useRef(new Animated.Value(0))?.current;
+
   const RenderItem = ({item}: {item: CourseCategoryType}) => {
     const textTitle = item?.title?.vi || item?.title?.en;
 
@@ -48,9 +51,11 @@ export default function FeaturedCourses(props: Props) {
             colors={['white', colors.BLACK]}
             style={styles.liner}></LinearGradient>
           <View style={styles.view6}>
-            <View style={styles.view5}>
-              <Text style={styles.txt1}>{money(item.price)}</Text>
-            </View>
+            {dataShow?.show_course_price && (
+              <View style={styles.view5}>
+                <Text style={styles.txt1}>{money(item.price)}</Text>
+              </View>
+            )}
           </View>
           <View style={styles.view3}>
             <Text style={styles.txt3}>{txt1(textTitle)}</Text>
@@ -96,6 +101,8 @@ export default function FeaturedCourses(props: Props) {
       </Pressable>
     );
   };
+  console.log(props.data);
+
   return (
     <View style={styles.view1}>
       <FlatList

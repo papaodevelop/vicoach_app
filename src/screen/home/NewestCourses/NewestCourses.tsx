@@ -11,11 +11,13 @@ import LinearGradient from 'react-native-linear-gradient';
 import {NavigationProp} from '@react-navigation/native';
 import {CourseCategoryType} from '../../../../types/CourseCategoryType';
 import images from '../../../res/images';
+import {useGetShowPriceQuery} from '../../../redux/state';
 interface Props {
   data: any;
   navigation: NavigationProp<Record<string, any>>;
 }
 export default function NewestCourses(props: Props) {
+  const {data: dataShow} = useGetShowPriceQuery('');
   const RederItem = ({item}: {item: CourseCategoryType}) => {
     const textTitle = item?.title?.vi || item?.title?.en;
 
@@ -77,22 +79,26 @@ export default function NewestCourses(props: Props) {
             <Text style={styles.txt1}>{Time(item?.duration)} giờ</Text>
           </View>
         </View>
-        <View style={styles.view2}>
-          {item?.discount !== 0 ? (
-            <Text style={styles.txt3}>
-              {item.price !== 0 && money(item?.price)}
-            </Text>
-          ) : (
-            <View></View>
-          )}
-          <Text style={styles.txt2}>
-            {money(item?.price - (item?.price * item?.discount) / 100)}
-          </Text>
-        </View>
-        {item?.discount !== 0 && (
-          <View style={styles.view5}>
-            <Text style={styles.txt4}>{item?.discount}% Off</Text>
-          </View>
+        {dataShow?.show_course_price && (
+          <>
+            <View style={styles.view2}>
+              {item?.discount !== 0 ? (
+                <Text style={styles.txt3}>
+                  {item.price !== 0 && money(item?.price)}
+                </Text>
+              ) : (
+                <View></View>
+              )}
+              <Text style={styles.txt2}>
+                {money(item?.price - (item?.price * item?.discount) / 100)}
+              </Text>
+            </View>
+            {item?.discount !== 0 && (
+              <View style={styles.view5}>
+                <Text style={styles.txt4}>{item?.discount}% Off</Text>
+              </View>
+            )}
+          </>
         )}
       </Pressable>
     );

@@ -57,13 +57,12 @@ export default function Infomation({
   const bothe = (chuoi: string) => {
     return chuoi.replace(/<[^>]*><\/[^>]*>/g, '');
   };
-
   return (
     <HScrollView index={index} showsVerticalScrollIndicator={false}>
-      <View style={styles.container}>
+      <View style={[styles.container]}>
         {datas?.assistant_instructor[0] && (
           <>
-            <Text style={styles.txt2}>Trợ giảng</Text>
+            <Text style={styles.txt2}>Trợ giảng:</Text>
             {datas?.assistant_instructor.map((i, index) => (
               <View style={stylescustom.view1} key={i?.id}>
                 <Image
@@ -71,48 +70,41 @@ export default function Infomation({
                   style={styles.img}
                 />
                 <View
-                  style={{marginLeft: 15, width: sizes._screen_width * 0.8}}>
+                  style={{marginLeft: 15, width: sizes._screen_width * 0.75}}>
                   <Text style={styles.txt2}>{i?.name}</Text>
                   <HTML
                     source={{html: i?.description}}
-                    contentWidth={sizes.width}
+                    contentWidth={sizes.width * 0.55}
                   />
                 </View>
               </View>
             ))}
           </>
         )}
-
         {bothe(datas?.description?.vi || '') && (
           <View style={{marginTop: 20}}>
-            <Text style={stylescustom.txt}>
-              <Text style={{color: colors.BLACK}}>
-                <Text style={{color: colors.RED}}>
-                  Miêu tả:{' '}
-                  <HTML
-                    source={{html: datas?.description?.vi || ''}}
-                    contentWidth={sizes.width}
-                  />
-                </Text>
-              </Text>
+            <Text style={[stylescustom.txt, {color: colors.RED}]}>
+              Miêu tả:{' '}
             </Text>
+            <HTML
+              source={{html: datas?.description?.vi || ''}}
+              contentWidth={sizes.width}
+            />
           </View>
         )}
         {bothe(datas?.requirements?.vi || '') && (
           <View style={{marginTop: 20}}>
-            <Text style={stylescustom.txt}>
-              <Text style={{color: colors.BLACK}}>
-                <Text style={{color: colors.RED}}>Yêu cầu:</Text>{' '}
-                <HTML
-                  source={{html: datas?.requirements?.vi || ''}}
-                  contentWidth={sizes.width}
-                />
-              </Text>
+            <Text style={[stylescustom.txt, {color: colors.RED}]}>
+              Yêu cầu:
             </Text>
+            <HTML
+              source={{html: datas?.requirements?.vi || ''}}
+              contentWidth={sizes.width}
+            />
           </View>
         )}
         {datas?.achieved.length !== 0 && (
-          <View style={{marginTop: 20}}>
+          <View style={{marginTop: 20, width: sizes.width * 0.95}}>
             <Text style={stylescustom.txt}>
               <Text style={{color: colors.BLACK}}>
                 <Text style={{color: colors.RED}}>Đạt được :</Text>{' '}
@@ -123,15 +115,13 @@ export default function Infomation({
         )}
         {bothe(datas?.outcomes.vi || '') && (
           <View style={{marginTop: 20}}>
-            <Text style={stylescustom.txt}>
-              <Text style={{color: colors.BLACK}}>
-                <Text style={{color: colors.RED}}>Kết quả :</Text>{' '}
-                <HTML
-                  source={{html: datas?.outcomes?.vi || ''}}
-                  contentWidth={sizes.width}
-                />
-              </Text>
+            <Text style={[stylescustom.txt, {color: colors.RED}]}>
+              Kết quả :
             </Text>
+            <HTML
+              source={{html: datas?.outcomes?.vi || ''}}
+              contentWidth={sizes.width}
+            />
           </View>
         )}
 

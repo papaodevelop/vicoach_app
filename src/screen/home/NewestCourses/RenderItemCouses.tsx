@@ -14,6 +14,7 @@ import images from '../../../res/images';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   item: CourseCategoryType;
+  dataShow?: ShowPrice;
 }
 export default function RenderItemCouses(props: Props) {
   let item = props.item;
@@ -52,9 +53,11 @@ export default function RenderItemCouses(props: Props) {
             />
             <Text style={styles.txt1}>{Time(item?.duration)} giờ </Text>
           </View>
-          <Text style={styles.txt2}>
-            {money(item?.price - (item?.price * item?.discount) / 100)}
-          </Text>
+          {props.dataShow?.show_course_price && (
+            <Text style={styles.txt2}>
+              {money(item?.price - (item?.price * item?.discount) / 100)}
+            </Text>
+          )}
         </View>
       </View>
     </Pressable>
