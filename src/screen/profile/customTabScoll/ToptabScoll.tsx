@@ -181,7 +181,7 @@ const TotabScoll: React.FC<Props> = props => {
       <Animated.View style={[styles.smallImage, headerTrans]}>
         <FontAwesome
           name="camera"
-          color={colors.BLACK}
+          color={colors.WHITE}
           size={30}
           onPress={openPicker}
         />
@@ -258,7 +258,7 @@ const TotabScoll: React.FC<Props> = props => {
               <Text
                 style={[
                   styles.txtheader,
-                  {color: focused ? colors.RED : colors.BLACK},
+                  {color: focused ? colors.GREEN : colors.BLACK},
                 ]}>
                 {route.title}
               </Text>
@@ -336,12 +336,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   indicator: {
-    backgroundColor: colors.ORANGE,
+    backgroundColor: colors.GREEN,
     height: 2,
     borderRadius: 10,
   },
   view: {
-    backgroundColor: '#fff',
+    backgroundColor: '#212121',
     width: '100%',
     height: HEAD_HEIGHT,
     alignItems: 'center',

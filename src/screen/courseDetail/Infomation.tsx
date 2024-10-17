@@ -82,12 +82,12 @@ export default function Infomation({
         {datas?.description?.vi && (
           <View style={{marginTop: 20}}>
             <Text style={stylescustom.txt}>
-              <Text style={{color: colors.BLACK}}>
-                <Text style={{color: colors.RED}}>
+              <Text style={{color: colors.WHITE}}>
+                <Text style={{color: colors.GREEN}}>
                   Miêu tả:{' '}
                   <HTML
                     source={{html: datas?.description?.vi}}
-                    contentWidth={sizes.width}
+                    contentWidth={sizes.width }
                   />
                 </Text>
               </Text>
@@ -97,8 +97,8 @@ export default function Infomation({
         {datas?.requirements?.vi && (
           <View style={{marginTop: 20}}>
             <Text style={stylescustom.txt}>
-              <Text style={{color: colors.BLACK}}>
-                <Text style={{color: colors.RED}}>Yêu cầu:</Text>{' '}
+              <Text style={{color: colors.WHITE}}>
+                <Text style={{color: colors.GREEN}}>Yêu cầu:</Text>{' '}
                 <HTML
                   source={{html: datas?.requirements?.vi}}
                   contentWidth={sizes.width}
@@ -110,8 +110,8 @@ export default function Infomation({
         {datas?.achieved.length !== 0 && (
           <View style={{marginTop: 20}}>
             <Text style={stylescustom.txt}>
-              <Text style={{color: colors.BLACK}}>
-                <Text style={{color: colors.RED}}>Đạt được :</Text>{' '}
+              <Text style={{color: colors.WHITE}}>
+                <Text style={{color: colors.GREEN}}>Đạt được :</Text>{' '}
                 {datas?.achieved}
               </Text>
             </Text>
@@ -120,8 +120,8 @@ export default function Infomation({
         {datas?.outcomes.vi && (
           <View style={{marginTop: 20}}>
             <Text style={stylescustom.txt}>
-              <Text style={{color: colors.BLACK}}>
-                <Text style={{color: colors.RED}}>Kết quả :</Text>{' '}
+              <Text style={{color: colors.WHITE}}>
+                <Text style={{color: colors.GREEN}}>Kết quả :</Text>{' '}
                 <HTML
                   source={{html: datas?.outcomes?.vi}}
                   contentWidth={sizes.width}

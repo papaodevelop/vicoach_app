@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     marginLeft: sizes._screen_width * 0.05,
   },
   txt: {
-    color: colors.BLACK,
+    color: colors.WHITE,
     fontFamily: fonts.textBold,
     fontSize: sizes._screen_width * 0.045,
     marginTop: 20,
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   },
   txt2: {
     ...stylescustom.txt1,
-    color: colors.GREEN,
+    color: colors.WHITE,
   },
   txt3: {
     ...stylescustom.txt1,

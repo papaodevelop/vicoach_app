@@ -63,7 +63,7 @@ export default function RenderItemShowCategori(props: Props) {
                 onPress={showItem}
                 name={show ? 'down' : 'right'}
                 size={sizes._screen_width * 0.06}
-                color={colors.GRAY}
+                color={colors.WHITE}
               />
             </View>
             {show ? (
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   view1: {
-    backgroundColor: 'white',
+    backgroundColor: 'gray',
     marginBottom: 3,
     padding: 10,
     borderRadius: 10,

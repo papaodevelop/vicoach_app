@@ -37,7 +37,7 @@ export default function RenderNotifi({
       <FontAwesome
         onPress={async () => deletes(item.id)}
         name="trash"
-        color={colors.BLACK}
+        color={colors.WHITE}
         size={sizes._screen_width * 0.08}
       />
     </Pressable>
@@ -45,7 +45,7 @@ export default function RenderNotifi({
 }
 const styles = StyleSheet.create({
   view: {
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY,
     borderRadius: 15,
     padding: 8,
     width: sizes._screen_width * 0.9,

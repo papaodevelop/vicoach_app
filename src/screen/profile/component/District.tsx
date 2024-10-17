@@ -66,7 +66,7 @@ export default function District({
           contentContainerStyle={{
             maxHeight: sizes._screen_height * 0.2,
             borderRadius: 10,
-            backgroundColor: '#e3e3e3',
+            backgroundColor: 'white',
             marginTop: 10,
           }}
         />
@@ -100,8 +100,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   txt: {
+    ...stylescustom.txt,
     marginTop: 8,
     marginLeft: sizes._screen_width * 0.04,
-    ...stylescustom.txt,
+    color: colors.BLACK,
   },
 });

@@ -69,7 +69,7 @@ const Register = ({navigation}: any) => {
           onPress={() => navigation.goBack()}
         />
         <Image
-          source={images.logomkt1}
+          source={images.logoVNC}
           resizeMode="contain"
           style={styles.img}
         />
@@ -80,12 +80,14 @@ const Register = ({navigation}: any) => {
             value={name}
             setValue={setName}
             require
+            pnc={true}
           />
           <CusTombtn
             placeholder="Tên đăng nhập"
             value={userName}
             setValue={setUsername}
             require
+            pnc={true}
           />
           {userName && !validateUsername(userName) ? (
             <ErrorText1 err={errUserName} />
@@ -97,6 +99,7 @@ const Register = ({navigation}: any) => {
             value={email}
             setValue={setEmail}
             require
+            pnc={true}
           />
           {email && !validateEmail(email) ? (
             <ErrorText1 err={errEmail} />
@@ -107,6 +110,7 @@ const Register = ({navigation}: any) => {
             value={phone_number}
             setValue={setphone_number}
             numberic
+            pnc={true}
           />
 
           <CusTombtn
@@ -114,6 +118,7 @@ const Register = ({navigation}: any) => {
             value={pass}
             setValue={setPass}
             require
+            pnc={true}
           />
           {pass && !validatePassword(pass) ? (
             <ErrorText1 err={errPassWord} />
@@ -124,6 +129,7 @@ const Register = ({navigation}: any) => {
             txt="ĐĂNG KÝ"
             onPress={submit}
             active={name && email && userName && pass ? false : true}
+            pnc={true}
           />
         </View>
         <ModalConfirmRegister isShow={show} toggleDate={() => setShow(false)} />
@@ -138,11 +144,11 @@ export default Register;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#212121',
   },
 
   login: {
-    color: colors.ORANGE,
+    color: colors.GREEN,
     fontFamily: fonts.textBold,
     fontSize: sizes._screen_width * 0.055,
     alignSelf: 'center',
@@ -163,5 +169,9 @@ const styles = StyleSheet.create({
     height: sizes._screen_width * 0.5,
     width: sizes._screen_width * 0.5,
   },
-  icon: {marginTop: sizes._screen_height * 0.05, marginLeft: 15},
+  icon: {
+    marginTop: sizes._screen_height * 0.05,
+    marginLeft: 15,
+    color: 'white',
+  },
 });

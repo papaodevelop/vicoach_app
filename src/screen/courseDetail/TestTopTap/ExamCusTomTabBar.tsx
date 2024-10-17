@@ -11,6 +11,8 @@ import {TabViewContainer} from './component/TabViewBase';
 import {Text} from 'react-native-animatable';
 import images from '../../../res/images';
 import sizes from '../../../res/sizes';
+import colors from '../../../res/colors';
+
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   route: any;
@@ -25,7 +27,7 @@ const ExampleCustomTabbar = (props: Props) => {
       <TabBar
         {...props}
         inactiveColor={'black'}
-        activeColor={'red'}
+        activeColor={colors.GREEN}
         style={styles.tabbarStyle}
         indicatorStyle={styles.view2}
       />
@@ -38,29 +40,34 @@ const ExampleCustomTabbar = (props: Props) => {
 
   return (
     <View style={{flex: 1}}>
-      {data ? (
-        <TabViewContainer
-          {...Props}
-          setShow={props.setShow}
-          renderTabBar={_renderTabBar}
-          data={data}
-          item={props.item}
-          navigation={props.navigation}
-        />
+      {!!isLoading ? (
+        <Loading />
       ) : (
         <>
-          <Text style={styles.txt3}>Khoá học không tồn tại</Text>
-          <Image
-            source={images.nodata}
-            style={{
-              height: sizes._screen_width * 0.8,
-              width: sizes._screen_width * 0.8,
-              alignSelf: 'center',
-            }}
-          />
+          {!!data ? (
+            <TabViewContainer
+              {...Props}
+              setShow={props.setShow}
+              renderTabBar={_renderTabBar}
+              data={data}
+              item={props.item}
+              navigation={props.navigation}
+            />
+          ) : (
+            <>
+              <Text style={styles.txt3}>Khoá học không tồn tại</Text>
+              <Image
+                source={images.nodata}
+                style={{
+                  height: sizes._screen_width * 0.8,
+                  width: sizes._screen_width * 0.8,
+                  alignSelf: 'center',
+                }}
+              />
+            </>
+          )}
         </>
       )}
-      {isLoading && <Loading />}
     </View>
   );
 };

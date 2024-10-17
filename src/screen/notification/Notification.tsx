@@ -83,6 +83,12 @@ export default function Notification({
           draggableIcon: {
             backgroundColor: '#000',
           },
+          container: {
+            backgroundColor: '#282C34',
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+            height: 'auto',
+          },
         }}>
         <>
           <View style={styles.txt}>
@@ -96,7 +102,7 @@ export default function Notification({
             <Text style={stylescustom.txtBold}>{dataNotifi?.title}</Text>
             <Text style={stylescustom.txt}>{dataNotifi?.body}</Text>
           </View>
-          <View style={{alignItems: 'center', bottom: 0, marginTop: 50}}>
+          <View style={{alignItems: 'center', bottom: 10, marginTop: 50}}>
             <BTNLogin onPress={() => refRBSheet.current.close()} txt="Đóng" />
           </View>
         </>
@@ -107,6 +113,7 @@ export default function Notification({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#212121',
   },
   view: {marginTop: sizes._screen_height * 0.01, paddingBottom: 50},
   view1: {
@@ -120,7 +127,7 @@ const styles = StyleSheet.create({
   },
   line: {
     width: sizes._csreen_width * 0.95,
-    backgroundColor: colors.GRAY,
+    backgroundColor: colors.WHITE,
     height: 1,
     alignSelf: 'center',
     marginTop: 10,

@@ -84,12 +84,14 @@ export default function Categories({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#212121',
   },
   txt: {
     ...stylescustom.txt,
     marginLeft: sizes._screen_width * 0.05,
     fontFamily: fonts.textBold,
     fontSize: sizes._csreen_width * 0.05,
+    color: 'white',
   },
   view: {
     marginTop: sizes._screen_height * 0.02,

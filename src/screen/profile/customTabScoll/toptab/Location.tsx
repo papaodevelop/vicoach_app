@@ -56,7 +56,6 @@ const Location = ({
       keyboardShouldPersistTaps={'handled'}>
       <View style={styles.container}>
         <Province district={city} setDistrict={setCity} code={setCode} />
-
         <District
           provincecode={code}
           code={setCode1}

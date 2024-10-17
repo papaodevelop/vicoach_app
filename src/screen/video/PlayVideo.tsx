@@ -15,12 +15,7 @@ export default function PlayVideo({
 
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
-      <View
-        style={{
-          height: sizes._screen_width * (9 / 12),
-        }}>
-        <WatchCoses navigation={navigation} item={item} />
-      </View>
+      <WatchCoses navigation={navigation} item={item} />
     </View>
   );
 }

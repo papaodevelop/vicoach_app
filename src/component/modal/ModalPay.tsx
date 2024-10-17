@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
   txt: {
     marginBottom: 10,
-    color: colors.BLACK,
+    color: colors.WHITE,
     fontFamily: fonts.textRegular,
     fontSize: sizes._screen_width * 0.04,
     alignSelf: 'center',

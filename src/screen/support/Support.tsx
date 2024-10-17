@@ -89,7 +89,7 @@ export default function Support({
 const styles = StyleSheet.create({
   view: {
     width: sizes._screen_width * 0.9,
-    backgroundColor: 'white',
+    backgroundColor: 'gray',
     marginTop: 15,
     alignSelf: 'center',
     borderRadius: 10,

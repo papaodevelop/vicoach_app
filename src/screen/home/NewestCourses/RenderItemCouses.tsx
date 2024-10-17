@@ -64,7 +64,7 @@ export default function RenderItemCouses(props: Props) {
 const styles = StyleSheet.create({
   view: {
     width: sizes._screen_width * 0.9,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY,
     padding: 10,
     alignSelf: 'center',
     borderRadius: 20,
@@ -80,15 +80,16 @@ const styles = StyleSheet.create({
   txt: {
     ...stylescustom.txt,
     fontFamily: fonts.textBold,
+    color: 'black',
   },
   txt1: {
-    color: colors.GRAY,
+    color: colors.BLACK,
     fontFamily: fonts.textRegular,
     fontSize: sizes._screen_width * 0.035,
     marginLeft: 5,
   },
   txt2: {
-    color: colors.GREEN,
+    color: colors.BLACK,
     fontFamily: fonts.textRegular,
     fontSize: sizes._csreen_width * 0.04,
   },

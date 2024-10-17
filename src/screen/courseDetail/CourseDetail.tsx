@@ -16,7 +16,7 @@ const CourseDetails = (props: Props) => {
   const [show, setShow] = useState(false);
 
   return (
-    <GestureHandlerRootView style={{flex: 1, backgroundColor: 'white'}}>
+    <GestureHandlerRootView style={{flex: 1, backgroundColor: '#212121'}}>
       <HeaderScreen navigation={props.navigation} title="Chi tiết khoá học" />
       <ExampleCustomTabbar
         id={item?.id}

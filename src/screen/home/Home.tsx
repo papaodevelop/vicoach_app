@@ -138,9 +138,10 @@ export default function Home(props: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'black',
   },
   title: {
-    color: colors.BLACK,
+    color: colors.WHITE,
     fontFamily: fonts.textBold,
     fontSize: sizes._csreen_width * 0.06,
     width: sizes._csreen_width * 0.9,
@@ -148,19 +149,19 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   title1: {
-    color: colors.BLACK,
+    color: colors.WHITE,
     fontFamily: fonts.textBold,
     fontSize: sizes._csreen_width * 0.06,
-    marginTop: 10,
   },
   view: {
     ...stylescustom.view,
     width: sizes._csreen_width * 0.9,
     alignSelf: 'center',
-    marginTop: 20,
+    marginTop: 30,
+    color: colors.WHITE,
   },
   txt: {
-    color: colors.GRAY,
+    color: colors.GREEN,
     fontFamily: fonts.textRegular,
     fontSize: sizes._screen_width * 0.04,
   },

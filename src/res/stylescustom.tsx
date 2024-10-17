@@ -14,33 +14,33 @@ const stylescustom = StyleSheet.create({
     alignItems: 'center',
   },
   txt: {
-    color: colors.BLACK,
+    color: colors.WHITE,
     fontFamily: fonts.textRegular,
     fontSize: sizes._screen_width * 0.04,
   },
   txtBold: {
-    color: colors.BLACK,
+    color: colors.WHITE,
     fontFamily: fonts.textBold,
     fontSize: sizes._screen_width * 0.04,
   },
   txt1: {
-    color: colors.GRAY,
+    color: colors.WHITE,
     fontFamily: fonts.textRegular,
     fontSize: sizes._screen_width * 0.035,
   },
   txtGray: {
-    color: colors.GRAY,
+    color: colors.WHITE,
     fontFamily: fonts.textRegular,
     fontSize: sizes._screen_width * 0.04,
   },
   txt2: {
-    color: colors.BLACK,
+    color: colors.WHITE,
     fontFamily: fonts.textBold,
     fontSize: sizes._screen_width * 0.04,
     width: sizes._screen_width * 0.5,
   },
   txt3: {
-    color: colors.BLACK,
+    color: colors.WHITE,
     fontFamily: fonts.textBold,
     fontSize: sizes._screen_width * 0.035,
   },
@@ -54,6 +54,7 @@ const stylescustom = StyleSheet.create({
   },
   container: {
     flex: 1,
+    backgroundColor: '#212121',
   },
   shadowitem: {
     shadowColor: '#000',

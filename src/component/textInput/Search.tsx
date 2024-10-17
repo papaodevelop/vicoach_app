@@ -21,16 +21,12 @@ const Search = ({
       <TextInput
         onPressIn={onPress}
         placeholder={placeholder}
+        placeholderTextColor={'white'}
         value={search}
         onChangeText={setSearch}
         style={styles.txtip}
       />
-      <Ionicons
-        name="md-search"
-        color={colors.BLACK}
-        size={30}
-        style={{paddingRight: 5}}
-      />
+      <Ionicons name="md-search" color={colors.WHITE} size={30} style={{}} />
     </View>
   );
 };
@@ -53,7 +49,7 @@ const styles = StyleSheet.create({
     height: 50,
     fontFamily: fonts.textRegular,
     fontSize: sizes._screen_width * 0.04,
-    color: colors.BLACK,
+    color: colors.WHITE,
     width: sizes._screen_width * 0.8,
   },
 });

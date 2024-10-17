@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 0,
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: 'gray',
+    borderRadius:12
   },
 });

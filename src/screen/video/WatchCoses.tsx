@@ -18,6 +18,7 @@ import Loading from '../../component/loading/Loading';
 import stylescustom from '../../res/stylescustom';
 import {Image} from 'react-native';
 import images from '../../res/images';
+import colors from '../../res/colors';
 export default function WatchCoses({
   navigation,
   item,
@@ -75,7 +76,7 @@ export default function WatchCoses({
           style={[
             styles.view,
             {
-              backgroundColor: select == item?.id ? '#dfdfdf' : 'transparent',
+              backgroundColor: select == item?.id ? 'gray' : 'transparent',
             },
           ]}>
           <View style={styles.view1}>
@@ -93,13 +94,13 @@ export default function WatchCoses({
       <RenderViedeo url={url} />
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.txt}>Video liên quan</Text>
-      <View style={{marginBottom: 20}}>
+      <View style={{marginBottom: 20, flex: 1}}>
         <SectionList
           ref={flatListRef}
           sections={du_lieu_moi || []}
           renderItem={RendeItem}
           contentContainerStyle={{alignItems: 'center'}}
-          keyExtractor={(item, index) => `cc${item?.id + index}`}
+          keyExtractor={(item, index) => `cc${item?.id + index + item?.name}`}
           style={{marginTop: 10}}
           renderSectionHeader={renderSectionHeader}
         />
@@ -111,30 +112,35 @@ export default function WatchCoses({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 20,
+    backgroundColor: '#212121',
   },
   title: {
     fontSize: sizes._screen_width * 0.045,
     fontFamily: fonts.textBold,
     marginTop: 10,
     marginLeft: 20,
+    color: colors.WHITE,
   },
   title1: {
     marginTop: 10,
     fontSize: sizes._screen_width * 0.045,
     fontFamily: fonts.textBold,
     marginLeft: 10,
+    color: colors.WHITE,
   },
   txt: {
     fontFamily: fonts.textBold,
     fontSize: sizes._screen_width * 0.04,
     marginTop: 5,
     marginLeft: 10,
+    color: colors.WHITE,
   },
 
   txt1: {
     fontSize: sizes._screen_width * 0.04,
     fontFamily: fonts.textBold,
+    color: colors.WHITE,
   },
   view: {
     width: sizes._screen_width * 0.95,
@@ -160,5 +166,10 @@ const styles = StyleSheet.create({
     ...stylescustom.txt,
   },
   img: {width: 50, height: 50},
-  view2: {backgroundColor: 'white', padding: 10, borderRadius: 10},
+  view2: {
+    backgroundColor: 'gray',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 10,
+  },
 });

@@ -13,6 +13,7 @@ interface Props {
   setValue: (val: string) => void;
   require?: boolean;
   numberic?: boolean;
+  pnc?: boolean;
 }
 const CusTomTextInput = (props: Props) => {
   const [show, setShow] = useState(true);
@@ -24,9 +25,10 @@ const CusTomTextInput = (props: Props) => {
       {props.require && <Text style={styles.txt}>*</Text>}
       <View style={stylescustom.view1}>
         <TextInput
-          style={styles.textInput}
-          cursorColor={'black'}
+          style={props.pnc ? styles.textInputPNC : styles.textInput}
+          cursorColor={props.pnc ? 'white' : 'black'}
           placeholder={props.placeholder}
+          placeholderTextColor={'gray'}
           selectionColor={'black'}
           secureTextEntry={props.pass ? show : undefined}
           value={props.value}
@@ -67,6 +69,13 @@ const styles = StyleSheet.create({
   },
   textInput: {
     color: colors.BLACK,
+    fontSize: sizes._screen_width * 0.04,
+    fontFamily: fonts.textRegular,
+    width: sizes._screen_width * 0.7,
+    marginLeft: sizes._screen_width * 0.04,
+  },
+  textInputPNC: {
+    color: colors.WHITE,
     fontSize: sizes._screen_width * 0.04,
     fontFamily: fonts.textRegular,
     width: sizes._screen_width * 0.7,

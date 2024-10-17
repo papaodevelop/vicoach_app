@@ -140,13 +140,18 @@ const TabViewContainer: React.FC<
           draggableIcon: {
             backgroundColor: '#000',
           },
+          container: {
+            backgroundColor: '#282C34',
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+          },
         }}>
-        <View style={{marginLeft: 15}}>
+        <View style={{paddingLeft: 15}}>
           <Text style={styles.txt1}>Tuỳ chọn</Text>
           <Pressable style={styles.view3} onPress={AddToFavorite}>
             <Icons
               name="hearto"
-              color={colors.BLACK}
+              color={colors.WHITE}
               size={sizes._screen_width * 0.06}
             />
             <Text style={styles.txt2}>Thêm vào mục yêu thích</Text>
@@ -155,7 +160,7 @@ const TabViewContainer: React.FC<
             <View style={styles.view3}>
               <Icons
                 name="shoppingcart"
-                color={colors.BLACK}
+                color={colors.WHITE}
                 size={sizes._screen_width * 0.06}
               />
 
@@ -170,7 +175,7 @@ const TabViewContainer: React.FC<
               onPress={() => add(props.data?.slug)}>
               <MaterialCommunityIcons
                 name="book-plus"
-                color={colors.BLACK}
+                color={colors.WHITE}
                 size={sizes._screen_width * 0.06}
               />
 

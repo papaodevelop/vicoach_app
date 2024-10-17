@@ -7,6 +7,7 @@ interface Props {
   txt: string;
   onPress: () => void;
   active?: boolean;
+  pnc?: boolean;
 }
 const BTNLogin = (props: Props) => {
   return (
@@ -17,7 +18,7 @@ const BTNLogin = (props: Props) => {
         ...styles.btn,
         backgroundColor: props.active ? '#DDDDDD' : colors.GREEN,
       }}>
-      <Text style={styles.txt}>{props.txt}</Text>
+      <Text style={props?.pnc ? styles.txt1 : styles.txt}>{props.txt}</Text>
     </TouchableOpacity>
   );
 };
@@ -32,6 +33,11 @@ const styles = StyleSheet.create({
   },
   txt: {
     color: colors.WHITE,
+    fontFamily: fonts.textBold,
+    fontSize: sizes._screen_width * 0.045,
+  },
+  txt1: {
+    color: colors.BLACK,
     fontFamily: fonts.textBold,
     fontSize: sizes._screen_width * 0.045,
   },

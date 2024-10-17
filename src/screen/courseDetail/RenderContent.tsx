@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   view: {
     height: sizes._screen_width * 0.2,
     width: sizes._screen_width * 0.7,
-    backgroundColor: colors.WHITE,
+    backgroundColor: 'gray',
     borderRadius: 15,
     ...stylescustom.view1,
     padding: 10,

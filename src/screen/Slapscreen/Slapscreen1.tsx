@@ -96,16 +96,12 @@ const Slapscreen1 = ({
       backgroundColor: props.active ? activeBackground : background,
       transform: [{scale}],
     };
-
     return <Animated.View style={style} />;
   }
 
   return (
     <View style={styles.container}>
-      <View style={styles.boderImg}>
-        <Image source={images.logomkt1} style={styles.img} />
-      </View>
-      <Text style={styles.txt}>Phần mềm MKT</Text>
+      <Text style={styles.txt}>NLP Training</Text>
       <Text style={styles.txt1}>Đang kiểm tra dữ liệu ...</Text>
       <View style={styles.main}>
         {dots.map(i => (
@@ -121,8 +117,9 @@ export default Slapscreen1;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#214987',
+    backgroundColor: '#212121',
     alignItems: 'center',
+    justifyContent: 'center',
     tintColor: 'white',
   },
   img: {

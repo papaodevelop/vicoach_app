@@ -43,7 +43,7 @@ export default function RenderItemCategoriesData(props: Props) {
 }
 const styles = StyleSheet.create({
   view: {
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY,
     marginLeft: sizes._screen_width * 0.05,
     padding: 10,
     borderRadius: 20,
@@ -73,5 +73,5 @@ const styles = StyleSheet.create({
     fontSize: sizes._screen_width * 0.044,
     fontFamily: fonts.textBold,
   },
-  txt: {...stylescustom.txt, color: colors.GRAY},
+  txt: {...stylescustom.txt, color: colors.BLACK},
 });

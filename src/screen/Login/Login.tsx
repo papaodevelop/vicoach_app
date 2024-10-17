@@ -147,7 +147,7 @@ const Login = ({
         keyboardDismissMode="interactive"
         keyboardShouldPersistTaps={'handled'}>
         <Image
-          source={images.logomkt2}
+          source={images.logoVNC}
           resizeMode="contain"
           style={styles.img}
         />
@@ -157,12 +157,14 @@ const Login = ({
             placeholder="Tên đăng nhập"
             value={userName}
             setValue={setusername}
+            pnc={true}
           />
           <CusTombtn
             placeholder="Mật khẩu"
             pass={true}
             value={pass}
             setValue={setPass}
+            pnc={true}
           />
         </View>
         {err && <ErrorText err={err} />}
@@ -171,7 +173,7 @@ const Login = ({
           Quên mật khẩu ?
         </Text>
         <View style={styles.btn}>
-          <BTNLogin txt="ĐĂNG NHẬP" onPress={LoginUser} />
+          <BTNLogin txt="ĐĂNG NHẬP" onPress={LoginUser} pnc={true} />
         </View>
         <Text style={styles.txt3}>
           Bạn chưa có tài khoản?{' '}
@@ -191,15 +193,15 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#212121',
   },
 
   login: {
-    color: colors.ORANGE,
+    color: colors.GREEN,
     fontFamily: fonts.textBold,
     fontSize: sizes._screen_width * 0.055,
-
     alignSelf: 'center',
+    marginTop: '10%',
   },
   view: {
     alignItems: 'center',

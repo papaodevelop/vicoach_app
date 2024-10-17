@@ -139,5 +139,6 @@ const styles = StyleSheet.create({
     ...stylescustom.txt,
     textAlign: 'center',
     marginTop: 20,
+    color: colors.WHITE,
   },
 });

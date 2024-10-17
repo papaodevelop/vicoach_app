@@ -49,7 +49,7 @@ export default DiscountCouses;
 
 const styles = StyleSheet.create({
   title: {
-    color: colors.BLACK,
+    color: colors.WHITE,
     fontFamily: fonts.textBold,
     fontSize: sizes._csreen_width * 0.06,
     width: sizes._csreen_width * 0.9,
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   title1: {
-    color: colors.BLACK,
+    color: colors.WHITE,
     fontFamily: fonts.textBold,
     fontSize: sizes._csreen_width * 0.06,
   },
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   txt: {
-    color: colors.GRAY,
+    color: colors.GREEN,
     fontFamily: fonts.textRegular,
     fontSize: sizes._screen_width * 0.04,
   },

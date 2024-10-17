@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   },
   view2: {
     padding: sizes._screen_width * 0.03,
-    backgroundColor: colors.WHITE,
+    backgroundColor: "#212121",
     borderRadius: 15,
   },
   viewHeader: {

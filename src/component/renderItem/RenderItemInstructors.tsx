@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   view: {
     width: sizes._screen_width * 0.42,
     paddingVertical: 10,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY,
     marginTop: 15,
     borderRadius: 15,
   },
@@ -49,5 +49,6 @@ const styles = StyleSheet.create({
   txt: {
     ...stylescustom.txt1,
     marginTop: 8,
+    color:"black"
   },
 });

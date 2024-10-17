@@ -125,8 +125,9 @@ export default function FeaturedCourses(props: Props) {
         scrollX={scrollX}
         dotStyle={styles.dot}
         inActiveDotOpacity={0.2}
-        activeDotColor={'#214987'}
+        activeDotColor={'#f9aa2e'}
         containerStyle={styles.view2}
+        inActiveDotColor={'white'}
       />
     </View>
   );
@@ -150,9 +151,8 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
   dot: {
-    width: 10,
+    width: 20,
     height: 10,
-    backgroundColor: colors.GRAY,
     borderRadius: 5,
   },
   view2: {bottom: -20},

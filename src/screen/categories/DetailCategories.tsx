@@ -45,6 +45,7 @@ export default function DetailCategories({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:"#212121"
   },
   view: {
     height: sizes._screen_width * 0.7,

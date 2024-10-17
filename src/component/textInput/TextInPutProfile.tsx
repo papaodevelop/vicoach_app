@@ -22,6 +22,7 @@ export default function TextInPutProfile({
       style={styles.textInputStyle}
       secureTextEntry={secureTextEntry}
       placeholder={placeholder}
+      placeholderTextColor={'white'}
     />
   );
 }
