@@ -27,6 +27,8 @@ import {getFCMToken} from '../../../utils/pushnotification_helper';
 import {NavigationProp, useFocusEffect} from '@react-navigation/native';
 import {usePutFcmTokenMutation} from '../../redux/state';
 import {setUser} from '../../redux/state/user';
+import {Renferer} from '../../redux/api/renferer';
+
 const Login = ({
   navigation,
 }: {
@@ -48,7 +50,7 @@ const Login = ({
     baseURL: BASE_URL,
     headers: {
       'Content-Type': 'application/json',
-      Referer: 'https://khoahoc.phanmemmkt.vn',
+      Referer: Renferer,
     },
     responseType: 'json',
 

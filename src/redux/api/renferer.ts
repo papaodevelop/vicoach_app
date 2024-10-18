@@ -1,1 +1,1 @@
-export const Renferer = 'https://khoahoc.phanmemmkt.vn';
+export const Renferer = 'https://nlp.vmaster.vn/';

@@ -9,6 +9,7 @@ import {NavigationProp} from '@react-navigation/native';
 import {General, Location, Security} from './index';
 import Loading from '../../../component/loading/Loading';
 import {useGetProfileQuery} from '../../../redux/state';
+
 const HEAD_HEIGHT = sizes._screen_height * 0.3;
 
 interface ScrollableTabViewContainerProps {

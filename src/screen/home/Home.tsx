@@ -34,53 +34,73 @@ export default function Home(props: Props) {
   const ListFooter = () => {
     return (
       <>
-        <Text style={styles.title}>Khoá học nổi bật</Text>
-        <View style={{marginTop: 15}}>
-          <FeaturedCourses
-            navigation={props.navigation}
-            data={data?.featured_courses.slice(0, 5)}
-          />
-        </View>
-        <View style={styles.view}>
-          <Text style={styles.title1}>Khoá học học mới nhất</Text>
-          <Text
-            style={styles.txt}
-            onPress={() =>
-              props.navigation.navigate('ViewAll', {
-                title: 'Khoá học mới nhất',
-                item: data?.newest_courses,
-              })
-            }>
-            Xem thêm
-          </Text>
-        </View>
-        <NewestCourses
-          data={data?.newest_courses.slice(0, 5)}
-          navigation={props.navigation}
-        />
-        <View style={styles.view}>
-          <Text style={styles.title1}>Bán chạy nhất</Text>
-          <Text
-            style={styles.txt}
-            onPress={() =>
-              props.navigation.navigate('ViewAll', {
-                title: 'Bán chạy nhất',
-                item: data?.newest_courses,
-              })
-            }>
-            Xem thêm
-          </Text>
-        </View>
-        <NewestCourses
-          data={data?.newest_courses.slice(0, 5)}
-          navigation={props.navigation}
-        />
+        {/* container Khoá học nổi bật */}
+        {!!data?.featured_courses && (
+          <>
+            {' '}
+            <Text style={styles.title}>Khoá học nổi bật</Text>
+            <View style={{marginTop: 15}}>
+              <FeaturedCourses
+                navigation={props.navigation}
+                data={data?.featured_courses?.slice(0, 5)}
+              />
+            </View>
+          </>
+        )}
+
+        {/* container Khoá học học mới nhất */}
+        {!!data?.newest_courses && (
+          <>
+            {' '}
+            <View style={styles.view}>
+              <Text style={styles.title1}>Khoá học học mới nhất</Text>
+              <Text
+                style={styles.txt}
+                onPress={() =>
+                  props.navigation.navigate('ViewAll', {
+                    title: 'Khoá học mới nhất',
+                    item: data?.newest_courses,
+                  })
+                }>
+                Xem thêm
+              </Text>
+            </View>
+            <NewestCourses
+              data={data?.newest_courses?.slice(0, 5)}
+              navigation={props.navigation}
+            />
+          </>
+        )}
+
+        {/* container Bán chạy nhất */}
+
+        {!!data?.newest_courses && (
+          <>
+            <View style={styles.view}>
+              <Text style={styles.title1}>Bán chạy nhất</Text>
+              <Text
+                style={styles.txt}
+                onPress={() =>
+                  props.navigation.navigate('ViewAll', {
+                    title: 'Bán chạy nhất',
+                    item: data?.newest_courses,
+                  })
+                }>
+                Xem thêm
+              </Text>
+            </View>
+            <NewestCourses
+              data={data?.newest_courses?.slice(0, 5)}
+              navigation={props.navigation}
+            />
+          </>
+        )}
+
         <DiscountCouses
           navigation={props.navigation}
           api="?course_filter[]=DISCOUNT_COURSE"
           title="Khoá học giảm giá"
         />
-
         <DiscountCouses
           api="?course_filter[]=FREE_COURSE"
           navigation={props.navigation}

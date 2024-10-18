@@ -6,6 +6,8 @@ import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {RootState} from '../store/store';
 import {Alert} from 'react-native';
 import {navigate} from '../../../RootNavigation';
+import {Renferer} from './renferer';
+
 export const axiosAuth = () => {
   const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
 
@@ -59,7 +61,7 @@ export const axiosBaseQuery =
   async ({url, method, data, params, timeout, headers}) => {
     const newHeaders = {
       ...headers,
-      Referer: 'https://khoahoc.phanmemmkt.vn', // Thay đổi thành giá trị Referer bạn muốn sử dụng
+      Referer: Renferer, // Thay đổi thành giá trị Referer bạn muốn sử dụng
     };
     try {
       const result = await axios({

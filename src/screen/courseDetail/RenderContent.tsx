@@ -8,6 +8,10 @@ import {Time, convertByteToMB} from '../../res/convert';
 import RNFetchBlob from 'rn-fetch-blob';
 import {BASE_URL} from '../../Api/BaseURL';
 import {NavigationProp} from '@react-navigation/native';
+import {Renferer} from '../../redux/api/renferer';
+import {TypedUseSelectorHook, useSelector} from 'react-redux';
+import {RootState} from '../../redux/store/store';
+
 interface Props {
   item: DocumentType;
   index: number;
@@ -18,35 +22,48 @@ interface Props {
 }
 export default function RenderContent(props: Props) {
   const [progress, setProgress] = useState<number | string>(0);
+  const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
+  const cookie = useAppSelect(data => data?.getAuth.auth);
+
   const dowLoadFile = ({id, chapterId}: {id: number; chapterId: number}) => {
-    const url = `${BASE_URL}course-list/streaming/${props.idCourse}/${chapterId}/${id}`;
-    let dirs = RNFetchBlob.fs.dirs;
-    const filePath = `${dirs.DocumentDir}`;
-    var filename = props.item?.name;
-    RNFetchBlob.config({
-      fileCache: true,
-      path: `${filePath}/${filename}`,
-      IOSBackgroundTask: true,
-      addAndroidDownloads: {
-        useDownloadManager: true,
-        title: filename,
-        description: props.item?.description,
-        notification: true,
+    try {
+      const url = `${BASE_URL}course-list/streaming/${props.idCourse}/${chapterId}/${id}`;
+      let dirs = RNFetchBlob.fs.dirs;
+      const filePath = `${dirs.DownloadDir}`;
+      var filename = props.item?.name;
+      RNFetchBlob.config({
+        fileCache: true,
         path: `${filePath}/${filename}`,
-      },
-    })
-      .fetch('GET', url)
-      .progress(received => {
-        setProgress(
-          Math.floor(
-            (received / props.item?.material?.active_file?.file_size) * 100,
-          ) + '%',
-        );
+        IOSBackgroundTask: true,
+        addAndroidDownloads: {
+          useDownloadManager: true,
+          title: filename,
+          description: props.item?.description,
+          notification: true,
+        },
       })
-      .then(res => {
-        setProgress('Hoàn thành');
-      })
-      .catch(error => {});
+        .fetch('GET', url, {
+          Referer: Renferer,
+          Authorization: `Cookie: ${cookie}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/octet-stream',
+        })
+        .progress(received => {
+          setProgress(
+            Math.floor(
+              (received / props.item?.material?.active_file?.file_size) * 100,
+            ) + '%',
+          );
+        })
+        .then(res => {
+          setProgress('Hoàn thành');
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
