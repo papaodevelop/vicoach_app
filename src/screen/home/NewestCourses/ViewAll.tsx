@@ -33,5 +33,6 @@ export default function ViewAll({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#212121',
   },
 });

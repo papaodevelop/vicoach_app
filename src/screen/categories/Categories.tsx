@@ -19,32 +19,38 @@ export default function Categories({
   const {data, isLoading} = useGetCategoryQuery('');
   const ListFoodter = () => {
     return (
-      <View style={styles.view}>
-        <Text style={styles.txt}>Xu hướng</Text>
-        <FlatList
-          data={data?.trending_categories}
-          renderItem={({
-            item,
-            index,
-          }: {
-            item: CourseCategoryType;
-            index: number;
-          }) => (
-            <RenderItemCategoriesData
-              item={item}
-              index={index}
-              navigation={navigation}
+      <>
+        {!!data?.trending_categories ? (
+          <View style={styles.view}>
+            <Text style={styles.txt}>Xu hướng</Text>
+            <FlatList
+              data={data?.trending_categories}
+              renderItem={({
+                item,
+                index,
+              }: {
+                item: CourseCategoryType;
+                index: number;
+              }) => (
+                <RenderItemCategoriesData
+                  item={item}
+                  index={index}
+                  navigation={navigation}
+                />
+              )}
+              keyExtractor={item => `${item.id}`}
+              removeClippedSubviews
+              showsHorizontalScrollIndicator={false}
+              horizontal
+              contentContainerStyle={{
+                marginTop: sizes._screen_height * 0.02,
+              }}
             />
-          )}
-          keyExtractor={item => `${item.id}`}
-          removeClippedSubviews
-          showsHorizontalScrollIndicator={false}
-          horizontal
-          contentContainerStyle={{
-            marginTop: sizes._screen_height * 0.02,
-          }}
-        />
-      </View>
+          </View>
+        ) : (
+          <></>
+        )}
+      </>
     );
   };
   return (

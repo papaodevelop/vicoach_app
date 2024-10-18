@@ -17,7 +17,7 @@ export default function Instructors({
   return (
     <View style={styles.container}>
       <FlatList
-        data={data?.instructors.instructors}
+        data={data?.instructors?.instructors}
         renderItem={({
           item,
           index,
@@ -50,6 +50,6 @@ export default function Instructors({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"#212121"
+    backgroundColor: '#212121',
   },
 });
