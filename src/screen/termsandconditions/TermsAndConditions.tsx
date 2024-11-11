@@ -31,14 +31,16 @@ const TermsAndConditions = ({
       <HeaderScreen navigation={navigation} title="Điều khoản điều kiện" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.txt}>{data ? data?.title?.vi : ''}</Text>
-        <View style={{width: sizes.width * 0.9, alignSelf: 'center'}}>
-          <RenderHtml
-            contentWidth={sizes.width}
-            source={{
-              html: `${data?.content?.vi}`,
-            }}
-          />
-        </View>
+        {!!data?.content?.vi && (
+          <View style={{width: sizes.width * 0.9, alignSelf: 'center'}}>
+            <RenderHtml
+              contentWidth={sizes.width}
+              source={{
+                html: `${data?.content?.vi}`,
+              }}
+            />
+          </View>
+        )}
 
         {!dataShow?.show_course_price && (
           <View style={{alignItems: 'center', marginBottom: 50, marginTop: 20}}>
@@ -65,5 +67,5 @@ const TermsAndConditions = ({
 export default TermsAndConditions;
 
 const styles = StyleSheet.create({
-  txt: {...stylescustom.txtBold, marginTop: 20, marginLeft: 5},
+  txt: {...stylescustom.txtBold, marginTop: 20, marginLeft: 5, color: 'white'},
 });
