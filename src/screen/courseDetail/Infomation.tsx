@@ -54,13 +54,16 @@ export default function Infomation({
       icon: 'bullseye',
     },
   ];
+  const bothe = (chuoi: string) => {
+    return chuoi.replace(/<[^>]*><\/[^>]*>/g, '');
+  };
 
   return (
     <HScrollView index={index} showsVerticalScrollIndicator={false}>
-      <View style={styles.container}>
+      <View style={[styles.container]}>
         {datas?.assistant_instructor[0] && (
           <>
-            <Text style={styles.txt2}>Trợ giảng</Text>
+            <Text style={styles.txt2}>Trợ giảng:</Text>
             {datas?.assistant_instructor.map((i, index) => (
               <View style={stylescustom.view1} key={i?.id}>
                 <Image
@@ -68,47 +71,45 @@ export default function Infomation({
                   style={styles.img}
                 />
                 <View
-                  style={{marginLeft: 15, width: sizes._screen_width * 0.8}}>
+                  style={{marginLeft: 15, width: sizes._screen_width * 0.75}}>
                   <Text style={styles.txt2}>{i?.name}</Text>
-                  <HTML
+                  <Text style={styles.txt3}>{i?.description}</Text>
+                  {/* <HTML
                     source={{html: i?.description}}
                     contentWidth={sizes.width}
-                  />
+                    tagsStyles={tagsStyles}
+                  /> */}
                 </View>
               </View>
             ))}
           </>
         )}
-        {datas?.description?.vi && (
+        {bothe(datas?.description?.vi || '') && (
           <View style={{marginTop: 20}}>
-            <Text style={stylescustom.txt}>
-              <Text style={{color: colors.WHITE}}>
-                <Text style={{color: colors.GREEN}}>
-                  Miêu tả:{' '}
-                  <HTML
-                    source={{html: datas?.description?.vi}}
-                    contentWidth={sizes.width }
-                  />
-                </Text>
-              </Text>
+            <Text style={[stylescustom.txt, {color: colors.GREEN}]}>
+              Miêu tả:{' '}
             </Text>
+            <HTML
+              source={{html: datas?.description?.vi || ''}}
+              contentWidth={sizes.width}
+              tagsStyles={tagsStyles}
+            />
           </View>
         )}
-        {datas?.requirements?.vi && (
+        {bothe(datas?.requirements?.vi || '') && (
           <View style={{marginTop: 20}}>
-            <Text style={stylescustom.txt}>
-              <Text style={{color: colors.WHITE}}>
-                <Text style={{color: colors.GREEN}}>Yêu cầu:</Text>{' '}
-                <HTML
-                  source={{html: datas?.requirements?.vi}}
-                  contentWidth={sizes.width}
-                />
-              </Text>
+            <Text style={[stylescustom.txt, {color: colors.GREEN}]}>
+              Yêu cầu:
             </Text>
+            <HTML
+              source={{html: datas?.requirements?.vi || ''}}
+              contentWidth={sizes.width}
+              tagsStyles={tagsStyles}
+            />
           </View>
         )}
         {datas?.achieved.length !== 0 && (
-          <View style={{marginTop: 20}}>
+          <View style={{marginTop: 20, width: sizes.width * 0.95}}>
             <Text style={stylescustom.txt}>
               <Text style={{color: colors.WHITE}}>
                 <Text style={{color: colors.GREEN}}>Đạt được :</Text>{' '}
@@ -117,17 +118,16 @@ export default function Infomation({
             </Text>
           </View>
         )}
-        {datas?.outcomes.vi && (
+        {bothe(datas?.outcomes.vi || '') && (
           <View style={{marginTop: 20}}>
-            <Text style={stylescustom.txt}>
-              <Text style={{color: colors.WHITE}}>
-                <Text style={{color: colors.GREEN}}>Kết quả :</Text>{' '}
-                <HTML
-                  source={{html: datas?.outcomes?.vi}}
-                  contentWidth={sizes.width}
-                />
-              </Text>
+            <Text style={[stylescustom.txt, {color: colors.GREEN}]}>
+              Kết quả :
             </Text>
+            <HTML
+              source={{html: datas?.outcomes?.vi || ''}}
+              contentWidth={sizes.width}
+              tagsStyles={tagsStyles}
+            />
           </View>
         )}
 
@@ -210,5 +210,18 @@ const styles = StyleSheet.create({
     ...stylescustom.txtBold,
     marginTop: 10,
   },
+  txt3: {
+    color: colors.WHITE,
+    fontSize: sizes._screen_width * 0.03,
+  },
   img: {height: 40, width: 40, borderRadius: 40 / 2},
 });
+
+const tagsStyles = {
+  h1: {color: 'white'},
+  p: {color: 'white'},
+  text: {color: 'white'},
+  span: {color: 'white'},
+  a: {color: 'white'},
+  div: {color: 'white'},
+};

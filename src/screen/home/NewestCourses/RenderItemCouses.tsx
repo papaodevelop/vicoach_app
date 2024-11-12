@@ -54,7 +54,7 @@ export default function RenderItemCouses(props: Props) {
           </View>
         </View>
         <Text style={styles.txt2}>
-          {money(item?.price - (item?.price * item?.discount) / 100)}
+          {money(Math.abs(item?.price - (item?.price * item?.discount) / 100))}
         </Text>
       </View>
     </Pressable>

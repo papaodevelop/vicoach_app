@@ -26,10 +26,9 @@ interface Props {
   data?: any;
 }
 export default function FeaturedCourses(props: Props) {
-  const datas = props.data?.filter((item: any) => item?.price <= 0);
   const {data: dataShow} = useGetShowPriceQuery('');
-
   const scrollX = React.useRef(new Animated.Value(0))?.current;
+
   const RenderItem = ({item}: {item: CourseCategoryType}) => {
     const textTitle = item?.title?.vi || item?.title?.en;
 
@@ -52,9 +51,11 @@ export default function FeaturedCourses(props: Props) {
             colors={['white', colors.BLACK]}
             style={styles.liner}></LinearGradient>
           <View style={styles.view6}>
-            <View style={styles.view5}>
-              <Text style={styles.txt1}>{money(item.price)}</Text>
-            </View>
+            {dataShow?.show_course_price && (
+              <View style={styles.view5}>
+                <Text style={styles.txt1}>{money(item.price)}</Text>
+              </View>
+            )}
           </View>
           <View style={styles.view3}>
             <Text style={styles.txt3}>{txt1(textTitle)}</Text>
@@ -100,10 +101,11 @@ export default function FeaturedCourses(props: Props) {
       </Pressable>
     );
   };
+
   return (
     <View style={styles.view1}>
       <FlatList
-        data={!dataShow?.show_course_price ? datas : props.data}
+        data={props.data}
         showsHorizontalScrollIndicator={false}
         keyExtractor={item => `${item.id}`}
         onScroll={Animated.event(
@@ -119,15 +121,13 @@ export default function FeaturedCourses(props: Props) {
         renderItem={({item}) => <RenderItem item={item} />}
       />
       <ExpandingDot
-        data={
-          (datas && (!dataShow?.show_course_price ? datas : props.data)) || []
-        }
+        data={props.data || []}
         scrollX={scrollX}
         dotStyle={styles.dot}
         inActiveDotOpacity={0.2}
-        activeDotColor={'#f9aa2e'}
+        activeDotColor={'#6E0101'}
         containerStyle={styles.view2}
-        inActiveDotColor={'white'}
+        inActiveDotColor='white'
       />
     </View>
   );
