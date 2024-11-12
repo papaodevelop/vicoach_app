@@ -19,10 +19,11 @@ import RBSheet from 'react-native-raw-bottom-sheet';
 import colors from '../../../../res/colors';
 import {useAddCousesFreeMutation} from '../../../../redux/state';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useDispatch} from 'react-redux';
-import {addFavorite} from '../../../../redux/state/favorite';
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
+import {addFavorite, removeFavorite} from '../../../../redux/state/favorite';
 
 import {Renferer} from '../../../../redux/api/renferer';
+import {RootState} from '../../../../redux/store/store';
 
 interface ScrollableTabViewContainerProps {
   navigation: NavigationProp<Record<string, any>>;
@@ -41,6 +42,10 @@ const TabViewContainer: React.FC<
     {key: 'Comment', title: 'Đánh giá'},
   ]);
   const [buyCouses] = useAddCousesFreeMutation();
+  const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
+
+  const favorite = useAppSelect(data => data?.getFavori?.favori);
+  const isFavorite = favorite?.some((fav: any) => fav?.id === props.data?.id);
 
   const add = async (slug: string) => {
     try {
@@ -94,9 +99,12 @@ const TabViewContainer: React.FC<
     );
   };
   const AddToFavorite = async () => {
-    dispatch(addFavorite(props.data));
+    isFavorite
+      ? dispatch(removeFavorite(props.data))
+      : dispatch(addFavorite(props.data));
     await refRBSheet.current.close();
   };
+
   const _renderScrollHeader = () => {
     return (
       <>
@@ -151,10 +159,12 @@ const TabViewContainer: React.FC<
           <Pressable style={styles.view3} onPress={AddToFavorite}>
             <Icons
               name="hearto"
-              color={colors.WHITE}
+              color={isFavorite ? colors.GREEN : colors.WHITE}
               size={sizes._screen_width * 0.06}
             />
-            <Text style={styles.txt2}>Thêm vào mục yêu thích</Text>
+            <Text style={styles.txt2}>
+              {isFavorite ? 'Bỏ yêu thích' : 'Thêm vào mục yêu thích'}
+            </Text>
           </Pressable>
           {!props.data?.has_enroll && (
             <View style={styles.view3}>

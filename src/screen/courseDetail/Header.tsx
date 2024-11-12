@@ -18,13 +18,11 @@ const Header = ({
   data: CourseDetail | undefined;
 }) => {
   const [load, setLoad] = useState(false);
+
   let url = data?.youtube_link as string;
   function layMaVideoTuURL(urls: string) {
-    let maVideo = urls.substring(urls.lastIndexOf('/') + 1);
-    if (maVideo.includes('?')) {
-      maVideo = maVideo.substring(0, maVideo.indexOf('?'));
-    }
-    return maVideo;
+    let maVideo = urls.match(/(?:\/|%3D|v=|vi=)([a-zA-Z0-9_-]{11})/);
+    return maVideo ? maVideo[1] : null;
   }
 
   return (
@@ -117,7 +115,7 @@ const styles = StyleSheet.create({
   },
   view2: {
     padding: sizes._screen_width * 0.03,
-    backgroundColor: "#212121",
+    backgroundColor: '#212121',
     borderRadius: 15,
   },
   viewHeader: {

@@ -31,13 +31,13 @@ export default function Home(props: Props) {
     );
     setSearchResults(ketQua || []);
   };
+
   const ListFooter = () => {
     return (
       <>
         {/* container Khoá học nổi bật */}
-        {!!data?.featured_courses && (
+        {data?.featured_courses && data?.featured_courses?.length > 0 && (
           <>
-            {' '}
             <Text style={styles.title}>Khoá học nổi bật</Text>
             <View style={{marginTop: 15}}>
               <FeaturedCourses
@@ -51,7 +51,6 @@ export default function Home(props: Props) {
         {/* container Khoá học học mới nhất */}
         {!!data?.newest_courses && (
           <>
-            {' '}
             <View style={styles.view}>
               <Text style={styles.title1}>Khoá học học mới nhất</Text>
               <Text

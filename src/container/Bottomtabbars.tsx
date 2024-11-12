@@ -94,7 +94,7 @@ const Bottomtabbars = (props: Props) => {
                 <Ionicons
                   name="grid"
                   size={sizes._screen_width * 0.065}
-                  color={'white'}
+                  color={focused ? '#f9aa2e' : 'white'}
                 />
                 {focused ? <Text style={styles.txt}>Phân loại</Text> : null}
               </View>
@@ -113,7 +113,7 @@ const Bottomtabbars = (props: Props) => {
                 <FontAwesome5
                   name="users"
                   size={sizes._screen_width * 0.065}
-                  color={'white'}
+                  color={focused ? '#f9aa2e' : 'white'}
                 />
                 {focused ? <Text style={styles.txt}>Giáo viên</Text> : null}
               </View>
@@ -131,7 +131,7 @@ const Bottomtabbars = (props: Props) => {
               <>
                 <IconHome
                   name="home"
-                  color={'white'}
+                  color={focused ? '#f9aa2e' : 'white'}
                   size={sizes._screen_width * 0.09}
                 />
                 {focused ? (
@@ -157,7 +157,7 @@ const Bottomtabbars = (props: Props) => {
                 <Fontisto
                   name="blogger"
                   size={sizes._screen_width * 0.065}
-                  color={'white'}
+                  color={focused ? '#f9aa2e' : 'white'}
                 />
                 {focused ? <Text style={styles.txt}>Blog</Text> : null}
               </View>
@@ -176,7 +176,7 @@ const Bottomtabbars = (props: Props) => {
                 <Icon
                   name="video-camera"
                   size={sizes._screen_width * 0.065}
-                  color={'white'}
+                  color={focused ? '#f9aa2e' : 'white'}
                 />
                 {focused ? <Text style={styles.txt}>Khoá học</Text> : null}
               </View>

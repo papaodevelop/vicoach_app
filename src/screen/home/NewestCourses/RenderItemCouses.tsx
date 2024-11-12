@@ -37,25 +37,25 @@ export default function RenderItemCouses(props: Props) {
         <View style={stylescustom.view1}>
           <FontAwesome
             name="user"
-            color={colors.GRAY}
+            color={colors.BLACK}
             size={sizes._screen_width * 0.04}
           />
           <Text style={styles.txt1}>{item?.assign_instructor?.name}</Text>
         </View>
-        <Star star={item?.avg_review} width={sizes._screen_width * 0.2} />
-        <View style={stylescustom.view}>
-          <View style={stylescustom.view1}>
+        <View style={styles.containerRight}>
+          <Star star={item?.avg_review} width={sizes._screen_width * 0.2} />
+          <View style={styles.containerRight}>
             <Icon
               name="clockcircle"
-              color={colors.GRAY}
+              color={colors.BLACK}
               size={sizes._screen_width * 0.035}
             />
             <Text style={styles.txt1}>{Time(item?.duration)} giờ </Text>
           </View>
-          <Text style={styles.txt2}>
-            {money(item?.price - (item?.price * item?.discount) / 100)}
-          </Text>
         </View>
+        <Text style={styles.txt2}>
+          {money(item?.price - (item?.price * item?.discount) / 100)}
+        </Text>
       </View>
     </Pressable>
   );
@@ -97,5 +97,10 @@ const styles = StyleSheet.create({
     height: sizes._screen_height * 0.1,
     width: sizes._screen_width * 0.35,
     borderRadius: 15,
+  },
+  containerRight: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });

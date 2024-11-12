@@ -17,6 +17,7 @@ interface Props {
   navigation: NavigationProp<Record<string, any>>;
 }
 export default function NewestCourses(props: Props) {
+  const {data: dataShow} = useGetShowPriceQuery('');
   const RederItem = ({item}: {item: CourseCategoryType}) => {
     const textTitle = item?.title?.vi || item?.title?.en;
 
@@ -78,34 +79,33 @@ export default function NewestCourses(props: Props) {
             <Text style={styles.txt1}>{Time(item?.duration)} giờ</Text>
           </View>
         </View>
-        <View style={styles.view2}>
-          {item?.discount !== 0 ? (
-            <Text style={styles.txt3}>
-              {item.price !== 0 && money(item?.price)}
-            </Text>
-          ) : (
-            <View></View>
-          )}
-          <Text style={styles.txt2}>
-            {money(item?.price - (item?.price * item?.discount) / 100)}
-          </Text>
-        </View>
-        {item?.discount !== 0 && (
-          <View style={styles.view5}>
-            <Text style={styles.txt4}>{item?.discount}% Off</Text>
-          </View>
+        {dataShow?.show_course_price && (
+          <>
+            <View style={styles.view2}>
+              {item?.discount !== 0 ? (
+                <Text style={styles.txt3}>
+                  {item.price !== 0 && money(item?.price)}
+                </Text>
+              ) : (
+                <View></View>
+              )}
+              <Text style={styles.txt2}>
+                {money(item?.price - (item?.price * item?.discount) / 100)}
+              </Text>
+            </View>
+            {item?.discount !== 0 && (
+              <View style={styles.view5}>
+                <Text style={styles.txt4}>{item?.discount}% Off</Text>
+              </View>
+            )}
+          </>
         )}
       </Pressable>
     );
   };
-  const {data: dataShow} = useGetShowPriceQuery('');
-
-  const datas = props.data?.filter((item: any) => item.price <= 0) as
-    | string[]
-    | any;
   return (
     <FlatList
-      data={!dataShow?.show_course_price ? datas : props.data}
+      data={props.data}
       renderItem={({item}) => <RederItem item={item} />}
       showsHorizontalScrollIndicator={false}
       keyExtractor={item => `${item.id}`}

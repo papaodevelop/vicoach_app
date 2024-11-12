@@ -27,7 +27,7 @@ export default function BlogPost({
       <>
         <View style={styles.view}>
           <Text style={styles.txt}>{item?.title}</Text>
-          <Text style={stylescustom.txt1}>{item?.postCategory?.name?.vi}</Text>
+          <Text style={styles.txt3}>{item?.postCategory?.name?.vi}</Text>
 
           <View style={styles.view1}>
             <Icon
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   txt: {
-    ...stylescustom.txt,
+    color: colors.BLACK,
     fontSize: sizes._screen_width * 0.045,
     fontFamily: fonts.textBold,
   },
@@ -93,8 +93,15 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   txt1: {
-    ...stylescustom.txt1,
+    color: colors.BLACK,
+    fontFamily: fonts.textRegular,
+    fontSize: sizes._screen_width * 0.035,
     marginLeft: 10,
+  },
+  txt3: {
+    color: colors.BLACK,
+    fontFamily: fonts.textRegular,
+    fontSize: sizes._screen_width * 0.035,
   },
 
   img: {
@@ -106,12 +113,20 @@ const styles = StyleSheet.create({
   },
 
   txt2: {
-    ...stylescustom.txt,
     marginTop: 10,
+    color: colors.BLACK,
+    fontFamily: fonts.textRegular,
+    fontSize: sizes._screen_width * 0.04,
   },
   view3: {
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.BLACK,
     borderRadius: 15,
     padding: 10,
+  },
+  txAuth: {
+    color: colors.BLACK,
+    fontSize: sizes._screen_width * 0.045,
+    fontFamily: fonts.textBold,
+    marginTop: 15
   },
 });

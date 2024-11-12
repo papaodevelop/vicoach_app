@@ -37,12 +37,7 @@ export default function Comment({id}: {id: number}) {
   return (
     <>
       <View>
-        <Text
-          onPress={() => refRBSheet.current.open()}
-          style={{
-            marginTop: 10,
-            ...stylescustom.txt1,
-          }}>
+        <Text onPress={() => refRBSheet.current.open()} style={styles.txt2}>
           {'Đọc bình luận'}
         </Text>
       </View>
@@ -133,5 +128,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     alignSelf: 'center',
     marginTop: sizes._screen_height * 0.05,
+  },
+  txt2: {
+    color: colors.BLACK,
+    fontSize: sizes._screen_width * 0.035,
+    marginTop: 10,
   },
 });

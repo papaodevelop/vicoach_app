@@ -17,7 +17,7 @@ const getQuizz = createSlice({
     },
     removeFavorite: (state: any, action) => {
       const itemId = action.payload;
-      state.favori = state.favori.filter((item: any) => item.id !== itemId);
+      state.favori = state.favori.filter((item: any) => item.id !== itemId?.id);
     },
   },
 });
