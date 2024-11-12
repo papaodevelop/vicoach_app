@@ -119,11 +119,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: sizes._screen_width * 0.95,
     paddingVertical: 20,
-
     alignSelf: 'center',
   },
   txt1: {
-    ...stylescustom.txt,
+    color: colors.BLACK,
+    fontSize: sizes._screen_width * 0.04,
     width: sizes._screen_width * 0.8,
     textAlign: 'center',
     alignSelf: 'center',

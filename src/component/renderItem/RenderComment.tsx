@@ -79,7 +79,13 @@ export default function RenderComment({
               style={styles.img}
             />
             <View style={{marginLeft: 10}}>
-              <Text style={stylescustom.txt}>{item?.author?.name}</Text>
+              <Text
+                style={{
+                  color: colors.BLACK,
+                  fontSize: sizes._screen_width * 0.04,
+                }}>
+                {item?.author?.name}
+              </Text>
             </View>
           </View>
           <Text style={styles.txt}>{item?.content}</Text>
@@ -87,7 +93,10 @@ export default function RenderComment({
             style={{...stylescustom.view, width: sizes._screen_width * 0.9}}>
             <Text style={styles.view1}>{DateTimes(item.create_at)}</Text>
             <Text
-              style={stylescustom.txt1}
+              style={{
+                color: colors.BLACK,
+                fontSize: sizes._screen_width * 0.035,
+              }}
               onPress={() => {
                 focus();
                 setID(item);
@@ -95,7 +104,11 @@ export default function RenderComment({
               Bình luận
             </Text>
             <Pressable style={stylescustom.view1} onPress={showItem}>
-              <Text style={stylescustom.txt1}>
+              <Text
+                style={{
+                  color: colors.BLACK,
+                  fontSize: sizes._screen_width * 0.035,
+                }}>
                 {item?.children_comment?.length}
               </Text>
               <Icon
@@ -144,9 +157,13 @@ const styles = StyleSheet.create({
     borderRadius: (sizes._screen_width * 0.12) / 2,
   },
   view1: {
-    ...stylescustom.txt1,
+    color: colors.BLACK,
     fontSize: sizes._screen_width * 0.03,
     marginTop: 5,
   },
-  txt: {...stylescustom.txt, marginTop: 5},
+  txt: {
+    color: colors.BLACK,
+    fontSize: sizes._screen_width * 0.04,
+    marginTop: 5,
+  },
 });
