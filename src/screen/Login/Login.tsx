@@ -56,6 +56,7 @@ const Login = ({
 
     withCredentials: true,
   });
+
   useFocusEffect(
     React.useCallback(() => {
       setPass(remember.password);
@@ -65,13 +66,13 @@ const Login = ({
 
   const LoginUser = async () => {
     setIsLoading(true);
-
     const a = await getFCMToken();
     try {
       const response = await axiosObj.post('auth/login', {
         username: userName,
         password: pass,
       });
+
       dispatch(setUser(response.data?.isEmailConfirmed));
       if (response.status === 200) {
         dispatch(setAuth(response.headers['set-cookie']));
@@ -89,10 +90,11 @@ const Login = ({
         navigation.navigate('DrawerCustoms');
       }
     } catch (error: any) {
-      if (error?.response.status === 502) {
-        setSeverErr('Có sự cố xảy ra xin vui lòng thử lại sau.');
-      } else if (error?.response.status === 401) {
+      console.log('error', error);
+      if (error?.response.status === 401) {
         setErr('Thông tin tài khoản không chính xác');
+      } else {
+        setSeverErr('Có sự cố xảy ra xin vui lòng thử lại sau.');
       }
     }
     setIsLoading(false);
