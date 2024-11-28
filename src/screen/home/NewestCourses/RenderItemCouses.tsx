@@ -11,6 +11,7 @@ import {Time, money, txt1} from '../../../res/convert';
 import {NavigationProp} from '@react-navigation/native';
 import {CourseCategoryType} from '../../../../types/CourseCategoryType';
 import images from '../../../res/images';
+import formatPrice from '../../../../utils/formatPice';
 interface Props {
   navigation: NavigationProp<Record<string, any>>;
   item: CourseCategoryType;
@@ -54,7 +55,10 @@ export default function RenderItemCouses(props: Props) {
           </View>
         </View>
         <Text style={styles.txt2}>
-          {money(Math.abs(item?.price - (item?.price * item?.discount) / 100))}
+          {/* {money(Math.abs(item?.price - (item?.price * item?.discount) / 100))}
+           */}
+          {formatPrice(item.price, item?.discount_type, false, item?.discount)}{' '}
+          đ
         </Text>
       </View>
     </Pressable>

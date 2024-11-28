@@ -1,5 +1,6 @@
 export interface CourseCategoryType {
   id: number;
+  discount_type: any;
   name: {
     en: string;
     vi: string;
