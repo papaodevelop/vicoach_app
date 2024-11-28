@@ -96,12 +96,12 @@ lintOptions {
     }
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.vi_mater"
+    namespace "com.nlp"
     defaultConfig {
-        applicationId "com.vi_mater"
+        applicationId "com.nlp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 7
+        versionCode 1
         versionName "1.0"
     }
 

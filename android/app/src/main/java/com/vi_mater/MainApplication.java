@@ -1,4 +1,4 @@
-package com.vi_mater;
+package com.nlp;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
